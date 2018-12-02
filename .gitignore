@@ -89,6 +89,7 @@ target/
 *.xwm
 
 # Matlab
+*.asv
 *.mlx
 *.mat
 *.fig
