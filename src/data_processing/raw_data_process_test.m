@@ -1,8 +1,9 @@
-clc;close all;clear all;
 % process raw data test script template
 
+clc;close all;clear all;
+
 % load projectroot path
-load project_paths;
+load project_paths projectroot src_path;
 
 % create path to the experimental raw data folder
 raw_data_path=fullfile( projectroot, 'data','raw','exp', filesep );
