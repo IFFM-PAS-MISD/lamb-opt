@@ -23,6 +23,8 @@ Project Organization
     │   │   ├── exp
     │   │   └── num
     │   └── raw
+    │       ├── exp
+    │       └── num
     ├── docs
     │   ├── manuals
     │   ├── proposal
