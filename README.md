@@ -35,12 +35,13 @@ Project Organization
     │   ├── figures
     │   │   ├── corel_draw
     │   │   └── grapher
-    │   ├──  journal_papers
-    │   ├──  presentations
-    │   └──  project_reports
+    │   ├── journal_papers
+    │   ├── presentations
+    │   └── project_reports
     └── src
         ├── data_processing
         ├── external
         ├── models
+        │   └── common
         ├── tools
         └── visualization
