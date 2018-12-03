@@ -27,3 +27,11 @@ interim_filename = 'interim_data_testfile.txt';
 
 % save processed data to interim (intermidiate) data folder
 save([interim_data_path,interim_filename],'interim_data_exp','-ascii');
+
+% add marker (empty file '.exist' ) indicating that the results exist
+output_filename_marker = [interim_data_path,'.exist'];
+
+if ~exist(output_filename_marker, 'file' )
+    fid = fopen(output_filename_marker,'w');
+    fclose(fid);
+end
