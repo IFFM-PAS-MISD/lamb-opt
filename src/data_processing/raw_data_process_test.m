@@ -28,7 +28,9 @@ interim_filename = 'interim_data_testfile.txt';
 % save processed data to interim (intermidiate) data folder
 save([interim_data_path,interim_filename],'interim_data_exp','-ascii');
 
-% add marker (empty file '.exist' ) indicating that the results exist
+% add marker (empty file '.exist' ) indicating that 
+% the processing results finished successfully and exist
+
 output_filename_marker = [interim_data_path,'.exist'];
 
 if ~exist(output_filename_marker, 'file' )
