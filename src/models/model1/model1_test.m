@@ -1,5 +1,5 @@
 function model1_test(test_case,model_output_path,overwrite)
-% TEST_FUN   computes elementwise square of matrices 
+% MODEL1_TEST   computes elementwise square of matrices 
 %    matrices A, B are defined in input file  
 %    filename is 'input'+integer definde by test_case 
 % 
