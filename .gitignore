@@ -116,7 +116,7 @@ bin/
 /data/external/*
 /data/interim/*
 /data/processed/*
-/data/raw
+/data/raw/*
 
 # exclude external models from source control
-/src/external/
+/src/external/*
