@@ -19,25 +19,18 @@
 % clear
 % clc
 
-function [mode_shapes, wave_number_real, wave_number_imag] = SASE(K,M,beta,freq)
-
-freq = freq*1e3;
+function [cg,mode_shapes, om_real, om_imag] = SASE_om_v2(K,M,wavenumber)
 
 
 
-%% Loop over propagating directions (beta)
 
-nbeta = length(beta);
-
-wave_number_real = zeros(length(M),nbeta);
-wave_number_imag = zeros(length(M),nbeta);
-mode_shapes = cell(nbeta,1);
+om_real = zeros(length(M),1);
+om_imag = zeros(length(M),1);
+cg = zeros(length(M),1);
+mode_shapes = cell(1,1);
 
 tic
-for ii=1:nbeta
-%     disp('Angle'); disp(beta(ii));
-    [mode_shapes{ii}, wave_number_real(:,ii), wave_number_imag(:,ii)] = get_k(K,M,beta(ii),freq);
-end
+[cg(:,1), mode_shapes{1,1}, om_real(:,1), om_imag(:,1)] = get_om_v2(K,M,wavenumber);
 toc
 
 end

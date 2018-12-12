@@ -19,33 +19,25 @@ clear all;close all;
 beta = 0:15:90; % angles for dispersion curves in polar plot for fixed frequency
 np = 3;
 nele_layer = 1;
-freq=200; % frequency for polar plots [kHz]
+%freq=200; % frequency for polar plots [kHz]
 theta=0; % angle for dispersion curves
-fmin=1; %minimal frequency [kHz]
+%fmin=1; %minimal frequency [kHz]
+wavenumber_min = 1; % minimal wavenumber [1/m]
 frmax=500; % maximal frequency for dispersion curves [kHz]
-number_of_freq_points=500;
-%number_of_freq_points=750;
-%number_of_freq_points=1000;
-fr_step=(frmax-fmin)/(number_of_freq_points-1); % frequency step [kHz]
+wavenumber_max = 2500; % maximal wavenumber for dispersion curves [1/m]
+%number_of_freq_points=500;
+number_of_wavenumber_points=1000;
+%fr_step=(frmax-fmin)/(number_of_freq_points-1); % frequency step [kHz]
+k_step=(wavenumber_max-wavenumber_min)/(number_of_wavenumber_points-1); % wavenumber step [1/m]
 nbeta = length(beta);
-delta_freq=fr_step*1/100; % fr_step*10 [Hz]
 num_of_modes=9; % number of modes to display on dispersion curves
 type='composite'; % type='composite' or type='isotropic'
-%type='isotropic';
-%fname='Tomek_carbon_epoxy_200kHz_s'; % filename for saving figures
-%fname='alu_1mm_25C'; % filename for saving figures
-%fname='alu_3mm_25C'; % filename for saving figures
-%fname='my_45mm_fibers'; % filename for saving figures
-%fname='my_45mm_fibers_vol20'; % filename for saving figures
-%fname='my_45mm_fibers_vol10'
-%fname='PANmodel'; % filename for saving figures
-fname='Airbus';
+
+fname='test';
 sorting = 'yes';
 %% SAFE
 disp('SASE...');
-freq2=freq+delta_freq;
-om=2*pi*freq;
-om2=2*pi*freq2;
+
 %
 %% Input
 SASEinput
@@ -55,204 +47,107 @@ SASEinput
 C = cell(nlayers,1);
 
 for ii=1:nlayers
-    theta = rot_angles(ii);
-    C_tmp = transprop(C0r+1i*C0i,stack_dir,1*theta);
+    theta = rot_angles(ii)+beta(1); % rotate material axis by angle beta
+    C_tmp = transprop(C0r,stack_dir,theta); % no damping, real elastic constants
     C{ii} = C_tmp;
 end
 
 
 %% Get K and M
 % Get global stiffness and mass matrices (independent of beta and freq.)
-[K, M] = get_KM(nele_layer,np,h,C,rho);
-%%
-% for polar coordinates
-% [mode_shapes, wave_number_real, wave_number_imag] = SASE(K,M,beta, freq);
-% [mode_shapes2, wave_number_real2, wave_number_imag2] = SASE(K,M,beta, freq2);
-% %% Roots sorting
-% switch sorting
-%     case 'yes'
-% [row,col]=size(wave_number_imag);
-% wave_number_imag_sort=zeros(row,col);
-% wave_number_real_sort=zeros(row,col);
-% wave_number_imag_sort2=zeros(row,col);
-% wave_number_real_sort2=zeros(row,col);
-% switch type
-%     case 'composite'
-%         [Ind]=roots_sorting(wave_number_imag,beta);
-%         [Ind2]=roots_sorting(wave_number_imag2,beta);
-%     case 'isotropic'
-%         [Ind]=roots_sorting(wave_number_real,beta);
-%         [Ind2]=roots_sorting(wave_number_real2,beta);
-% end
-% for i=1:row
-%     for j=1:col
-%         wave_number_imag_sort(i,j) = wave_number_imag(Ind(i,j),j);
-%         wave_number_real_sort(i,j) = wave_number_real(Ind(i,j),j);
-%         wave_number_imag_sort2(i,j) = wave_number_imag2(Ind2(i,j),j);
-%         wave_number_real_sort2(i,j) = wave_number_real2(Ind2(i,j),j);
-%     end
-% end
-%     case 'no'
-%         [row,col]=size(wave_number_imag);
-%         wave_number_imag_sort = wave_number_imag;
-%         wave_number_real_sort =  wave_number_real;
-%         wave_number_imag_sort2 = wave_number_imag2;
-%         wave_number_real_sort2 =  wave_number_real2;
-% end
-% %% Polar plot
-% 
-% % in Np/m -- convert to dB/m -- 1 Np/m = 20/log(10) dB/m
-% 
-% attenuation_mod1 = wave_number_imag_sort(1,:);
-% % attenuation_mod1 = attenuation_mod1 * 20/log(10);
-% cp1=om./wave_number_real_sort(1,:);
-% %cp2=om2./wave_number_real_sort2(1,:);
-% phase_veloc_mod1=cp1; %[km/s]
-% group_veloc_mod1=(om2-om)./(wave_number_real_sort2(1,:)-wave_number_real_sort(1,:)); %[km/s]
-% %group_veloc_mod1=cp2.^2./(cp2-(om2.*(cp2-cp1)./(om2-om))); %[km/s]
-% 
-% attenuation_mod2 = wave_number_imag_sort(2,:);
-% % attenuation_mod2 = attenuation_mod2 * 20/log(10);
-% cp1=om./wave_number_real_sort(2,:);
-% %cp2=om2./wave_number_real_sort2(2,:);
-% phase_veloc_mod2=cp1; %[km/s]
-% group_veloc_mod2=(om2-om)./(wave_number_real_sort2(2,:)-wave_number_real_sort(2,:)); %[km/s]
-% %group_veloc_mod2=cp2.^2./(cp2-(om2.*(cp2-cp1)./(om2-om))); %[km/s]
-% 
-% attenuation_mod3 = wave_number_imag_sort(3,:);
-% % attenuation_mod3 = attenuation_mod3 * 20/log(10);
-% cp1=om./wave_number_real_sort(3,:);
-% %cp2=om2./wave_number_real_sort2(3,:);
-% phase_veloc_mod3=cp1; %[km/s]
-% 
-% group_veloc_mod3=(om2-om)./(wave_number_real_sort2(3,:)-wave_number_real_sort(3,:)); %[km/s]
-% %group_veloc_mod3=cp2.^2./(cp2-(om2.*(cp2-cp1)./(om2-om))); %[km/s]
-% 
-% 
-% att_lim = 1.0*max([max(attenuation_mod1),max(attenuation_mod2),max(attenuation_mod3)]);
-% phase_veloc_lim = 1.0*max([max(phase_veloc_mod1),max(phase_veloc_mod2),max(phase_veloc_mod3)]);
-% group_veloc_lim = 1.0*max([max(group_veloc_mod1),max(group_veloc_mod2),max(group_veloc_mod3)]);
-% %%
-% % attenuation plots
-% 
-% figure(1);
-% newPolar(beta*pi/180,attenuation_mod1,att_lim,'k.');
-% hold on;
-% newPolar(beta*pi/180,attenuation_mod2,att_lim,'r.');
-% newPolar(beta*pi/180,attenuation_mod3,att_lim,'b.');
-% title(['Attenuation ',num2str(freq),' [kHz]']);
-% set(gcf,'Color','white');
-% %print(gcf,'-dtiffn','-r600',['figs\Attenuation_polar_',fname,'.tiff']);
-% print(gcf,'-dpng','-r300',['figs\Attenuation_polar_',fname,'.png']);
-% saveas(gcf,['figs\Attenuation_polar_',fname,'.fig'], 'fig');
-% 
-% figure(2); hold on;
-% % plot(beta,attenuation_mod1,'k.','LineWidth',2);
-% % plot(beta,attenuation_mod2,'r.','LineWidth',2);
-% % plot(beta,attenuation_mod3,'b.','LineWidth',2);
-% plot(beta,attenuation_mod1,'k.','LineWidth',2);
-% plot(beta,attenuation_mod2,'k.','LineWidth',2);
-% plot(beta,attenuation_mod3,'k.','LineWidth',2);
-% 
-% axis([0 360 0 att_lim])
-% %legend('mod1','mod2','mod3');
-% Hxl=xlabel('Angle');
-% Hyl=ylabel('Attenuation [Np/m]');
-% title([num2str(freq),' [kHz]']);
-% set(Hxl,'FontSize',12);set(Hyl,'FontSize',12);
-% set(gcf,'Color','white');set(gca,'FontSize',11);
-% %print(gcf,'-dtiffn','-r600',['figs\Attenuation_angle_',fname,'.tiff']);
-% print(gcf,'-dpng','-r300',['figs\Attenuation_angle_',fname,'.png']);
-% saveas(gcf,['figs\Attenuation_angle_',fname,'.fig'], 'fig');
-% % phase velocities plots
-% figure(3);
-% newPolar(beta*pi/180,phase_veloc_mod1,phase_veloc_lim,'k.');
-% hold on;
-% newPolar(beta*pi/180,phase_veloc_mod2,phase_veloc_lim,'r.');
-% newPolar(beta*pi/180,phase_veloc_mod3,phase_veloc_lim,'b.');
-% title(['Phase velocity ',num2str(freq),' [kHz]']);
-% set(gcf,'Color','white');
-% %legend('mod2','mod1','mod3');
-% %print(gcf,'-dtiffn','-r600',['figs\Phase_velocity_polar_',fname,'.tiff']);
-% print(gcf,'-dpng','-r300',['figs\Phase_velocity_polar_',fname,'.png']);
-% saveas(gcf,['figs\Phase_velocity_polar_',fname,'.fig'], 'fig');
-% 
-% figure(4); hold on;
-% plot(beta,phase_veloc_mod1,'k.','LineWidth',2);
-% plot(beta,phase_veloc_mod2,'r.','LineWidth',2);
-% plot(beta,phase_veloc_mod3,'b.','LineWidth',2);
-% axis([0 360 0 phase_veloc_lim])
-% %legend('mod1','mod2','mod3');
-% %legend('mod2','mod1','mod3');
-% Hxl=xlabel('Angle');
-% Hyl=ylabel('Phase velocity');
-% title([num2str(freq),' [kHz]']);
-% set(Hxl,'FontSize',12);set(Hyl,'FontSize',12);
-% set(gcf,'Color','white');set(gca,'FontSize',11);
-% %print(gcf,'-dtiffn','-r600',['figs\Phase_velocity_angle_',fname,'.tiff']);
-% print(gcf,'-dpng','-r300',['figs\Phase_velocity_angle_',fname,'.png']);
-% saveas(gcf,['figs\Phase_velocity_angle_',fname,'.fig'], 'fig');
-% 
-% % group velocities plots
-% figure(5);
-% % newPolar(beta*pi/180,group_veloc_mod1,group_veloc_lim,'k.');
-% % hold on;
-% % newPolar(beta*pi/180,group_veloc_mod2,group_veloc_lim,'r.');
-% % newPolar(beta*pi/180,group_veloc_mod3,group_veloc_lim,'b.');
-% newPolar(beta*pi/180,group_veloc_mod1,group_veloc_lim,'k.');
-% hold on;
-% newPolar(beta*pi/180,group_veloc_mod2,group_veloc_lim,'k.');
-% newPolar(beta*pi/180,group_veloc_mod3,group_veloc_lim,'k.');
-% title(['Group velocity ',num2str(freq),' [kHz]']);
-% set(gcf,'Color','white');
-% %print(gcf,'-dtiffn','-r600',['figs\Group_velocity_polar_',fname,'.tiff']);
-% print(gcf,'-dpng','-r300',['figs\Group_velocity_polar_',fname,'.png']);
-% saveas(gcf,['figs\Group_velocity_polar_',fname,'.fig'], 'fig');
-% 
-% figure(6); hold on;
-% plot(beta,group_veloc_mod1,'k.','LineWidth',2);
-% plot(beta,group_veloc_mod2,'r.','LineWidth',2);
-% plot(beta,group_veloc_mod3,'b.','LineWidth',2);
-% axis([0 360 0 group_veloc_lim]);
-% %legend('mod1','mod2','mod3');
-% Hxl=xlabel('Angle');
-% Hyl=ylabel('Group velocity');
-% title([num2str(freq),' [kHz]']);
-% set(Hxl,'FontSize',12);set(Hyl,'FontSize',12);
-% set(gcf,'Color','white');set(gca,'FontSize',11);
-% %print(gcf,'-dtiffn','-r600',['figs\Group_velocity_angle_',fname,'.tiff']);
-% print(gcf,'-dpng','-r300',['figs\Group_velocity_angle_',fname,'.png']);
-% saveas(gcf,['figs\Group_velocity_angle_',fname,'.fig'], 'fig');
-% %return;
+[K, M] = get_KM_v2(nele_layer,np,h,C,rho);
 %% dispersion curves
-frmin=fmin; %
-frn=round((frmax-frmin)/fr_step);
 
-[mode_shapes_, k_real, k_imag] = SASE(K,M,theta, frmax);
-num_of_modes = length(k_real);
-wave_number_real = zeros(num_of_modes,frn);
-wave_number_real2 = zeros(num_of_modes,frn);
-wave_number_imag = zeros(num_of_modes,frn);
-wave_number_imag2 = zeros(num_of_modes,frn);
+om_real = zeros(length(M),number_of_wavenumber_points);
+om_imag = zeros(length(M),number_of_wavenumber_points);
+cg = zeros(length(M),number_of_wavenumber_points);
+om_real2 = zeros(length(M),number_of_wavenumber_points);
+om_imag2 = zeros(length(M),number_of_wavenumber_points);
+cg2 = zeros(length(M),number_of_wavenumber_points);
+wavenumber = zeros(1,number_of_wavenumber_points);
 
 
-f=zeros(1,frn);
-om=zeros(1,frn);
 % in Np/m -- convert to dB/m -- 1 Np/m = 20/log(10) dB/m
 disp('SASE...');
-for k=1:frn
-    [k frn]
-    freq=frmin+(k-1)*fr_step;
-    f(1,k)=freq;
-    %% SAFE
-    om(k)=2*pi*freq;
-    freq2=freq+delta_freq;
-    om2(k)=2*pi*freq2;
+for k=1:number_of_wavenumber_points
+    [k number_of_wavenumber_points]
+    wavenumber(k) = wavenumber_min+(k-1)*k_step;
+    %wavenumber(k) = 100;
     
-    [mode_shapes(:,k), wave_number_real(:,k), wave_number_imag(:,k)] = SASE(K,M,theta, freq);
-    [mode_shapes2(:,k), wave_number_real2(:,k), wave_number_imag2(:,k)] = SASE(K,M,theta, freq2);
+%     [cg(:,k),mode_shapes, om_real(:,k), om_imag(:,k)] = SASE_om_v2(K,M,wavenumber(k));
+%     [cg2(:,k),mode_shapes, om_real2(:,k), om_imag2(:,k)] = SASE_om_v2(K,M,wavenumber(k)+wavenumber_min);
+    [cg(:,k),mode_shapes, om_real(:,k), om_imag(:,k)] = get_om_v2(K,M,wavenumber(k));
+    [cg2(:,k),mode_shapes, om_real2(:,k), om_imag2(:,k)] = get_om_v2(K,M,wavenumber(k)+wavenumber_min);
 end
 
+
+%%
+c='rgbkrbkrbgkrbgkrbgkrbgkrbgkrbgkrbgkrbgkrbgkrgbkrbgkrbgkkkkkkkkkkkkkkkkkkkk';
+figure(12); hold on;
+for k=1:num_of_modes
+    s=[c(k),'.'];
+    plot(om_real(k,:)/2/pi/1e3,wavenumber,s,'LineWidth',2);
+end
+Hxl=xlabel('Frequency [kHz]');
+%Hxl=xlabel('Frequency [Hz]');
+Hyl=ylabel('Wavenumber [1/m]');
+
+set(Hxl,'FontSize',12);set(Hyl,'FontSize',12);
+set(gcf,'Color','white');set(gca,'FontSize',11);
+title([num2str(beta(1)),' [deg]']);
+axis([0 500000/1e3 0 1800]);
+
+
+figure(13); hold on;
+for k=1:num_of_modes
+    s=[c(k),'.'];
+    plot(om_real(k,:)/2/pi/1e3,om_real(k,:)./wavenumber,s,'LineWidth',2);
+    %plot(om_real(k,:)/2/pi,wavenumber,'k.','LineWidth',2);
+    %plot(abs(om_imag(k,:))/2/pi,wavenumber,'k.','LineWidth',2);
+end
+Hxl=xlabel('Frequency [kHz]');
+%Hxl=xlabel('Frequency [Hz]');
+%Hyl=ylabel('Wavenumber [1/m]');
+Hyl=ylabel('Phase velocity');
+set(Hxl,'FontSize',12);set(Hyl,'FontSize',12);
+set(gcf,'Color','white');set(gca,'FontSize',11);
+title([num2str(beta(1)),' [deg]']);
+axis([0 500000/1e3 0 10000]);
+%axis([0 5000000/1e3 0 10000]);
+
+figure(14); hold on;
+for k=1:num_of_modes
+    s=[c(k),'.'];
+    plot(om_real(k,:)/2/pi/1e3,(real(cg(k,:))),s,'LineWidth',2);
+    %plot(om_real(k,:)/2/pi/1e3,imag(cg(k,:)),'k.','LineWidth',2);
+end
+Hxl=xlabel('Frequency [kHz]');
+%Hxl=xlabel('Frequency [Hz]');
+%Hyl=ylabel('Wavenumber [1/m]');
+Hyl=ylabel('Group velocity');
+set(Hxl,'FontSize',12);set(Hyl,'FontSize',12);
+set(gcf,'Color','white');set(gca,'FontSize',11);
+title([num2str(beta(1)),' [deg]']);
+axis([0 500000/1e3 0 10000]);
+
+figure(15); hold on;
+for k=1:num_of_modes
+    s=[c(k),'.'];
+    plot(om_real(k,:)/2/pi/1e3,(om_real2(k,:)-om_real(k,:))./wavenumber_min,s,'LineWidth',2);
+    %plot(om_real(k,:)/2/pi/1e3,imag(cg(k,:)),'k.','LineWidth',2);
+end
+Hxl=xlabel('Frequency [kHz]');
+%Hxl=xlabel('Frequency [Hz]');
+%Hyl=ylabel('Wavenumber [1/m]');
+Hyl=ylabel('Group velocity');
+set(Hxl,'FontSize',12);set(Hyl,'FontSize',12);
+set(gcf,'Color','white');set(gca,'FontSize',11);
+title([num2str(beta(1)),' [deg]']);
+axis([0 500000/1e3 0 10000]);
+
+
+
+return;
 %% Roots sorting
 switch sorting
     case 'yes'
@@ -286,6 +181,7 @@ end
         wave_number_real_sort2 =  wave_number_real2;
 end
    %%
+
 
     attenuation_mod1_fr = wave_number_imag_sort(1,:);
     % attenuation_mod1 = attenuation_mod1 * 20/log(10);

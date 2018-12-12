@@ -25,7 +25,7 @@
 % layup = [0 0 0 0];
 %layup = [0 90 0 90 0 90 0 0 90 0 90 0 90 0];
 %layup = [0 90 0 90 90 0 90 0];
-%layup = [0 90 90 0];
+layup = [0 90 90 0];
 %layup = [0 90 0 90];
 %layup = [0 45 90 -45 0];
 % layup = [45 0 135 90 90 135 0 45];
@@ -36,7 +36,7 @@
 %layup = [0 0 0 0 0 0 0 0 0 0 0 0]; % S2
 %layup = [0 0 90 90 90 90 90 90 90 90 0 0]; % S3
 %layup = [0 90 45 -45 0 90 90 0 -45 45 90 0]; % S4
-layup = [45 135 0 90 90 0 135 45 45 135 0 90 90 0 135 45 45 135 0 90 90 0 135 45];
+%layup = [45 135 0 90 90 0 135 45 45 135 0 90 90 0 135 45 45 135 0 90 90 0 135 45];
 
 nlayers = length(layup);
 h = 1*ones(nlayers,1) * 3e-3/nlayers; % 3 mm thick
@@ -51,7 +51,7 @@ h = 1*ones(nlayers,1) * 3e-3/nlayers; % 3 mm thick
 %h = 1*ones(nlayers,1) * 3*1e-3; % [m]
 %h = 1*ones(nlayers,1) * 3*1e-3/24; % [m]
 %h = 1*ones(nlayers,1) * 1.5*1e-3; % [m]
-rot_angles = layup + 90;
+rot_angles = layup - 90; % set x axis horizontal
     
 % Stacking direction
 stack_dir = 1;
