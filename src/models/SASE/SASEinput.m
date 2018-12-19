@@ -22,10 +22,10 @@
 %layup = [90,90,90,90,90,90];
 %layup = [0 90 0 90 0];
 % layup = [0 0 0 0 0];
-% layup = [0 0 0 0];
+ layup = [0 0 0 0];
 %layup = [0 90 0 90 0 90 0 0 90 0 90 0 90 0];
 %layup = [0 90 0 90 90 0 90 0];
-layup = [0 90 90 0];
+%layup = [0 90 90 0];
 %layup = [0 90 0 90];
 %layup = [0 45 90 -45 0];
 % layup = [45 0 135 90 90 135 0 45];
@@ -39,7 +39,7 @@ layup = [0 90 90 0];
 %layup = [45 135 0 90 90 0 135 45 45 135 0 90 90 0 135 45 45 135 0 90 90 0 135 45];
 
 nlayers = length(layup);
-h = 1*ones(nlayers,1) * 3e-3/nlayers; % 3 mm thick
+h = 1*ones(nlayers,1) * 1.5e-3/nlayers; % 3 mm thick
 % h = 1*ones(nlayers,1) * 3.6*12e-3/12;
 %h = 1*ones(nlayers,1) * 1.07*1e-3/8;
 %h = 1*ones(nlayers,1) * 2.0*1e-3/12; % [m]
@@ -62,7 +62,7 @@ stack_dir = 1;
 % 1 = Taupin      2 = Neau      3 = Mircea    4 = aluminium 5 = after
 % Sierakowski 6=Pan, 7=Short fibers vol 40% 8=short fibers vol 40% 9= short
 % fibers vol 20% 10= short fibers vol 10%
-props = 11;
+props = 5;
 
 %% In Taupin et. al.
 switch props
