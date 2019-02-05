@@ -12,7 +12,7 @@
 % counter-clockwise 
 % For material properties transformation, +Y = 0 deg. and then
 % counter-clockwise -- for stacking direction +X.
-% Hence, layup angles have to be changed. rot_angles = layup + 90 deg.
+% Hence, layup angles have to be changed. rot_angles = layup - 90 deg.
 
 %% Input
 
