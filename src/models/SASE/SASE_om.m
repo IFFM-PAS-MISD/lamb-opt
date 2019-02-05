@@ -32,12 +32,12 @@ om_imag = zeros(length(M),nbeta);
 cg = zeros(length(M),nbeta);
 mode_shapes = cell(nbeta,1);
 
-tic
+%tic
 for ii=1:nbeta
 %     disp('Angle'); disp(beta(ii));
     [cg(:,ii), mode_shapes{ii}, om_real(:,ii), om_imag(:,ii)] = get_om(K,M,beta(ii),wavenumber);
 end
-toc
+%toc
 
 end
 
