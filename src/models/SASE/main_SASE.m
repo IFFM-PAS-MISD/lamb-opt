@@ -23,8 +23,8 @@ function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C6
 % 
 % Outputs: 
 %    wavenumber - vector of wavenumbers, dimensions [1, number_of_wavenumber_points], Units: 1/m 
-%    CG - matrix of group velocities, double, dimensions [num_of_modes,number_of_wavenumber_points,number_of_angles], Units: m/s 
-%    FREQ - matrix of frequencies, double, dimensions [num_of_modes,number_of_wavenumber_points,number_of_angles], Units: Hz 
+%    CG - matrix of group velocities, double, dimensions [number_of_modes,number_of_wavenumber_points,number_of_angles], Units: m/s 
+%    FREQ - matrix of frequencies, double, dimensions [number_of_modes,number_of_wavenumber_points,number_of_angles], Units: Hz 
 % 
 % Example: 
 %    [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer) 
@@ -35,6 +35,18 @@ function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C6
 % MAT-files required: none 
 % See also: 
 % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This code is based on "A detailed study of guided wave propagation in a
+% viscoelastic multilayered anisotropic plate" paper by L. Taupin et. al.
+% in 9th Anglo-French Physical Acoustic Joint conference in 2011.
+% Further reference: Modeling wave propagation in damped waveguides of
+% arbitrary cross-section, by I. Bartoli et. al. (2006)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% layup angles are as given in the paper: +Z = 0 deg. and then
+% counter-clockwise 
+% For material properties transformation, +Y = 0 deg. and then
+% counter-clockwise -- for stacking direction +X.
+% Hence, layup angles have to be changed. rot_angles = layup - 90 deg.
 
 % Author: Pawel Kudela, D.Sc., Ph.D., Eng. 
 % Institute of Fluid Flow Machinery Polish Academy of Sciences 
@@ -70,9 +82,9 @@ end
 % Get global stiffness and mass matrices (independent of beta and wavenumber)
 [K, M] = get_KM(nele_layer,np,h,C,rho);
 %% dispersion curves
-num_of_modes=length(M);
-FREQ = zeros(num_of_modes,number_of_wavenumber_points,number_of_angles);
-CG = zeros(num_of_modes,number_of_wavenumber_points,number_of_angles);
+number_of_modes=length(M);
+FREQ = zeros(number_of_modes,number_of_wavenumber_points,number_of_angles);
+CG = zeros(number_of_modes,number_of_wavenumber_points,number_of_angles);
 wavenumber = zeros(number_of_wavenumber_points,number_of_angles);
 for k=1:number_of_wavenumber_points
     wavenumber(k,:) = wavenumber_min+(k-1)*wavenumber_step;
@@ -80,11 +92,11 @@ end
 %% loop over angles
 for j=1:length(beta)
     fprintf('SASE dispersion curves at angle: %2.1f\n', beta(j));
-    om_real = zeros(num_of_modes,number_of_wavenumber_points);
-    om_imag = zeros(num_of_modes,number_of_wavenumber_points);
-    cg = zeros(num_of_modes,number_of_wavenumber_points);
+    om_real = zeros(number_of_modes,number_of_wavenumber_points);
+    om_imag = zeros(number_of_modes,number_of_wavenumber_points);
+    cg = zeros(number_of_modes,number_of_wavenumber_points);
     for k=1:number_of_wavenumber_points
-        [cg(:,k),mode_shapes, om_real(:,k), om_imag(:,k)] = SASE_om(K,M,beta(j),wavenumber(k,j));   
+        [cg(:,k),~, om_real(:,k), om_imag(:,k)] = get_om(K,M,beta(j),wavenumber(k,j));   
     end
     %% mode-tracing
     % Taylor approximation method

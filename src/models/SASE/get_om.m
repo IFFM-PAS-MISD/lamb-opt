@@ -26,14 +26,6 @@ T(3:3:end) = 1;
 
 T=diag(T);
 
-%A = wavenumber^2*(sb^2*T'*K22*T + cb^2*T'*K33*T - cb*sb*T'*K23*T - cb*sb*T'*K32*T) - 1i*wavenumber*(cb*T'*K13*T + sb*T'*K21*T - sb*T'*K12*T - cb*T'*K31*T) + T'*K11*T;
-%A = wavenumber^2*(sb^2*T'*K22*T + cb^2*T'*K33*T - cb*sb*T'*K23*T - cb*sb*T'*K32*T) + wavenumber*(cb*T'*K13*T + sb*T'*K21*T - sb*T'*K12*T - cb*T'*K31*T) + T'*K11*T;
-%
-%A = wavenumber^2*(sb^2*K22 + cb^2*K33 - cb*sb*K23 - cb*sb*K32)-1i*wavenumber*(cb*T'*K13*T + sb*T'*K21*T - sb*T'*K12*T - cb*T'*K31*T) + K11;
-%A = wavenumber^2*(sb^2*K22 + cb^2*K33 - cb*sb*K23 - cb*sb*K32)+wavenumber*(cb*T'*K13*T + sb*T'*K21*T - sb*T'*K12*T - cb*T'*K31*T) + K11;
-
-%A = wavenumber^2*(sb^2*K22 + cb^2*K33 - cb*sb*K23 - cb*sb*K32)-1i*wavenumber*(cb*K13 + sb*K21 - sb*K12 - cb*K31) + K11;
-%A = wavenumber^2*(sb^2*K22 + cb^2*K33 - cb*sb*K23 - cb*sb*K32)-wavenumber*(cb*K13 + sb*K21 - sb*K12 - cb*K31) + K11;
 A = wavenumber^2*(sb^2*K22 + cb^2*K33 - cb*sb*K23 - cb*sb*K32)+1i*wavenumber*T'*(-cb*K13 - sb*K21 + sb*K12 + cb*K31)*T + K11;
 
 %% Generalized Eigenvalue problem
