@@ -61,7 +61,7 @@ for ii=1:nlayers
     else
         C0r(1,1) = C11(ii); C0r(1,2)=C12(ii); C0r(1,3)=C13(ii);C0r(2,2)=C22(ii);C0r(2,3)=C23(ii);C0r(3,3)=C33(ii);C0r(4,4)=C44(ii);C0r(5,5)=C55(ii);C0r(6,6)=C66(ii);
     end
-    C_tmp = transprop(C0r,stack_dir,theta); % no damping, real elastic constants
+    C_tmp = transform_prop_3D(C0r,stack_dir,theta); % no damping, real elastic constants
     C{ii} = C_tmp;
 end
 
