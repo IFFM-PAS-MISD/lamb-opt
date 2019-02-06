@@ -25,19 +25,17 @@ function [cg,mode_shapes, om_real, om_imag] = SASE_om(K,M,beta,wavenumber)
 
 %% Loop over propagating directions (beta)
 
-nbeta = length(beta);
+number_of_angles = length(beta);
 
-om_real = zeros(length(M),nbeta);
-om_imag = zeros(length(M),nbeta);
-cg = zeros(length(M),nbeta);
-mode_shapes = cell(nbeta,1);
+om_real = zeros(length(M),number_of_angles);
+om_imag = zeros(length(M),number_of_angles);
+cg = zeros(length(M),number_of_angles);
+mode_shapes = cell(number_of_angles,1);
 
-%tic
-for ii=1:nbeta
-%     disp('Angle'); disp(beta(ii));
+
+for ii=1:number_of_angles
     [cg(:,ii), mode_shapes{ii}, om_real(:,ii), om_imag(:,ii)] = get_om(K,M,beta(ii),wavenumber);
 end
-%toc
 
 end
 

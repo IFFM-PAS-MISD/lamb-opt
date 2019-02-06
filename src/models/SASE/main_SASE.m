@@ -1,4 +1,4 @@
-function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer)
+function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer)
 % MAIN_SASE   Dispersion curves of Lamb wave modes 
 %    includes symmetric, antisymmetric and shear horizontal modes 
 %    sweep over wavenumbers 
@@ -13,7 +13,8 @@ function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C6
 %                                          m is the number of composite layers
 %    layup - composite layup (angles of reinforcing fibres), dimensions [1, m], Units: deg 
 %    h - thickness of each layer, double, dimensions [m, 1], Units: m
-%    wavenumber_max - maximum value of wavenumber for dispersion curves,double, Units: 1/m
+%    wavenumber_min - minimum value of wavenumber for dispersion curves,double, dimensions [number_of_angles,1], Units: 1/m
+%    wavenumber_max - maximum value of wavenumber for dispersion curves,double, dimensions [number_of_angles,1], Units: 1/m
 %    number_of_wavenumber_points - number of wavenumber points, integer
 %    beta - vector of wave propagation angles under analysis, double,dimensions [1,number_of_angles]
 %    stack_dir - stacking direction (1,2 or 3)
@@ -45,9 +46,11 @@ function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C6
 
 nlayers = length(layup);
 rot_angles = layup - 90; % set x axis horizontal 
-wavenumber_min = 0; % minimal wavenumber [1/m]
-wavenumber_step=(wavenumber_max-wavenumber_min)/(number_of_wavenumber_points-1); % wavenumber step [1/m]
-
+number_of_angles = length(beta);
+wavenumber_step=zeros(number_of_angles,1);
+for j=1:number_of_angles
+    wavenumber_step(j)=(wavenumber_max(j)-wavenumber_min(j))/(number_of_wavenumber_points-1); % wavenumber step [1/m]
+end
 %% Transform material properties
 C = cell(nlayers,1);
 C0r = zeros(6,6);
@@ -68,26 +71,24 @@ end
 [K, M] = get_KM(nele_layer,np,h,C,rho);
 %% dispersion curves
 num_of_modes=length(M);
-FREQ = zeros(num_of_modes,number_of_wavenumber_points,length(beta));
-CG = zeros(num_of_modes,number_of_wavenumber_points,length(beta));
+FREQ = zeros(num_of_modes,number_of_wavenumber_points,number_of_angles);
+CG = zeros(num_of_modes,number_of_wavenumber_points,number_of_angles);
+wavenumber = zeros(number_of_wavenumber_points,number_of_angles);
+for k=1:number_of_wavenumber_points
+    wavenumber(k,:) = wavenumber_min+(k-1)*wavenumber_step;
+end
 %% loop over angles
 for j=1:length(beta)
     fprintf('SASE dispersion curves at angle: %2.1f\n', beta(j));
     om_real = zeros(num_of_modes,number_of_wavenumber_points);
     om_imag = zeros(num_of_modes,number_of_wavenumber_points);
     cg = zeros(num_of_modes,number_of_wavenumber_points);
-    wavenumber = zeros(1,number_of_wavenumber_points);
-    
     for k=1:number_of_wavenumber_points
-        %[k number_of_wavenumber_points]
-        wavenumber(k) = wavenumber_min+(k-1)*wavenumber_step;
-        [cg(:,k),mode_shapes, om_real(:,k), om_imag(:,k)] = SASE_om(K,M,beta(j),wavenumber(k));
+        [cg(:,k),mode_shapes, om_real(:,k), om_imag(:,k)] = SASE_om(K,M,beta(j),wavenumber(k,j));   
     end
-
-
     %% mode-tracing
     % Taylor approximation method
-    [cg_new,om_new] = mode_tracing(cg,om_real,wavenumber_step);
+    [cg_new,om_new] = mode_tracing(cg,om_real,wavenumber_step(j));
     FREQ(:,:,j) = om_new/2/pi;
     CG(:,:,j) = cg_new;
 end

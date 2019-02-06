@@ -20,13 +20,10 @@ beta = 0:15:90; % angles for dispersion curves in polar plot
 np = 3;
 nele_layer = 1;
 
-wavenumber_min = 0; % minimal wavenumber [1/m]
+wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
 
-wavenumber_max = 3657.8; % maximal wavenumber for dispersion curves [1/m]
+wavenumber_max = [3657.8,3786.8,4223.7,5172.9,4223.7,3786.8,3657.8]'; % maximal wavenumber for dispersion curves [1/m]
 number_of_wavenumber_points=512;
-
-
-nbeta = length(beta);
 
 
 %% SAFE
@@ -54,11 +51,55 @@ stack_dir = 1;
 % Elastic constants of composite lamina in terms of principal material directions
 [C11,C12,C13,C22,C23,C33,C44,C55,C66] = lamina_3D(e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23);
 
-[wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
+[wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
 
 % identify A0 and S0 mode
+FREQ_A0 = zeros(number_of_wavenumber_points,length(beta));
+FREQ_S0 = zeros(number_of_wavenumber_points,length(beta));
+CG_A0 = zeros(number_of_wavenumber_points,length(beta));
+CG_S0 = zeros(number_of_wavenumber_points,length(beta));
+[num_of_modes,number_of_wavenumber_points,number_of_angles] = size(CG);
+for j=1:number_of_angles
+    f1=FREQ(:,2,j);
+    I3=find(f1<50e3); % should find 3 modes existing in range 0-50 kHz, namely A0, S0 and SH0
+    [~,A0_ind] = min(CG(I3,4,j)); % A0 mode index
+    [~,S0_ind] = max(CG(I3,4,j)); % S0 mode index
+    FREQ_A0(:,j)=FREQ(I3(A0_ind),:,j);
+    CG_A0(:,j)=CG(I3(A0_ind),:,j);
+    FREQ_S0(:,j)=FREQ(I3(S0_ind),:,j);
+    CG_S0(:,j)=CG(I3(S0_ind),:,j);
+end
+% sanity check
+figure(1)
+hold on;
+for j=1:number_of_angles
+    plot(FREQ_A0(2:end,j)/1e3,CG_A0(2:end,j),'LineWidth',2);% A0
+    %plot(FREQ_S0(:,j)/1e3,CG_S0(:,j),'LineWidth',2);% S0
+end
+Hxl=xlabel('Frequency [kHz]');
+Hyl=ylabel('Group velocity [m/s]');
+set(Hxl,'FontSize',12);set(Hyl,'FontSize',12);
+figure(2)
+hold on;
+for j=1:number_of_angles
+    %plot(FREQ_A0(:,j)/1e3,CG_A0(:,j),'LineWidth',2);% A0
+    plot(FREQ_S0(2:end,j)/1e3,CG_S0(2:end,j),'LineWidth',2);% S0
+end
+Hxl=xlabel('Frequency [kHz]');
+Hyl=ylabel('Group velocity [m/s]');
+set(Hxl,'FontSize',12);set(Hyl,'FontSize',12);
+figure(3)
+hold on;
+for j=1:number_of_angles
+    plot(FREQ_A0(2:end,j)/1e3,wavenumber(2:end,j),'LineWidth',2);% A0
+    plot(FREQ_S0(2:end,j)/1e3,wavenumber(2:end,j),'LineWidth',2);% S0
+end
+Hxl=xlabel('Frequency [kHz]');
+Hyl=ylabel('Wavenumber [1/m]');
+set(Hxl,'FontSize',12);set(Hyl,'FontSize',12)
 
-figure(1); hold on;
+return;
+figure(5); hold on;
 
 %plot(FREQ(:,:,1)/1e3,wavenumber,'LineWidth',2);
 plot(FREQ(1,:,1)/1e3,wavenumber,'LineWidth',2);% A0
@@ -73,7 +114,7 @@ title([num2str(beta(1)),' [deg]']);
 %axis([0 5000000/1e3 0 1800]);
 %axis([0 500000/1e3 0 1800]);
 
-figure(2); 
+figure(6); 
 plot(FREQ(1,:,1)/1e3,CG(1,:,1),'LineWidth',2);% A0
 hold on;
 plot(FREQ(2,:,1)/1e3,CG(2,:,1),'LineWidth',2);
