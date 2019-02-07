@@ -7,12 +7,13 @@ overwrite=false;
 
 % retrieve model name based on foldername
 currentFile = mfilename('fullpath');
-[pathstr,~,~] = fileparts( currentFile );
+[pathstr,name,ext] = fileparts( currentFile );
 idx = strfind( pathstr,filesep );
-modelname = pathstr(idx(end)+1:end);
+modelname = pathstr(idx(end)+1:end); % name of folder
+%modelname = name; % name of running file
 
 % prepare model output path
-model_output_path = prepare_model_paths(modelname,'raw','num');
+model_output_path = prepare_model_paths('raw','num',modelname);
 
 %% START RUNNING MODEL
 % replace 'model1_test' with your 'model_name'

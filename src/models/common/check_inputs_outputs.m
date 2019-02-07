@@ -37,7 +37,8 @@ if ~exist(inputs_folder, 'dir')
     mkdir(inputs_folder);
 end
 % check if 'outputs' folder exist, if not create it
-outputs_folder = [model_output_path,filesep,'outputs',filesep];
+%outputs_folder = [model_output_path,filesep,'outputs',filesep];
+outputs_folder = [model_output_path,filesep];
 if ~exist(outputs_folder, 'dir')
     mkdir(outputs_folder);
 end

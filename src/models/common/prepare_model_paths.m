@@ -1,24 +1,26 @@
-function model_output_path = prepare_model_paths(modelname,data_process_type,data_origin)
+function model_output_path = prepare_model_paths(data_process_type,data_origin,foldername,modelname)
 % PREPARE_MODEL_PATHS   function creates model_output_path 
 %     Also set current directory in folder related to the model
 % Syntax: model_output_path = prepare_model_paths(modelname,data_process_type,data_origin)
 % 
-% Inputs: 
-%    modelname -  name of model, string  
+% Inputs:   
 %    data_process_type - string: 'raw', 'interim', 'processed' 
 %    data_origin - string: 'exp', 'num' 
+%    foldername -  name of folder in which model resides, string
+%    modelname -  name of model, string
 % 
 % Outputs:
 %    model_output_path - path to store the result, string
 %
 % Example: 
-%    model_output_path = prepare_model_paths(modelname,'raw','num'); 
-%    model_output_path = prepare_model_paths('Model2','raw','num'); 
+%    model_output_path = prepare_model_paths('raw','num',modelname); 
+%    model_output_path = prepare_model_paths('raw','num','Model2'); 
+%    model_output_path = prepare_model_paths('raw','num','model','model1'); 
 % 
 % Other m-files required: none 
-% Subfunctions: CHECK_INPUTS_OUTPUTS 
+% Subfunctions:  
 % MAT-files required: none 
-% See also: 
+% See also: CHECK_INPUTS_OUTPUTS
 % 
 
 % Author: Pawel Kudela, D.Sc., Ph.D., Eng. 
@@ -32,13 +34,22 @@ function model_output_path = prepare_model_paths(modelname,data_process_type,dat
 % load projectroot path
 load project_paths projectroot src_path;
 
-% set current path to model folder
-model_path = [src_path,'models',filesep,modelname,filesep];
-cd(model_path);
+if nargin == 3
+    modelname = foldername;
+    % set current path to model folder
+    model_path = [src_path,'models',filesep,modelname,filesep];
+    cd(model_path);
+end
+if nargin == 4
+    % set current path to model folder
+    model_path = [src_path,'models',filesep,foldername,filesep];
+    cd(model_path);
+    modelname = [foldername,filesep,modelname];
+end
 
-% create path to the numerical raw data folder (absolute path)
-raw_data_path = fullfile( projectroot, 'data',data_process_type,data_origin, filesep );
-model_output_path = [raw_data_path,modelname,'_out'];
+% create path to the output data folder (absolute path)
+data_output_path = fullfile( projectroot, 'data',data_process_type,data_origin, filesep );
+model_output_path = [data_output_path,modelname,'_out'];
 
 % check if folder exist, if not create it
 if ~exist(model_output_path, 'dir')

@@ -1,13 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%                          main                       %%%%%%%%%%%
+%                                    main                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This script calls main_SASE function for a given wavenumbers (in 1/m) 
 % and gets the real frequencies and group velocities.
 % Dispersion curves are calculated at different angles (beta) 
-% (eig_no)
-% freq in kHz                       beta in degrees
-% np = order of elements (3<=np<=5)
-% nele_layer = no. of elements per ply
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all;close all;
@@ -32,7 +28,8 @@ ef = 240e9; % Pa
 nim = 0.35;
 nif =  0.2; 
 vol = 0.5;
-layup = [0 90 90 0];
+layup = [0 90 0 90 90 0 90 0];
+%layup = [0 90 0 90 0 90 0 90];
 nlayers = length(layup);
 h = [1,1,1,1]'* 3e-3/nlayers; % thickness of layers;
 % Stacking direction
