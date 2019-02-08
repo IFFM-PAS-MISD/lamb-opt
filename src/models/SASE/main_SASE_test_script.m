@@ -13,21 +13,22 @@ clear all;close all;
 
 % Mode, frequency and angles and order of sprectal elements
 beta = 0:15:90; % angles for dispersion curves in polar plot [deg]
-np = 3; % order of elements (3<=np<=5)
+np = 4; % order of elements (3<=np<=5)
 nele_layer = 1; % no. of elements per ply
 wavenumber_min = zeros(length(beta),1)+1; % minimal wavenumbers [1/m]
 wavenumber_max = [3657.8,3786.8,4223.7,5172.9,4223.7,3786.8,3657.8]'; % maximal wavenumber for dispersion curves [1/m]
 number_of_wavenumber_points=512;
+%number_of_wavenumber_points=1024;
 %
 %% Input for material properties
 
 rhom = 1250; % kg/m^3
 rhof = 1900; % kg/m^3
 em = 3.43e9; % Pa
-ef = 240e9; % Pa
+ef = 0.8*240e9; % Pa
 nim = 0.35;
 nif =  0.2; 
-vol = 0.5;
+vol = 0.8*0.5;
 layup = [0 90 0 90 90 0 90 0];
 %layup = [0 90 0 90 0 90 0 90];
 nlayers = length(layup);
@@ -42,10 +43,12 @@ stack_dir = 1;
 %% SASE
 disp('SASE...');
 [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
-
-% identify A0 and S0 mode
-[FREQ_A0,FREQ_S0,CG_A0,CG_S0] = identify_A0_S0_modes(FREQ,CG);
 [number_of_modes,number_of_wavenumber_points,number_of_angles] = size(CG);
+% for k=1:number_of_modes
+% CG(k,2:end,:) = squeeze(FREQ(k,2:end,:) - FREQ(k,1:end-1,:))./(wavenumber(2:end,:)-wavenumber(1:end-1,:));
+% end
+% identify A0 and S0 mode
+[FREQ_A0,FREQ_S0,CG_A0,CG_S0] = identify_A0_S0_modes2(FREQ,CG);
 
 % sanity check
 % all angles - fundamental modes
@@ -81,9 +84,10 @@ set(Hxl,'FontSize',12);set(Hyl,'FontSize',12)
 
 
 % all modes - 0 deg
+jj=1;
 figure(4); hold on;
 for k=1:number_of_modes
-    plot(FREQ(k,2:end,1)/1e3,wavenumber(2:end,1),'LineWidth',2);% 
+    plot(FREQ(k,2:end,jj)/1e3,wavenumber(2:end,jj),'LineWidth',2);% 
 end
 Hxl=xlabel('Frequency [kHz]');
 Hyl=ylabel('Wavenumber [1/m]');
@@ -95,7 +99,7 @@ title([num2str(beta(1)),' [deg]']);
 
 figure(5); hold on;
 for k=1:number_of_modes
-    plot(FREQ(k,2:end,1)/1e3,CG(k,2:end,1),'LineWidth',2);% 
+    plot(FREQ(k,2:end,jj)/1e3,CG(k,2:end,jj),'LineWidth',2);% 
 end
 
 Hxl=xlabel('Frequency [kHz]');

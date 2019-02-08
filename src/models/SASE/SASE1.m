@@ -74,7 +74,7 @@ for i1=1:number_of_points % ef
         [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
 
         % identify A0 and S0 mode
-        [FREQ_A0,FREQ_S0,CG_A0,CG_S0] = identify_A0_S0_modes(FREQ,CG);
+        [FREQ_A0,FREQ_S0,CG_A0,CG_S0] = identify_A0_S0_modes2(FREQ,CG);
         [number_of_modes,number_of_wavenumber_points,number_of_angles] = size(CG);
 
         %% Save output

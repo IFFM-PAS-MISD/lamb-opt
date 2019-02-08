@@ -9,7 +9,8 @@ load project_paths projectroot src_path;
 raw_data_path=fullfile( projectroot, 'data','raw','exp', filesep );
 
 % filename of data to be processed
-filename = '643p_pulse_5ms_x100_7Vpp_up250kHz.mat';
+filename = '643p_pulse_5ms_x100_7Vpp_up250kHz.mat'; % measurements along a line
+
 
 % load raw experimental data file
 load([raw_data_path,filename]);

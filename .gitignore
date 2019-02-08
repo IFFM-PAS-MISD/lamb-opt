@@ -106,6 +106,9 @@ target/
 # documents
 *.docx
 
+# figures
+*.png
+
 # IPython NB Checkpoints
 .ipynb_checkpoints/
 

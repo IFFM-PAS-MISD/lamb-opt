@@ -1,4 +1,4 @@
-function [FREQ_A0,FREQ_S0,CG_A0,CG_S0] = identify_A0_S0_modes(FREQ,CG)
+function [FREQ_A0,FREQ_S0,CG_A0,CG_S0] = identify_A0_S0_modes2(FREQ,CG)
 % IDENTIFY_A0_S0_MODES   identify A0 and S0 Lamb wave mode dispersion curves
 %    extracts only fundamental Lamb wave modes from number_of_modes and
 %    angles
@@ -34,7 +34,7 @@ function [FREQ_A0,FREQ_S0,CG_A0,CG_S0] = identify_A0_S0_modes(FREQ,CG)
 
 %---------------------- BEGIN CODE---------------------- 
 
-[~,number_of_wavenumber_points,number_of_angles] = size(CG);
+[~,number_of_wavenumber_points,number_of_angles] = size(FREQ);
 FREQ_A0 = zeros(number_of_wavenumber_points,number_of_angles);
 FREQ_S0 = zeros(number_of_wavenumber_points,number_of_angles);
 CG_A0 = zeros(number_of_wavenumber_points,number_of_angles);
@@ -43,12 +43,15 @@ CG_S0 = zeros(number_of_wavenumber_points,number_of_angles);
 for j=1:number_of_angles
     f1=FREQ(:,2,j);
     I3=find(f1<50e3); % should find 3 modes existing in range 0-50 kHz, namely A0, S0 and SH0
-    [~,A0_ind] = min(CG(I3,4,j)); % A0 mode index
-    [~,S0_ind] = max(CG(I3,4,j)); % S0 mode index
-    FREQ_A0(:,j)=FREQ(I3(A0_ind),:,j);
-    CG_A0(:,j)=CG(I3(A0_ind),:,j);
-    FREQ_S0(:,j)=FREQ(I3(S0_ind),:,j);
-    CG_S0(:,j)=CG(I3(S0_ind),:,j);
+    FREQ_A0(:,j)=FREQ(I3(1),:,j);
+    CG_A0(:,j)=CG(I3(1),:,j);
+    if(length(I3)==3)
+        FREQ_S0(:,j)=FREQ(I3(3),:,j);
+        CG_S0(:,j)=CG(I3(3),:,j);
+    else
+        FREQ_S0(:,j)=FREQ(I3(2),:,j);
+        CG_S0(:,j)=CG(I3(2),:,j);
+    end
 end
 
 %---------------------- END OF CODE---------------------- 

@@ -30,7 +30,7 @@ A = wavenumber^2*(sb^2*K22 + cb^2*K33 - cb*sb*K23 - cb*sb*K32)+1i*wavenumber*T'*
 
 %% Generalized Eigenvalue problem
 
-[eig_vect, eig_val] = eig(A,M);
+[eig_vect, eig_val,eig_vect_r] = eig(A,M);
 
 eig_val = sqrt(diag(eig_val));
 
@@ -39,18 +39,40 @@ eig_val = sqrt(diag(eig_val));
 
 [om_imag, IX_imag] = sort((imag(eig_val(1:1:end))),'ascend');
 
-
 QR = (eig_vect(:,IX_real));
+QL = (eig_vect_r(:,IX_real))';
+%QL = (eig_vect_r(IX_real,:))';
 
+ for k=1:length(M)
+     if(~isreal(eig_val(IX_real(k))))
+         QR(:,k) = abs(QR(:,k));
+         QL(k,:) = abs(QL(k,:));
+%          QR(:,k) = real(QR(:,k));
+%          QL(k,:) = real(QL(k,:));
+%          QR(:,k) = real(conj(QR(:,k)));
+%          QL(k,:) = real(conj(QL(k,:)));
+     end
+ end
+%     else
+%         QR(:,k) = (QR(:,k));
+%     end
+% end
+%QR = (eig_vect(:,IX_real));
+%QR = real(eig_vect(:,IX_real));
 
 %%
 % group velocity computation
 Aprim = 2*wavenumber*(sb^2*K22 + cb^2*K33 - cb*sb*K23 - cb*sb*K32) +1i*T'*(-cb*K13 - sb*K21 + sb*K12 + cb*K31)*T;
 
+% if (~isreal(QR)) 
+%     disp('complex'); 
+%     return 
+% end
 cg = zeros(length(M),1);
 for k=1:length(M)
     QL=QR(:,k)';
     cg(k,1) =  (QL*Aprim*QR(:,k))./(2*om_real(k)*QL*M*QR(:,k));
+    %cg(k,1) =  (QL(k,:)*Aprim*QR(:,k))./(2*om_real(k)*QL(k,:)*M*QR(:,k));
 end
 
 end
