@@ -25,14 +25,16 @@ number_of_wavenumber_points=512;
 rhom = 1250; % kg/m^3
 rhof = 1900; % kg/m^3
 em = 3.43e9; % Pa
-ef = 0.8*240e9; % Pa
+%ef = 0.8*240e9; % Pa
+ef = 240e9; % Pa
 nim = 0.35;
 nif =  0.2; 
-vol = 0.8*0.5;
+%vol = 0.8*0.5;
+vol = 0.3;
 layup = [0 90 0 90 90 0 90 0];
 %layup = [0 90 0 90 0 90 0 90];
 nlayers = length(layup);
-h = [1,1,1,1]'* 3e-3/nlayers; % thickness of layers;
+h = [zeros(nlayers,1)+1]* 3e-3/nlayers; % thickness of layers;
 % Stacking direction
 stack_dir = 1;
 %% Mechanical properties  
@@ -84,7 +86,7 @@ set(Hxl,'FontSize',12);set(Hyl,'FontSize',12)
 
 
 % all modes - 0 deg
-jj=1;
+jj=5;
 figure(4); hold on;
 for k=1:number_of_modes
     plot(FREQ(k,2:end,jj)/1e3,wavenumber(2:end,jj),'LineWidth',2);% 

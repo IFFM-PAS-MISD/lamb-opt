@@ -17,7 +17,7 @@ load([raw_data_path,filename]);
 
 %% START DATA PROCESSING
 %
-Lenght = 0.9*sqrt(2);  
+Length = (0.9*sqrt(2));  
 
         % Unit vecotrs      
 Fs =  1/(time(3)-time(2));    % sampling frequency
@@ -26,10 +26,13 @@ NFFT = 2^nextpow2(L);
 %f_vec = Fs/2*linspace(0,1,NFFT/2+1);  % frequency vector
 
 [points frames] = size(Data);
-deltay = Lenght/(points-1);                   
-ky1 = (0:points-1)/points*2*pi/deltay;             % wavenumebr 1/m
-%ky1 = (0:points-1)/points/deltay;             % angular wavenumebr rad/m
+deltay = Length/(points-1);                   
+ky1 = 2*pi*(0:points-1)/points/deltay;       % angular wavenumber rad/m
+%ky1 = (0:points-1)/points/deltay;           % linear wavenumebr 1/m  %
 ky_vec = ky1-1/2*ky1(end);
+% N=points;
+% ky_vec2 = linspace(-pi/deltay,(pi-2*pi/N)/deltay,N); % angular wavenumber
+% ky_vec2 = linspace(-1/(2*deltay),(1/2-1/N)/deltay,N); % linear wavenumber
 
 % same as above
 %deltaY = Lenght/(points-1);
@@ -59,7 +62,8 @@ set(gca,'YDir','normal');
 set(gca,'Fontsize',16)
 %xlabel('Angular frequency (rad/s)')
 xlabel('Frequency (Hz)')
-ylabel('k_y (1/m)')
+%ylabel('k_y (1/m)')
+ylabel('k_y (rd/m)')
 %colormap(cmap);
 axis tight; 
 b = max(caxis);  c = min(caxis);  

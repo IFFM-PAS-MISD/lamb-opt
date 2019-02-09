@@ -34,14 +34,15 @@ end
 
 %%
 % input
-lxmax=kx_vec(end); % length
-lymax=ky_vec(end); % width
+% lxmax=kx_vec(end); % length
+% lymax=ky_vec(end); % width
+lxmax=kx_vec(end)/2; % length
+lymax=ky_vec(end)/2; % width
 lxmin=kx_vec(floor(length(kx_vec)/2)+1); % lxmin=0; first quarter
 lymin=ky_vec(floor(length(kx_vec)/2)+1); % lymin=0; first quarter
 % Define the resolution of the grid:
 N=max([m1,n1]); % # no of grid points for R coordinate
 if(mod(N,2)) N=N-1; end;
- 
 %%
 disp('Preliminary calculation...');
 % Polar data allocation: angle, radius(wavenumbers), time(frequency)
@@ -111,7 +112,8 @@ processed_data_path=fullfile( projectroot, 'data','processed','exp', filesep );
 processed_filename = ['polar_',filename];
 
 % save processed data to processed data folder
-save([processed_data_path,processed_filename],'Data_polar','x','y','wavenumber_max','fmax','-v7.3');
+save([processed_data_path,processed_filename],'Data_polar','x','y','wavenumber_max','fmax','beta','-v7.3');
 param_filename = [processed_filename,'_param'];
-save([processed_data_path,param_filename],'x','y','wavenumber_max','fmax');
+number_of_wavenumber_points = N;
+save([processed_data_path,param_filename],'x','y','wavenumber_max','fmax','beta','number_of_wavenumber_points');
 

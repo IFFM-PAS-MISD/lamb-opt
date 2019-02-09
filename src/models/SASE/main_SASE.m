@@ -96,19 +96,15 @@ for j=1:length(beta)
     %om_imag = zeros(number_of_modes,number_of_wavenumber_points);
     cg = zeros(number_of_modes,number_of_wavenumber_points);
     for k=1:number_of_wavenumber_points
-        [cg(:,k),~, om_real(:,k), ~] = get_om(K,M,beta(j),wavenumber(k,j));
-%         [cg_temp,~, om_temp] = get_om_real(K,M,beta(j),wavenumber(k,j));
-%         cg(1:length(cg_temp),k) = cg_temp;
-%         om_real(1:length(om_temp),k) = om_temp;
-        
+        [cg(:,k),~, om_real(:,k), ~] = get_om(K,M,beta(j),wavenumber(k,j));    
     end
     %% mode-tracing
     % Taylor approximation method
     %[cg_new,om_new] = mode_tracing(cg,om_real,wavenumber_step(j));
-    [cg_new,om_new] = mode_tracing_pade(cg,om_real,wavenumber_step(j));
-%      cg_new=cg;
-%      om_new=om_real;
-    FREQ(:,:,j) = om_new/2/pi;
+    %[cg_new,om_new] = mode_tracing_pade(cg,om_real,wavenumber_step(j));
+      cg_new=cg;
+      om_new=om_real;
+    FREQ(:,:,j) = om_new/(2*pi);
     CG(:,:,j) = cg_new;
 end
 %---------------------- END OF CODE---------------------- 

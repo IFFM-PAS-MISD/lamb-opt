@@ -52,7 +52,7 @@ hold on;
 %plot(freq(1:25000)/1e3,wavenumber(1:25000),'y');
 plot(fvec2/1e3,kvec2,'y');
 
-
+%% Function to logical matrix
 % convert numerical dispersion curve into logical matrix
 %H=logical(sparse(km,fn));
 H=logical(zeros(km,fn));
@@ -80,8 +80,8 @@ caxis([0 max(caxis)/50]);
 %
 [i,j] = find(H==true);
 obj=0;
-for k =1:fn
-obj = obj + (sqrt(dispersion(i(k),j(k)).^2))/fn;
+for k =1:length(i)
+obj = obj + (sqrt(dispersion(i(k),j(k)).^2));
 end
 obj
 return;
