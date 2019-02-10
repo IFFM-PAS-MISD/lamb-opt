@@ -48,12 +48,12 @@ interim_output_path = prepare_model_paths('interim','num',foldername,modelname);
 interim_filename = 'obj_score';
 
 % save processed data to interim (intermidiate) data folder
-save([interim_output_path,interim_filename],'obj_score');
+save([interim_output_path,filesep,interim_filename],'obj_score');
 
 % add marker (empty file '.exist' ) indicating that 
 % the processing results finished successfully and exist
 
-output_filename_marker = [interim_output_path,'.exist'];
+output_filename_marker = [interim_output_path,filesep,'.exist'];
 
 if ~exist(output_filename_marker, 'file' )
     fid = fopen(output_filename_marker,'w');

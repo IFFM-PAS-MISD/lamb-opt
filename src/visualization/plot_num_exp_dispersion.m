@@ -24,7 +24,10 @@ filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF_';
 disp('loading data ...');
 load([data_path,filename]); % Data_polar x y wavenumber_max fmax
 % load numerical data file
-test_case = 121; % input
+%test_case = 121; % worst objective function score
+test_case = 25; % best objective function score for all modes
+%test_case = 29; % best objective function score for A0 mode only
+
 output_name = [model_output_path,filesep,'output',num2str(test_case)];
 load(output_name); % FREQ CG wavenumber
 
