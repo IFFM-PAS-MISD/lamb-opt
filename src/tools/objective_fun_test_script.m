@@ -8,9 +8,8 @@ load project_paths projectroot src_path;
 % create path to the numerical model data folder
 foldername = 'SASE';
 modelname = 'SASE1';
-data_process_type = 'raw';
-data_origin = 'num';
-model_output_path = prepare_model_paths(data_process_type,data_origin,foldername,modelname);
+
+model_output_path = prepare_model_paths('raw','num',foldername,modelname);
 
 % create path to the experimental processed data folder
 data_path=fullfile( projectroot, 'data','processed','exp', filesep );
@@ -23,6 +22,7 @@ filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF_';
 % load experimental data file
 disp('loading data ...');
 load([data_path,filename]); % Data_polar x y wavenumber_max fmax beta number_of_wavenumber_points
+num_of_modes_consid = 4; % number of modes considered in calculation of objective function score
 %% START DATA PROCESSING
 disp('calculating objective function score ...');
 obj_score=zeros(121,1);
@@ -30,10 +30,10 @@ test_case = 0;
 for i1 = 1:11
     for i2 = 1:11
         test_case= test_case+1;
-        output_name = [model_output_path,filesep,'output',num2str(test_case)];
+        output_name = [model_output_path,filesep,num2str(test_case),'output'];
         % load numerical data file
         load(output_name); % FREQ CG wavenumber
-        [score] = objective_fun(Data_polar,fmax,FREQ);
+        [score] = objective_fun(Data_polar,fmax,FREQ,num_of_modes_consid);
         obj_score(test_case,1)=score;
     end
 end

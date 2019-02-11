@@ -86,8 +86,8 @@ for i1=1:number_of_points % ef
 %         [number_of_modes,number_of_wavenumber_points,number_of_angles] = size(CG);
 
         %% Save output
-        output_name = [model_output_path,filesep,'output',num2str(test_case)];
-        input_name = [model_output_path,filesep,'input',num2str(test_case)];
+        output_name = [model_output_path,filesep,num2str(test_case),'output'];
+        input_name = [model_output_path,filesep,num2str(test_case),'input'];
         %save(output_name,'wavenumber','FREQ_A0','FREQ_S0','CG_A0','CG_S0');
         save(output_name,'wavenumber','FREQ','CG');
         save(input_name,'rhom','rhof','em','ef','nim','nif','vol');

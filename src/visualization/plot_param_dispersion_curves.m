@@ -15,7 +15,7 @@ for j=1:length(beta)
     for i1 = 1:11
         for i2 = 1:11
             test_case= test_case+1;
-            output_name = [model_output_path,filesep,'output',num2str(test_case)];
+            output_name = [model_output_path,filesep,num2str(test_case),'output'];
             load(output_name); % FREQ CG wavenumber
             plot(squeeze(FREQ(1,2:end,j))/1e3,wavenumber(2:end,j),'LineWidth',2);% mode 1
             plot(squeeze(FREQ(2,2:end,j))/1e3,wavenumber(2:end,j),'LineWidth',2);% mode 2

@@ -1,29 +1,26 @@
-function [obj_score] = objective_fun(Data_polar,fmax,FREQ)
-% OBJECTIVE_FUN   One line description of what the function or script performs (H1 line) 
-%    optional: more details about the function than in the H1 line 
-%    optional: more details about the function than in the H1 line 
-%    optional: more details about the function than in the H1 line 
+function [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_consid)
+% OBJECTIVE_FUN   score for overlap of numerical and experimental dispersion curves
 % 
-% Syntax: [output1,output2] = objective_fun(input1,input2,input3) 
+% Syntax: [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_consid) 
 % 
 % Inputs: 
-%    input1 - Description, string, dimensions [m, n], Units: ms 
-%    input2 - Description, logical, dimensions [m, n], Units: m 
-%    input3 - Description, double, dimensions [m, n], Units: N 
+%    Data_polar - Experimental dispersion curves, double, dimensions [number_of_angles,number_of_wavenumber_points,number_of_frequency_points]  
+%    fmax - max frequency, double, Units: Hz 
+%    FREQ - Numerical frequency matrix for the same wavenumbers as in experiment, double, 
+%           dimensions [number_of_modes,number_of_wavenumber_points,number_of_angles], Units: Hz 
+%    number_of_modes_consid - number of modes considered in calculation of the score
 % 
 % Outputs: 
-%    output1 - Description, integer, dimensions [m, n], Units: - 
-%    output2 - Description, double, dimensions [m, n], Units: m/s^2 
+%    obj_score - Objective function score, double, dimensions [m, n], Units: - 
 % 
 % Example: 
-%    [output1,output2] = objective_fun(input1,input2,input3) 
-%    [output1,output2] = objective_fun(input1,input2) 
-%    [output1] = objective_fun(input1,input2,input3) 
+%    [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_consid)
+%    [obj_score] = objective_fun(Data_polar,fmax,FREQ) 
 % 
 % Other m-files required: none 
 % Subfunctions: none 
 % MAT-files required: none 
-% See also: OTHER_FUNCTION_NAME1,  OTHER_FUNCTION_NAME2 
+% See also:  
 % 
 
 % Author: Pawel Kudela, D.Sc., Ph.D., Eng. 
@@ -34,6 +31,10 @@ function [obj_score] = objective_fun(Data_polar,fmax,FREQ)
 
 %---------------------- BEGIN CODE---------------------- 
 
+if nargin == 3
+    number_of_modes_consid = 4; % default number of modes considered
+end
+    
 [number_of_angles,number_of_wavenumber_points,number_of_frequency_points] = size(Data_polar);
 fvec = linspace(0,fmax,number_of_frequency_points);
 obj_score=0;
@@ -43,15 +44,12 @@ for j=1:number_of_angles % beta
 
     H=logical(zeros(number_of_wavenumber_points,number_of_frequency_points));
     for i=1:number_of_wavenumber_points
-        [~,I] = min(abs( FREQ(1,i,j) - fvec )); % mode 1
-        H(i,I) = 1;
-        [~,I] = min(abs( FREQ(2,i,j) - fvec )); % mode 2
-        H(i,I) = 1;
-        [~,I] = min(abs( FREQ(3,i,j) - fvec )); % mode 3
-        H(i,I) = 1;
-        [~,I] = min(abs( FREQ(4,i,j) - fvec )); % mode 4
-        H(i,I) = 1;
+        for k =1:number_of_modes_consid
+            [~,I] = min(abs( FREQ(k,i,j) - fvec )); % mode 1 : number_of_modes_consid (default=4)
+            H(i,I) = 1;
+        end
     end
+    
     start_idx1 = 4;
     start_idx2 = 2;
     end_idx1 = number_of_wavenumber_points -1;
