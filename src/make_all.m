@@ -9,5 +9,9 @@ CartesianToPolar;
 
 SASE1;
 
+% call objective_fun for test cases calculated in SASE1
+objective_fun_test_script;
+
 % plot selected results and make figures
 plot_num_exp_dispersion;
+

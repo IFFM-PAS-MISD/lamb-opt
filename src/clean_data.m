@@ -1,4 +1,4 @@
-% clean all data except raw data
+% clean all data except raw data (subfolders only)
 
 % load projectroot path
 load project_paths projectroot src_path;

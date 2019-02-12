@@ -1,4 +1,4 @@
-% convert function to logical matrix
+% call objective_fun for test cases calculated in SASE1
 
 clear all; close all;
 

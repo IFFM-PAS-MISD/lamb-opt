@@ -18,10 +18,10 @@ load project_paths projectroot src_path;
 data_path=fullfile( projectroot, 'data','processed','exp', filesep );
 % filename of parameter data
 filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF__param'; 
-load([data_path,filename]); % x y wavenumber_max fmax beta number_of_wavenumber_points
+load([data_path,filename]); % wavenumber_max fmax beta number_of_wavenumber_points
 %% Prepare output directories
-% allow overwriting existing results
-overwrite=true;
+% allow overwriting existing results if true
+overwrite=false;
 % retrieve model name based on running file and folder
 currentFile = mfilename('fullpath');
 [pathstr,name,ext] = fileparts( currentFile );
@@ -70,26 +70,29 @@ for i1=1:number_of_points % ef
     ef = ef0*(variation_range(i1));
     for i2=1:number_of_points % vol
         test_case = test_case+1;
-        fprintf('SASE test case: %d\n', test_case);
-        vol = vol0 *(variation_range(i2));
-        %% Mechanical properties  
-        % homogenization of unidirectional fibre reinforce composite
-        [rho,e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23] = homogenization(rhom,rhof,em,ef,nim,nif,vol);
-        % Elastic constants of composite lamina in terms of principal material directions
-        [C11,C12,C13,C22,C23,C33,C44,C55,C66] = lamina_3D(e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23);
-        %% SASE
-
-        [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
-
-        % identify A0 and S0 mode
-%         [FREQ_A0,FREQ_S0,CG_A0,CG_S0] = identify_A0_S0_modes2(FREQ,CG);
-%         [number_of_modes,number_of_wavenumber_points,number_of_angles] = size(CG);
-
-        %% Save output
         output_name = [model_output_path,filesep,num2str(test_case),'output'];
-        input_name = [model_output_path,filesep,num2str(test_case),'input'];
-        %save(output_name,'wavenumber','FREQ_A0','FREQ_S0','CG_A0','CG_S0');
-        save(output_name,'wavenumber','FREQ','CG');
-        save(input_name,'rhom','rhof','em','ef','nim','nif','vol');
+        if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
+            fprintf('SASE test case: %d\n', test_case);
+            vol = vol0 *(variation_range(i2));
+            %% Mechanical properties  
+            % homogenization of unidirectional fibre reinforce composite
+            [rho,e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23] = homogenization(rhom,rhof,em,ef,nim,nif,vol);
+            % Elastic constants of composite lamina in terms of principal material directions
+            [C11,C12,C13,C22,C23,C33,C44,C55,C66] = lamina_3D(e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23);
+            %% SASE
+            [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
+
+            % identify A0 and S0 mode
+            % [FREQ_A0,FREQ_S0,CG_A0,CG_S0] = identify_A0_S0_modes2(FREQ,CG);
+            % [number_of_modes,number_of_wavenumber_points,number_of_angles] = size(CG);
+
+            %% Save output
+            input_name = [model_output_path,filesep,num2str(test_case),'input'];
+            %save(output_name,'wavenumber','FREQ_A0','FREQ_S0','CG_A0','CG_S0');
+            save(output_name,'wavenumber','FREQ','CG');
+            save(input_name,'rhom','rhof','em','ef','nim','nif','vol');
+        else
+            fprintf('SASE test case: %d already exist\n', test_case);
+        end
     end
 end
