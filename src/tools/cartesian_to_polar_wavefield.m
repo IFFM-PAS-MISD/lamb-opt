@@ -1,24 +1,27 @@
 function [Data_polar,number_of_wavenumber_points,wavenumber_max] = cartesian_to_polar_wavefield(Data,kxmax,kymax,beta)
 % CARTESIAN_TO_POLAR_WAVEFIELD   transform wavefield to polar coordinates 
-%    optional: more details about the function than in the H1 line 
-%    optional: more details about the function than in the H1 line 
-%    optional: more details about the function than in the H1 line 
+%    Data is interpolated at given angles beta 
+%    The same number of points is used for interpolation at each angle 
+%    wavenumber_max is different at each angle
 % 
-% Syntax: [output1,output2] = cartesian_to_polar_wavefield(input1,input2,input3) 
+% Syntax: [Data_polar,number_of_wavenumber_points,wavenumber_max] = cartesian_to_polar_wavefield(Data,kxmax,kymax,beta) 
 % 
 % Inputs: 
-%    input1 - Description, string, dimensions [m, n], Units: ms 
-%    input2 - Description, logical, dimensions [m, n], Units: m 
-%    input3 - Description, double, dimensions [m, n], Units: N 
+%    Data - Wavefield in wavenumber domain, complex double, dimensions [nPointsx, nPointsy, number_of_frequency_points], Units:  
+%    kxmax - maximal wavenumber in x direction, double, Units: rad/m 
+%    kymax - maximal wavenumber in y direction, double, Units: rad/m 
+%    beta - list of angles in range 0:90, double, Units: deg
 % 
 % Outputs: 
-%    output1 - Description, integer, dimensions [m, n], Units: - 
-%    output2 - Description, double, dimensions [m, n], Units: m/s^2 
+%    Data_polar - Data transformed to polar coordinates, complex double 
+%    dimensions [number_of_angles,number_of_wavenumber_points,number_of_frequency_points], Units: - 
+%    number_of_wavenumber_points - integer 
+%    wavenumber_max - list of maximum values of wavenumber for each angle,
+%    dimensions [number_of_angles ,1]
 % 
 % Example: 
-%    [output1,output2] = cartesian_to_polar_wavefield(input1,input2,input3) 
-%    [output1,output2] = cartesian_to_polar_wavefield(input1,input2) 
-%    [output1] = cartesian_to_polar_wavefield(input1,input2,input3) 
+%    [Data_polar,number_of_wavenumber_points,wavenumber_max] = cartesian_to_polar_wavefield(Data,kxmax,kymax,beta) 
+%    [Data_polar,number_of_wavenumber_points,wavenumber_max] = cartesian_to_polar_wavefield(Data,kxmax,kymax,[0:15:90])  
 % 
 % Other m-files required: none 
 % Subfunctions: none 
@@ -38,10 +41,10 @@ b = beta*pi/180;
 number_of_angles = length(beta);
 
 %% check NAN
-[m1,n1,number_of_frames]=size(Data); % number_of_frames is equal to number_of_frequencies
-% for i=1:m1
-%     for j=1:n1
-%         for k=1:number_of_frames
+[nPointsx,nPointsy,number_of_frequency_points]=size(Data); % number_of_frequency_points is equal to number_of_frequencies
+% for i=1:nPointsx
+%     for j=1:nPointsy
+%         for k=1:number_of_frequency_points
 %             if(isnan(Data(i,j,k)))
 %                 Data(i,j,k)=0;
 %             end
@@ -56,14 +59,13 @@ lymax=kymax; % width
 lxmin=0; % quarter
 lymin=0; % quarter
 % Define the resolution of the grid:
-number_of_wavenumber_points=max([m1,n1]); % # no of grid points for R coordinate
+number_of_wavenumber_points=max([nPointsx,nPointsy]); % # no of grid points for R coordinate
 if(mod(number_of_wavenumber_points,2)) % only even numbers
     number_of_wavenumber_points=number_of_wavenumber_points-1; 
 end
 %%
-disp('Preliminary calculation...');
 % Polar data allocation: angle, radius(wavenumbers), time(frequency)
-Data_polar=zeros(number_of_angles,number_of_wavenumber_points,number_of_frames);
+Data_polar=zeros(number_of_angles,number_of_wavenumber_points,number_of_frequency_points);
  %%
 [XI,YI] = meshgrid(linspace(lxmin,lxmax,n1),linspace(lymin,lymax,m1)); % due to columnwise plotting n1 is for x coordinates and m1 is for y coordinates
 X=reshape(XI,[],1);
@@ -94,10 +96,10 @@ end
  % convert Data from Cartesian to polar coordinates
  %%
 
- disp('Data conversion...');
+ disp('Cartesian to polar coordinates transformation and interpolation');
 % loop through time (frequency) frames
-for frame=1:number_of_frames
-    [frame,number_of_frames]
+for frame=1:number_of_frequency_points
+    [frame,number_of_frequency_points]
     ZI=Data(:,:,frame);
     Z=reshape(ZI,[],1);
     F = TriScatteredInterp(X,Y,Z,'linear');

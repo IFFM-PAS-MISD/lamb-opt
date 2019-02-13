@@ -2,11 +2,16 @@
 
 clear all; close all;
 
-set(0,'defaulttextinterpreter','none');
+%set(0,'defaulttextinterpreter','none');
 
 % load projectroot path
 load project_paths projectroot src_path;
 
+% figure parameters
+% size 12cm by 8cm (1-column text)
+fig_width = 12; fig_height = 8; 
+% size 7cm by 5cm (2-column text)
+%fig_width = 7; fig_height = 5; 
 % create path to the numerical model data folder
 foldername = 'SASE';
 modelname = 'SASE1';
@@ -58,7 +63,7 @@ for j=1:number_of_angles % beta
     set(gca,'Fontsize',10,'linewidth',1);
     xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
     if(radians)
-        ylabel({'$k$ [rd/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rd/m]
+        ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
     else
         ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
     end
@@ -86,8 +91,7 @@ for j=1:number_of_angles % beta
     %title(['angle ', num2str(beta(j)),' deg'],'Fontsize',12,'interpreter','latex');
     title({[num2str(beta(j)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
     %set(gca, 'Position',[0 0 1.2 1.2]); % figure without axis and white border
-    set(fig, 'Units','centimeters', 'Position',[10 10 12 8]); % size 12cm by 8cm (1-column text)
-    %set(fig, 'Units','centimeters', 'Position',[10 10 7 5]); % size 7cm by 5cm (2-column text)
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % size 12cm by 8cm (1-column text)
     % remove unnecessary white space
     set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
     fig.PaperPositionMode   = 'auto';

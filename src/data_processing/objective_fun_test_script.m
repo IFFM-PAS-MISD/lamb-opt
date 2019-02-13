@@ -22,7 +22,7 @@ filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF_';
 % load experimental data file
 disp('loading data ...');
 load([data_path,filename]); % Data_polar x y wavenumber_max fmax beta number_of_wavenumber_points
-num_of_modes_consid = 4; % number of modes considered in calculation of objective function score
+number_of_modes_considered = 4; % number of modes considered in calculation of objective function score
 %% START DATA PROCESSING
 disp('calculating objective function score ...');
 obj_score=zeros(121,1);
@@ -33,7 +33,7 @@ for i1 = 1:11
         output_name = [model_output_path,filesep,num2str(test_case),'output'];
         % load numerical data file
         load(output_name); % FREQ CG wavenumber
-        [score] = objective_fun(Data_polar,fmax,FREQ,num_of_modes_consid);
+        [score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered);
         obj_score(test_case,1)=score;
     end
 end
@@ -45,7 +45,7 @@ end
 interim_output_path = prepare_model_paths('interim','num',foldername,modelname);
 
 % filename of processed data
-interim_filename = 'obj_score';
+interim_filename = 'objective_function_score';
 
 % save processed data to interim (intermidiate) data folder
 save([interim_output_path,filesep,interim_filename],'obj_score');

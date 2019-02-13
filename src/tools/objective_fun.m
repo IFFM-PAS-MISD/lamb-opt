@@ -1,20 +1,20 @@
-function [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_consid)
+function [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered)
 % OBJECTIVE_FUN   score for overlap of numerical and experimental dispersion curves
 % 
-% Syntax: [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_consid) 
+% Syntax: [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered) 
 % 
 % Inputs: 
-%    Data_polar - Experimental dispersion curves, double, dimensions [number_of_angles,number_of_wavenumber_points,number_of_frequency_points]  
+%    Data_polar - Experimental dispersion curves, complex double, dimensions [number_of_angles,number_of_wavenumber_points,number_of_frequency_points]  
 %    fmax - max frequency, double, Units: Hz 
 %    FREQ - Numerical frequency matrix for the same wavenumbers as in experiment, double, 
 %           dimensions [number_of_modes,number_of_wavenumber_points,number_of_angles], Units: Hz 
-%    number_of_modes_consid - number of modes considered in calculation of the score
+%    number_of_modes_considered - number of modes considered in calculation of the score
 % 
 % Outputs: 
 %    obj_score - Objective function score, double, dimensions [m, n], Units: - 
 % 
 % Example: 
-%    [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_consid)
+%    [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered)
 %    [obj_score] = objective_fun(Data_polar,fmax,FREQ) 
 % 
 % Other m-files required: none 
@@ -32,7 +32,7 @@ function [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_consid
 %---------------------- BEGIN CODE---------------------- 
 
 if nargin == 3
-    number_of_modes_consid = 4; % default number of modes considered
+    number_of_modes_considered = 4; % default number of modes considered
 end
     
 [number_of_angles,number_of_wavenumber_points,number_of_frequency_points] = size(Data_polar);
@@ -44,8 +44,8 @@ for j=1:number_of_angles % beta
 
     H=logical(zeros(number_of_wavenumber_points,number_of_frequency_points));
     for i=1:number_of_wavenumber_points
-        for k =1:number_of_modes_consid
-            [~,I] = min(abs( FREQ(k,i,j) - fvec )); % mode 1 : number_of_modes_consid (default=4)
+        for k =1:number_of_modes_considered
+            [~,I] = min(abs( FREQ(k,i,j) - fvec )); % mode 1 : number_of_modes_considered (default=4)
             H(i,I) = 1;
         end
     end
