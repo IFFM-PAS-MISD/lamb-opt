@@ -1,10 +1,10 @@
 % plot dispersion curves for range of variation
 clear all; close all;
-foldername = 'SASE';
+
+modelfolder = 'SASE';
 modelname = 'SASE1';
-data_process_type = 'raw';
-data_origin = 'num';
-model_output_path = prepare_model_paths(data_process_type,data_origin,foldername,modelname);
+
+model_output_path = prepare_model_paths('raw','num',modelfolder,modelname);
 beta= 0:15:90;
 
 for j=1:length(beta)

@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                   SASE1                                 %
+%                                   SASE2                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This script calls main_SASE function for a given wavenumbers (in 1/m) 
 % and gets the real frequencies and group velocities.
@@ -41,7 +41,7 @@ wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
 %
 %% Input for material properties
 
-run(['inputs',filesep,'input1.m']);  % initial material properties
+run(['inputs',filesep,'input1.m']); % initial material properties
 % rhom0 = 1250; % kg/m^3
 % rhof0 = 1900; % kg/m^3
 % em0 = 3.43e9; % Pa
@@ -62,19 +62,21 @@ stack_dir = 1;
 %% grid search approach - sweep over parameters
 rhom = rhom0; % kg/m^3
 rhof = rhof0; % kg/m^3
-em = em0; % Pa
-
+%em = em0; % Pa
+ef=ef0; % Pa
 nim = nim0;
 nif =  nif0; 
+vol=vol0;
 test_case = 0;
-for i1=1:number_of_points % ef
-    ef = ef0*(variation_range(i1));
-    for i2=1:number_of_points % vol
+for i1=1:number_of_points % em
+    
+    em = em0*(variation_range(i1));
+    
         test_case = test_case+1;
         output_name = [model_output_path,filesep,num2str(test_case),'output'];
         if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
             fprintf([modelname,' test case: %d\n'], test_case);
-            vol = vol0 *(variation_range(i2));
+            
             %% Mechanical properties  
             % homogenization of unidirectional fibre reinforce composite
             [rho,e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23] = homogenization(rhom,rhof,em,ef,nim,nif,vol);
@@ -95,5 +97,4 @@ for i1=1:number_of_points % ef
         else
             fprintf([modelname,' test case: %d already exist\n'], test_case);
         end
-    end
 end

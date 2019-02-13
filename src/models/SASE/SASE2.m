@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                   SASE1                                 %
+%                                   SASE2                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This script calls main_SASE function for a given wavenumbers (in 1/m) 
 % and gets the real frequencies and group velocities.
@@ -41,14 +41,15 @@ wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
 %
 %% Input for material properties
 
-test_case = 0;
-rhom0 = 1250; % kg/m^3
-rhof0 = 1900; % kg/m^3
-em0 = 3.43e9; % Pa
-ef0 = 240e9; % Pa
-nim0 = 0.35;
-nif0 =  0.2; 
-vol0 = 0.5;
+run(['inputs',filesep,'input1.m']); % initial material properties
+% rhom0 = 1250; % kg/m^3
+% rhof0 = 1900; % kg/m^3
+% em0 = 3.43e9; % Pa
+% ef0 = 240e9; % Pa
+% nim0 = 0.35;
+% nif0 =  0.2; 
+% vol0 = 0.5;
+
 variation = 0.2; % parametric sweep -20% to +20% of initial parameters
 number_of_points = 11; % number of points in grid search method
 variation_range=1-variation:2*variation/(number_of_points-1):1+variation;
@@ -65,7 +66,7 @@ ef=ef0;
 nim = nim0;
 nif =  nif0; 
 vol=vol0;
-
+test_case = 0;
 for i1=1:number_of_points % rhom
     
     rhom = rhom0*(variation_range(i1));
@@ -73,7 +74,7 @@ for i1=1:number_of_points % rhom
         test_case = test_case+1;
         output_name = [model_output_path,filesep,num2str(test_case),'output'];
         if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
-            fprintf('SASE test case: %d\n', test_case);
+            fprintf([modelname,' test case: %d\n'], test_case);
             
             %% Mechanical properties  
             % homogenization of unidirectional fibre reinforce composite
@@ -93,6 +94,6 @@ for i1=1:number_of_points % rhom
             save(output_name,'wavenumber','FREQ','CG');
             save(input_name,'rhom','rhof','em','ef','nim','nif','vol');
         else
-            fprintf('SASE test case: %d already exist\n', test_case);
+            fprintf([modelname,' test case: %d already exist\n'], test_case);
         end
 end
