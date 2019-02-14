@@ -10,9 +10,9 @@ overwrite = false; % allow overwriting existing results if true
 
 % figure parameters
 % size 12cm by 8cm (1-column text)
-fig_width = 12; fig_height = 8; 
+%fig_width = 12; fig_height = 8; 
 % size 7cm by 5cm (2-column text)
-%fig_width = 7; fig_height = 5; 
+fig_width = 7; fig_height = 5; 
 % create path to the numerical model data folder
 modelfolder = 'SASE';
 modelname = 'SASE2';
@@ -31,7 +31,6 @@ exp_input_data_path=fullfile( projectroot, 'data','processed','exp', filesep );
 filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF__param'; 
 
 % load experimental parameter data file
-disp('loading data ...');
 load([exp_input_data_path,filename]); % wavenumber_max fmax beta number_of_wavenumber_points
 number_of_frequency_points = number_of_wavenumber_points;
 number_of_angles = length(beta);
@@ -39,13 +38,15 @@ fvec = linspace(0,fmax,number_of_frequency_points);
 if(~radians)
    wavenumber_max = wavenumber_max/(2*pi); % linear scale [1/m]
 end
+fprintf('Making figures: %s\n', modelname);
 % adjust colors
-
 alpha = [0.5,0.5,0.5,0.5,0.5,0,0.5,0.5,0.5,0.5,0.5];
 for j=1:number_of_angles % beta
+    
     figfilename = ['angle_',num2str(beta(j)),'_param_dispersion_curves'];
     if(overwrite||(~overwrite && ~exist([output_path,figfilename,'.png'], 'file')))
         %% START PLOTTING
+        fprintf('Making figure: [%d/%d]\n', j,number_of_angles);
         figure(j)
         set(gcf,'Color','w');
         for test_case=[1:5,7:11,6]
@@ -86,7 +87,7 @@ for j=1:number_of_angles % beta
         % remove unnecessary white space
         set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
         fig.PaperPositionMode   = 'auto';
-        print([output_path,figfilename],'-dpng', '-r300'); 
+        print([output_path,figfilename],'-dpng', '-r600'); 
     else
         fprintf('Figure: %s already exist\n', figfilename);
     end

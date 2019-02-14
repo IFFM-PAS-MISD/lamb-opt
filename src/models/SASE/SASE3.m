@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                   SASE2                                 %
+%                                   SASE3                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This script calls main_SASE function for a given wavenumbers (in 1/m) 
 % and gets the real frequencies and group velocities.
@@ -7,6 +7,7 @@
 % composite [0 90 0 90 90 0 90 0]
 % parametric study of material constituents
 % rule of mixture homogenization
+% parametric search over fibre density
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all;close all;
@@ -61,6 +62,7 @@ h = [zeros(nlayers,1)+1]* 3e-3/nlayers; % thickness of layers;
 stack_dir = 1;
 %% grid search approach - sweep over parameters
 rhom = rhom0; % kg/m^3
+%rhof = rhof0; % kg/m^3
 em = em0; % Pa
 ef=ef0; % Pa
 nim = nim0;

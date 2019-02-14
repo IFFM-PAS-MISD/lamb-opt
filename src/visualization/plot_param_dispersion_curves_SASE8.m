@@ -15,7 +15,7 @@ overwrite = false; % allow overwriting existing results if true
 fig_width = 7; fig_height = 5; 
 % create path to the numerical model data folder
 modelfolder = 'SASE';
-modelname = 'SASE4';
+modelname = 'SASE8';
 radians = false;
 % create output path
 output_path = prepare_figure_paths(modelfolder,modelname);
@@ -42,7 +42,7 @@ fprintf('Making figures: %s\n', modelname);
 % adjust colors
 alpha = [0.5,0.5,0.5,0.5,0.5,0,0.5,0.5,0.5,0.5,0.5];
 for j=1:number_of_angles % beta
-    
+   
     figfilename = ['angle_',num2str(beta(j)),'_param_dispersion_curves'];
     if(overwrite||(~overwrite && ~exist([output_path,figfilename,'.png'], 'file')))
         %% START PLOTTING
@@ -81,7 +81,7 @@ for j=1:number_of_angles % beta
         end
         set(gca,'FontName','Times');
         fig = gcf;
-        title({['${E}_{m} \pm$','20{\%}, ',num2str(beta(j)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+        title({['${V} \pm$','20{\%}, ',num2str(beta(j)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
         %set(gca, 'Position',[0 0 1.2 1.2]); % figure without axis and white border
         set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % size 12cm by 8cm (1-column text)
         % remove unnecessary white space

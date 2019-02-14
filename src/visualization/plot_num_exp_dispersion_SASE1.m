@@ -31,12 +31,13 @@ exp_input_data_path=fullfile( projectroot, 'data','processed','exp', filesep );
 filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF_'; 
 
 % load experimental data file
-disp('loading data ...');
 load([exp_input_data_path,filename]); % Data_polar x y wavenumber_max fmax
 if(~radians)
    wavenumber_max = wavenumber_max/(2*pi); % linear scale [1/m]
 end
+fprintf('Making figures: %s\n', modelname);
 for test_case=[25,29,121]
+    fprintf('Making figures for test case: [%d/%d]\n', test_case,length(test_case));
 % load numerical data file
 %test_case = 121; % worst objective function score
 %test_case = 25; % best objective function score for all modes
@@ -55,6 +56,7 @@ for j=1:number_of_angles % beta
     figfilename = [num2str(test_case),'_angle_',num2str(beta(j)),'_num_exp_dispersion'];
     if(overwrite||(~overwrite && ~exist([output_path,figfilename,'.png'], 'file')))
         %% START PLOTTING
+        fprintf('Making figure: [%d/%d]\n', j,number_of_angles);
         figure(j)
         set(gcf,'Color','w');
         %imagesc(fvec(2:end)/1e3, wavenumber(2:end,j)/2, squeeze(abs(Data_polar(j,2:end,2:end)))); 
@@ -98,7 +100,7 @@ for j=1:number_of_angles % beta
         % remove unnecessary white space
         set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
         fig.PaperPositionMode   = 'auto';
-        print([output_path,figfilename],'-dpng', '-r300'); 
+        print([output_path,figfilename],'-dpng', '-r600'); 
         %% END PLOTTING
     else
         fprintf('Figure: %s already exist\n', figfilename);

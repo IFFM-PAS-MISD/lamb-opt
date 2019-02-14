@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                   SASE4                                 %
+%                                   SASE5                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This script calls main_SASE function for a given wavenumbers (in 1/m) 
 % and gets the real frequencies and group velocities.
@@ -7,7 +7,7 @@
 % composite [0 90 0 90 90 0 90 0]
 % parametric study of material constituents
 % rule of mixture homogenization
-% parametric search over Young modulus of matrix
+% parametric search over Young modulus of fibres
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all;close all;
@@ -63,15 +63,15 @@ stack_dir = 1;
 %% grid search approach - sweep over parameters
 rhom = rhom0; % kg/m^3
 rhof = rhof0; % kg/m^3
-%em = em0; % Pa
-ef=ef0; % Pa
+em = em0; % Pa
+%ef=ef0; % Pa
 nim = nim0;
 nif =  nif0; 
 vol=vol0;
 test_case = 0;
-for i1=1:number_of_points % em
+for i1=1:number_of_points % ef
     
-    em = em0*(variation_range(i1));
+    ef = ef0*(variation_range(i1));
     
         test_case = test_case+1;
         output_name = [model_output_path,filesep,num2str(test_case),'output'];

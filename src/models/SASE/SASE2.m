@@ -7,6 +7,7 @@
 % composite [0 90 0 90 90 0 90 0]
 % parametric study of material constituents
 % rule of mixture homogenization
+% parametric search over matrix density
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all;close all;

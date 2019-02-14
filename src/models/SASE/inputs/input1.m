@@ -1,5 +1,6 @@
 % input initial material properties for SASE models
 % specimen no 1, plain wave treated as [0 90 0 90 90 0 90 0]
+% CFRP
 
 rhom0 = 1250; % kg/m^3
 rhof0 = 1900; % kg/m^3
