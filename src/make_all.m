@@ -39,6 +39,16 @@ SASE7;
 % parametric search over volume fraction of reinforcing fibres
 SASE8;
 
+% semi analytical spectral element (SASE) model dispersion curves 
+% grid search over volume fractions and Young modulus of fibres
+% based on simulated pzt distribution (9x9 points)
+SASE9;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% grid search over volume fractions and Young modulus of fibres
+% based on simulated pzt distribution (17x17 points)
+SASE10;
+
 % call objective_fun for test cases calculated in SASE1,SASE2
 objective_fun_script;
 
@@ -71,3 +81,11 @@ plot_param_dispersion_curves_SASE7;
 % plot and make figures for dispersion curves variability depending on volume
 % fraction
 plot_param_dispersion_curves_SASE8;
+
+% plot and make figure for num dispersion curves on top of experimental results
+% for simulated pzt distrubution (9x9 points)
+plot_num_exp_dispersion_SASE9;
+
+% plot and make figure for num dispersion curves on top of experimental results
+% for simulated pzt distrubution (17x17 points)
+plot_num_exp_dispersion_SASE10;

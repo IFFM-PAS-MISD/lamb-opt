@@ -87,6 +87,7 @@ target/
 *.blg
 *.synctex.gz
 *.xwm
+*.pdf
 
 # Matlab
 *.asv

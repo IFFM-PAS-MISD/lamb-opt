@@ -67,7 +67,7 @@ end
 % Polar data allocation: angle, radius(wavenumbers), time(frequency)
 Data_polar=zeros(number_of_angles,number_of_wavenumber_points,number_of_frequency_points);
  %%
-[XI,YI] = meshgrid(linspace(lxmin,lxmax,n1),linspace(lymin,lymax,m1)); % due to columnwise plotting n1 is for x coordinates and m1 is for y coordinates
+[XI,YI] = meshgrid(linspace(lxmin,lxmax,nPointsx),linspace(lymin,lymax,nPointsy)); % due to columnwise plotting nPointsx is for x coordinates and nPointsy is for y coordinates
 X=reshape(XI,[],1);
 Y=reshape(YI,[],1);
  %% 
@@ -111,9 +111,9 @@ for frame=1:number_of_frequency_points
 end
 
 %% check NAN
-%[m1,n1,p1]=size(Data_polar);
-% for i=1:m1
-%     for j=1:n1
+%[nPointsy,nPointsx,p1]=size(Data_polar);
+% for i=1:nPointsy
+%     for j=1:nPointsx
 %         for k=1:p1
 %             if(isnan(Data_polar(i,j,k)))
 %                 Data_polar(i,j,k)=0;
