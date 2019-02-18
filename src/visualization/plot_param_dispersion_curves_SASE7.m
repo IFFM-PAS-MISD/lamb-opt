@@ -28,7 +28,7 @@ exp_input_data_path=fullfile( projectroot, 'data','processed','exp', filesep );
 % filename of data to be processed
 % full field measurements after 3D FFT transform (1st quarter)
 % and conversion to polar coordinate system
-filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF__param'; 
+filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF_param'; 
 
 % load experimental parameter data file
 load([exp_input_data_path,filename]); % wavenumber_max fmax beta number_of_wavenumber_points

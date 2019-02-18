@@ -18,11 +18,11 @@
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{\textbf{Studia parametryczne krzywych dyspersji\\ w laminatach kompozytowych\\ uzyskane metod¹ pó³-analityczn¹\\ i ich porównanie z wynikami eksperymentalnymi\\} 
-\normalsize{W ramach projektu pt.: \\ \textit{Identyfikacja sta³ych sprê¿ystych laminatów kompozytowych\\ poprzez wykorzystanie zjawiska fal Lamba  i metod optymalizacji\\}
-Minigrant FBW26}}
+\vspace{1cm}\normalsize{W ramach projektu pt.: \\ \vspace{6pt}  \textit{Identyfikacja sta³ych sprê¿ystych laminatów kompozytowych\\ poprzez wykorzystanie zjawiska fal Lamba  i metod optymalizacji\\}
+\vspace{6pt} Minigrant FBW26}}
 	
-\author{Pawe³ \textbf{Kudela}$^{1}$ \\ Maciej \textbf{Radzieñski}$^{1}$\\\\ $^{1}$~Instytut Maszyn Przep³ywowych Polskiej Akademii Nauk, Gdañsk \\}
-	
+\author{Pawe³ \textbf{Kudela}$^{1}$ \\ Maciej \textbf{Radzieñski}$^{1}$\\\\ $^{1}$~Instytut Maszyn Przep³ywowych Polskiej Akademii Nauk, Gdañsk \\ \vspace{2cm}}
+
 \date{Gdañsk, Luty 2019\\ (Nr Arch. ???/2019)}
 	
 \maketitle
@@ -39,9 +39,10 @@ Minigrant FBW26}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Niniejszy raport ma na celu przedstawienie wstêpnych wyników symulacji numerycznych i badañ eksperymentalnych przeprowadzonych w laboratorium Zak³adu Struktur Inteligentnych IMP PAN. Prace mia³y na celu:
 \begin{itemize}
-	\item  opracowanie modelu numerycznego materia³u o w³aœciwoœciach ortotropowych oraz analiza zjawisk cieplnych i mechanicznych zachodz¹cych podczas procesów ogrzewania i och³adzania materia³u,
-	\item stworzenie modelu interakcji fali elektromagnetycznej w zakresie THz z próbk¹ wykonan¹ z materia³u kompozytowego o wzmocnieniu w³óknami szklanymi,
-	\item  rozpoznanie oraz ocenê mo¿liwoœci zastosowania komory œrodowiskowej.	
+	\item implementacjê  pó³--analitycznej metody elementów spektralnych do modelowania krzywych dyspersji fal Lamba propaguj¹cych w~laminatach kompozytowych,
+	\item studia parametryczne wp³ywu w³aœciwoœci materia³owych na krzywe dyspersji,
+	\item  test ró¿nych sygna³ów wzbudzenia celem uzyskania optymalnych krzywych dyspersji w warunkach laboratoryjnych,	
+	\item porównanie wyników numerycznych i eksperymentalnych dla wybranych sta³ych materia³owych.
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Zakres prac}
@@ -110,7 +111,8 @@ Zastosowano przestrzenne, prostopad³oœcienne 8-wêz³owe elementy skoñczone. Wykon
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Studia parametryczne krzywych dyspersji}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-W ramach wstêpnych prac przeprowadzono symulacje numeryczne, których celem by³o opraco
+Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:rhom}.
+
 \begin{figure} [h!]
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
@@ -142,7 +144,9 @@ W ramach wstêpnych prac przeprowadzono symulacje numeryczne, których celem by³o 
 	\caption{Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
 	\label{fig:rhom}
 \end{figure}
-opis
+
+Wp³yw gêstoœci w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:rhof}.
+
 \begin{figure} [h!]
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
@@ -174,6 +178,179 @@ opis
 	\caption{Wp³yw gêstoœci w³ókien na krzywe dyspersji w zale¿noœci od k¹ta: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
 	\label{fig:rhof}
 \end{figure}
+
+Wp³yw modu³u Younga matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:em}.
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_0_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:em0}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_30_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:em30}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_45_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:em45}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_90_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:em90}
+	\end{subfigure}
+	\caption{Wp³yw modu³u Younga matrycy na krzywe dyspersji w zale¿noœci od k¹ta: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\label{fig:em}
+\end{figure}
+
+Wp³yw modu³u Younga w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:ef}.
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_0_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:ef0}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_30_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:ef30}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_45_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:ef45}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_90_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:ef90}
+	\end{subfigure}
+	\caption{Wp³yw modu³u Younga w³ókien na krzywe dyspersji w zale¿noœci od k¹ta: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\label{fig:ef}
+\end{figure}
+
+Wp³yw wspó³czynnika Poissona matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:nim}.
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_0_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:nim0}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_30_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:nim30}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_45_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:nim45}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_90_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:nim90}
+	\end{subfigure}
+	\caption{Wp³yw wspó³czynnika Poissona matrycy na krzywe dyspersji w zale¿noœci od k¹ta: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\label{fig:nim}
+\end{figure}
+
+Wp³yw wspó³czynnika Poissona w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:nif}.
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_0_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:nif0}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_30_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:nif30}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_45_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:nif45}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_90_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:nif90}
+	\end{subfigure}
+	\caption{Wp³yw wspó³czynnika Poissona w³ókien na krzywe dyspersji w zale¿noœci od k¹ta: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\label{fig:nif}
+\end{figure}
+
+Wp³yw zawartoœci objêtoœciowej w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:vol}.
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_0_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:vol0}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_30_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:vol30}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_45_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:vol45}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_90_param_dispersion_curves.png}
+		\caption{}
+		\label{fig:vol90}
+	\end{subfigure}
+	\caption{Wp³yw zawartoœci objêtoœciowej w³ókien na krzywe dyspersji w zale¿noœci od k¹ta: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\label{fig:vol}
+\end{figure}
+
+
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Testowanie ró¿nych sygna³ów wzbudzenia}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -956,6 +1133,7 @@ Pi¹ty test \#5 trwa³ prawie 70 godzin, przyczym komora pod zadanym programem pra
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Szósty test \#6 trwa³ prawie 70 godzin, przyczym komora pod zadanym programem pracowa³a przez oko³o 5 godzin. Program zadany komorze polega³ na stopniowym och³adzaniu do - 50\textdegree C i swobodnym ogrzaniu do temperatury pokojowej. Na Rys.~\ref{fig:test_6}(a) pokazano zmiany d³ugoœci fali w czasie dla czujnika swobodnego ('free') oraz umieszczongo w~wodzie ('ice'). Na Rys.~\ref{fig:test_6}(b) przedstawiono odkszta³cenia jakie zosta³y zmierzone przez czujniki œwiat³owodowe typu FBG ('free' i 'ice'), wyraŸnie mo¿na wskazaæ moment, w~którym czujnik 'ice' doznaje najwiêkszego odkszta³cenia œciskaj¹cego na poziomie bliskim -6e-4. Na Rys.~\ref{fig:test_6}(c) i Rys.~\ref{fig:test_6}(d) mo¿na zaobserwowaæ zachowanie sond. WyraŸnie widaæ jak sonda 'free' odwzorowuje zadany program jak i swobodne ogrzewanie (Rys.~\ref{fig:test_6}(f)) zarówno w przebiegu d³ugoœci fali (Rys.~\ref{fig:test_6}(c)) jak i temperatury (Rys.~\ref{fig:test_6}(e)). Sonda 'ice' pokazuje izotermiczny proces krzepniêcia oraz topnienia (Rys.~\ref{fig:test_6}(d) i Rys.~\ref{fig:test_6}(e)). 
 \end{comment}
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Podsumowanie}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -966,6 +1144,8 @@ Opracowane modele numeryczne mog¹ stanowiæ podstawê dalszych prac uwzglêdniaj¹cy
 Przeprowadzono symulacje interakcji fal THz z materia³em GFRP z wykorzystaniem metody FDTD. Wyniki analizy numerycznej porównano z wynikami badañ eksperymentalnych dla próbki poddanej procesowi degradacji termicznej uzyskuj¹c dobr¹ zgodnoœæ. Dodatkowo pokazano rezultaty symulacji numerycznej dla sygna³ów odbitych od spodniej powierzchni próbki dla g³owic ustawionych w trybie odbicia. Analiza numeryczna skoncentrowana by³a na zale¿noœci pomiêdzy zmianami wspó³czynnika refrakcji \textit{n} a czasem propagacji.
 
 Przeprowadzono wstêpne badania eksperymentalne dotycz¹ce zachowania siê czujników œwiat³owodowych typu FBG i sond temperaturowych poddane wp³ywowi temperatury i wilgoci. Komora klimatyczna pozwala na przeprowadzanie testów na dowolnych strukturach, pozwalaj¹c na wytworzenie, utrzymanie pod kontrol¹ przez dowolny czas oraz monitorowanie i rejestrowanie warunków œrodowiskowych (temperatury, wilgotnoœci powietrza) w dowolnie ustalonych zakresach.
+
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{99}
 	

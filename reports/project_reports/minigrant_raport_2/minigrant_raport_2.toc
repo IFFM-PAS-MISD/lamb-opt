@@ -5,5 +5,5 @@
 \contentsline {subsection}{\numberline {2.1}Wprowadzenie}{3}% 
 \contentsline {subsection}{\numberline {2.2}Model p\'o\IeC {\l }--analityczny}{4}% 
 \contentsline {subsection}{\numberline {2.3}Studia parametryczne krzywych dyspersji}{5}% 
-\contentsline {subsection}{\numberline {2.4}Testowanie r\'o\.znych sygna\IeC {\l }\'ow wzbudzenia}{5}% 
-\contentsline {section}{\numberline {3}Podsumowanie}{7}% 
+\contentsline {subsection}{\numberline {2.4}Testowanie r\'o\.znych sygna\IeC {\l }\'ow wzbudzenia}{12}% 
+\contentsline {section}{\numberline {3}Podsumowanie}{17}% 

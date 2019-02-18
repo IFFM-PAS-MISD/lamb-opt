@@ -1,3 +1,8 @@
+% This script transforms wavenumber-frequency data from Cartesian coordinates
+% to polar coordinates at selected angles beta by using interpolation
+% all *.mat files in interim experimental data folder are processed 
+% and the results are stored in experimental processed data folder
+
 clc;close all;clear all;
 
 % load projectroot path
@@ -9,13 +14,12 @@ beta = 0:15:90;
 % create path to the experimental interim data folder
 interim_data_path = fullfile( projectroot, 'data','interim','exp', filesep );
 
-% filename of data to be processed
-% full field measurements after 3D FFT transform (1st quarter)
-% filename = 'interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF_'; 
+% filenames of data to be processed
+% full field measurements after 3D FFT transform (positive quarter)
 
 % create path to the experimental processed data folder
 processed_data_path = fullfile( projectroot, 'data','processed','exp', filesep );
-
+disp('Cartesian to polar transform ');
 folder  = interim_data_path;
 list    = dir(fullfile(folder, '*.mat')); % list of mat files to be processed
 nFile   = length(list);
@@ -31,15 +35,14 @@ for k = 1:nFile
             load([interim_data_path,filename]); % KXKYF_ kx_vec ky_vec f_vec
 
             % input
-            Data=KXKYF_; clear KXKYF_;
             fmax=f_vec(end);
-            kxmax=kx_vec(end)/2;
-            kymax=ky_vec(end)/2;
+            kxmax=kx_vec(end);
+            kymax=ky_vec(end);
             % end of input
 
             %% PROCESS DATA
             fprintf('Processing:\n%s\n',filename);
-            [Data_polar,number_of_wavenumber_points,wavenumber_max] = cartesian_to_polar_wavefield(Data,kxmax,kymax,beta); 
+            [Data_polar,number_of_wavenumber_points,wavenumber_max] = cartesian_to_polar_wavefield(KXKYF_,kxmax,kymax,beta); 
 
             %% END OF PROCESSING
             % save data in polar coordinate system

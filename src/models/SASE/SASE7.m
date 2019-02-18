@@ -18,7 +18,7 @@ load project_paths projectroot src_path;
 % create path to the experimental processed data folder
 data_path=fullfile( projectroot, 'data','processed','exp', filesep );
 % filename of parameter data
-filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF__param'; 
+filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF_param'; 
 load([data_path,filename]); % wavenumber_max fmax beta number_of_wavenumber_points
 %% Prepare output directories
 % allow overwriting existing results if true
