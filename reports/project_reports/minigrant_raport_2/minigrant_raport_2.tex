@@ -61,11 +61,7 @@ W raporcie przedstawiono:
 		\item wstêpne badania eksperymentalne	
 	\end{itemize}
 \end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section[Modelowanie i symulacje numeryczne MES]{Modelowanie i symulacje numeryczne z wykorzystaniem metody elementów skoñczonych (analiza wp³ywu zamiany temperatury)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Wprowadzenie}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Celem przewidzianych symulacji numerycznych jest opracowanie modelu numerycznego materia³u o w³aœciwoœciach ortotropowych oraz analiza zjawisk cieplnych i mechanicznych zachodz¹cych podczas procesów ogrzewania i och³adzania analizowanego materia³u. W dalszym etapie przewiduje siê mo¿liwoœæ uwzglêdnienia wp³ywu wilgotnoœci.
 
 W przeprowadzonych oraz planowanych analizach zastosowana zosta³a metoda elementów skoñczonych (MES) bêd¹ca obecnie jednym z podstawowych narzêdzi stosowanych w~obliczeniach in¿ynierskich i naukowych. Metoda ta polega na dyskretyzacji, czyli podziale analizowanego obszaru kontinuum na skoñczone podobszary, zwane elementami skoñczonymi. W kolejnym etapie nastêpuje analiza dotycz¹c¹ jedynie dyskretnych punktów bêd¹cych wêz³ami siatki elementów skoñczonych. Obliczone wartoœci s¹ interpolowane, z wykorzystaniem przyjêtych funkcji kszta³tu w punktach znajduj¹cych siê poza wêz³ami.
@@ -76,7 +72,7 @@ Opracowany model numeryczny mo¿e byæ przydatny w planowaniu i weryfikacji wynikó
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Model pó³--analityczny}
+\section{Model pó³--analityczny}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 W ramach wstêpnych prac przeprowadzono symulacje numeryczne, których celem by³o opracowanie modelu MES p³yty kompozytowej o okreœlonej liczbie warstw o zró¿nicowanej konfiguracji w³ókien. Obliczenia wykonano dla materia³u w postaci kompozytu sk³adaj¹cego siê z w³ókien wêglowych oraz ¿ywicy polimerowej.
 Przyjêto model cia³a sprê¿ystego obci¹¿onego temperatur¹. 
@@ -109,7 +105,7 @@ Zastosowano przestrzenne, prostopad³oœcienne 8-wêz³owe elementy skoñczone. Wykon
 %	\label{fig:rhom}
 %\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Studia parametryczne krzywych dyspersji}
+\section{Studia parametryczne krzywych dyspersji}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:rhom}.
 
@@ -117,27 +113,39 @@ Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		 \centering
-		\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_0_param_dispersion_curves.png}
+		 % size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_0_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE2_out/angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhom0}
 	\end{subfigure}
 \hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_30_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_30_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE2_out/angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhom30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_45_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_45_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE2_out/angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhom45}
 	\end{subfigure}
 \hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_90_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_90_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE2_out/angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhom90}
 \end{subfigure}
@@ -151,27 +159,39 @@ Wp³yw gêstoœci w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_0_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_0_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE3_out/angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhof0}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_30_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_30_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE3_out/angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhof30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_45_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_45_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE3_out/angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhof45}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_90_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_90_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE3_out/angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhof90}
 	\end{subfigure}
@@ -185,27 +205,39 @@ Wp³yw modu³u Younga matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawio
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_0_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_0_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE4_out/angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:em0}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_30_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_30_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE4_out/angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:em30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_45_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_45_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE4_out/angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:em45}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_90_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_90_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE4_out/angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:em90}
 	\end{subfigure}
@@ -219,27 +251,39 @@ Wp³yw modu³u Younga w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawio
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_0_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_0_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE5_out/angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:ef0}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_30_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_30_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE5_out/angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:ef30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_45_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_45_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE5_out/angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:ef45}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_90_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_90_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE5_out/angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:ef90}
 	\end{subfigure}
@@ -253,27 +297,39 @@ Wp³yw wspó³czynnika Poissona matrycy na krzywe dyspersji w zale¿noœci od k¹ta pr
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_0_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_0_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE6_out/angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nim0}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_30_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_30_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE6_out/angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nim30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_45_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_45_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE6_out/angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nim45}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_90_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_90_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE6_out/angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nim90}
 	\end{subfigure}
@@ -287,27 +343,39 @@ Wp³yw wspó³czynnika Poissona w³ókien na krzywe dyspersji w zale¿noœci od k¹ta pr
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_0_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_0_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE7_out/angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nif0}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_30_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_30_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE7_out/angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nif30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_45_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_45_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE7_out/angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nif45}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_90_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_90_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE7_out/angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nif90}
 	\end{subfigure}
@@ -321,27 +389,39 @@ Wp³yw zawartoœci objêtoœciowej w³ókien na krzywe dyspersji w zale¿noœci od k¹ta 
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_0_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_0_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE8_out/angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:vol0}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_30_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_30_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE8_out/angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:vol30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_45_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_45_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE8_out/angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:vol45}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_90_param_dispersion_curves.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_90_param_dispersion_curves.png}
+		% size 100%
+		\includegraphics[]{SASE/SASE8_out/angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:vol90}
 	\end{subfigure}
@@ -352,7 +432,7 @@ Wp³yw zawartoœci objêtoœciowej w³ókien na krzywe dyspersji w zale¿noœci od k¹ta 
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Testowanie ró¿nych sygna³ów wzbudzenia}
+\section{Testowanie ró¿nych sygna³ów wzbudzenia}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Poni¿ej przedstawiono jakoœciowe porównanie krzywych dyspersji wyznaczonych dla badanej próbki w zale¿noœci od przyjêtych parametrów i rodzaju sygna³u wzbudzenia. Wszystkie wyniki prezentuj¹ce krzywe dyspersji zosta³y przedstawione w ten sposób, aby zakres wartoœci (kolorów) odpowiada³ przedzia³owi od 0 do 99.9 percentyla wszystkich wartoœci. Innymi s³owy, próg odciêcia górnych wartoœci zosta³ ustawiony w ten sposób, aby pomin¹æ 1 promil punktów o najwy¿szych wartoœciach.
 
@@ -407,27 +487,39 @@ Zestawienie wyników uzyskanych dla wzbudzenia sygna³em typu chirp o liniowo nara
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP20_x3_18Vpp_50Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP20_x3_18Vpp_50Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_0-350kHz_CHP20_x3_18Vpp_50Hz_KY_freq.png}
 		\caption{}
 		\label{fig:chirp20_dispersion}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP40_x3_18Vpp_50Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP40_x3_18Vpp_50Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_0-350kHz_CHP40_x3_18Vpp_50Hz_KY_freq.png}
 		\caption{}
 		\label{fig:chirp40_dispersion}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP80_x3_18Vpp_50Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP80_x3_18Vpp_50Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_0-350kHz_CHP80_x3_18Vpp_50Hz_KY_freq.png}
 		\caption{}
 		\label{fig:chirp80_dispersion}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_50Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_50Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_50Hz_KY_freq.png}
 		\caption{}
 		\label{fig:chirp160_dispersion}
 	\end{subfigure}
@@ -441,24 +533,33 @@ Pomiar wykonywany by³ sekwencyjnie w kolejnych punktach, dodatkowo uœredniaj¹c u
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_50Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_50Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_50Hz_KY_freq.png}
 		\caption{}
 		\label{fig:chirp_delay_20ms_dispersion}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_200Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_200Hz_KY_freq.png}
 		\caption{}
 		\label{fig:chirp_delay_5ms_dispersion}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_500Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_500Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_500Hz_KY_freq.png}
 		\caption{}
 		\label{fig:chirp_delay_2ms_dispersion}
 	\end{subfigure}
-	\caption{Krzywe dyspersji wyznaczone dla wzbudzenia typu chirp w przedziale czêstotliwoœci 0 – 350 kHz oraz odstêpnie czasu: (a) 20 ms, (b) 5 ms, (c) 2 ms.} 
+	\caption{Krzywe dyspersji wyznaczone dla wzbudzenia typu chirp w przedziale czêstotliwoœci 0 – 350 kHz oraz odstêpie czasu: (a) 20 ms, (b) 5 ms, (c) 2 ms.} 
 	\label{fig:chirp_delay_dispersion}
 \end{figure}
 
@@ -467,13 +568,19 @@ W dalszej kolejnoœci porównano wyniki uzyskane przy wzbudzeniu sygna³em typu chi
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_50Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_50Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_0-350kHz_CHP160_x3_18Vpp_50Hz_KY_freq.png}
 		\caption{}
 		\label{fig:chirp160_dispersion2}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN25_x3_10Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN25_x3_10Vpp_200Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_HANN25_x3_10Vpp_200Hz_KY_freq.png}
 		\caption{}
 		\label{fig:Hanning_dispersion}
 	\end{subfigure}
@@ -486,27 +593,39 @@ Zbadano wp³yw czasu trwania sygna³u Hanninga na krzywe dyspersji, a uzyskane wyn
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN25_x3_10Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN25_x3_10Vpp_200Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_HANN25_x3_10Vpp_200Hz_KY_freq.png}
 		\caption{}
 		\label{fig:Hanning_0_625_dispersion}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN50_x3_10Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN50_x3_10Vpp_200Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_HANN50_x3_10Vpp_200Hz_KY_freq.png}
 		\caption{}
 		\label{fig:Hanning_1_25_dispersion}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN100_x3_10Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN100_x3_10Vpp_200Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_HANN100_x3_10Vpp_200Hz_KY_freq.png}
 		\caption{}
 		\label{fig:Hanning_2_5_dispersion}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN500_x3_18Vpp_50Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN500_x3_18Vpp_50Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_HANN500_x3_18Vpp_50Hz_KY_freq.png}
 		\caption{}
 		\label{fig:Hanning_12_5_dispersion}
 	\end{subfigure}
@@ -520,13 +639,19 @@ Kolejne badanie obejmowa³o wp³yw liczby punktów pomiarowych na jakoœæ uzyskanych
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN100_x30_10Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN100_x30_10Vpp_200Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_HANN100_x30_10Vpp_200Hz_KY_freq.png}
 		\caption{}
 		\label{fig:Hanning_289_dispersion}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/493x493p_HANN100_x10_10Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/493x493p_HANN100_x10_10Vpp_200Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/493x493p_HANN100_x10_10Vpp_200Hz_KY_freq.png}
 		\caption{}
 		\label{fig:Hanning_493_dispersion}
 	\end{subfigure}
@@ -540,27 +665,39 @@ Dla wzbudzenia funkcj¹ Hanninga równie¿ przeprowadzono badania wp³ywu amplitudy 
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN50_x3_5Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN50_x3_5Vpp_200Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_HANN50_x3_5Vpp_200Hz_KY_freq.png}
 		\caption{}
 		\label{fig:Hanning_50V_dispersion}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN50_x3_10Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN50_x3_10Vpp_200Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_HANN50_x3_10Vpp_200Hz_KY_freq.png}
 		\caption{}
 		\label{fig:Hanning_100V_dispersion}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN50_x3_15Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN50_x3_15Vpp_200Hz_KY_freq.png}
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_HANN50_x3_15Vpp_200Hz_KY_freq.png}
 		\caption{}
 		\label{fig:Hanning_150V_dispersion}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN50_x3_20Vpp_200Hz_KY_freq.png}
+		% size fitted
+		%\includegraphics[width=\textwidth]{minigrant_raport_2/289x289p_HANN50_x3_20Vpp_200Hz_KY_freq.png}	
+		% size 100%
+		\includegraphics[]{minigrant_raport_2/289x289p_HANN50_x3_20Vpp_200Hz_KY_freq.png}	
 		\caption{}
 		\label{fig:Hanning_200V_dispersion}
 	\end{subfigure}
@@ -568,571 +705,39 @@ Dla wzbudzenia funkcj¹ Hanninga równie¿ przeprowadzono badania wp³ywu amplitudy 
 	\label{fig:Hanning_voltage_dispersion}
 \end{figure}
 
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Porównanie wyników numerycznych i eksperymentalnych}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Porównanie eksperymentalnych i numerycznych krzywych dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:numexp0}--\ref{fig:numexp90}.
 
-\begin{comment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Wyniki analizy MES}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Wyniki w postaci map wartoœci deformacji w kierunkach \textit{x} i \textit{y} w p³aszczyŸnie p³yty dla wybranych etapów obci¹¿enia przedstawia Rys.~\ref{fig:xy_bc-1}. Ze wzglêdu na symetriê uk³adu warstw analizowanego materia³u otrzymane rozk³ady s¹ symetryczne.
-
-Na Rys.~\ref{fig:z_bc-1} przedstawiono formy deformacji próbki w przypadku spadku  (Rys.~\ref{fig:z_bc-1}(a))~oraz wzrostu temperatury (Rys.~\ref{fig:z_bc-1}(b)) w stosunku do temperatury wyjœciowej. Dodatkowo przedstawiono mapê wartoœci deformacji w kierunku prostopad³ym do powierzchni p³yty. Zgodnie z oczekiwaniami zauwa¿yæ mo¿na, i¿ w przypadku spadku temperatury wystêpuje deformacja zwi¹zana ze zmniejszeniem wymiarów próbki, podczas gdy wzrost temperatury skutkuje rozszerzeniem wymiarów. 
-
-Wyniki w postaci wartoœci deformacji w kierunkach \textit{x}, \textit{y}, \textit{z} otrzymane na kolejnych etapach obci¹¿enia temperatur¹ zestawiono w Tab.~\ref{tab:xyz_bc-1}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[h]
-	\renewcommand{\arraystretch}{1.5}
-	\centering \footnotesize
-	\caption[Deformacji p³yty kompozytowej (bc-1) -- wartoœci]{Wartoœci deformacji p³yty kompozytowej na kolejnych etapach obci¹¿enia temperatur¹ (podparcie bc-1).}
-	\begin{tabular}{cccc}
-		\multirow{2}{*}{\textbf{Temp.[\textdegree C]}} & \multicolumn{3}{c}{\textbf{Deformacja} }	 \\ 
-		\cline{2-4}	
-		& \textbf{x} & \textbf{y} & \textbf{z} \\
-		\hline \hline
-		-50 & -0.289 & -0.289 & -0.598\\ 
-		\hline 
-		-40 & -0.248 & -0.248 & -0.512\\ 
-		\hline 
-		-30 & -0.206 & -0.206 & -0.427\\ 
-		\hline 
-		-20 & -0.165 & -0.165 & -0.342\\ 
-		\hline 
-		-10 & -0.124 & -0.124 & -0.256\\ 
-		\hline 
-		0 &   -0.083 & -0.083 & -0.171\\ 
-		\hline 
-		10 & -0.041 &  -0.041 & -0.085\\ 
-		\hline 
-		20 & 0.000 & 0.000 & 0.000\\ 
-		\hline 
-		30 & 0.041 & 0.041 & 0.085\\ 
-		\hline 
-		40 & 0.083 &  0.083 & 0.171\\ 
-		\hline 
-		50 & 0.124 & 0.124 & 0.256\\ 
-		\hline  \hline
-	\end{tabular} 
-	\label{tab:xyz_bc-1}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure} [h!]
-	\begin{center}
-		\begin{tabular}{c} 
-			\includegraphics[width=14cm]{d-x_d-y_t-all_bc-1.jpg}
-			%			\includegraphics[width=6cm]{Graphics/d-x_t-m50_bc-1_k.jpg} 
-			%			\includegraphics[width=6cm]{Graphics/d-y_t-m50_bc-1_k.jpg} \\
-			%			
-			%			\includegraphics[width=6cm]{Graphics/d-x_t-p40_bc-1_k.jpg} 
-			%			\includegraphics[width=6cm]{Graphics/d-y_t-p40_bc-1_k.jpg} \\
-			%
-			%			
-			%			\includegraphics[width=6cm]{Graphics/d-x_t-p50_bc-1_k.jpg} 
-			%			\includegraphics[width=6cm]{Graphics/d-y_t-p50_bc-1_k.jpg} \\
-			%			\hspace{0.2cm} {\footnotesize (a)} \hspace{6cm} {\footnotesize (b)}
-		\end{tabular}
-	\end{center}
-	\caption[Mapy deformacji p³yty (bc-1)]{Mapy deformacji p³yty w temperaturze -50\textdegree C, 40\textdegree C i 50\textdegree C: (a) w kierunku \textit{x}, (b) w kierunku \textit{y} (podparcie bc-1).} 
-	\label{fig:xy_bc-1}
+		\centering
+		\includegraphics[]{SASE/SASE1_out/25_angle_0_num_exp_dispersion.png}
+		\caption{Porównanie eksperymentalnych i numerycznych krzywych dyspersji dla k¹ta propagacji fal 0$^{\circ}$.}
+		\label{fig:numexp0}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\begin{center}
-		%\begin{tabular}{c} 
-		\includegraphics[width=7cm]{deformacja_d-z_t-m50_bc-1_k.jpg} 
-		\includegraphics[width=7cm]{deformacja_d-z_t-p50_bc-1_k.jpg} \\
-		\hspace{0.2cm} {\footnotesize (a)} \hspace{6cm} {\footnotesize (b)}
-		%	\end{tabular}
-	\end{center}
-	\caption[Widok aksonometryczny deformacji p³yty (bc-1)]{Widok aksonometryczny deformacji p³yty w temperaturze: (a) -50\textdegree C, (b) 50\textdegree C  (podparcie bc-1).} 
-	\label{fig:z_bc-1}
+\begin{figure}[h!]
+		\centering
+		\includegraphics[]{SASE/SASE1_out/25_angle_30_num_exp_dispersion.png}
+		\caption{Porównanie eksperymentalnych i numerycznych krzywych dyspersji dla k¹ta propagacji fal 30$^{\circ}$.}
+		\label{fig:numexp30}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpage
-Analogiczne wyniki dla zmodyfikowanych warunków brzegowych zestawiono na Rys.~\ref{fig:xy_bc-2} i Rys.~\ref{fig:z_bc-2} oraz w Tab. ~\ref{tab:xyz_bc-2}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\begin{center}
-		%\begin{tabular}{c} 
-		\includegraphics[width=14cm]{d-x_d-y_t-all_bc-2.jpg}
-		%		\includegraphics[width=6cm]{Graphics/d-x_t-m50_bc-2_k.jpg} 
-		%		\includegraphics[width=6cm]{Graphics/d-y_t-m50_bc-2_k.jpg} \\
-		%		
-		%		\includegraphics[width=6cm]{Graphics/d-x_t-p40_bc-2_k.jpg} 
-		%		\includegraphics[width=6cm]{Graphics/d-y_t-p40_bc-2_k.jpg} \\
-		%		
-		%		
-		%		\includegraphics[width=6cm]{Graphics/d-x_t-p50_bc-2_k.jpg} 
-		%		\includegraphics[width=6cm]{Graphics/d-y_t-p50_bc-2_k.jpg} \\
-		%		\hspace{0.2cm} {\footnotesize (a)} \hspace{6cm} {\footnotesize (b)}
-		%\end{tabular}
-	\end{center}
-	\caption[Mapy deformacji p³yty (bc-2)]{Mapy deformacji p³yty w temperaturze -50\textdegree C, 40\textdegree C i 50 \textdegree C: (a) w kierunku~\textit{x}, (b) w kierunku \textit{y} (podparcie bc-2).} 
-	\label{fig:xy_bc-2}
+\begin{figure}[h!]
+		\centering
+		\includegraphics[]{SASE/SASE1_out/25_angle_45_num_exp_dispersion.png}
+		\caption{Porównanie eksperymentalnych i numerycznych krzywych dyspersji dla k¹ta propagacji fal 45$^{\circ}$.}
+		\label{fig:numexp45}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\begin{center}
-		%\begin{tabular}{c} 
-		\includegraphics[width=6.8cm]{deformacja_d-z_t-m50_bc-2_k.jpg} 
-		\includegraphics[width=6.8cm]{deformacja_d-z_t-p50_bc-2_k.jpg} \\
-		\hspace{0.2cm} {\footnotesize (a)} \hspace{6cm} {\footnotesize (b)}
-		%	\end{tabular}
-	\end{center}
-	\caption[Widok aksonometryczny deformacji p³yty (bc-2)]{Widok aksonometryczny deformacji p³yty w temperaturze: (a) -50\textdegree C, (b) 50\textdegree C (podparcie bc-2).} 
-	\label{fig:z_bc-2}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[h]
-	\renewcommand{\arraystretch}{1.5}
-	\centering \footnotesize
-	\caption[Deformacji p³yty kompozytowej (bc-2) -- wartoœci]{Wartoœci deformacji p³yty kompozytowej na kolejnych etapach obci¹¿enia temperatur¹ (podparcie bc-2).}
-	\begin{tabular}{cccc}
-		\multirow{2}{*}{\textbf{Temp.[\textdegree C]}} & \multicolumn{3}{c}{\textbf{Deformacja} }	 \\ 
-		\cline{2-4}	
-		& \textbf{x} & \textbf{y} & \textbf{z} \\
-		\hline \hline
-		-50 & -0.358 & -0.293 & -0.371 / 0.244\\ 
-		\hline 
-		-40 & -0.307 & -0.251 & -0.318 / 0.209\\ 
-		\hline 
-		-30 & -0.256 & -0.209 & -0.265 / 0.174\\ 
-		\hline 
-		-20 & -0.205 & -0.168 & -0.219 / 0.139\\ 
-		\hline 
-		-10 & -0.153 & -0.125 & -0.159 / 0.104\\ 
-		\hline 
-		0 & -0.102 & -0.084 & -0.106 / 0.070\\ 
-		\hline 
-		10 & -0.051 &  -0.042 & -0.053 / 0.035\\ 
-		\hline 
-		20 & 0.000 & 0.000 & 0.000\\ 
-		\hline 
-		30 & 0.051 & 0.042 & -0.035 / 0.053\\ 
-		\hline 
-		40 & 0.102 &  0.084 & -0.070 / 0.106\\ 
-		\hline 
-		50 & 0.154 & 0.125 & -0.104 / 0.159\\ 
-		\hline \hline
-	\end{tabular} 
-	\label{tab:xyz_bc-2}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section[Symulacje numeryczne metod¹ FDTD]{Symulacje numeryczne metod¹ ró¿nic skoñczonych w~dziedzinie czasu} \label{sec:simul}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Wprowadzenie}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Celem symulacji numerycznych jest stworzenie modelu interakcji fali elektromagnetycznej w zakresie THz z materia³em o w³aœciwoœciach ortotropowych – laminatu kompozytowego o wzmocnieniu w³óknami szklanymi i o osnowie polimerowej. Zastosowana metoda ró¿nic skoñczonych w dziedzinie czasu (FDTD, z ang. \textit{Finite-difference time domain}) jest metod¹ numeryczn¹ wykorzystywan¹ do rozwi¹zywania z³o¿onych problemów dotycz¹cych propagacji fal elektromagnetycznych w ró¿nych oœrodkach.
-
-W dalszych etapach analiz numerycznych przewiduje siê uwzglêdnienie w modelu budowy warstwowej laminatu, zmian zachodz¹cych w materiale zwi¹zanych z oddzia³ywaniem wilgoci i temperatury oraz uszkodzeñ (np. delaminacji). 
-
-Opracowany model numeryczny bêdzie weryfikowany w oparciu o wyniki doœwiadczeñ laboratoryjnych z wykorzystaniem spektrometru THz.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Metoda FDTD}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Metoda FDTD jest wykorzystywana do rozwi¹zywania z³o¿onych problemów dotycz¹cych propagacji fal elektromagnetycznych. W metodzie tej ró¿nice skoñczone s¹ stosowane jako przybli¿enie pochodnych przestrzennych i czasowych, które wystêpuj¹ w~równaniach Maxwela (a dok³adnie w prawach Ampera i Faraday'a)~\cite{schneider2010}. Najwa¿niejsz¹ zalet¹ metody FDTD jest mo¿liwoœæ wykorzystania jej do modelowania materia³ów dyspersyjnych, nieliniowych oraz anizotropowych~\cite{tu2016}. Niestety uzyskanie rozwi¹zania wymaga du¿ej mocy obliczeniowej~\cite{schneider2010}. 
-
-Metoda FDTD mo¿e byæ stosowana do tworzenia symulacji propagacji fal elektromagnetycznych w zakresie THz oraz ich interakcji z ró¿nymi materia³ami, np. ochronnymi pow³okami na ³odziach/ statkach~\cite{tu2016}, ludzk¹ skór¹ przedramienia i d³oni~\cite{pickwell2004} czy zdrow¹ lub nowotworow¹ tkank¹ ludzk¹~\cite{fitzgerald2014}. 
-
-W metodzie FDTD pola magnetyczne $H_{y}$  i elektryczne $E_{z}$ s¹ opisane przy pomocy nastêpuj¹cej zale¿noœci
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}
-H^{k+1/2}_{y}=[j+1/2]=H^{k-1/2}[j+1/2]+\frac{\Delta t}{\mu \Delta x}\left(E^{k}_{z}[j+1]-E^{k}_{z}[j]\right)
-\label{magnetic_field}
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}
-E^{k+1}_{z}[j]=E^{k}_{z}[j]+\frac{\Delta t}{\epsilon \Delta t}\left(H^{k+1/2}_{y}[j+1/2]-H^{k+1/2}_{y}[j-1/2]\right)
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-gdzie \textit{k} oznacza krok czasowy, \textit{j} - krok w przestrzeni, $\Delta x$ - odleg³oœæ miêdzy kolejnymi punktami w przestrzeni, $\Delta t$ - odleg³oœæ miêdzy kolejnymi chwilami czasowymi, \mbox{$\mu$ - przenikalnoœæ magnetyczn¹, $\varepsilon$~-~przenikalnoœæ elektryczn¹.}
-
-Przenikalnoœæ magnetyczna materia³u jest opisywana zale¿noœci¹
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}
-\mu=\mu_{0} \mu_{r}
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-gdzie $\mu_{0}$ oznacza przenikalnoœæ magnetyczn¹ pró¿ni ($\mu_{0}$=4$\pi$e-7 H/m), a $\mu_{r}$~--~wzglêdn¹ przenikalnoœæ magnetyczn¹ materia³u.
-
-Przenikalnoœæ elektryczna materia³u jest opisywana zale¿noœci¹
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}
-\varepsilon=\varepsilon_{0} \varepsilon_{r}
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-gdzie $\varepsilon_{0}$ oznacza przenikalnoœæ elektryczn¹ pró¿ni ($\varepsilon_{0}$=8,854e-12 F/m), a~$\varepsilon_{r}$~--~wzglêdn¹ przenikalnoœæ elektryczn¹. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Opis analizowanego problemu}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Przeprowadzone analizy numeryczne by³y skoncentrowane na interakcji fali THz z~elementem wykonanym z kompozytu o zbrojeniu z~w³ókna szklanego i osnowie polimerowej (z ang \textit{Glas Fibre Reinforced Polymer}, GFRP). Geometryczne i fizyczne parametry modelu zosta³y za³o¿one w oparciu o geometryczne i fizyczne charakterystyki spektrometru THz znajduj¹cego siê w Zak³adzie Mechaniki Struktur Inteligentnych IMP~PAN.
-
-Spektroskopia THz jest jedn¹ z metod badañ nieniszcz¹cych (z ang. \textit{Non-Destructive Techniques}, NDT) wykorzystuj¹cych fale elektromagnetyczne w~zakresie 0.1 -- 10~THz. Metoda ta pozwala na ocenê struktury wewnêtrznej materia³ów nieprzewodz¹cych, np.~GFRP. Jej zasada dzia³ania bazuje na analizie zmian w fali THz na skutek jej interakcji z ró¿nymi oœrodkami. G³ównymi parametrami s¹: wspó³czynnik absorpcji, wspó³czynnik refrakcji oraz rozproszenie fali np. na chropowatej powierzchni. Metoda ta mo¿e byæ wykorzystywana do identyfikacji uszkodzeñ (np. pustki lub przypalenia powierzchni materia³u~\cite{stoik2008}, delaminacje~\cite{majewska2017}) lub wtr¹ceñ (kropla wody~\cite{mieloszyk2018}, warstwa Teflonu~\cite{zhang2016}). 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\begin{center}
-		\begin{tabular}{c} 
-			\includegraphics[width=14 cm]{spektrometr_THz.jpg}
-		\end{tabular}
-	\end{center}
-	\caption[Spektrometr THz]{Spektrometr THz z g³owicami w uk³adzie: (a) transmisji, \mbox{(b) odbicia.}} 
-	\label{fig:spektrometr}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Spektrometr THz (TPS Spectra 300~THz Pulsed Imaging and Spectroscopy, firmy TerraView$^{\textregistered}$) pozwala na wykonywanie pomiarów w trybie transmisji lub odbicia (Rys.~\ref{fig:spektrometr}). W pierwszym przypadku g³owice s¹ ustawione naprzeciwko siebie, a próbka znajduje siê pomiêdzy nimi. W drugim przypadku g³owice s¹ ustawione pod k¹tem do powierzchni próbki. K¹t pomiêdzy g³owicami wynosi 22$^{\circ}$. Ze wzglêdu na to, ¿e fale THz s¹ wra¿liwe na wp³yw wilgoci wszystkie pomiary wykonywane s¹ przy w³¹czonym osuszaczu, który usuwa wilgoæ z przestrzeni pomiarowej oraz klimatyzacji, która stabilizuje temperaturê w~laboratorium na za³o¿onym poziomie 20-22$^{\circ}$C.
-
-Uzyskane wyniki numeryczne porównano z wynikami eksperymentalnymi uzyskanymi dla dwóch próbek (200~mm~x~300~mm~x~3mm) wykonanych z GFRP. Pomiary przeprowadzono z wykorzystaniem spektrometru THz z~g³owicami ustawionymi w trybie transmisji. Podczas badañ analizowano wp³yw procesu degradacji termicznej na wartoœci parametrów materia³owych: wspó³czynnika absorpcji $\kappa$ i wspó³czynnika refrakcji \textit{n}. W centralnej czêœci ka¿dej z próbek wybrano obszar o wymiarach 100 mm x 100 mm (10000 punktów). Porównuj¹c sygna³y zmierzone dla obszaru miêdzy g³owicami bez i z próbk¹ wyznaczono wspó³czynniki absorpcji $\kappa$ i refrakcji \textit{n} dla materia³u nieuszkodzonego. Analogicznie wyznaczano wartoœci tych parametrów dla materia³u po kolejnych etapach grzania. Zmiany tych parametrów wykorzystano do okreœlenia stopnia degradacji materia³u. Wyniki przedstawiono na Rys.~\ref{fig:abs_ref}. W zwi¹zku z procesem degradacji zachodz¹cym w materiale wartoœci wspó³czynnika refrakcji \textit{n} badanych próbek zmala³y z ok. 2,093 do ok. 2,075. Zaobserwowano, ¿e wartoœæ wspó³czynnika absorpcji $\kappa$ pocz¹tkowo gwa³townie zmala³a, a nastêpnie utrzymywa³a siê na sta³ym poziomie. W zwi¹zku z~powy¿szym trudno by³oby powi¹zaæ te zmiany z procesem degradacji zachodz¹cym w materiale. Badania eksperymentalne szczegó³owo opisano w~\cite{radzienski2015}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\begin{center}
-		\begin{tabular}{c} 
-			\includegraphics[width=14 cm]{ref_abs_SPIE_2015.jpg}
-		\end{tabular}
-	\end{center}
-	\caption[Eksperymentalnie wyznaczone wartoœci wspó³czynnika]{Porównanie wyznaczonych eksperymentalnie wartoœci wspó³czynnika: \mbox{(a) absorpcji, (b) refrakcji~\cite{radzienski2015}.}} 
-	\label{fig:abs_ref}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Wyniki analizy FDTD}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Odleg³oœæ pomiêdzy g³owicami spektrometru THz w trybie transmisji wynosi 200~mm. W przestrzeni pomiarowej, ze wzglêdu na w³¹czone dodatkowe osuszanie, znajduje siê suche powietrze. W analizie numerycznej na pocz¹tku wyznaczono wp³yw suchego powietrza na parametry fali THz propaguj¹cej przez ten obszar. W symulacjach numerycznych falê THz wprowadzono w~postaci dodatkowego Ÿród³a o kszta³cie impulsu. Za³o¿enie to dobrze oddaje impulsowych charakter promieniowania THz emitowanego przez spektrometr THz podczas badañ. Na Rys.~\ref{fig:air_exp_simul} pokazano porównanie sygna³ów wyliczonych numerycznie ze~zmierzonymi eksperymentalnie. Kalkulacje przeprowadzono dla suchego powietrza w~sta³ej temperaturze (20$^\circ$C) i dwóch wartoœci ciœnienia: 120~kPa i 101~kPa (oznaczonych na Rys.~\ref{fig:air_exp_simul} jako $A_{1}$ i $A_{2}$). Mo¿na zauwa¿yæ, ¿e w obu przypadkach kszta³ty pierwszych maksimów oraz ich amplitudy s¹ do siebie zbli¿one, natomiast dla kolejnych maksimów (o du¿o ni¿szych amplitudach) takie podobieñstwo nie wystêpuje. W przypadku sygna³ów zmierzonych obecnoœæ dodatkowych maksimów mo¿e byæ spowodowana wp³ywem parametrów œrodowiskowych, takich jak: pozosta³a niewielka iloœæ wilgoci czy drobinki kurzu. W~przypadku sygna³ów wyznaczonych numerycznie widoczne fluktuacje s¹ zwi¹zane z~b³êdami obliczeniowymi. Wartoœci czasu w symulacji i sygna³u zmierzonego znacznie ró¿ni¹ siê od siebie. W przypadku symulacji czas odnosi siê do wielkoœci ca³ego analizowanego problemu w dziedzinie czasu, natomiast spektrometr THz rejestruje tylko wycinek sygna³u dotycz¹cy obszaru miêdzy g³owicami.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\begin{center}
-		\begin{tabular}{c} 
-			\includegraphics[width=14 cm]{air_exp_simul.jpg}
-		\end{tabular}
-	\end{center}
-	\caption[Fale THz propaguj¹ce przez powietrze -- porównanie]{Porównanie fal THz propaguj¹cych przez powietrze: (a) eksperyment, \mbox{(b)~symulacja; V - pró¿nia, A$_{1}$, A$_{2}$ - powietrze o ró¿nych wartoœciach ciœnienia.}} 
-	\label{fig:air_exp_simul}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Porównanie amplitud sygna³ów w pró¿ni i suchym powietrzu pokazuje, ¿e powietrze powoduje oko³o 40\% t³umienie. Natomiast ró¿nice pomiêdzy amplitudami fali THz propaguj¹cej w powietrzu o ró¿nym ciœnieniu ($A_{1}$~i~$A_{2}$) s¹ niezauwa¿alne (ok. 0,0021\%). W~zwi¹zku z tym podczas kolejnych symulacji wykorzystano wartoœci parametrów powietrza o ciœnieniu 101~hPa -- ciœnienie zbli¿one do typowego ciœnienia atmosferycznego w~laboratorium. 
-
-Nastêpnie przeprowadzono bardziej z³o¿on¹ symulacjê dotycz¹c¹ interakcji fali THz z~próbk¹ wykonan¹ z GFRP, dla której wybrano piêæ ro¿nych wartoœci wspó³czynnika refrakcji \textit{n}. Wartoœci te wyznaczono eksperymentalnie podczas procesu degradacji termicznej materia³u. Uzyskane wyniki numeryczne porównano z eksperymentalnymi opisanymi szczegó³owo w~\cite{radzienski2015}. 
-
-Ze wzglêdu na to, ¿e proces degradacji wi¹za³ siê ze spadkiem wartoœci wspó³czynnika refrakcji \textit{n} przy prawie sta³ej wartoœci wspó³czynnika absorpcji $\kappa$, w symulacji numerycznej skoncentrowano siê na zmianach wspó³czynnika refrakcji \textit{n}. Wyznaczone eksperymentalnie œrednie wartoœci wspó³czynnika refrakcji \textit{n} znajdowa³y siê w zakresie 2,075-2,093. Do obliczeñ numerycznych przyjêto zakres 2,075-2,095 z krokiem co 0,005. Dla tak przyjêtych wartoœci wspó³czynnika wyznaczono przebiegi fal THz przechodz¹cych przez próbkê w~trybie transmisji oraz odbicia. Ze wzglêdu na to, ¿e w trybie transmisji sygna³ zmierzony zawiera ca³¹ informacjê o oœrodkach, przez które propaguje fala THz i nie ma mo¿liwoœci rozdzielenia wp³ywów poszczególnych komponentów na ostateczny kszta³t sygna³u, próbkê zamodelowano jako obszar o~sta³ym wspó³czynniku refrakcji \textit{n}. Na tym etapie symulacji wp³yw poszczególnych warstw laminatu nie by³ analizowany.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\begin{center}
-		\begin{tabular}{c} 
-			\includegraphics[width=10 cm]{sample_FDTD.jpg}
-		\end{tabular}
-	\end{center}
-	\caption[Fala THz propaguj¹ca przez powietrze i~próbkê wykonan¹ z GFRP -- symulacja numeryczna]{Wyniki symulacji numerycznej dla fali THz propaguj¹cej przez powietrze i~próbkê wykonan¹ z GFRP; $I_{W}$ - fala wchodz¹ca w materia³, \mbox{$R_{W}$ - fala} odbita od powierzchni materia³u, $T_{W}$ - fala przechodz¹ca przez materia³, g - gruboœæ próbki.} 
-	\label{fig:sample_FDTD}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Na Rys.~\ref{fig:sample_FDTD} pokazano wyniki symulacji numerycznej dla bliskiego s¹siedztwa próbki, któr¹ zaznaczono ¿ó³tym prostok¹tem o gruboœci \textit{g}. Na rysunku przedstawiono zmiany amplitud sygna³ów w powietrzu i materiale GFRP w~zale¿noœci od odleg³oœci miêdzy kolejnymi punktami w przestrzeni $\Delta x$ oraz chwilami czasowymi $\Delta t$. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\begin{center}
-		\begin{tabular}{c} 
-			\includegraphics[width=14 cm]{n_exp_simul.jpg}
-		\end{tabular}
-	\end{center}
-	\caption[Fale THz propaguj¹ce przez próbkê wykonan¹ z GFRP o~ró¿nych wspó³czynnikach refrakcji \textit{n} dla trybu transmisji -- porównanie]{Porównanie sygna³ów fal THz propaguj¹cych przez próbkê wykonan¹ z GFRP o~ró¿nych wspó³czynnikach refrakcji \textit{n} dla trybu transmisji: (a)~eksperyment, (b) symulacja.} 
-	\label{fig:n_exp_simul}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Na Rys.~\ref{fig:n_exp_simul} przedstawiono porównanie sygna³ów zmierzonych i wyznaczonych numerycznie dla próbki o ró¿nych wartoœciach wspó³czynnika refrakcji \textit{n}. Kolejnoœæ maksimów (od najmniejszej wartoœci wspó³czynnika refrakcji \textit{n} do najwiêkszej) na wykresach jest podobna dla obu analiz. Zwi¹zane jest ona z zale¿noœci¹ pomiêdzy tym wspó³czynnikiem a prêdkoœci¹ propagacji fali w~oœrodku. Prêdkoœæ opisana jest wzorem
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation} 
-v=c/n
-\label{eq:velocity}
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-gdzie \textit{c} - prêdkoœæ œwiat³a w pró¿ni (\textit{c}=299792458 m/s).
-Zmiany amplitud w zmierzonych sygna³ach prawdopodobnie odnosz¹ siê do chropowatoœci powierzchni próbki lub jej nierównomiernego niszczenia podczas procesu degradacji termicznej, bowiem nie zaobserwowano ¿adnej zale¿noœci pomiêdzy zmianami wspó³czynnika absorpcji a procesem degradacji.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\begin{center}
-		\begin{tabular}{c} 
-			\includegraphics[width=10 cm]{reflection_tps_pop.jpg}
-		\end{tabular}
-	\end{center}
-	\caption[Fale THz propaguj¹ce przez próbkê wykonan¹ z GFRP o~ró¿nych wspó³czynnikach refrakcji \textit{n} dla trybu odbicia -- porównanie]{Porównanie wyznaczonych numerycznie sygna³ów fal THz propaguj¹cych przez próbkê wykonan¹ z GFRP o~ró¿nych wspó³czynnikach refrakcji \textit{n} dla trybu odbicia.} 
-	\label{fig:n_simul_reflect}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Dodatkowo wyznaczono kszta³ty sygna³ów odbitych od spodniej powierzchni próbki (granica materia³ GFRP/ powietrze) dla g³owic spektrometru THz ustawionych w~trybie odbicia. Podczas analiz za³o¿ono, ¿e g³owica nadajnika ustawiona jest prostopadle do powierzchni próbki. Na Rys.~\ref{fig:n_simul_reflect} przedstawiono porównanie sygna³ów zmierzonych i~wyznaczonych numerycznie dla próbki o ró¿nych wartoœciach wspó³czynnika refrakcji \textit{n}. Kolejnoœæ maksimów (od najmniejszej wartoœci wspó³czynnika refrakcji \textit{n} do najwiêkszej) jest zwi¹zana z zale¿noœci¹ pomiêdzy tym wspó³czynnikiem a prêdkoœci¹ propagacji fali w~oœrodku. Ponad trzykrotne mniejsze amplitudy sygna³ów w trybie odbicia w stosunku do analogicznych wyznaczonych dla trybu transmisji zwi¹zane jest dwukrotnym przejœciem fali THz przez ca³kowit¹ gruboœæ próbki. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure} [h!]
-	\begin{center}
-		\begin{tabular}{c} 
-			\includegraphics[width=14 cm]{angle_schema.jpg}
-		\end{tabular}
-	\end{center}
-	\caption[Schemat propagacji promieniowania THz dla ró¿nych k¹tów padania]{Schemat propagacji promieniowania THz dla k¹ta padania: (a)~rzeczywistego~$\alpha$, (b) za³o¿onego  $\alpha'$.} 
-	\label{fig:angle_schema}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Schematyczne porównanie kierunków propagacji fal THz przez granicê powietrze/ materia³ próbki dla dwóch ró¿nych k¹tów padania przedstawiono na Rys.~\ref{fig:angle_schema}. Poniewa¿ powierzchnie próbki s¹ równoleg³e do p³aszczyzny g³owic nadajnika i odbiornika to k¹t pomiêdzy normaln¹ do tej p³aszczyzny a padaj¹c¹ wi¹zk¹ $\alpha$ wynosi $11^{\circ}$. Podczas symulacji za³o¿ono, ¿e k¹t $\alpha'$ pomiêdzy normaln¹ do p³aszczyzny a~wi¹zk¹ promieniowania THz jest równy $0^{\circ}$, w~zwi¹zku z tym k¹t za³amania $\beta'=0^{\circ}$. Rzeczywisty k¹t padania wi¹zki zale¿y od ustawienia g³owic, wiêc $\alpha=11^{\circ}$. Rzeczywisty k¹t za³amania $\beta$ mo¿na wyznaczyæ wykorzystuj¹c prawo Snella
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}\label{Snell}
-n_{1}sin\left(\alpha \right)=n_{2}sin\left(\beta\right).
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-gdzie $n_{1}$ i $n_{2}$ oznaczaj¹ wspó³czynniki refrakcji dla powietrza i materia³u. Obliczony k¹t za³amania $\beta$ wynosi $6^{\circ}$. Przyjête w obliczeniach za³o¿enie o~prostopad³oœci g³owic do p³aszczyzn próbki powoduje powstanie b³êdu zwi¹zanego z wartoœci¹ rzeczywistego k¹ta za³amania $\beta$ fali THz przechodz¹cej przez granicê powietrze/ próbka, a nastêpnie propaguj¹cej przez materia³ próbki. B³¹d ten jest równy ró¿nicy odleg³oœci w materiale o za³o¿onej gruboœci \textit{d} jak¹ pokonuj¹ fale THz dla tych dwóch k¹tów padania ($\alpha'=0^{\circ}$ i $\alpha=11^{\circ}$) i odnosz¹cych siê do nich dwóch k¹tów za³amania ($\beta'=0^{\circ}$ i $\beta=6^{\circ}$). 
-Do wyznaczenia odleg³oœci na jak¹ fala THz propaguje w materiale mo¿na wykorzystaæ zale¿noœæ
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}\label{way}
-d=0,5 \cdot v \cdot t
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-gdzie \textit{t} oznacza czas, w którym fala propaguje w danym oœrodku. W przypadku ustawienia g³owic w trybie odbicia fala THz propaguje przez ten sam dystans dwukrotnie. Po raz pierwszy, gdy propaguje z nadajnika do danego miejsca (granicy oœrodków), a po raz drugi, gdy odbita fala wraca do odbiornika. 
-B³¹d wynikaj¹cy z za³o¿enia wartoœci k¹ta padania $\alpha$ mo¿na opisaæ zale¿noœci¹
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{equation}\label{error_d}
-error=\left(\frac{1}{cos\left(\beta \right)}-\frac{1}{cos\left(\beta' \right)}\right)=0,0064
-\end{equation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Wyznaczona wartoœæ b³êdu jest niewielka, w zwi¹zku z tym przyjête za³o¿enie (uproszczenie) mo¿na uznaæ za poprawne i niewp³ywaj¹ce na ostateczny wynik symulacji.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Badania eksperymentalne}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Badania eksperymentalne wraz z badaniami teoretycznymi maj¹ na celu stworzenie metody do okreœlania globalnego i lokalnego stopnia dezintegracji (degradacji) strukturalnej wywo³anej przez czynniki œrodowiskowe (jednoczesne oddzia³ywanie wilgoæ/ woda oraz ujemna/wysoka temperatura) w~materia³ach anizotropowych (ze szczególnym uwzglêdnieniem kompozytów wzmacnianych w³óknem szklanym (GFRP, ang.\textit{Glass Fibre Reinforced Polymer}) lub wêglowym (CFRP, ang. \textit{Carbon Fibre Reinforced Polymer}) i ich po³¹czeniach klejowych. 
-
-Dezintegracjê strukturaln¹ materia³u mog¹ wywo³aæ czynniki œrodowiskowe. Zmiany w strukturze materia³u powoduj¹ce zmniejszenie jego wytrzyma³oœci mechanicznej mog¹ zachodziæ mimo i¿ dany materia³ wydaje siê byæ nienaruszony. Materia³y anizotropowe sk³adaj¹ siê z po³¹czonych ze sob¹ przynajmniej dwóch komponentów o ro¿nych w³aœciwoœciach fizycznych i chemicznych. W³aœciwoœci nowopowsta³ego materia³u nie s¹ sum¹ czy œredni¹ w³aœciwoœci jego sk³adników. Materia³y anizotropowe wykazuj¹ ró¿ne w³aœciwoœci w ró¿nych kierunkach, a zatem wp³yw czynników œrodowiskowych równie¿ nie jest jednakowy. Materia³y kompozytowe s¹ u¿ywane w konstrukcjach lotniczych, morskich czy budownictwa l¹dowego. Stosunek wytrzyma³oœci mechanicznej do masy jest dla kompozytów bardzo wysoki, ale pojawienie siê uszkodzenia (np. pêkniêæ na granicy matryca/~w³ókno czy delaminacji) powoduje spadek ich w³asnoœci mechanicznych. Jednym z istotnych problemów jest okreœlenie zakresu temperatur, w których materia³ mo¿e pracowaæ bez wp³ywu na jego wytrzyma³oœæ mechaniczn¹. W przypadku kompozytów problemem jest równie¿ tendencja matryc do absorbowania wilgoci z otoczenia. Dezintegracja strukturalna materia³u mo¿e byæ wywo³ana dzia³aniem ujemnych/ podwy¿szonych temperatur, szczególnie w po³¹czeniu z wilgoci¹.
-
-Mo¿liwoœæ modelowania i okreœlenia stopnia dezintegracji strukturalnej materia³ów anizotropowych o z³o¿onej strukturze wewnêtrznej, jak np. kompozytów czêsto u¿ywanych w wielu ga³êziach przemys³u jest bardzo wa¿na zarówno ze wzglêdów ekonomicznych jak i spo³ecznych. Istotne jest zapewnienie bezpieczeñstwa dotycz¹cego u¿ytkowania konstrukcji, transportu ludzi i towarów. Dodatkowo, wyst¹pienie jakiegokolwiek uszkodzenia nie tylko skutkuje kosztami naprawy urz¹dzenia, ale równie¿ mo¿e spowodowaæ zanieczyszczenie œrodowiska (katastrofê ekologiczn¹).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Komora klimatyczna}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Badania eksperymentalne dotycz¹ce zachowania siê materia³ów i uszkodzeñ powodowanych przez czynniki œrodowiskowe (jednoczesne oddzia³ywanie wilgoæ/ woda oraz ujemna/ wysoka temperatura) w~materia³ach/ próbkach mo¿liwe s¹ dziêki zastosowaniu komory klimatycznej. Komora klimatyczna s³u¿y do przeprowadzania testów na dowolnych strukturach, pozwalaj¹c na wytworzenie, utrzymanie pod kontrol¹ przez dowolny czas oraz monitorowanie i rejestrowanie warunków œrodowiskowych (temperatury, wilgotnoœci powietrza) w dowolnie ustalonych zakresach.
-
-Do badañ wykorzystano komorê klimatyczn¹ MyDiscovery DM600C (Rys.~\ref{fig:komora_foto}) w³oskiej firmy Angelantoni Test Technologies Srl. Parametry komory zebrano w~Tab.~\ref{tab:tab_komora}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=14 cm]{komora_foto.jpg}
-	\caption{Komora klimatyczna MyDiscovery DM600C.}
-	\label{fig:komora_foto}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[h!]
-	\renewcommand{\arraystretch}{1.5}
-	\centering \footnotesize
-	\caption[Parametry komory klimatycznej DM600C]{Parametry komory klimatycznej DM600C.}
-	\begin{tabular}{cc} 
-		\textbf{Parametr} & \textbf{Miara}\\ \hline \hline
-		temperatura & -75$^\circ$C $\div$ +180$^\circ$C \\ \hline
-		wilgotnoœæ wzglêdna & 10\% $\div$ 98\% \\ \hline
-		punkt rosy & +4$^\circ$C $\div$ +94$^\circ$C \\ 
-		& dla testów ci¹g³ych\\ \hline
-		wahania temperatury & $\pm$0,1$^\circ$C\ldots $\pm$0,3$^\circ$C \\ \hline
-		prêdkoœæ zmian temperatury & \\
-		grzanie  & 4,5$^\circ$K/min @ -70$^\circ$C $\div$ +180$^\circ$C \\
-		ch³odzenie  & 4$^\circ$K/min @ +180$^\circ$C $\div$ -70$^\circ$C \\ \hline
-		wahania wilgotnoœci wzglêdnej & $\pm$1\%\ldots $\pm$3\% \\ \hline \hline
-		wymiary (szer. x d³ug. x wys.) & \\  
-		wewnetrzne & 850 mm x 730 mm x 892 mm \\  
-		zewnêtrzne & 1124 mm x 1768 mm x 2049 mm \\ \hline
-		pojemnoœæ & 553 l\\ \hline 
-		ciê¿ar & 990 kg \\ \hline \hline
-	\end{tabular}
-	\label{tab:tab_komora}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-System sterowania (Mykratos 2.0) komor¹ oparty jest na programowalnym sterowniku logicznym (PLC, ang. \textit{programmable logic controller}) i interfejsie MyKratos$^{TM}$ z ekranem dotykowym wbudowanym w drzwi komory. Dodatkowo komor¹ mo¿na zarz¹dzaæ z dowolnego urz¹dzenia mobilnego (tablet, telefon komórkowy lub komputer) ³¹cz¹c siê z komor¹ za pomoc¹ WiFi lub przewodem Ethernet. Komora zapisuje wszystkie parametry pracy i~programy we w³asnej wewnêtrznej pamiêci i nie ma koniecznoœci ci¹g³ego po³¹czenia w czasie trwania testu. W ka¿dej chwili mo¿liwe jest œci¹gniêcie danych z testu na dysk urz¹dzenia zewnêtrznego. System MyKratos umo¿liwia pisanie programów (nawet do 350 segmentów testu) z wykorzystaniem intuicyjnego edytora, który prezentuje edytowany profil w postaci wykresu. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Czujniki œwiat³owowdowe typu FBG}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-W ostatnim czasie obserwowany jest znaczny rozwój systemów pomiarowych, w których wykorzystywane s¹ w³ókna optyczne zwane œwiat³owodami. Po raz pierwszy œwiat³owody zastosowano w 1970 roku do przesy³ania danych telekomunikacyjnych \cite{kaczmarek2006,udd2011}. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-\begin{table}[h]
-	\renewcommand{\arraystretch}{1.5}
-	\centering \footnotesize
-	\caption{Zalety i wady czujników œwiat³owodowych typu FBG.}
-	\begin{tabular}{cc} 
-		\textbf{Zalety} & \textbf{Wady}\\ \hline \hline
-		niewielkie wymiary & kruchoœæ\\
-		($\phi$ - 0,15 mm, d³. - 1-10 mm) & \\ \hline
-		ma³a masa & elementy pasywne \\
-		& (s³u¿¹ce tylko do odczytu)\\ \hline
-		brak koniecznoœci kalibracji & sprzê¿enie odkszta³ceñ \\
-		& mechanicznych i termicznych\\ \hline
-		niewra¿liwoœæ na wp³yw pola EM & \\ \hline
-		wysoka odpornoœæ \\na wp³yw œrodowiska agresywnego & \\
-		(wilgoæ, ogieñ, promieniowanie, ...)  & \\ \hline
-		wysoka wytrzyma³oœæ \\mechaniczna i termiczna & \\ \hline
-		zdolnoœæ do tworzenia multipleksów & \\ \hline \hline
-	\end{tabular}
-	\label{tab:01}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-\begin{table}[h!]
-	\renewcommand{\arraystretch}{1.5}
-	\centering \footnotesize
-	\caption{Czujniki typu FBG, a tensometry -- porównanie.}
-	\begin{tabular}{lcc} 
-		& \textbf{Czujniki typu FBG} & \textbf{Tensometry} \\ \hline \hline
-		Pole EM & odporne & wra¿liwe \\ \hline
-		Przewodnoœæ \\ elektryczna  & brak	 & wystêpuje \\ \hline
-		Dystans pomiarowy &	do dziesi¹tek kilometrów &	ograniczona \\ \hline
-		Zdolnoœæ  &	do $256$ sensorów & brak \\
-		multipleksowania & /$1$ w³ókno & \\ \hline
-		Maga &	ma³e rozmiary i lekkie & ciê¿kie \\
-		&   & ze wzglêdu na kable \\ \hline
-		Korozja &	odporne & wymagana ochrona \\ \hline
-		Wytrzyma³oœæ \\ zmêczeniowa & wysoka & niska \\ \hline
-		Wp³yw temperatury &	wysoka wra¿liwoœæ & niska wra¿liwoœæ \\ \hline \hline
-	\end{tabular}
-	\label{tab:02}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-W~osiem lat póŸniej pojawi³y siê pierwsze doniesienia opisuj¹ce wp³yw odkszta³cenia na przesy³any sygna³ œwietlny i~tym samym pojawi³ siê pierwszy czujnik odkszta³cenia. Czujniki œwiat³owodowe typu FBG (z ang. \textit{Fibre Bragg Grating}, FBG) zosta³y po raz pierwszy opisane w 1989 roku \cite{hill1987,meltz1989}. Pierwsz¹ konstrukcj¹ na której zainstalowano system wykorzystuj¹cy czujniki œwiat³owodowe typu FBG, do pomiaru odkszta³cenia i temperatury, by³ most w Calgary w Kanadzie \cite{tennyson2001}.
-Wykorzystanie czujników œwiat³owodowych typu FBG do monitorowania stanu technicznego konstrukcji wynika z szeregu ich zalet (Tab. \ref{tab:01}). Diagnostyka techniczna wykorzystuj¹ca czujniki œwiat³owodowe typu FBG jest z~powodzeniem stosowana na ca³ym œwiecie, zastêpuj¹c konwencjonalne czujniki odkszta³ceñ - tensometry (Tab. \ref{tab:02}). Czujniki tego typu mog¹ byæ wykorzystywane do pomiaru zarówno na niewielkich jak i du¿ych konstrukcjach.
 	
-Czujniki œwiat³owodowe typu FBG maj¹ jedn¹ lub wiele siatek \mbox{Bragga} wytworzonych w rdzeniu œwiat³owodu jednomodowego (rodzaj œwiat³owodu s³u¿¹cy do przesy³ania jednego modu œwiat³a, nazywanego te¿ modem podstawowym) i charakteryzuje siê periodycznymi zmianami wspó³czynnika za³amania œwiat³a rdzenia. W przypadku czujników œwiat³owodowych typu FBG siatki Bragga dziel¹ siê na: siatki równomierne (z ang. \textit{uniform Bragg grating}), siatki o zmiennym okresie (z ang. \textit{chirped Bragg grating}), siatki skoœne (z ang. \textit{tilted Bragg grating}).
-	
-Czujniki o siatce równomiernej nazywane s¹ czujnikami FBG lub czujnikami Bragga. Okres zmian przestrzennych wspó³czynnika za³amania œwiat³a to sta³a siatki dyfrakcyjnej. Od siatki dyfrakcyjnej Bragga odbija siê pewna iloœæ œwiat³a o okreœlonej d³ugoœci fali, a~reszta jest przenoszona dalej wzd³u¿ w³ókna. Pojedyncza siatka dyfrakcyjna ma d³ugoœæ od $1$ mm do $25$ mm. Mo¿na stwierdziæ, ¿e czujniki FBG s¹ w rzeczywistoœci filtrami widmowymi wykorzystuj¹cymi zasadê odbicia Bragga.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=10 cm]{FBG_zasada.jpg}
-	\caption[Zasada dzia³ania czujnika œwiat³owodowego typu FBG]{Zasada dzia³ania czujnika œwiat³owodowego typu FBG.}
-	\label{fig:FBG_zasada}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-Szerokopasmowa wi¹zka œwiat³a przechodz¹ca przez p³aszczyzny siatki dyfrakcyjnej Bragga jest czêœciowo od nich odbijana, czêœciowo zaœ transmitowana dalej wzd³u¿ w³ókna optycznego. Sumaryczne odbicie wi¹zki wyst¹pi tylko wtedy, gdy jej odbicia od pojedynczych p³aszczyzn siatki zsumuj¹ siê w~fazie. W¹skie pasmo odbitych fal elektromagnetycznych jest skupione wówczas wokó³ pewnej centralnej d³ugoœci fali, tzw. d³ugoœæ fali Bragga (Rys.~\ref{fig:FBG_zasada}). Czu³oœæ z jak¹ mo¿na pomierzyæ przesuniêcie d³ugoœci fali Bragga zale¿y od szerokoœci widma œwiat³a odbitego czujnika FBG. Zarówno odkszta³cenie jak i~zmiana temperatury œwiat³owodu wp³ywaj¹ na wartoœæ wspó³czynnika za³amania œwiat³a w~rdzeniu oraz na odleg³oœci pomiêdzy p³aszczyznami siatki dyfrakcyjnej, co przek³ada siê bezpoœrednio na zmiany d³ugoœci fali odbitej od czujnika FBG.
-
-Czujniki FBG w systemach monitorowania stanu technicznego konstrukcji s¹ zazwyczaj wykorzystywane do pomiaru odkszta³ceñ (tensometry optyczne) i temperatury. Ich skutecznoœæ jest porównywalna z tradycyjnymi czujnikami piezoelektrycznymi lub tensometrycznymi. Umo¿liwiaj¹ pomiar wielu innych wielkoœci fizycznych, jeœli tylko mo¿liwa jest ich korelacja ze zmianami odkszta³ceñ. Te cechy sprawiaj¹, ¿e czujniki FBG mog¹ byæ równie¿ wykorzystywane do detekcji i lokalizacji miejsc dotkniêtych korozj¹ lub byæ przetwornikami ciœnienia hydrostatycznego w pomiarach du¿ych ciœnieñ.
-	
-Czujniki FBG wykazuj¹ liniow¹ zale¿noœæ pomiêdzy mierzonymi odkszta³ceniami a~wystêpuj¹cymi naprê¿eniami i przy odpowiedniej kalibracji i kompensacji wahañ temperatury, pozwalaj¹ wyznaczyæ dok³adn¹ wartoœæ mierzonych odkszta³ceñ. Ich du¿a czu³oœæ temperaturowa jest du¿ym ograniczeniem w wykorzystywaniu czujników FBG jako przetworników odkszta³cenia w realizacji pomiarów wielkoœci wolnozmiennych. Z tego powodu stosuje siê kompensacjê temperaturow¹ w uk³adach opartych na czujnikach FBG.
-	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Wstêpne badania doœwiadczalne}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Wstêpne badania eksperymentalne przeprowadzono w celu rozpoznania mo¿liwoœci i~charakterystyki pracy komory klimatycznej oraz wp³ywu zdanego, kontrolowanego œrodowiska na zmiany charakterystyk zachowania czujników œwiat³owodowych typu FBG.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=14cm]{schemat_komora_eksp.jpg}
-	\caption[Stanowisko pomiarowe]{Laboratorium IMP~PAN: (a) wygl¹d ogólny komory klimatycznej, (b) wnêtrze komory wraz z badanymi czujnikami œwiat³owodowymi typu FBG i sondami temperaturowymi, (c) schemat uk³adu czujników œwiat³owodowych typu FBG i sond temperaturowych.}
-	\label{fig:schemat_komora_eksp}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Komora klimatyczna ma mo¿liwoœæ, poprzez napisany przez u¿ytkownika program, zarz¹dzania temperatur¹, wilgoci¹ lub temperatur¹ i wilgoci¹ jednoczeœnie (w zakresach jak podano w Tab. \ref{tab:tab_komora}).
-
-W niniejszym raporcie skupiono siê na pomiarach czujnikami œwiat³owodowymi typu FBG w ró¿nych temperaturach. Badania przeprowadzono w laboratorium Zak³adu Struktur Mechanicznych IMP~PAN. Na Rys.~\ref{fig:schemat_komora_eksp} przedstawiono komorê klimatczn¹ (Rys.~\ref{fig:schemat_komora_eksp}(a)), wnêtrze komory klimatycznej (Rys.~\ref{fig:schemat_komora_eksp}(b)) wraz z czujnikami œwiat³owodowymi typu FBG i sondami temperaturowymi oraz schemat (Rys.~\ref{fig:schemat_komora_eksp}(c)) doœwiadczenia i uk³adu czujników œwiat³owodowych typu FBG i sond temperaturowych. W przeprowadzonych testach zaproponowano uk³ad dwóch czujników œwiat³owodowych typu FBG i dwóch sond temperaturowych. Jeden czujnik œwiat³owodowy typu FBG i jedn¹ sondê tempertaurow¹ umieszczono w wodzie/ lodzie, a pozosta³e pozostawiono swobodne (Rys.~\ref{fig:schemat_komora_eksp}(c)).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Test \#1}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[h!]
-	\centering
-	\includegraphics[width=14 cm]{test_1.jpg}
-	\caption[Wyniki -- Test \#1]{Wyniki pomiarów: (a) d³ugoœci fal czujników œwiat³owodowych typu FBG, (b) odkszta³cenia zarejestrowane przez czujniki œwiat³owodowe typu FBG (c), (d) d³ugoœci fal sond temperaturowych, (e) temperatury zarejestrowane sondami temperaturowymi, (f)~temperatury w komorze klimatycznej.}
-	\label{fig:test_1}
+		\centering
+		\includegraphics[]{SASE/SASE1_out/25_angle_90_num_exp_dispersion.png}
+		\caption{Porównanie eksperymentalnych i numerycznych krzywych dyspersji dla k¹ta propagacji fal 90$^{\circ}$.} 
+		\label{fig:numexp90}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Pierwszy test \#1 trwa³ ponad 22 godziny, przy czym komora pod zadanym programem pracowa³a przez oko³o 9 godzin. Program zadany komorze polega³ na stopniowym och³adzaniu do - 10\textdegree C i ogrzewaniu do +10\textdegree C z krokiem co 2~stopnie dwukrotnie. Na Rys.~\ref{fig:test_1}(a) pokazano zmiany d³ugoœci fali w czasie dla czujnika swobodnego ('free') oraz umieszczongo w wodzie ('ice'). Na Rys.~\ref{fig:test_1}(b) przedstawiono odkszta³cenia jakie zosta³y zmierzone przez czujniki œwiat³owodowe typu FBG ('free' i 'ice'), wyraŸnie mo¿na wskazaæ moment, w którym czujnik 'ice' doznaje najwiêkszego odkszta³cenia œciskaj¹cego na poziomie bliskim -4e-4. Na Rys.~\ref{fig:test_1}(c) i Rys.~\ref{fig:test_1}(d) mo¿na zaobserwowaæ zachowanie sond. WyraŸnie widaæ jak sonda 'free' odwzorowuje zadany program (Rys.~\ref{fig:test_1}(f)) zarówno w~przebiegu d³ugoœci fali (Rys.~\ref{fig:test_1}(c)) jak i temperatury (Rys.~\ref{fig:test_1}(e)). Sonda 'ice' pokazuje izotermiczne procesy krzepniêcia i topnienia (Rys.~\ref{fig:test_1}(d) i Rys.~\ref{fig:test_1}(e)). 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Test \#2}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=14 cm]{test_2.jpg}
-	\caption[Wyniki -- Test \#2]{Wyniki pomiarów: (a) d³ugoœci fal czujników œwiat³owodowych typu FBG, (b) odkszta³cenia zarejestrowane przez czujniki œwiat³owodowe typu FBG (c), (d) d³ugoœci fal sond temperaturowych, (e) temperatury zarejestrowane sondami temperaturowymi, (f)~temperatury w komorze klimatycznej.}
-	\label{fig:test_2}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Drugi test \#2 trwa³ oko³o 27 godzin, przyczym komora pod zadanym programem pracowa³a przez oko³o 17 godzin. Program zadany komorze polega³ na stopniowym och³adzaniu do - 10\textdegree C i ogrzewaniu do +10\textdegree C z krokiem co 2~stopnie czterokrotnie. Na Rys.~\ref{fig:test_2}(a) pokazano zmiany d³ugoœci fali w czasie dla czujnika swobodnego ('free') oraz umieszczongo w wodzie ('ice'). Na Rys.~\ref{fig:test_2}(b) przedstawiono odkszta³cenia jakie zosta³y zmierzone przez czujniki œwiat³wodowe typu FBG ('free' i 'ice'), wyraŸnie mo¿na wskazaæ moment, w~którym czujnik 'ice' doznaje najwiêkszego odkszta³cenia œciskaj¹cego na poziomie bliskim -3e-4. Na Rys.~\ref{fig:test_2}(c) i Rys.~\ref{fig:test_2}(d) mo¿na zaobserwowaæ zachowanie sond. WyraŸnie widaæ jak sonda 'free' odwzorowuje zadany program (Rys.~\ref{fig:test_2}(f)) zarówno w przebiegu d³ugoœci fali (Rys.~\ref{fig:test_2}(c)) jak i temperatury (Rys.~\ref{fig:test_2}(e)). Sonda 'ice' pokazuje izotermiczne procesy krzepniêcia i topnienia (Rys.~\ref{fig:test_2}(d) i Rys.~\ref{fig:test_2}(e)) widaæ do trzeciego pe³nego cyklu. W~cyklu ostatnim (czwartym) widaæ moment, w~którym woda wyparowa³a, ze wzglêdu na to sondy w cyklu czwartym pokazuj¹ to samo (Rys.~\ref{fig:test_2}(e)).   
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Test \#3}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=14 cm]{test_3.jpg}
-	\caption[Wyniki -- Test \#3]{Wyniki pomiarów: (a) d³ugoœci fal czujników œwiat³owodowych typu FBG, (b) odkszta³cenia zarejestrowane przez czujniki œwiat³owodowe typu FBG (c), (d) d³ugoœci fal sond temperaturowych, (e) temperatury zarejestrowane sondami temperaturowymi, (f)~temperatury w komorze klimatycznej.}
-	\label{fig:test_3}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Trzeci test \#3 trwa³ tyle samo czasu co test \#2. Jednak¿e do testu nie uzupe³niono wyparowanej pod koniec testu \#2 wody. W zwi¹zku z brakiem wody zarówno sondy temperaturowe jak i czujniki œwiat³owodowe typu FBG pokazywa³y dok³adnie to samo (Rys.~\ref{fig:test_3}). Jedyna ró¿nica polega³a na tym, ¿e w przebiegu sygna³u czujnika 'ice' odwzorowa³a siê modulacja zwi¹zana z czêstotliwoœci¹ pracy wiatraka komory (Rys.~\ref{fig:test_3}(a) i~Rys.~\ref{fig:test_3}(b)).  
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Test \#4}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=14 cm]{test_5.jpg}
-	\caption[Wyniki -- Test \#4]{Wyniki pomiarów: (a) d³ugoœci fal czujników œwiat³owodowych typu FBG, (b) odkszta³cenia zarejestrowane przez czujniki œwiat³owodowe typu FBG (c), (d) d³ugoœci fal sond temperaturowych, (e) temperatury zarejestrowane sondami temperaturowymi, (f)~temperatury w komorze klimatycznej.}
-	\label{fig:test_5}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Czwarty test \#4 trwa³ prawie 70 godzin, przyczym komora pod zadanym programem pracowa³a przez oko³o 52 godziny. Program zadany komorze polega³ na stopniowym och³adzaniu do - 10\textdegree C i ogrzewaniu do + 10\textdegree C z krokiem co 2~stopnie dziesiêciokrotnie. Na Rys.~\ref{fig:test_5}(a) pokazano zmiany d³ugoœci fali w czasie dla czujnika swobodnego ('free') oraz umieszczongo w wodzie ('ice'). Na Rys.~\ref{fig:test_5}(b) przedstawiono odkszta³cenia jakie zosta³y zmierzone przez czujniki œwiat³owodowe typu FBG ('free' i 'ice'), wyraŸnie mo¿na wskazaæ moment, w którym czujnik 'ice' doznaje najwiêkszego odkszta³cenia œciskaj¹cego na poziomie bliskim -5e-4. Na Rys.~\ref{fig:test_5}(c) i Rys.~\ref{fig:test_5}(d) mo¿na zaobserwowaæ zachowanie sond. WyraŸnie widaæ jak sonda 'free' odwzorowuje zadany program (Rys.~\ref{fig:test_5}(f)) zarówno w~przebiegu d³ugoœci fali (Rys.~\ref{fig:test_5}(c)) jak i temperatury (Rys.~\ref{fig:test_5}(e)). Sonda 'ice' pokazuje izotermiczne procesy krzepniêcia i topnienia (Rys.~\ref{fig:test_5}(d) i Rys.~\ref{fig:test_5}(e)) widaæ do siódmego pe³nego cyklu. W trzech ostatnich cyklach widaæ, ¿e woda wyparowa³a -- sondy pokazuj¹ to samo (Rys.~\ref{fig:test_5}(e)).  
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Test \#5}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=14 cm]{test_4.jpg}
-	\caption[Wyniki -- Test \#5]{Wyniki pomiarów: (a) d³ugoœci fal czujników œwiat³owodowych typu FBG, (b) odkszta³cenia zarejestrowane przez czujniki œwiat³owodowe typu FBG (c), (d) d³ugoœci fal sond temperaturowych, (e) temperatury zarejestrowane sondami temperaturowymi, (f)~temperatury w komorze klimatycznej.}
-	\label{fig:test_4}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Pi¹ty test \#5 trwa³ prawie 70 godzin, przyczym komora pod zadanym programem pracowa³a przez oko³o 5 godzin. Program zadany komorze polega³ na stopniowym och³adzaniu do - 10\textdegree C i swobodnym ogrzaniu do temperatury pokojowej. Na Rys.~\ref{fig:test_4}(a) pokazano zmiany d³ugoœci fali w czasie dla czujnika swobodnego ('free') oraz umieszczongo w~wodzie ('ice'). Na Rys.~\ref{fig:test_4}(b) przedstawiono odkszta³cenia jakie zosta³y zmierzone przez czujniki œwiat³owodowe typu FBG ('free' i 'ice'), wyraŸnie mo¿na wskazaæ moment, w którym czujnik 'ice' doznaje najwiêkszego odkszta³cenia œciskaj¹cego na poziomie bliskim -4e-4. Na Rys.~\ref{fig:test_4}(c) i Rys.~\ref{fig:test_4}(d) mo¿na zaobserwowaæ zachowanie sond. WyraŸnie widaæ jak sonda 'free' odwzorowuje zadany program jak i swobodne ogrzewanie (Rys.~\ref{fig:test_4}(f)) zarówno w~przebiegu d³ugoœci fali (Rys.~\ref{fig:test_4}(c)) jak i temperatury (Rys.~\ref{fig:test_4}(e)). Sonda 'ice' pokazuje izotermiczny proces krzepniêcia oraz topnienia (Rys.~\ref{fig:test_4}(d) i Rys.~\ref{fig:test_4}(e)).  
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Test \#6}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=14 cm]{test_6.jpg}
-	\caption[Wyniki -- Test \#6]{Wyniki pomiarów: (a) d³ugoœci fal czujników œwiat³owodowych typu FBG, (b) odkszta³cenia zarejestrowane przez czujniki œwiat³owodowe typu FBG (c), (d) d³ugoœci fal sond temperaturowych, (e) temperatury zarejestrowane sondami temperaturowymi, (f)~temperatury w komorze klimatycznej.}
-	\label{fig:test_6}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Szósty test \#6 trwa³ prawie 70 godzin, przyczym komora pod zadanym programem pracowa³a przez oko³o 5 godzin. Program zadany komorze polega³ na stopniowym och³adzaniu do - 50\textdegree C i swobodnym ogrzaniu do temperatury pokojowej. Na Rys.~\ref{fig:test_6}(a) pokazano zmiany d³ugoœci fali w czasie dla czujnika swobodnego ('free') oraz umieszczongo w~wodzie ('ice'). Na Rys.~\ref{fig:test_6}(b) przedstawiono odkszta³cenia jakie zosta³y zmierzone przez czujniki œwiat³owodowe typu FBG ('free' i 'ice'), wyraŸnie mo¿na wskazaæ moment, w~którym czujnik 'ice' doznaje najwiêkszego odkszta³cenia œciskaj¹cego na poziomie bliskim -6e-4. Na Rys.~\ref{fig:test_6}(c) i Rys.~\ref{fig:test_6}(d) mo¿na zaobserwowaæ zachowanie sond. WyraŸnie widaæ jak sonda 'free' odwzorowuje zadany program jak i swobodne ogrzewanie (Rys.~\ref{fig:test_6}(f)) zarówno w przebiegu d³ugoœci fali (Rys.~\ref{fig:test_6}(c)) jak i temperatury (Rys.~\ref{fig:test_6}(e)). Sonda 'ice' pokazuje izotermiczny proces krzepniêcia oraz topnienia (Rys.~\ref{fig:test_6}(d) i Rys.~\ref{fig:test_6}(e)). 
-\end{comment}
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Podsumowanie}
