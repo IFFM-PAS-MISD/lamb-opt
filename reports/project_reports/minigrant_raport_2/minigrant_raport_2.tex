@@ -1,5 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[a4paper,12pt, titlepage]{article}
+%\documentclass[preprint,12pt]{elsarticle} % elsevier journal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[pdftex]{graphicx,color}
 \graphicspath{{../../figures/}}
@@ -14,14 +15,21 @@
 \usepackage{verbatim}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{amsmath}
+% matrix command (bold upright)
+\newcommand{\matr}[1]{\mathbf{#1}} % undergraduate algebra version
+%\newcommand{\matr}[1]{#1}          % pure math version
+%\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+% vector command (bold upright)
+\newcommand{\vect}[1]{\mathbf{#1}} % undergraduate algebra version
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{\textbf{Studia parametryczne krzywych dyspersji\\ w laminatach kompozytowych\\ uzyskane metod¹ pó³-analityczn¹\\ i ich porównanie z wynikami eksperymentalnymi\\} 
 \vspace{1cm}\normalsize{W ramach projektu pt.: \\ \vspace{6pt}  \textit{Identyfikacja sta³ych sprê¿ystych laminatów kompozytowych\\ poprzez wykorzystanie zjawiska fal Lamba  i metod optymalizacji\\}
-\vspace{6pt} Minigrant FBW26}}
+\vspace{6pt} Mini grant FBW26}}
 	
-\author{Pawe³ \textbf{Kudela}$^{1}$ \\ Maciej \textbf{Radzieñski}$^{1}$\\\\ $^{1}$~Instytut Maszyn Przep³ywowych Polskiej Akademii Nauk, Gdañsk \\ \vspace{2cm}}
+\author{Pawe³ \textbf{Kudela}$^{1}$ \\ Maciej \textbf{Radzieñski}$^{1}$\\\\ $^{1}$~Instytut Maszyn Przep³ywowych Polskiej Akademii Nauk \\ \vspace{2cm}}
 
 \date{Gdañsk, Luty 2019\\ (Nr Arch. ???/2019)}
 	
@@ -30,68 +38,61 @@
 \tableofcontents
 \newpage
 \listoffigures
-\listoftables
+%\listoftables
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wprowadzenie}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Cel pracy}
+\subsection{Cel i zakres prac}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Niniejszy raport ma na celu przedstawienie wstêpnych wyników symulacji numerycznych i badañ eksperymentalnych przeprowadzonych w laboratorium Zak³adu Struktur Inteligentnych IMP PAN. Prace mia³y na celu:
+Niniejszy raport ma na celu przedstawienie wstêpnych wyników symulacji numerycznych i badañ eksperymentalnych przeprowadzonych w laboratorium Zak³adu Struktur Inteligentnych IMP PAN. Prace mia³y na celu stworzenie narzêdzi pomocnych w~identyfikacji sta³ych sprê¿ystych laminatów kompozytowych.
+Zakres prac obejmowa³:
 \begin{itemize}
 	\item implementacjê  pó³--analitycznej metody elementów spektralnych do modelowania krzywych dyspersji fal Lamba propaguj¹cych w~laminatach kompozytowych,
 	\item studia parametryczne wp³ywu w³aœciwoœci materia³owych na krzywe dyspersji,
-	\item  test ró¿nych sygna³ów wzbudzenia celem uzyskania optymalnych krzywych dyspersji w warunkach laboratoryjnych,	
+	\item  test ró¿nych sygna³ów wzbudzenia celem uzyskania optymalnych krzywych dyspersji w~warunkach laboratoryjnych przy wykorzystaniu skanuj¹cego wibrometru laserowego,	
 	\item porównanie wyników numerycznych i eksperymentalnych dla wybranych sta³ych materia³owych.
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Zakres prac}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-W raporcie przedstawiono:
-\begin{itemize}
-	\item analizy numeryczne
-	\begin{itemize}
-		\item symulacje numeryczne z wykorzystaniem metody elementów skoñczonych
-		\item symulacje numeryczne z wykorzystaniem metody ró¿nic skoñczonych w~dziedzinie czasu
-	\end{itemize}	
-	\item badania eksperymentalne
-	\begin{itemize}
-		\item komora œrodowiskowa
-		\item czujniki œwiat³owodowe typu FBG
-		\item wstêpne badania eksperymentalne	
-	\end{itemize}
-\end{itemize}
-
-Celem przewidzianych symulacji numerycznych jest opracowanie modelu numerycznego materia³u o w³aœciwoœciach ortotropowych oraz analiza zjawisk cieplnych i mechanicznych zachodz¹cych podczas procesów ogrzewania i och³adzania analizowanego materia³u. W dalszym etapie przewiduje siê mo¿liwoœæ uwzglêdnienia wp³ywu wilgotnoœci.
-
-W przeprowadzonych oraz planowanych analizach zastosowana zosta³a metoda elementów skoñczonych (MES) bêd¹ca obecnie jednym z podstawowych narzêdzi stosowanych w~obliczeniach in¿ynierskich i naukowych. Metoda ta polega na dyskretyzacji, czyli podziale analizowanego obszaru kontinuum na skoñczone podobszary, zwane elementami skoñczonymi. W kolejnym etapie nastêpuje analiza dotycz¹c¹ jedynie dyskretnych punktów bêd¹cych wêz³ami siatki elementów skoñczonych. Obliczone wartoœci s¹ interpolowane, z wykorzystaniem przyjêtych funkcji kszta³tu w punktach znajduj¹cych siê poza wêz³ami.
-
-W prowadzonych pracach wykorzystano komercyjny pakiet MES pod nazw¹ \mbox{ADINA} System \cite{adina}. Program posiada szeroki zakres mo¿liwoœci obliczeniowych opartych na wydajnych procedurach MES dotycz¹cych zarówno podstawowych obliczeñ statycznych, jak i dynamicznych. Umo¿liwia z³o¿on¹ analizê w zakresie wymiany ciep³a, przep³ywów, interakcji ciecz cia³o sta³e (FSI),  a tak¿e zagadnieñ termomechanicznych. Z punktu widzenia termicznych zagadnieñ termodynamiki pakiet ADINA umo¿liwia zaawansowan¹ analizê uwzglêdniaj¹c¹ przewodzenie, konwekcjê i promieniowanie, a tak¿e zmianê stanów skupienia (np. analiza zamra¿ania i topnienia wody w przypadku uwzglêdnienia zawilgocenia próbki).
-
-Opracowany model numeryczny mo¿e byæ przydatny w planowaniu i weryfikacji wyników doœwiadczeñ laboratoryjnych, w tym okreœleniu optymalnych po³o¿eñ i konfiguracji czujników optycznych FBG.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Model pó³--analityczny}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-W ramach wstêpnych prac przeprowadzono symulacje numeryczne, których celem by³o opracowanie modelu MES p³yty kompozytowej o okreœlonej liczbie warstw o zró¿nicowanej konfiguracji w³ókien. Obliczenia wykonano dla materia³u w postaci kompozytu sk³adaj¹cego siê z w³ókien wêglowych oraz ¿ywicy polimerowej.
-Przyjêto model cia³a sprê¿ystego obci¹¿onego temperatur¹. 
+Zjawisko dyspersji fal Lamba zwi¹zane jest z zale¿noœci¹ liczb falowych, $k$ od czêstotliwoœci $f$. Krzywe dyspersji fal Lamba zale¿ne s¹ od sta³ych sprê¿ystych materia³u, w którym te fale propaguj¹. Ponadto, w~laminatach kompozytowych zachowanie fal Lamba œciœle zwi¹zane jest z k¹tem propagacji. Parametry takie jak: prêdkoœæ fazowa i~grupowa, które bezpoœrednio zwi¹zane s¹ z krzywymi dyspersji oraz t³umienie zale¿¹ od k¹ta propagacji. Dlatego, aby prawid³owo scharakteryzowaæ zachowanie propaguj¹cych siê fal Lamba, konieczne jest uwzglêdnienie krzywych dyspersji fal Lamba w~zale¿noœci od k¹ta propagacji.  
 
-W obliczeniach przyjêto nastêpuj¹ce w³aœciwoœci wytrzyma³oœciowe i termiczne (okreœlone w osiowym uk³adzie odniesienia -- oœ 1 równoleg³a do w³ókien):
+Krzywe dyspersji mo¿na uzyskaæ za pomoc¹ pó³-analitycznej metody elementów spektralnych. Implementacja tej metody jest modyfikacj¹ podejœcia zaproponowanego w pracy~\cite{Bartoli2006}. Modyfikacja polega³a na zastosowaniu spektralnych elementów skoñczonych zamiast klasycznych elementów skoñczonych po gruboœci laminatu, zachowuj¹c równanie falowe w kierunku propagacji. Ponadto, zamiast dwuwymiarowej aproksymacji przekroju poprzecznego laminatu zastosowano jednowymiarowe elementy spektralne. Jednoczeœnie, zgodnie z~koncepcj¹ zaproponowan¹ przez Taupin et~al.~\cite{Taupin2011}, równania krzywych dyspersji wyprowadzone zosta³y w~ten sposób, aby macierze sztywnoœci i~mas by³y niezale¿ne od k¹ta propagacji fal. Równania krzywych dyspersji przybieraj¹ postaæ problemu w³asnego:
+\begin{equation}
+\left[\matr{A} - \omega^2\matr{M} \right] \vect{U} =0,
+\label{eq:eig_dispersion}
+\end{equation}
+gdzie $\omega$ jest czêstotliwoœci¹ k¹tow¹, $\matr{M}$ jest macierz¹ mas, a macierz $\matr{A}$ mo¿na zdefiniowaæ jako:
+% A = wavenumber^2*(sb^2*K22 + cb^2*K33 - cb*sb*K23 - cb*sb*K32)+1i*wavenumber*T'*(-cb*K13 - sb*K21 + sb*K12 + cb*K31)*T + K11;
+\begin{equation}
+\begin{aligned}
+\matr{A} & =  k^2\left(s^2 \,\matr{K}_{22} + c^2\, \matr{K}_{33} - c s\, \matr{K}_{23} - c s\, \matr{K}_{32}\right) \\
+				& + i k\, \matr{T}^T\left(-c\, \matr{K}_{13} - s\, \matr{K}_{21} + s\, \matr{K}_{12} + c\, \matr{K}_{31}\right) \matr{T} +\matr{K}_{11},
+\end{aligned}
+\label{eq:dispersion}
+\end{equation}
+gdzie $s = \sin(\beta)$, $c = \cos(\beta)$, $i = \sqrt{-1}$, a $\beta$ jest k¹tem propagacji fal Lamba. Macierz transformacji T jest macierz¹ diagonaln¹ wprowadzon¹, aby wyeliminowaæ czêœci urojone z równania \ref{eq:dispersion}:
+\begin{equation}
+\matr{T} =
+	\begin{bmatrix}
+		i & & & & & \\
+		& 1 & & & & \\
+		& & 1 & & & \\
+		& & & \ddots & & \\
+		& & & & i & & \\
+		& & & & & 1 & \\
+		& & & & & & 1
+	\end{bmatrix}.
+\end{equation}
+Macierze sztywnoœci $\matr{K}$ z równania~\ref{eq:dispersion} zale¿¹ od sta³ych sprê¿ystych laminatu kompozytowego i zwi¹zków pomiêdzy przemieszczeniami a~odkszta³ceniami (wiêcej szczegó³ów mo¿na znaleŸæ w~pracy~\cite{Bartoli2006}).
+
+Równanie~\ref{eq:eig_dispersion} mo¿na rozwi¹zaæ numerycznie na dwa sposoby:
 \begin{itemize}
-	\item modu³y sprê¿ystoœci [Pa]:$ E_{1}=1.3951e11, E_{2}=9.9608e9, E_{3}=9.9608e9 $,
-	\item liczby Poissona: $\nu_{1}=0.3672, \nu_{2}=0.2750, \nu_{3}=0.2750 $,
-	\item wspó³czynniki rozszerzalnoœci cieplnej [1/K]: $ \alpha_{1}=-3e-7, \alpha_{2}=2.8e-5, \\ \alpha_{3}=2.8e-5$. 	
+	\item  jako standardowy problem w³asny $\omega (k)$ (zak³adaj¹c rzeczywiste wartoœci liczb falowych $k$)
+	\item jako wielomianowy problem w³asny drugiego rzêdu $k(\omega)$ dla danych czêstotliwoœci $\omega$.
 \end{itemize}
-Symulacje numeryczne przeprowadzono dla p³yty o wymiarach 300~mm x 300~mm, co odpowiada wymiarom próbki laboratoryjnej, dla której planowane s¹ doœwiadczenia w~komorze œrodowiskowej.
-W pierwszym etapie wykonany zosta³ model pojedynczej warstwy w³ókien laminatu o gruboœci 2 mm. 
-Nastêpnie zamodelowana zosta³a p³yta sk³adaj¹ca siê z~4~warstw o gruboœci 2 mm ka¿da, w uk³adzie $\pm$ 45\textdegree.
-
-Wykonano sekwencjê pomiarów dla obci¹¿enia temperatur¹ w zakresie od - 50\textdegree C do +~50\textdegree C, z przyrostem wynosz¹cym 10\textdegree. Przyjêto za³o¿enie, i¿ w stanie pocz¹tkowym temperatura analizowanej p³yty wynosi³a 20\textdegree C.
-
-Zastosowano dwa warianty warunków brzegowych, przedstawione schematycznie na Rys.~\ref{fig:rhom}, gdzie '-' oznacza przesuw zablokowany; '$\surd$' przesuw swobodny. W pierwszym wariancie oznaczonym jako bc-1 zablokowane zosta³y przesuwy w kierunkach \textit{x}, \textit{y}, \textit{z} w czterech naro¿nych wêz³ach po³o¿onych na dolnej p³aszczyŸnie p³yty (Rys.~\ref{fig:bc}(a)). W drugim wariancie (bc-2) wprowadzona zosta³a modyfikacja polegaj¹ca na zwolnieniu przesuwów w p³aszczyŸnie p³yty (kierunki \textit{x} i \textit{y}) dla dwóch wêz³ów zlokalizowanych w s¹siednich naro¿ach (Rys.~\ref{fig:bc}(b)).
-
-Zastosowano przestrzenne, prostopad³oœcienne 8-wêz³owe elementy skoñczone. Wykonano dyskretyzacjê ka¿dej z warstw laminatu  siatk¹  30 x 30 x 2 elementów skoñczonych.
+W drugim przypadku konieczne jest zlinearyzowanie równania co wymaga dwukrotnego zwiêkszenia rozmiaru uk³adu równañ. Otrzymane liczby falowe maj¹ wówczas charakter zespolony. Dziêki temu mo¿na uzyskaæ informacje zarówno o dyspersji fal (czêœæ rzeczywista liczb falowych) jak i~t³umieniu fal (czêœæ urojona liczb falowych).  Z~uwagi jednak, na fakt, ¿e priorytetem jest czas obliczeñ oraz to, ¿e informacja o t³umieniu fal nie jest konieczna, preferowane jest rozwi¹zanie standardowego problemu w³asnego  $\omega (k)$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{figure} [h!]
 %	\begin{center}
@@ -107,6 +108,25 @@ Zastosowano przestrzenne, prostopad³oœcienne 8-wêz³owe elementy skoñczone. Wykon
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Studia parametryczne krzywych dyspersji}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Jak by³o wspomniane w Raporcie nr 1, ¿eby zminimalizowaæ liczbê sta³ych sprê¿ystych, które wymagaj¹ optymalizacji, parametrami wejœciowymi s¹ w³aœciwoœci sk³adników kompozytu, tj. matrycy i~w³ókien. Parametry te przekszta³cane s¹ do postaci standardowej macierzy sta³ych sprê¿ystych za pomoc¹ prawa mieszanin. Pocz¹tkowe wartoœci sta³ych materia³owych sk³adników kompozytu przyjête w studiach parametrycznych krzywych dyspersji zestawiono w Tabeli. Obejmuj¹ one 7 parametrów: gêstoœæ matrycy $\rho_m$, gêstoœæ w³ókien $\rho_f$, modu³ Younga matrycy $E_m$, modu³ Young w³ókien $E_f$, wspó³czynnik Poissona matrycy $\nu_m$, wspó³czynnik Poissona w³ókien $\nu_f$ oraz zawartoœæ objêtoœciow¹ w³ókien $V$. Badano wp³yw ka¿dego parametru oddzielnie na krzywe dyspersji. Przyjêto zakres zmiennoœci $\pm$20\% wzglêdem wartoœci pocz¹tkowych.
+
+\begin{table}[h]
+	%\renewcommand{\arraystretch}{1.5}
+	\centering \footnotesize
+	\caption{Pocz¹tkowe wartoœci sta³ych materia³owych sk³adników kompozytu.}
+	\begin{tabular}{ccc|ccc|c}
+	  \multicolumn{3}{c|}{\textbf{Matryca} }	& \multicolumn{3}{c|}{\textbf{W³ókna} } & \textbf{Zawartoœæ w³ókien}	 \\ 
+		\hline \hline
+		 $\rho_m$ & $E_m$ & $\nu_m$  & $\rho_f$ & $E_f$ & $\nu_f$ & $V$\\
+		\hline 
+		kg/m\textsuperscript{3} &GPa& --  & kg/m\textsuperscript{3}  & GPa& -- & \%\\ 
+		\hline
+		1250 &3.43& 0.35& 1900 & 240 & 0.2 & 50\\ 
+		\hline  
+	\end{tabular} 
+	\label{tab:xyz_bc-1}
+\end{table}
+
 Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:rhom}.
 
 \begin{figure} [h!]
@@ -743,50 +763,15 @@ Porównanie eksperymentalnych i numerycznych krzywych dyspersji w zale¿noœci od k
 \section{Podsumowanie}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Przeprowadzone symulacje numeryczne MES wykorzystane zostan¹ na etapie przygotowania próbek do badañ laboratoryjnych. Uzyskane wyniki uwzglêdnione zostan¹ przy wyborze rozmieszczenia i konfiguracji czujników FBG.
-W dalszych pracach wyniki symulacji numerycznych MES zostan¹ porównane z wynikami badañ eksperymentalnych. 
-Opracowane modele numeryczne mog¹ stanowiæ podstawê dalszych prac uwzglêdniaj¹cych wp³yw wilgoci oraz uwzglêdnienie z³o¿onych zjawisk jak przep³ywy ciep³a, a tak¿e konwekcja, promieniowanie.
 
-Przeprowadzono symulacje interakcji fal THz z materia³em GFRP z wykorzystaniem metody FDTD. Wyniki analizy numerycznej porównano z wynikami badañ eksperymentalnych dla próbki poddanej procesowi degradacji termicznej uzyskuj¹c dobr¹ zgodnoœæ. Dodatkowo pokazano rezultaty symulacji numerycznej dla sygna³ów odbitych od spodniej powierzchni próbki dla g³owic ustawionych w trybie odbicia. Analiza numeryczna skoncentrowana by³a na zale¿noœci pomiêdzy zmianami wspó³czynnika refrakcji \textit{n} a czasem propagacji.
-
-Przeprowadzono wstêpne badania eksperymentalne dotycz¹ce zachowania siê czujników œwiat³owodowych typu FBG i sond temperaturowych poddane wp³ywowi temperatury i wilgoci. Komora klimatyczna pozwala na przeprowadzanie testów na dowolnych strukturach, pozwalaj¹c na wytworzenie, utrzymanie pod kontrol¹ przez dowolny czas oraz monitorowanie i rejestrowanie warunków œrodowiskowych (temperatury, wilgotnoœci powietrza) w dowolnie ustalonych zakresach.
-
-\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{thebibliography}{99}
-	
-\bibitem{adina}	ADINA R \& D, Inc. (2102) Theory and Modeling Guide, ADINA R \& D, Watertown.
-	
-\bibitem{fitzgerald2014} Fitzgerald A.J, Pickwell-MacPherson E., Wallace V.P. (2014) \textit{Use of finite difference time domain simulations and Debye theory for modelling the terahertz reflection response of normal and tumour breast tissue}, PLoS ONE 9(7): e99291.
-
-\bibitem{hill1987} Hill K.O., Fujii Y., Johnson D.C., Kawasaki B.S. (1987) \textit{Photosensitivity in optical fiber waveguides: Application to reflection filter fabrication}, Applied Physics Letters 32:647--649.
-
-\bibitem{kaczmarek2006} Kaczmarek Z. Œwiat³owodowe czujniki i przetworniki pomiarowe. Agenda Wydawnicza PAK, 2006.
-	
-\bibitem{majewska2017} Majewska K., Soman R., Mieloszyk M., Ostachowicz W. (2017) \textit{Assessment of delamination in composite beam using infrared thermography, optical sensors and terahertz technique}, Proc. SPIE Smart Structures and Materials+ Nondestructive Evaluation and Health Monitoring, 1017005--1017005.
-	
-\bibitem{mieloszyk2018} Mieloszyk M., Majewska K., Ostachowicz W. (2018) \textit{Localisation of embedded water drop in glass composite using THz spectroscopy}, Smart Structures and Systems, w druku. 
-
-\bibitem{meltz1989} Meltz G., Morey W.W., Glenn W.H. (1989), \textit{Formation of Bragg gratings in optical fibers by a transverse holographic method}, Optics Letters 14(15):823--825.
-
-\bibitem{pickwell2004} Pickwell E., Cole B.E., Fitzgerald A.J., Pepper M., Wallace V.P. (2004) \textit{In vivo study of human skin using pulsed terahertz radiation}, Physics in Medicine \& Biology 49(9):1595--1607.
-	
-\bibitem{radzienski2015} Radzie{\'n}ski M., Mieloszyk M., Rahani E.K., Kundu T., Ostachowicz W. (2015) \textit{Heat induced damage detection in composite materials by terahertz radiation}, Proc. SPIE Health Monitoring of Structural and Biological Systems 9438:94381P.
-	
-\bibitem{schneider2010} Schneider J.B. (2010) \textit{Understanding the finite-difference time-domain method}, School of electrical engineering and computer science Washington State University.--URL: http://www. Eecs. Wsu. Edu/\~{} schneidj/ufdtd/(request data: 29.11. 2012).
-	
-\bibitem{stoik2008} Stoik C.D., Bohn M.J., Blackshire J.L. (2008) \textit{Nondestructive evaluation of aircraft composites using transmissive terahertz time domain spectroscopy}, Optics Express 16(21):17039--17051.
-	
-\bibitem{tu2016} Tu W., Zhong S., Shen Y., Incecik A. (2016) \textit{Nondestructive testing of marine protective coatings using terahertz waves with stationary wavelet transform}, Ocean Engineering 111:582--592.
-
-\bibitem{tennyson2001} Tennyson R.C., Mufti A.A., Rizkalla S., Tadros G., Benmokrane B. (2001) \textit{Structural health monitoring of innovative bridges in Canada with fiber optic sensors}, Smart Materials and Structures 10(3):560.
-
-\bibitem{udd2011} Udd E., Spillman Jr W.B., eds. Fiber optic sensors: an introduction for engineers and scientists. John Wiley \& Sons, 2011.
-	
-\bibitem{zhang2016} Zhang J., Wang J., Han X., Cui H.L., Shi C., Zhang J., Shen Y. (2016) \textit{Noncontact detection of Teflon inclusions in glass-fiber-reinforced polymer composites using terahertz imaging} Applied Optics 55(36)10215--10222.
-\end{thebibliography}
+\section*{Podziêkowania}
+Badania zosta³y przeprowadzone w ramach mini grantu ufundowanego przez Dyrektora Instytutu Maszyn Przep³ywowych.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\bibliographystyle{plain}
+%\bibliographystyle{unsrt}
+\bibliographystyle{abbrv}
+\bibliography{safe}
 
-%\section*{Podziêkowania}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
