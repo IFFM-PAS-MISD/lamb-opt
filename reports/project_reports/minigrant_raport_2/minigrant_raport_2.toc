@@ -3,5 +3,5 @@
 \contentsline {section}{\numberline {2}Model p\'o\IeC {\l }--analityczny}{3}% 
 \contentsline {section}{\numberline {3}Studia parametryczne krzywych dyspersji}{4}% 
 \contentsline {section}{\numberline {4}Testowanie r\'o\.znych sygna\IeC {\l }\'ow wzbudzenia}{12}% 
-\contentsline {section}{\numberline {5}Por\'ownanie wynik\'ow numerycznych i eksperymentalnych}{17}% 
-\contentsline {section}{\numberline {6}Podsumowanie}{19}% 
+\contentsline {section}{\numberline {5}Por\'ownanie wynik\'ow numerycznych i eksperymentalnych}{18}% 
+\contentsline {section}{\numberline {6}Podsumowanie}{21}% 

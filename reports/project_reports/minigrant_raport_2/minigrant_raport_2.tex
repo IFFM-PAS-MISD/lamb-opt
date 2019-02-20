@@ -12,6 +12,7 @@
 \usepackage{geometry}
 \newgeometry{tmargin=2.5cm, bmargin=2.5cm, lmargin=2.5cm, rmargin=2.5cm}
 \usepackage{multirow}
+\usepackage{booktabs}
 \usepackage{verbatim}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -25,7 +26,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{\textbf{Studia parametryczne krzywych dyspersji\\ w laminatach kompozytowych\\ uzyskane metod¹ pó³-analityczn¹\\ i ich porównanie z wynikami eksperymentalnymi\\} 
+\title{\textbf{Studia parametryczne krzywych dyspersji\\ uzyskane metod¹ pó³-analityczn¹\\ i ich porównanie z wynikami eksperymentalnymi\\} 
 \vspace{1cm}\normalsize{W ramach projektu pt.: \\ \vspace{6pt}  \textit{Identyfikacja sta³ych sprê¿ystych laminatów kompozytowych\\ poprzez wykorzystanie zjawiska fal Lamba  i metod optymalizacji\\}
 \vspace{6pt} Mini grant FBW26}}
 	
@@ -38,7 +39,7 @@
 \tableofcontents
 \newpage
 \listoffigures
-%\listoftables
+\listoftables
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wprowadzenie}
@@ -56,7 +57,7 @@ Zakres prac obejmowa³:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Model pó³--analityczny}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Zjawisko dyspersji fal Lamba zwi¹zane jest z zale¿noœci¹ liczb falowych, $k$ od czêstotliwoœci $f$. Krzywe dyspersji fal Lamba zale¿ne s¹ od sta³ych sprê¿ystych materia³u, w którym te fale propaguj¹. Ponadto, w~laminatach kompozytowych zachowanie fal Lamba œciœle zwi¹zane jest z k¹tem propagacji. Parametry takie jak: prêdkoœæ fazowa i~grupowa, które bezpoœrednio zwi¹zane s¹ z krzywymi dyspersji oraz t³umienie zale¿¹ od k¹ta propagacji. Dlatego, aby prawid³owo scharakteryzowaæ zachowanie propaguj¹cych siê fal Lamba, konieczne jest uwzglêdnienie krzywych dyspersji fal Lamba w~zale¿noœci od k¹ta propagacji.  
+Zjawisko dyspersji fal Lamba zwi¹zane jest z zale¿noœci¹ liczb falowych, $k$ od czêstotliwoœci $f$. Krzywe dyspersji fal Lamba zale¿ne s¹ od sta³ych sprê¿ystych materia³u, w~którym te fale propaguj¹. Ponadto, w~laminatach kompozytowych zachowanie fal Lamba œciœle zwi¹zane jest z k¹tem propagacji. Parametry takie jak: prêdkoœæ fazowa i~grupowa, które bezpoœrednio zwi¹zane s¹ z krzywymi dyspersji oraz t³umienie zale¿¹ od k¹ta propagacji. Dlatego, aby prawid³owo scharakteryzowaæ zachowanie propaguj¹cych siê fal Lamba, konieczne jest uwzglêdnienie krzywych dyspersji fal Lamba w~zale¿noœci od k¹ta propagacji.  
 
 Krzywe dyspersji mo¿na uzyskaæ za pomoc¹ pó³-analitycznej metody elementów spektralnych. Implementacja tej metody jest modyfikacj¹ podejœcia zaproponowanego w pracy~\cite{Bartoli2006}. Modyfikacja polega³a na zastosowaniu spektralnych elementów skoñczonych zamiast klasycznych elementów skoñczonych po gruboœci laminatu, zachowuj¹c równanie falowe w kierunku propagacji. Ponadto, zamiast dwuwymiarowej aproksymacji przekroju poprzecznego laminatu zastosowano jednowymiarowe elementy spektralne. Jednoczeœnie, zgodnie z~koncepcj¹ zaproponowan¹ przez Taupin et~al.~\cite{Taupin2011}, równania krzywych dyspersji wyprowadzone zosta³y w~ten sposób, aby macierze sztywnoœci i~mas by³y niezale¿ne od k¹ta propagacji fal. Równania krzywych dyspersji przybieraj¹ postaæ problemu w³asnego:
 \begin{equation}
@@ -108,26 +109,34 @@ W drugim przypadku konieczne jest zlinearyzowanie równania co wymaga dwukrotnego
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Studia parametryczne krzywych dyspersji}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Jak by³o wspomniane w Raporcie nr 1, ¿eby zminimalizowaæ liczbê sta³ych sprê¿ystych, które wymagaj¹ optymalizacji, parametrami wejœciowymi s¹ w³aœciwoœci sk³adników kompozytu, tj. matrycy i~w³ókien. Parametry te przekszta³cane s¹ do postaci standardowej macierzy sta³ych sprê¿ystych za pomoc¹ prawa mieszanin. Pocz¹tkowe wartoœci sta³ych materia³owych sk³adników kompozytu przyjête w studiach parametrycznych krzywych dyspersji zestawiono w Tabeli. Obejmuj¹ one 7 parametrów: gêstoœæ matrycy $\rho_m$, gêstoœæ w³ókien $\rho_f$, modu³ Younga matrycy $E_m$, modu³ Young w³ókien $E_f$, wspó³czynnik Poissona matrycy $\nu_m$, wspó³czynnik Poissona w³ókien $\nu_f$ oraz zawartoœæ objêtoœciow¹ w³ókien $V$. Badano wp³yw ka¿dego parametru oddzielnie na krzywe dyspersji. Przyjêto zakres zmiennoœci $\pm$20\% wzglêdem wartoœci pocz¹tkowych.
+Jak by³o wspomniane w Raporcie nr 1, ¿eby zminimalizowaæ liczbê sta³ych sprê¿ystych, które wymagaj¹ optymalizacji, parametrami wejœciowymi s¹ w³aœciwoœci sk³adników kompozytu, tj. matrycy i~w³ókien. Parametry te przekszta³cane s¹ do postaci standardowej macierzy sta³ych sprê¿ystych za pomoc¹ prawa mieszanin. Pocz¹tkowe wartoœci sta³ych materia³owych sk³adników kompozytu przyjête w studiach parametrycznych krzywych dyspersji zestawiono w Tabeli~\ref{tab:matprop}. Obejmuj¹ one 7 parametrów: gêstoœæ matrycy $\rho_m$, gêstoœæ w³ókien $\rho_f$, modu³ Younga matrycy $E_m$, modu³ Young w³ókien $E_f$, wspó³czynnik Poissona matrycy $\nu_m$, wspó³czynnik Poissona w³ókien $\nu_f$ oraz zawartoœæ objêtoœciow¹ w³ókien $V$. Badano wp³yw ka¿dego parametru oddzielnie na krzywe dyspersji. Przyjêto zakres zmiennoœci $\pm$20\% wzglêdem wartoœci pocz¹tkowych. Za³o¿ono, ¿e k¹ty u³o¿enia w³ókien w~poszczególnych warstwach kompozytu s¹ znane. W~obliczeniach przyjêto nastêpuj¹cy uk³ad w³ókien [0 90 0 90]\textsubscript{s}. Za³o¿ono, ¿e ca³kowita gruboœæ laminatu kompozytowego wynosi 3 mm. Za³o¿one w~modelu numerycznym wartoœci odpowiadaj¹  rzeczywistej próbce wykonanej z~¿ywicy epoksydowej wzmacnianej w³óknami wêglowymi. Jedyn¹ ró¿nic¹ jest to, ¿e zbrojenie próbki ma postaæ tkaniny typu plain.
 
 \begin{table}[h]
-	%\renewcommand{\arraystretch}{1.5}
+	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
 	\caption{Pocz¹tkowe wartoœci sta³ych materia³owych sk³adników kompozytu.}
-	\begin{tabular}{ccc|ccc|c}
-	  \multicolumn{3}{c|}{\textbf{Matryca} }	& \multicolumn{3}{c|}{\textbf{W³ókna} } & \textbf{Zawartoœæ w³ókien}	 \\ 
-		\hline \hline
+	%\begin{tabular}{@{}ccccccc@{}} % remove spaces from vertical lines
+	\begin{tabular}{ccccccc} 
+		%\hline
+		\toprule
+	  \multicolumn{3}{c}{\textbf{Matryca} }	& \multicolumn{3}{c}{\textbf{W³ókna} } & \textbf{Zawartoœæ w³ókien}	 \\ 
+	%	\hline \hline
+		\midrule
 		 $\rho_m$ & $E_m$ & $\nu_m$  & $\rho_f$ & $E_f$ & $\nu_f$ & $V$\\
-		\hline 
+		% \cmidrule(lr){1-3} \cmidrule(lr){4-6} \cmidrule(lr){7-7}
+		%\hline
 		kg/m\textsuperscript{3} &GPa& --  & kg/m\textsuperscript{3}  & GPa& -- & \%\\ 
-		\hline
-		1250 &3.43& 0.35& 1900 & 240 & 0.2 & 50\\ 
-		\hline  
+		%\hline
+		%\midrule
+		\cmidrule(lr){1-3} \cmidrule(lr){4-6} \cmidrule(lr){7-7}
+		1250 &3.43& 0.35& 1900 & 240 & 0.2 & 50\\
+		%\hline 
+		\bottomrule 
 	\end{tabular} 
-	\label{tab:xyz_bc-1}
+	\label{tab:matprop}
 \end{table}
 
-Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:rhom}.
+Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:rhom}. Parametr ten ma umiarkowany wp³yw na ka¿dy mod fal Lamba.
 
 \begin{figure} [h!]
 	\centering
@@ -173,7 +182,7 @@ Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na
 	\label{fig:rhom}
 \end{figure}
 
-Wp³yw gêstoœci w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:rhof}.
+Wp³yw gêstoœci w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:rhof}. Mo¿na zaobserwowaæ du¿e zmiany krzywych dyspersji modów antysymetrycznych oraz ma³e zmiany modów symetrycznych. 
 
 \begin{figure} [h!]
 	\centering
@@ -219,7 +228,7 @@ Wp³yw gêstoœci w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na
 	\label{fig:rhof}
 \end{figure}
 
-Wp³yw modu³u Younga matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:em}.
+Wp³yw modu³u Younga matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:em}. Mo¿na zaobserwowaæ du¿e zmiany krzywych dyspersji modów antysymetrycznych oraz ma³e zmiany modów symetrycznych.
 
 \begin{figure} [h!]
 	\centering
@@ -265,7 +274,7 @@ Wp³yw modu³u Younga matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawio
 	\label{fig:em}
 \end{figure}
 
-Wp³yw modu³u Younga w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:ef}.
+Wp³yw modu³u Younga w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:ef}. W~tym przypadku zaobserwowano jedynie ma³e zmiany krzywych dyspersji modów symetrycznych.
 
 \begin{figure} [h!]
 	\centering
@@ -311,7 +320,7 @@ Wp³yw modu³u Younga w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawio
 	\label{fig:ef}
 \end{figure}
 
-Wp³yw wspó³czynnika Poissona matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:nim}.
+Wp³yw wspó³czynnika Poissona matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:nim}. Zaobserwowano ma³e zmiany krzywych dyspersji g³ównie modów antysymetrycznych.
 
 \begin{figure} [h!]
 	\centering
@@ -357,7 +366,7 @@ Wp³yw wspó³czynnika Poissona matrycy na krzywe dyspersji w zale¿noœci od k¹ta pr
 	\label{fig:nim}
 \end{figure}
 
-Wp³yw wspó³czynnika Poissona w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:nif}.
+Wp³yw wspó³czynnika Poissona w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:nif}. Zauwa¿onok ¿e parametr ten najmniej wp³ywa na krzywe dyspersji fal Lamba ze wszystkich analizowanych parametrów.
 
 \begin{figure} [h!]
 	\centering
@@ -403,7 +412,7 @@ Wp³yw wspó³czynnika Poissona w³ókien na krzywe dyspersji w zale¿noœci od k¹ta pr
 	\label{fig:nif}
 \end{figure}
 
-Wp³yw zawartoœci objêtoœciowej w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:vol}.
+Wp³yw zawartoœci objêtoœciowej w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:vol}. Jest to najistotniejszy ze wszystkich analizowanych parametrów, poniewa¿ ma najwiêkszy wp³yw na krzywe dyspersji fal Lamba. W~szczególnoœci mo¿na zauwa¿yæ bardzo du¿e zmiany krzywych dyspersji modów antysymetrycznych. Parametr ten ma nieco mniejszy wp³yw na krzywe dyspersji modów symetrycznych. 
 
 \begin{figure} [h!]
 	\centering
@@ -454,11 +463,13 @@ Wp³yw zawartoœci objêtoœciowej w³ókien na krzywe dyspersji w zale¿noœci od k¹ta 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Testowanie ró¿nych sygna³ów wzbudzenia}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Testowano sygna³y wzbudzenia typu chirp o liniowo narastaj¹cej czêstotliwoœci w przedziale 0 – 350 kHz (Rys.~\ref{fig:chirp}) oraz sygna³y sinusoidalne modulowane oknem Hanninga. W~obu przypadkach badano wp³yw czas trwania sygna³u (w przypadku sygna³u typu chirp odpowiednio 20 $\mu$s, 40 $\mu$s, 80 $\mu$s i~160 $\mu$s ( porównaj Rys.~\ref{fig:chirp}(a)--(d)), a~w~przypadku funkcji Hanninga odpowiednio 0.625 $\mu$s, 1.25 $\mu$s, 2.5 $\mu$s oraz 12.5 $\mu$s).
+
 Poni¿ej przedstawiono jakoœciowe porównanie krzywych dyspersji wyznaczonych dla badanej próbki w zale¿noœci od przyjêtych parametrów i rodzaju sygna³u wzbudzenia. Wszystkie wyniki prezentuj¹ce krzywe dyspersji zosta³y przedstawione w ten sposób, aby zakres wartoœci (kolorów) odpowiada³ przedzia³owi od 0 do 99.9 percentyla wszystkich wartoœci. Innymi s³owy, próg odciêcia górnych wartoœci zosta³ ustawiony w ten sposób, aby pomin¹æ 1 promil punktów o najwy¿szych wartoœciach.
 
 Wszystkie pomiary wykonane zosta³y na równomiernej siatce punktów 289  $\times$ 289 (poza Rys. 7b) pokrywaj¹cych ca³¹ powierzchniê badanej próbki. Obrazy krzywych dyspersji zosta³y wyznaczone przy wykorzystaniu trójwymiarowej transformacji Fouriera z dope³nieniem zerami do 1024 $\times$ 1024  $\times$ 1024 punktów. Prezentowane wyniki s¹ przekrojem uzyskanych transformat dla liczby falowej $k_x$ = 0 w~zakresie dodatnich wartoœci liczb falowych $k_y$.
 
-Zestawienie wyników uzyskanych dla wzbudzenia sygna³em typu chirp o liniowo narastaj¹cej czêstotliwoœci w przedziale 0 – 350 kHz, przy tych samych parametrach pomiarowych zmieniaj¹c jedynie czas trwania wymuszenia (pokazanego na Rys.~\ref{fig:chirp}), przedstawiono na Rys.~\ref{fig:chirp_dispersion}.
+Zestawienie wyników uzyskanych dla wzbudzenia sygna³em typu chirp o liniowo narastaj¹cej czêstotliwoœci w przedziale 0 – 350 kHz, przy tych samych parametrach pomiarowych zmieniaj¹c jedynie czas trwania wymuszenia (pokazanego na Rys.~\ref{fig:chirp}(a)--(d)), przedstawiono na Rys.~\ref{fig:chirp_dispersion}.
 
 %\begin{figure} [h!]
 %	\begin{center}
@@ -583,7 +594,7 @@ Pomiar wykonywany by³ sekwencyjnie w kolejnych punktach, dodatkowo uœredniaj¹c u
 	\label{fig:chirp_delay_dispersion}
 \end{figure}
 
-W dalszej kolejnoœci porównano wyniki uzyskane przy wzbudzeniu sygna³em typu chirp oraz funkcj¹ Hanninga. Dwa wybrane wyniki przedstawiono na Rys 5.
+W dalszej kolejnoœci porównano wyniki uzyskane przy wzbudzeniu sygna³em typu chirp oraz funkcj¹ Hanninga. Dwa wybrane wyniki przedstawiono na Rys.~\ref{fig:chirp_Hanning_dispersion}.
 \begin{figure} [h!]
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
@@ -608,7 +619,7 @@ W dalszej kolejnoœci porównano wyniki uzyskane przy wzbudzeniu sygna³em typu chi
 	\label{fig:chirp_Hanning_dispersion}
 \end{figure}
 
-Zbadano wp³yw czasu trwania sygna³u Hanninga na krzywe dyspersji, a uzyskane wyniki zestawiono na Rys. 6.
+Zbadano wp³yw czasu trwania sygna³u Hanninga na krzywe dyspersji, a uzyskane wyniki zestawiono na Rys.~\ref{fig:Hanning_time_dispersion}.
 \begin{figure} [h!]
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
@@ -653,7 +664,7 @@ Zbadano wp³yw czasu trwania sygna³u Hanninga na krzywe dyspersji, a uzyskane wyn
 	\label{fig:Hanning_time_dispersion}
 \end{figure}
 
-Kolejne badanie obejmowa³o wp³yw liczby punktów pomiarowych na jakoœæ uzyskanych krzywych dyspersji. Liczba uœrednieñ dla przedstawionych przypadków (30 uœrednieñ Rys. 7a i 10 uœrednieñ Rys. 7b.) zosta³a tak dobrana, aby czasy pomiaru by³y zbli¿one.
+Kolejne badanie obejmowa³o wp³yw liczby punktów pomiarowych na jakoœæ uzyskanych krzywych dyspersji. Liczba uœrednieñ dla przedstawionych przypadków (30 uœrednieñ Rys.~\ref{fig:Hanning_289_dispersion}  i~10 uœrednieñ Rys.~\ref{fig:Hanning_493_dispersion}.) zosta³a tak dobrana, aby czasy pomiaru by³y zbli¿one.
 
 \begin{figure} [h!]
 	\centering
@@ -679,7 +690,7 @@ Kolejne badanie obejmowa³o wp³yw liczby punktów pomiarowych na jakoœæ uzyskanych
 	\label{fig:Hanning_points_dispersion}
 \end{figure}
 
-Dla wzbudzenia funkcj¹ Hanninga równie¿ przeprowadzono badania wp³ywu amplitudy na jakoœæ uzyskanych wyników, które zestawiono na Rys. 8.
+Dla wzbudzenia funkcj¹ Hanninga równie¿ przeprowadzono badania wp³ywu amplitudy na jakoœæ uzyskanych wyników, które zestawiono na Rys.~\ref{fig:Hanning_voltage_dispersion}.
 
 \begin{figure} [h!]
 	\centering
@@ -724,12 +735,32 @@ Dla wzbudzenia funkcj¹ Hanninga równie¿ przeprowadzono badania wp³ywu amplitudy 
 	\caption{Krzywe dyspersji wyznaczone dla wzbudzenia funkcj¹ Hanninga o czasie trwania 1.25 $\mu$s i amplitudzie: (a) 50 V, (b) 100 V, (c) 150 V, (d) 200 V.} 
 	\label{fig:Hanning_voltage_dispersion}
 \end{figure}
-
+Z~powy¿szych testów eksperymentalnych mo¿na wywnioskowaæ, ¿e rodzaj szerokopasmowego sygna³u wzbudzenia nie ma du¿ego wp³ywu na jakoœæ uzyskiwanych krzywych dyspresji. Jedynie wiêksza liczba uœrednieñ poprawia stosunek sygna³u do szumu. Zbyt d³ugi czas trwania sygna³u wzbudzenia funkcj¹ Hanninga powoduje ograniczenie zakresu wzbudzanych czêstotliwoœci. Stosunkowo dobrej jakoœci krzywe dyspersji otrzymano dla funkcji Hanninga o czasie trwania 2.5 $\mu$s. Dlatego dalsze wyniki badañ przedstawiono w³aœnie dla tego rodzaju sygna³u.
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Porównanie wyników numerycznych i eksperymentalnych}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Porównanie eksperymentalnych i numerycznych krzywych dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:numexp0}--\ref{fig:numexp90}.
+Krzywe dyspersji uzyskane za pomoc¹ modelu pó³--analitycznego porównywano z~krzywymi dyspersji uzyskanymi eksperymentalnie. W~szczególnoœci przeszukiwano przedzia³ zmiennoœci modu³u Younga w³ókien $E_f \pm20$\% oraz zawartoœci objêtoœciowej w³ókien $V\pm$20\%. Przeszukiwanie zaimplementowano w~formie dwóch pêtli po 11 przypadków ka¿dy, co daje w~sumie 121 symulacji numerycznych. Jest to siatkowy algorytm wyszukiwania (z~ang. \textit{grid search algorithm})~w procesie optymalizacji. W³aœciwoœci materia³owe, dla których ró¿nice pomiêdzy modelem a~wynikami eksperymentalnymi by³y minimalne,  zestawiono w~Tabeli~\ref{tab:matprop2}.
+\begin{table}[h]
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
+	\caption{Wartoœci sta³ych materia³owych sk³adników kompozytu uzyskane iteracyjnie.}
+	%\begin{tabular}{@{}ccccccc@{}} % remove spaces from vertical lines
+	\begin{tabular}{ccccccc} 
+		%\hline
+		\toprule
+		\multicolumn{3}{c}{\textbf{Matryca} }	& \multicolumn{3}{c}{\textbf{W³ókna} } & \textbf{Zawartoœæ w³ókien}	 \\ 
+		\midrule
+		$\rho_m$ & $E_m$ & $\nu_m$  & $\rho_f$ & $E_f$ & $\nu_f$ & $V$\\
+		kg/m\textsuperscript{3} &GPa& --  & kg/m\textsuperscript{3}  & GPa& -- & \%\\ 
+		\cmidrule(lr){1-3} \cmidrule(lr){4-6} \cmidrule(lr){7-7}
+		1250 &3.43& 0.35& 1900 &\textbf{211.1} & 0.2 & \textbf{44}\\
+		\bottomrule 
+	\end{tabular} 
+	\label{tab:matprop2}
+\end{table}
+
+Porównanie eksperymentalnych i numerycznych krzywych dyspersji w zale¿noœci od k¹ta propagacji fal Lamba przedstawiono na Rys.~\ref{fig:numexp0}--\ref{fig:numexp90}. Mo¿na zaobserwowaæ dobr¹ zgodnoœæ wyników dla k¹tów propagacji fal 0$^{\circ}$,  30$^{\circ}$ i~45$^{\circ}$. Dla k¹ta  90$^{\circ}$ dopasowanie modelu do eksperymentalych krzywych dyspersji modu antysymetrycznego jest znacznie gorsze.
 
 \begin{figure} [h!]
 		\centering
@@ -762,11 +793,11 @@ Porównanie eksperymentalnych i numerycznych krzywych dyspersji w zale¿noœci od k
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Podsumowanie}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Przeprowadzone symulacje numeryczne MES wykorzystane zostan¹ na etapie przygotowania próbek do badañ laboratoryjnych. Uzyskane wyniki uwzglêdnione zostan¹ przy wyborze rozmieszczenia i konfiguracji czujników FBG.
+Przeprowadzone symulacje numeryczne i~badania eksperymentalne œwiadcz¹ o~tym, ¿e krzywe dyspersji fal Lamba mog¹ zostaæ wykorzystane do szacowania w³aœciwoœci mechanicznych laminatów kompozytowych. Wykazano, ¿e niektóre w³aœciwoœci materia³owe, takie jak zawartoœæ objêtoœciowa w³ókien, maj¹ bardzo du¿y wp³yw na zmiany krzywych dyspersji fal Lamba. Krzywe dyspersji fal Lamba zale¿¹ od k¹ta propagacji fal Lamba. Szczególnie widoczna jest zmiana przebiegu krzywej dyspersji modu œcinaj¹cego w~zale¿noœci od k¹ta propagacji. Mod ten zaobserwowano w wynikach eksperymentalnych dla k¹ta 30$^{\circ}$. W~mniejszym stopniu wraz z k¹tem propagacji zmienia siê kszta³t krzywej dyspersji modu S0 i~A0.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Podziêkowania}
-Badania zosta³y przeprowadzone w ramach mini grantu ufundowanego przez Dyrektora Instytutu Maszyn Przep³ywowych.
+Badania zosta³y przeprowadzone w ramach mini grantu ufundowanego przez Dyrektora Instytutu Maszyn Przep³ywowych. W~obliczeniach korzystano z~licencji sieciowych programu Matlab udostêpnionych przez Centrum Informatyczne Trójmiejskiej Akademickiej Sieci Komputerowej (CI TASK).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\bibliographystyle{plain}
 %\bibliographystyle{unsrt}
