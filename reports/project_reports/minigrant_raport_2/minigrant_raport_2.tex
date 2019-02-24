@@ -17,16 +17,22 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{amsmath}
-% matrix command (bold upright)
-\newcommand{\matr}[1]{\mathbf{#1}} % undergraduate algebra version
+\usepackage{hyperref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% matrix command 
+\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
 %\newcommand{\matr}[1]{#1}          % pure math version
 %\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
-% vector command (bold upright)
-\newcommand{\vect}[1]{\mathbf{#1}} % undergraduate algebra version
+% vector command 
+\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% derivative upright command
+\DeclareRobustCommand*{\drv}{\mathop{}\!\mathrm{d}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{\textbf{Studia parametryczne krzywych dyspersji\\ uzyskane metod¹ pó³-analityczn¹\\ i ich porównanie z wynikami eksperymentalnymi\\} 
+\title{\textbf{Studia parametryczne krzywych dyspersji\\ uzyskanych metod¹ pó³-analityczn¹\\ i ich porównanie z wynikami eksperymentalnymi\\} 
 \vspace{1cm}\normalsize{W ramach projektu pt.: \\ \vspace{6pt}  \textit{Identyfikacja sta³ych sprê¿ystych laminatów kompozytowych\\ poprzez wykorzystanie zjawiska fal Lamba  i metod optymalizacji\\}
 \vspace{6pt} Mini grant FBW26}}
 	
@@ -93,13 +99,13 @@ Równanie~\ref{eq:eig_dispersion} mo¿na rozwi¹zaæ numerycznie na dwa sposoby:
 	\item  jako standardowy problem w³asny $\omega (k)$ (zak³adaj¹c rzeczywiste wartoœci liczb falowych $k$)
 	\item jako wielomianowy problem w³asny drugiego rzêdu $k(\omega)$ dla danych czêstotliwoœci $\omega$.
 \end{itemize}
-W drugim przypadku konieczne jest zlinearyzowanie równania co wymaga dwukrotnego zwiêkszenia rozmiaru uk³adu równañ. Otrzymane liczby falowe maj¹ wówczas charakter zespolony. Dziêki temu mo¿na uzyskaæ informacje zarówno o dyspersji fal (czêœæ rzeczywista liczb falowych) jak i~t³umieniu fal (czêœæ urojona liczb falowych).  Z~uwagi jednak, na fakt, ¿e priorytetem jest czas obliczeñ oraz to, ¿e informacja o t³umieniu fal nie jest konieczna, preferowane jest rozwi¹zanie standardowego problemu w³asnego  $\omega (k)$.
+W drugim przypadku konieczna jest linearyzacja równania, co wymaga dwukrotnego zwiêkszenia rozmiaru uk³adu równañ. Otrzymane liczby falowe maj¹ wówczas charakter zespolony. Dziêki temu mo¿na uzyskaæ informacje zarówno o dyspersji fal (czêœæ rzeczywista liczb falowych), jak i~t³umieniu fal (czêœæ urojona liczb falowych).  Z~uwagi jednak, na fakt, ¿e priorytetem jest czas obliczeñ oraz to, ¿e informacja o t³umieniu fal nie jest konieczna, preferowane jest rozwi¹zanie standardowego problemu w³asnego  $\omega (k)$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{figure} [h!]
 %	\begin{center}
 %		\begin{tabular}{c} 
-%		\includegraphics[width=7cm]{SASE/SASE2_out/angle_0_param_dispersion_curves.png}
-%		\includegraphics[width=7cm]{SASE/SASE2_out/angle_30_param_dispersion_curves.png}\\	
+%		\includegraphics[width=7cm]{SASE/SASE2_out/\modelname_angle_0_param_dispersion_curves.png}
+%		\includegraphics[width=7cm]{SASE/SASE2_out/\modelname_angle_30_param_dispersion_curves.png}\\	
 %			\hspace{0.2cm} {\footnotesize (a)} \hspace{7cm} {\footnotesize (b)}
 %			\end{tabular}
 %	\end{center}
@@ -139,13 +145,14 @@ Jak by³o wspomniane w Raporcie nr 1, ¿eby zminimalizowaæ liczbê sta³ych sprê¿yst
 Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:rhom}. Parametr ten ma umiarkowany wp³yw na ka¿dy mod fal Lamba.
 
 \begin{figure} [h!]
+	\newcommand{\modelname}{SASE2}
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		 \centering
 		 % size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_0_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE2_out/angle_0_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhom0}
 	\end{subfigure}
@@ -153,18 +160,18 @@ Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_30_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE2_out/angle_30_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhom30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_45_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE2_out/angle_45_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhom45}
 	\end{subfigure}
@@ -172,9 +179,9 @@ Wp³yw gêstoœci matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE2_out/angle_90_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE2_out/angle_90_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhom90}
 \end{subfigure}
@@ -186,12 +193,13 @@ Wp³yw gêstoœci w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na
 
 \begin{figure} [h!]
 	\centering
+	\newcommand{\modelname}{SASE3}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_0_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE3_out/angle_0_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhof0}
 	\end{subfigure}
@@ -199,18 +207,18 @@ Wp³yw gêstoœci w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_30_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE3_out/angle_30_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhof30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_45_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE3_out/angle_45_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhof45}
 	\end{subfigure}
@@ -218,9 +226,9 @@ Wp³yw gêstoœci w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE3_out/angle_90_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE3_out/angle_90_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:rhof90}
 	\end{subfigure}
@@ -232,12 +240,13 @@ Wp³yw modu³u Younga matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawio
 
 \begin{figure} [h!]
 	\centering
+	\newcommand{\modelname}{SASE4}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_0_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE4_out/angle_0_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:em0}
 	\end{subfigure}
@@ -245,18 +254,18 @@ Wp³yw modu³u Younga matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawio
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_30_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE4_out/angle_30_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:em30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_45_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE4_out/angle_45_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:em45}
 	\end{subfigure}
@@ -264,9 +273,9 @@ Wp³yw modu³u Younga matrycy na krzywe dyspersji w zale¿noœci od k¹ta przedstawio
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE4_out/angle_90_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE4_out/angle_90_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:em90}
 	\end{subfigure}
@@ -278,12 +287,13 @@ Wp³yw modu³u Younga w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawio
 
 \begin{figure} [h!]
 	\centering
+	\newcommand{\modelname}{SASE5}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_0_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE5_out/angle_0_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:ef0}
 	\end{subfigure}
@@ -291,18 +301,18 @@ Wp³yw modu³u Younga w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawio
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_30_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE5_out/angle_30_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:ef30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_45_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE5_out/angle_45_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:ef45}
 	\end{subfigure}
@@ -310,9 +320,9 @@ Wp³yw modu³u Younga w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawio
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE5_out/angle_90_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE5_out/angle_90_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:ef90}
 	\end{subfigure}
@@ -324,12 +334,13 @@ Wp³yw wspó³czynnika Poissona matrycy na krzywe dyspersji w zale¿noœci od k¹ta pr
 
 \begin{figure} [h!]
 	\centering
+	\newcommand{\modelname}{SASE6}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_0_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE6_out/angle_0_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nim0}
 	\end{subfigure}
@@ -337,18 +348,18 @@ Wp³yw wspó³czynnika Poissona matrycy na krzywe dyspersji w zale¿noœci od k¹ta pr
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_30_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE6_out/angle_30_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nim30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_45_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE6_out/angle_45_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nim45}
 	\end{subfigure}
@@ -356,9 +367,9 @@ Wp³yw wspó³czynnika Poissona matrycy na krzywe dyspersji w zale¿noœci od k¹ta pr
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE6_out/angle_90_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE6_out/angle_90_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nim90}
 	\end{subfigure}
@@ -366,16 +377,17 @@ Wp³yw wspó³czynnika Poissona matrycy na krzywe dyspersji w zale¿noœci od k¹ta pr
 	\label{fig:nim}
 \end{figure}
 
-Wp³yw wspó³czynnika Poissona w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:nif}. Zauwa¿onok ¿e parametr ten najmniej wp³ywa na krzywe dyspersji fal Lamba ze wszystkich analizowanych parametrów.
+Wp³yw wspó³czynnika Poissona w³ókien na krzywe dyspersji w zale¿noœci od k¹ta przedstawiono na Rys.~\ref{fig:nif}. Zauwa¿ono, ¿e parametr ten najmniej wp³ywa na krzywe dyspersji fal Lamba ze wszystkich analizowanych parametrów.
 
 \begin{figure} [h!]
 	\centering
+	\newcommand{\modelname}{SASE7}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_0_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE7_out/angle_0_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nif0}
 	\end{subfigure}
@@ -383,18 +395,18 @@ Wp³yw wspó³czynnika Poissona w³ókien na krzywe dyspersji w zale¿noœci od k¹ta pr
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_30_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE7_out/angle_30_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nif30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_45_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE7_out/angle_45_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nif45}
 	\end{subfigure}
@@ -402,9 +414,9 @@ Wp³yw wspó³czynnika Poissona w³ókien na krzywe dyspersji w zale¿noœci od k¹ta pr
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE7_out/angle_90_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE7_out/angle_90_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:nif90}
 	\end{subfigure}
@@ -416,12 +428,13 @@ Wp³yw zawartoœci objêtoœciowej w³ókien na krzywe dyspersji w zale¿noœci od k¹ta 
 
 \begin{figure} [h!]
 	\centering
+	\newcommand{\modelname}{SASE8}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_0_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE8_out/angle_0_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:vol0}
 	\end{subfigure}
@@ -429,18 +442,18 @@ Wp³yw zawartoœci objêtoœciowej w³ókien na krzywe dyspersji w zale¿noœci od k¹ta 
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_30_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE8_out/angle_30_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:vol30}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_45_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE8_out/angle_45_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:vol45}
 	\end{subfigure}
@@ -448,9 +461,9 @@ Wp³yw zawartoœci objêtoœciowej w³ókien na krzywe dyspersji w zale¿noœci od k¹ta 
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
-		%\includegraphics[width=\textwidth]{SASE/SASE8_out/angle_90_param_dispersion_curves.png}
+		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		% size 100%
-		\includegraphics[]{SASE/SASE8_out/angle_90_param_dispersion_curves.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 		\caption{}
 		\label{fig:vol90}
 	\end{subfigure}
@@ -735,7 +748,7 @@ Dla wzbudzenia funkcj¹ Hanninga równie¿ przeprowadzono badania wp³ywu amplitudy 
 	\caption{Krzywe dyspersji wyznaczone dla wzbudzenia funkcj¹ Hanninga o czasie trwania 1.25 $\mu$s i amplitudzie: (a) 50 V, (b) 100 V, (c) 150 V, (d) 200 V.} 
 	\label{fig:Hanning_voltage_dispersion}
 \end{figure}
-Z~powy¿szych testów eksperymentalnych mo¿na wywnioskowaæ, ¿e rodzaj szerokopasmowego sygna³u wzbudzenia nie ma du¿ego wp³ywu na jakoœæ uzyskiwanych krzywych dyspresji. Jedynie wiêksza liczba uœrednieñ poprawia stosunek sygna³u do szumu. Zbyt d³ugi czas trwania sygna³u wzbudzenia funkcj¹ Hanninga powoduje ograniczenie zakresu wzbudzanych czêstotliwoœci. Stosunkowo dobrej jakoœci krzywe dyspersji otrzymano dla funkcji Hanninga o czasie trwania 2.5 $\mu$s. Dlatego dalsze wyniki badañ przedstawiono w³aœnie dla tego rodzaju sygna³u.
+Z~powy¿szych testów eksperymentalnych mo¿na wywnioskowaæ, ¿e rodzaj szerokopasmowego sygna³u wzbudzenia nie ma du¿ego wp³ywu na jakoœæ uzyskiwanych krzywych dyspersji. Jedynie wiêksza liczba uœrednieñ poprawia stosunek sygna³u do szumu. Zbyt d³ugi czas trwania sygna³u wzbudzenia funkcj¹ Hanninga powoduje ograniczenie zakresu wzbudzanych czêstotliwoœci. Stosunkowo dobrej jakoœci krzywe dyspersji otrzymano dla funkcji Hanninga o czasie trwania 2.5 $\mu$s. Dlatego dalsze wyniki badañ przedstawiono w³aœnie dla tego rodzaju sygna³u.
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Porównanie wyników numerycznych i eksperymentalnych}
@@ -744,7 +757,7 @@ Krzywe dyspersji uzyskane za pomoc¹ modelu pó³--analitycznego porównywano z~krzy
 \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
-	\caption{Wartoœci sta³ych materia³owych sk³adników kompozytu uzyskane iteracyjnie.}
+	\caption{Wartoœci sta³ych materia³owych sk³adników kompozytu uzyskane w~sposób iteracyjny.}
 	%\begin{tabular}{@{}ccccccc@{}} % remove spaces from vertical lines
 	\begin{tabular}{ccccccc} 
 		%\hline
@@ -760,32 +773,32 @@ Krzywe dyspersji uzyskane za pomoc¹ modelu pó³--analitycznego porównywano z~krzy
 	\label{tab:matprop2}
 \end{table}
 
-Porównanie eksperymentalnych i numerycznych krzywych dyspersji w zale¿noœci od k¹ta propagacji fal Lamba przedstawiono na Rys.~\ref{fig:numexp0}--\ref{fig:numexp90}. Mo¿na zaobserwowaæ dobr¹ zgodnoœæ wyników dla k¹tów propagacji fal 0$^{\circ}$,  30$^{\circ}$ i~45$^{\circ}$. Dla k¹ta  90$^{\circ}$ dopasowanie modelu do eksperymentalych krzywych dyspersji modu antysymetrycznego jest znacznie gorsze.
-
+Porównanie eksperymentalnych i numerycznych krzywych dyspersji w zale¿noœci od k¹ta propagacji fal Lamba przedstawiono na Rys.~\ref{fig:numexp0}--\ref{fig:numexp90}. Mo¿na zaobserwowaæ dobr¹ zgodnoœæ wyników dla k¹tów propagacji fal 0$^{\circ}$,  30$^{\circ}$ i~45$^{\circ}$. Dla k¹ta  90$^{\circ}$ dopasowanie modelu do eksperymentalnych krzywych dyspersji modu antysymetrycznego jest znacznie gorsze.
+\newcommand{\modelname}{SASE1}
 \begin{figure} [h!]
 		\centering
-		\includegraphics[]{SASE/SASE1_out/25_angle_0_num_exp_dispersion.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_25_angle_0_num_exp_dispersion.png}
 		\caption{Porównanie eksperymentalnych i numerycznych krzywych dyspersji dla k¹ta propagacji fal 0$^{\circ}$.}
 		\label{fig:numexp0}
 \end{figure}
 
 \begin{figure}[h!]
 		\centering
-		\includegraphics[]{SASE/SASE1_out/25_angle_30_num_exp_dispersion.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_25_angle_30_num_exp_dispersion.png}
 		\caption{Porównanie eksperymentalnych i numerycznych krzywych dyspersji dla k¹ta propagacji fal 30$^{\circ}$.}
 		\label{fig:numexp30}
 \end{figure}
 
 \begin{figure}[h!]
 		\centering
-		\includegraphics[]{SASE/SASE1_out/25_angle_45_num_exp_dispersion.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_25_angle_45_num_exp_dispersion.png}
 		\caption{Porównanie eksperymentalnych i numerycznych krzywych dyspersji dla k¹ta propagacji fal 45$^{\circ}$.}
 		\label{fig:numexp45}
 \end{figure}
 	
 \begin{figure}[h!]
 		\centering
-		\includegraphics[]{SASE/SASE1_out/25_angle_90_num_exp_dispersion.png}
+		\includegraphics[]{SASE/\modelname_out/\modelname_25_angle_90_num_exp_dispersion.png}
 		\caption{Porównanie eksperymentalnych i numerycznych krzywych dyspersji dla k¹ta propagacji fal 90$^{\circ}$.} 
 		\label{fig:numexp90}
 \end{figure}

@@ -43,7 +43,7 @@ fprintf('Making figures: %s\n', modelname);
 alpha = [0.5,0.5,0.5,0.5,0.5,0,0.5,0.5,0.5,0.5,0.5];
 for j=1:number_of_angles % beta
    
-    figfilename = ['angle_',num2str(beta(j)),'_param_dispersion_curves'];
+    figfilename = [modelname,'_','angle_',num2str(beta(j)),'_param_dispersion_curves'];
     if(overwrite||(~overwrite && ~exist([output_path,figfilename,'.png'], 'file')))
         %% START PLOTTING
         fprintf('Making figure: [%d/%d]\n', j,number_of_angles);

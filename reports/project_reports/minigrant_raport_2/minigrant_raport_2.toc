@@ -1,7 +1,7 @@
-\contentsline {section}{\numberline {1}Wprowadzenie}{3}% 
-\contentsline {subsection}{\numberline {1.1}Cel i zakres prac}{3}% 
-\contentsline {section}{\numberline {2}Model p\'o\IeC {\l }--analityczny}{3}% 
-\contentsline {section}{\numberline {3}Studia parametryczne krzywych dyspersji}{4}% 
-\contentsline {section}{\numberline {4}Testowanie r\'o\.znych sygna\IeC {\l }\'ow wzbudzenia}{12}% 
-\contentsline {section}{\numberline {5}Por\'ownanie wynik\'ow numerycznych i eksperymentalnych}{18}% 
-\contentsline {section}{\numberline {6}Podsumowanie}{21}% 
+\contentsline {section}{\numberline {1}Wprowadzenie}{3}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}Cel i zakres prac}{3}{subsection.1.1}% 
+\contentsline {section}{\numberline {2}Model p\'o\IeC {\l }--analityczny}{3}{section.2}% 
+\contentsline {section}{\numberline {3}Studia parametryczne krzywych dyspersji}{4}{section.3}% 
+\contentsline {section}{\numberline {4}Testowanie r\'o\.znych sygna\IeC {\l }\'ow wzbudzenia}{12}{section.4}% 
+\contentsline {section}{\numberline {5}Por\'ownanie wynik\'ow numerycznych i eksperymentalnych}{18}{section.5}% 
+\contentsline {section}{\numberline {6}Podsumowanie}{21}{section.6}% 

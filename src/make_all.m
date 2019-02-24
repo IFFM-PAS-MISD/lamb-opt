@@ -94,3 +94,9 @@ plot_num_exp_dispersion_SASE9;
 % plot and make figure for num dispersion curves on top of experimental results
 % for simulated pzt distrubution (17x17 points)
 plot_num_exp_dispersion_SASE10;
+
+% plot experimental dispersion curves for various excitation signals
+plot_exp_dispersion;
+
+% plot chirp signals for reports and presentations
+plot_chirp_signals;

@@ -53,7 +53,7 @@ end
 fvec = linspace(0,fmax,number_of_frequency_points);
 beta=0:90/(number_of_angles-1):90; 
 for j=1:number_of_angles % beta
-    figfilename = [num2str(test_case),'_angle_',num2str(beta(j)),'_num_exp_dispersion'];
+    figfilename = [modelname,'_',num2str(test_case),'_angle_',num2str(beta(j)),'_num_exp_dispersion'];
     if(overwrite||(~overwrite && ~exist([output_path,figfilename,'.png'], 'file')))
         %% START PLOTTING
         fprintf('Making figure: [%d/%d]\n', j,number_of_angles);
