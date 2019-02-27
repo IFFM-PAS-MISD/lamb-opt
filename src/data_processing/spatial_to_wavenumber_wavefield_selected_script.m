@@ -59,7 +59,7 @@ for k = test_case
     % check if already exist
     if(overwrite||(~overwrite && ~exist([interim_data_path,processed_filename,'.mat'], 'file')))
         try 
-            % load interim experimental data file
+            % load raw experimental data file
             disp('loading data');
             load([raw_data_path,filename]); % Data Length Width time
             %% PROCESS DATA

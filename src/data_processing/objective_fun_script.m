@@ -1,4 +1,4 @@
-% call objective_fun for test cases calculated in SASE1
+% call objective_fun for test cases calculated in SASE models
 
 clear all; close all;
 

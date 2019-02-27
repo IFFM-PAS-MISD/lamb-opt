@@ -1,7 +1,7 @@
-\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
-%\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9
+%\documentclass[10pt]{beamer} % aspect ratio 4:3, 128 mm by 96 mm
+\documentclass[10pt,aspectratio=169]{beamer} % aspect ratio 16:9
 \graphicspath{{../../figures/}}
-%\includeonlyframes{frameone,frametwo}
+%\includeonlyframes{framezero,frameone,frametwo,framethree}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -103,13 +103,13 @@
 %\begin{columns}[b,onlytextwidth]
 %	\column{0.39\textwidth}
 %		\centering 
-%		\includegraphics[width=\textwidth,height=0.85cm,keepaspectratio]{../images/logo/logo_eng_40mm.eps}
+%		\includegraphics[width=\mywidth,height=0.85cm,keepaspectratio]{../images/logo/logo_eng_40mm.eps}
 %	\column{0.3\textwidth}
 %		\centering 
-%		\includegraphics[width=\textwidth,height=0.85cm,keepaspectratio]{../images/logo/logo_box.eps}
+%		\includegraphics[width=\mywidth,height=0.85cm,keepaspectratio]{../images/logo/logo_box.eps}
 %	\column{0.3\textwidth}
 %		\centering 
-%		\includegraphics[width=\textwidth,height=0.85cm,keepaspectratio]{../images/logo/logo_box2.eps}
+%		\includegraphics[width=\mywidth,height=0.85cm,keepaspectratio]{../images/logo/logo_box2.eps}
 %\end{columns}
 %}
 %\makeatletter
@@ -165,10 +165,10 @@
 %	\begin{columns}[b,onlytextwidth]
 %		\column{0.5\textwidth}
 %		\centering 
-%		\includegraphics[width=\textwidth,height=0.85cm,keepaspectratio]{../images/logo/logo_eng_40mm.eps}
+%		\includegraphics[width=\mywidth,height=0.85cm,keepaspectratio]{../images/logo/logo_eng_40mm.eps}
 %		\column{0.5\textwidth}
 %		\centering 
-%		\includegraphics[width=\textwidth,height=0.85cm,keepaspectratio]{../images/logo/logo_box.eps}
+%		\includegraphics[width=\mywidth,height=0.85cm,keepaspectratio]{../images/logo/logo_box.eps}
 %	\end{columns}
 %}
 %\makeatletter
@@ -215,7 +215,20 @@
 %	\end{picture}}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\tikzexternalize % activate!
+\AtBeginDocument{%
+	%\def\myindenta{0.17\textwidth} % define myindenta variable  for correcting caption placement
+	%\def\myindenta{0.18\textwidth} % 16:9 define myindenta variable  for correcting caption placement
+	\def\myindenta{0.26\textwidth} % 4:3 define myindenta variable  for correcting caption placement
+	\def\mywidtha{0.4\textwidth}  %16:9
+	%\def\mywidtha{0.5\textwidth}  % 4:3
+	\def\myindentb{0.05\textwidth} % define myindenta variable  for correcting caption placement
+	\def\mywidthb{0.65\textwidth}  %16:9
+	%\def\mywidthb{0.86\textwidth}  % 4:3
+	\def\mywidthc{0.8\textwidth}  %16:9
+	%\def\mywidthc{\textwidth}  % 4:3
+	%\def\myindentc{0.12\textwidth} % 4:3 define myindenta variable  for correcting caption placement
+	\def\myindentc{0.23\textwidth} % 16:9 define myindenta variable  for correcting caption placement
+}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -230,7 +243,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Metropolis}
+\begin{frame}[fragile,label=framezero]{Metropolis}
 
   The \themename theme is a Beamer theme with minimal visual noise
   inspired by the \href{https://github.com/hsrmbeamertheme/hsrmbeamertheme}{\textsc{hsrm} Beamer
@@ -359,39 +372,38 @@ or show \textbf{bold} results.\end{verbatim}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{SASE dispersion curves: density influence}
-%\vspace{6pt}
-\def\myindenta{0.17\textwidth} % define myindenta variable  for correcting caption placement
+\vspace{-12pt} % 16:9
 \begin{columns}[T]
 	\column{0.5\textwidth}
 	\newcommand{\modelname}{SASE2}
 		\begin{figure}
 			\only<1>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{matrix density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{0}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{matrix density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{0}$^{\circ}$}
 			}
 			\only<2>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{matrix density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{15}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{matrix density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{15}$^{\circ}$ }
 			}
 			\only<3>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{matrix density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{30}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{matrix density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{30}$^{\circ}$ }
 			}
 		    \only<4>{
-		    	\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
-		    	\caption{\hspace{\myindenta}The influence of \alert{matrix density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{45}$^{\circ}$ }
+		    	\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
+		    	\caption{\hspace{\myindentc}The influence of \alert{matrix density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{45}$^{\circ}$ }
 		    }
 	    	\only<5>{
-	    		\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
-	    		\caption{\hspace{\myindenta}The influence of \alert{matrix density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{60}$^{\circ}$ }
+	    		\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
+	    		\caption{\hspace{\myindentc}The influence of \alert{matrix density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{60}$^{\circ}$ }
 	    	}
     		\only<6>{
-    			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
-    			\caption{\hspace{\myindenta}The influence of \alert{matrix density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{75}$^{\circ}$ }
+    			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
+    			\caption{\hspace{\myindentc}The influence of \alert{matrix density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{75}$^{\circ}$ }
     		}
     		\only<7->{
-    			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
-    			\caption{\hspace{\myindenta}The influence of \alert{matrix density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{90}$^{\circ}$ }
+    			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
+    			\caption{\hspace{\myindentc}The influence of \alert{matrix density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{90}$^{\circ}$ }
     		}
 			\label{fig:rhom}
 		\end{figure}
@@ -399,32 +411,32 @@ or show \textbf{bold} results.\end{verbatim}
 	\newcommand{\modelname}{SASE3}
 		\begin{figure}
 			\only<1>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{fibre density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{0}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{fibre density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{0}$^{\circ}$}
 			}
 			\only<2>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{fibre density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{15}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{fibre density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{15}$^{\circ}$}
 			}
 			\only<3>{
-				\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
-				\caption{\hspace{\myindenta}The influence of \alert{fibre density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{30}$^{\circ}$}
+				\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
+				\caption{\hspace{\myindentc}The influence of \alert{fibre density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{30}$^{\circ}$}
 			}
 			\only<4>{
-				\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
-				\caption{\hspace{\myindenta}The influence of \alert{fibre density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{45}$^{\circ}$}
+				\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
+				\caption{\hspace{\myindentc}The influence of \alert{fibre density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{45}$^{\circ}$}
 			}
 			\only<5>{
-				\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
-				\caption{\hspace{\myindenta}The influence of \alert{fibre density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{60}$^{\circ}$}
+				\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
+				\caption{\hspace{\myindentc}The influence of \alert{fibre density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{60}$^{\circ}$}
 			}
 			\only<6>{
-				\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
-				\caption{\hspace{\myindenta}The influence of \alert{fibre density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{75}$^{\circ}$}
+				\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
+				\caption{\hspace{\myindentc}The influence of \alert{fibre density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{75}$^{\circ}$}
 			}
 			\only<7->{
-				\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
-				\caption{\hspace{\myindenta}The influence of \alert{fibre density}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{90}$^{\circ}$}
+				\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
+				\caption{\hspace{\myindentc}The influence of \alert{fibre density}\\ \hspace{\myindentc}on dispersion curves at angle \textbf{90}$^{\circ}$}
 			}
 			\label{fig:rhof}
 		\end{figure}
@@ -437,40 +449,38 @@ or show \textbf{bold} results.\end{verbatim}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t]{SASE dispersion curves: Young modulus influence}
-%\vspace{6pt}
-\def\myindenta{0.12\textwidth} % define myindenta variable  for correcting caption placement
-
+\vspace{-12pt} % 16:9
 \begin{columns}[T]
 	\column{0.5\textwidth}
 	\newcommand{\modelname}{SASE4}
 	\begin{figure}
 		\only<1>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{0}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{0}$^{\circ}$}
 		}
 		\only<2>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{15}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{15}$^{\circ}$ }
 		}
 		\only<3>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{30}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{30}$^{\circ}$ }
 		}
 		\only<4>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{45}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{45}$^{\circ}$ }
 		}
 		\only<5>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{60}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{60}$^{\circ}$ }
 		}
 		\only<6>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{75}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{75}$^{\circ}$ }
 		}
 		\only<7->{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{90}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{90}$^{\circ}$ }
 		}
 		\label{fig:em}
 	\end{figure}
@@ -478,32 +488,32 @@ or show \textbf{bold} results.\end{verbatim}
 	\newcommand{\modelname}{SASE5}
 	\begin{figure}
 		\only<1>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{0}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{0}$^{\circ}$}
 		}
 		\only<2>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{15}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{15}$^{\circ}$}
 		}
 		\only<3>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{30}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{30}$^{\circ}$}
 		}
 		\only<4>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{45}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{45}$^{\circ}$}
 		}
 		\only<5>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{60}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{60}$^{\circ}$}
 		}
 		\only<6>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{75}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{75}$^{\circ}$}
 		}
 		\only<7->{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Young's modulus}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{90}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Young's modulus}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{90}$^{\circ}$}
 		}
 		\label{fig:ef}
 	\end{figure}
@@ -515,40 +525,39 @@ or show \textbf{bold} results.\end{verbatim}
 }
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t]{SASE dispersion curves: Poisson's ratio influence}
-%\vspace{6pt}
-\def\myindenta{0.12\textwidth} % define myindenta variable  for correcting caption placement
+\begin{frame}[t,label=framethree]{SASE dispersion curves: Poisson's ratio influence}
+\vspace{-12pt} % 16:9
 \begin{columns}[T]
 	\column{0.5\textwidth}
 	\newcommand{\modelname}{SASE6}
 	\begin{figure}
 		\only<1>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{0}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{0}$^{\circ}$}
 		}
 		\only<2>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{15}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{15}$^{\circ}$ }
 		}
 		\only<3>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{30}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{30}$^{\circ}$ }
 		}
 		\only<4>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{45}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{45}$^{\circ}$ }
 		}
 		\only<5>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{60}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{60}$^{\circ}$ }
 		}
 		\only<6>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{75}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{75}$^{\circ}$ }
 		}
 		\only<7->{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of matrix} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{90}$^{\circ}$ }
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of matrix} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{90}$^{\circ}$ }
 		}
 		\label{fig:nim}
 	\end{figure}
@@ -556,32 +565,32 @@ or show \textbf{bold} results.\end{verbatim}
 	\newcommand{\modelname}{SASE7}
 	\begin{figure}
 		\only<1>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{0}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{0}$^{\circ}$}
 		}
 		\only<2>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{15}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{15}$^{\circ}$}
 		}
 		\only<3>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{30}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{30}$^{\circ}$}
 		}
 		\only<4>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{45}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{45}$^{\circ}$}
 		}
 		\only<5>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{60}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{60}$^{\circ}$}
 		}
 		\only<6>{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{75}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{75}$^{\circ}$}
 		}
 		\only<7->{
-			\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
-			\caption{\hspace{\myindenta}The influence of \alert{Poisson's ratio}\\ \hspace{\myindenta}\alert{of fibres} on dispersion curves at\\ \hspace{\myindenta}angle \textbf{90}$^{\circ}$}
+			\includegraphics[width=\mywidthc]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
+			\caption{\hspace{\myindentc}The influence of \alert{Poisson's ratio}\\ \hspace{\myindentc}\alert{of fibres} on dispersion curves at\\ \hspace{\myindentc}angle \textbf{90}$^{\circ}$}
 		}
 		\label{fig:nif}
 	\end{figure}
@@ -594,36 +603,35 @@ or show \textbf{bold} results.\end{verbatim}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t,label=frameone]{SASE dispersion curves: volume fraction influence}
-%\vspace{6pt}
-\def\myindenta{0.18\textwidth} % define myindenta variable  for correcting caption placement
+\vspace{-12pt} % 16:9
 \newcommand{\modelname}{SASE8}
 	\begin{figure}
 		\only<1>{
-			\includegraphics[width=0.5\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
+			\includegraphics[width=\mywidtha]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves.png}
 			\caption{\hspace{\myindenta}The influence of \alert{volume fraction of reinforcing fibres}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{0}$^{\circ}$}
 		}
 		\only<2>{
-			\includegraphics[width=0.5\textwidth]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
+			\includegraphics[width=\mywidtha]{SASE/\modelname_out/\modelname_angle_15_param_dispersion_curves.png}
 			\caption{\hspace{\myindenta}The influence of \alert{volume fraction of reinforcing fibres}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{15}$^{\circ}$ }
 		}
 		\only<3>{
-			\includegraphics[width=0.5\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
+			\includegraphics[width=\mywidtha]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves.png}
 			\caption{\hspace{\myindenta}The influence of \alert{volume fraction of reinforcing fibres}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{30}$^{\circ}$ }
 		}
 		\only<4>{
-			\includegraphics[width=0.5\textwidth]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
+			\includegraphics[width=\mywidtha]{SASE/\modelname_out/\modelname_angle_45_param_dispersion_curves.png}
 			\caption{\hspace{\myindenta}The influence of \alert{volume fraction of reinforcing fibres}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{45}$^{\circ}$ }
 		}
 		\only<5>{
-			\includegraphics[width=0.5\textwidth]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
+			\includegraphics[width=\mywidtha]{SASE/\modelname_out/\modelname_angle_60_param_dispersion_curves.png}
 			\caption{\hspace{\myindenta}The influence of \alert{volume fraction of reinforcing fibres}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{60}$^{\circ}$ }
 		}
 		\only<6>{
-			\includegraphics[width=0.5\textwidth]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
+			\includegraphics[width=\mywidtha]{SASE/\modelname_out/\modelname_angle_75_param_dispersion_curves.png}
 			\caption{\hspace{\myindenta}The influence of \alert{volume fraction of reinforcing fibres}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{75}$^{\circ}$ }
 		}
 		\only<7->{
-			\includegraphics[width=0.5\textwidth]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
+			\includegraphics[width=\mywidtha]{SASE/\modelname_out/\modelname_angle_90_param_dispersion_curves.png}
 			\caption{\hspace{\myindenta}The influence of \alert{volume fraction of reinforcing fibres}\\ \hspace{\myindenta}on dispersion curves at angle \textbf{90}$^{\circ}$ }
 		}
 		\label{fig:vol}
@@ -637,37 +645,35 @@ or show \textbf{bold} results.\end{verbatim}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t,label=frametwo]{Comparison of numerical and experimental dispersion curves}
-%\vspace{6pt}
-\def\myindenta{0.05\textwidth} % define myindenta variable  for correcting caption placement
 \newcommand{\modelname}{SASE1}
 \begin{figure}
 	\only<1>{
-		\includegraphics[width=0.86\textwidth]{SASE/\modelname_out/\modelname_25_angle_0_num_exp_dispersion.png}
-		\caption{\hspace{\myindenta}Comparison of numerical and experimental dispersion curves at angle \textbf{0}$^{\circ}$}
+		\includegraphics[width=\mywidthb]{SASE/\modelname_out/\modelname_25_angle_0_num_exp_dispersion.png}
+		\caption{\hspace{\myindentb}Comparison of numerical and experimental dispersion curves at angle \textbf{0}$^{\circ}$}
 	}
 	\only<2>{
-		\includegraphics[width=0.86\textwidth]{SASE/\modelname_out/\modelname_25_angle_15_num_exp_dispersion.png}
-		\caption{\hspace{\myindenta}Comparison of numerical and experimental dispersion curves at angle \textbf{15}$^{\circ}$ }
+		\includegraphics[width=\mywidthb]{SASE/\modelname_out/\modelname_25_angle_15_num_exp_dispersion.png}
+		\caption{\hspace{\myindentb}Comparison of numerical and experimental dispersion curves at angle \textbf{15}$^{\circ}$ }
 	}
 	\only<3>{
-		\includegraphics[width=0.86\textwidth]{SASE/\modelname_out/\modelname_25_angle_30_num_exp_dispersion.png}
-		\caption{\hspace{\myindenta}Comparison of numerical and experimental dispersion curves at angle \textbf{30}$^{\circ}$ }
+		\includegraphics[width=\mywidthb]{SASE/\modelname_out/\modelname_25_angle_30_num_exp_dispersion.png}
+		\caption{\hspace{\myindentb}Comparison of numerical and experimental dispersion curves at angle \textbf{30}$^{\circ}$ }
 	}
 	\only<4>{
-		\includegraphics[width=0.86\textwidth]{SASE/\modelname_out/\modelname_25_angle_45_num_exp_dispersion.png}
-		\caption{\hspace{\myindenta}Comparison of numerical and experimental dispersion curves at angle \textbf{45}$^{\circ}$ }
+		\includegraphics[width=\mywidthb]{SASE/\modelname_out/\modelname_25_angle_45_num_exp_dispersion.png}
+		\caption{\hspace{\myindentb}Comparison of numerical and experimental dispersion curves at angle \textbf{45}$^{\circ}$ }
 	}
 	\only<5>{
-		\includegraphics[width=0.86\textwidth]{SASE/\modelname_out/\modelname_25_angle_60_num_exp_dispersion.png}
-		\caption{\hspace{\myindenta}Comparison of numerical and experimental dispersion curves at angle \textbf{60}$^{\circ}$ }
+		\includegraphics[width=\mywidthb]{SASE/\modelname_out/\modelname_25_angle_60_num_exp_dispersion.png}
+		\caption{\hspace{\myindentb}Comparison of numerical and experimental dispersion curves at angle \textbf{60}$^{\circ}$ }
 	}
 	\only<6>{
-		\includegraphics[width=0.86\textwidth]{SASE/\modelname_out/\modelname_25_angle_75_num_exp_dispersion.png}
-		\caption{\hspace{\myindenta}Comparison of numerical and experimental dispersion curves at angle \textbf{75}$^{\circ}$ }
+		\includegraphics[width=\mywidthb]{SASE/\modelname_out/\modelname_25_angle_75_num_exp_dispersion.png}
+		\caption{\hspace{\myindentb}Comparison of numerical and experimental dispersion curves at angle \textbf{75}$^{\circ}$ }
 	}
 	\only<7>{
-		\includegraphics[width=0.86\textwidth]{SASE/\modelname_out/\modelname_25_angle_90_num_exp_dispersion.png}
-		\caption{\hspace{\myindenta}Comparison of numerical and experimental dispersion curves at angle \textbf{90}$^{\circ}$ }
+		\includegraphics[width=\mywidthb]{SASE/\modelname_out/\modelname_25_angle_90_num_exp_dispersion.png}
+		\caption{\hspace{\myindentb}Comparison of numerical and experimental dispersion curves at angle \textbf{90}$^{\circ}$ }
 	}
 	\label{fig:numexp}
 \end{figure}

@@ -11,6 +11,10 @@ spatial_to_wavenumber_wavefield_selected_script;
 % processing of all files in interm exp folder
 cartesian_to_polar_wavefield_script;
 
+% transformation of wave field
+% from cartesian to polar
+% of selected file '289x289p_HANN100_x30_10Vpp_200Hz'
+
 %% modelling
 % semi analytical spectral element (SASE) model dispersion curves 
 % grid search over volume fractions and Young modulus of fibres
@@ -100,3 +104,4 @@ plot_exp_dispersion;
 
 % plot chirp signals for reports and presentations
 plot_chirp_signals;
+
