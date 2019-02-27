@@ -30,8 +30,6 @@ function [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
 %    rho - composite density, dimensions [1, 1], Units: kg/m3 
 % Example: 
 %    [output1,output2] = compfabricprop(input1,input2,input3) 
-%    [output1,output2] = compfabricprop(input1,input2) 
-%    [output1] = compfabricprop(input1,input2,input3) 
 % 
 % Other m-files required: plain_wave.m; plainweaveproperet.m; functionalHahn.m  
 % Subfunctions: none 
