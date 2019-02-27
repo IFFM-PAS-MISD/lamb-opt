@@ -1,27 +1,26 @@
-function [Data_polar,number_of_wavenumber_points,wavenumber_max] = cartesian_to_polar_wavefield(Data,kxmax,kymax,beta)
-% CARTESIAN_TO_POLAR_WAVEFIELD   transform wavefield to polar coordinates 
+function [Data_polar,number_of_points,radius] = cartesian_to_polar_wavefield(Data,Lx,Ly,beta)
+% CARTESIAN_TO_POLAR_WAVENUMBER_WAVEFIELD   transform wavefield to polar coordinates 
 %    Data is interpolated at given angles beta 
 %    The same number of points is used for interpolation at each angle 
-%    wavenumber_max is different at each angle
+%    radius is the same at each angle
 % 
-% Syntax: [Data_polar,number_of_wavenumber_points,wavenumber_max] = cartesian_to_polar_wavefield(Data,kxmax,kymax,beta) 
+% Syntax: [Data_polar,number_of_points,radius] = cartesian_to_polar_wavenumber_wavefield(Data,Lx,Ly,beta) 
 % 
 % Inputs: 
-%    Data - Wavefield in wavenumber domain, complex double, dimensions [nPointsx, nPointsy, number_of_frequency_points], Units:  
-%    kxmax - maximal wavenumber in x direction, double, Units: rad/m 
-%    kymax - maximal wavenumber in y direction, double, Units: rad/m 
+%    Data - Wavefield in space domain, double, dimensions [nPointsx, nPointsy, number_of_time_steps], Units:  
+%    Lx - length (in x direction), double, Units: m 
+%    Ly - width (in y direction), double, Units: m 
 %    beta - list of angles in range 0:90, double, Units: deg
 % 
 % Outputs: 
-%    Data_polar - Data transformed to polar coordinates, complex double 
-%    dimensions [number_of_angles,number_of_wavenumber_points,number_of_frequency_points], Units: - 
-%    number_of_wavenumber_points - integer 
-%    wavenumber_max - list of maximum values of wavenumber for each angle,
-%    dimensions [number_of_angles ,1]
+%    Data_polar - Data transformed to polar coordinates, double 
+%    dimensions [number_of_angles,number_of_points,number_of_time_steps], Units: - 
+%    number_of_points - integer 
+%    radius - the same radius at each angle, double, Units: m
 % 
 % Example: 
-%    [Data_polar,number_of_wavenumber_points,wavenumber_max] = cartesian_to_polar_wavefield(Data,kxmax,kymax,beta) 
-%    [Data_polar,number_of_wavenumber_points,wavenumber_max] = cartesian_to_polar_wavefield(Data,kxmax,kymax,[0:15:90])  
+%    [Data_polar,number_of_points,radius] = cartesian_to_polar_wavenumber_wavefield(Data,Lx,Ly,beta) 
+%    [Data_polar,number_of_points,radius] = cartesian_to_polar_wavenumber_wavefield(Data,Lx,Ly,[0:15:90])  
 % 
 % Other m-files required: none 
 % Subfunctions: none 
@@ -41,10 +40,10 @@ b = beta*pi/180;
 number_of_angles = length(beta);
 
 %% check NAN
-[nPointsx,nPointsy,number_of_frequency_points]=size(Data); % number_of_frequency_points is equal to number_of_frequencies
+[nPointsx,nPointsy,number_of_time_steps]=size(Data); % number_of_time_steps is equal to number_of_frequencies
 % for i=1:nPointsx
 %     for j=1:nPointsy
-%         for k=1:number_of_frequency_points
+%         for k=1:number_of_time_steps
 %             if(isnan(Data(i,j,k)))
 %                 Data(i,j,k)=0;
 %             end
@@ -54,40 +53,28 @@ number_of_angles = length(beta);
 Data(isnan(Data))=0;
 %%
 % input
-lxmax=kxmax; % length
-lymax=kymax; % width
+lxmax=Lx; % length
+lymax=Ly; % width
 lxmin=0; % quarter
 lymin=0; % quarter
 % Define the resolution of the grid:
-number_of_wavenumber_points=max([nPointsx,nPointsy]); % # no of grid points for R coordinate
-if(mod(number_of_wavenumber_points,2)) % only even numbers
-    number_of_wavenumber_points=number_of_wavenumber_points-1; 
+number_of_points=max([nPointsx,nPointsy]); % # no of grid points for R coordinate
+if(mod(number_of_points,2)) % only even numbers
+    number_of_points=number_of_points-1; 
 end
 %%
 % Polar data allocation: angle, radius(wavenumbers), time(frequency)
-Data_polar=zeros(number_of_angles,number_of_wavenumber_points,number_of_frequency_points);
+Data_polar=zeros(number_of_angles,number_of_points,number_of_time_steps);
  %%
 [XI,YI] = meshgrid(linspace(lxmin,lxmax,nPointsx),linspace(lymin,lymax,nPointsy)); % due to columnwise plotting nPointsx is for x coordinates and nPointsy is for y coordinates
 X=reshape(XI,[],1);
 Y=reshape(YI,[],1);
  %% 
-wavenumber_max=zeros(number_of_angles ,1);
+radius=min(lxmax,lymax);
+x=zeros(number_of_angles,number_of_points);
+y=zeros(number_of_angles,number_of_points);
 for k=1:number_of_angles 
-    if(b(k) <= atan(lymax/lxmax))
-        wavenumber_max(k,1)=sqrt((lxmax*tan(b(k))).^2+lxmax^2);
-    else
-        wavenumber_max(k,1)=sqrt((lymax*tan(pi/2-b(k))).^2+lymax^2);
-    end
-end
-wavenumber_min = zeros(number_of_angles,1); % minimal wavenumbers [1/m]
-wavenumber_step=zeros(number_of_angles,1);
-for k=1:number_of_angles
-    wavenumber_step(k)=(wavenumber_max(k)-wavenumber_min(k))/(number_of_wavenumber_points-1); % wavenumber step [1/m]
-end
-x=zeros(number_of_angles,number_of_wavenumber_points);
-y=zeros(number_of_angles,number_of_wavenumber_points);
-for k=1:number_of_angles 
-    R=linspace(wavenumber_min(k),wavenumber_max(k),number_of_wavenumber_points);
+    R=linspace(0,radius,number_of_points);
     x(k,:) = R*cos(b(k));
     y(k,:) = R*sin(b(k));
 end
@@ -98,8 +85,8 @@ end
 
  disp('Cartesian to polar coordinates transformation and interpolation');
 % loop through time (frequency) frames
-for frame=1:number_of_frequency_points
-    [frame,number_of_frequency_points]
+for frame=1:number_of_time_steps
+    [frame,number_of_time_steps]
     ZI=Data(:,:,frame);
     Z=reshape(ZI,[],1);
     F = TriScatteredInterp(X,Y,Z,'linear');
@@ -124,4 +111,4 @@ end
 Data_polar(isnan(Data_polar))=0;
 %---------------------- END OF CODE---------------------- 
 
-% ================ [cartesian_to_polar_wavefield.m] ================  
+% ================ [cartesian_to_polar_wavenumber_wavefield.m] ================  

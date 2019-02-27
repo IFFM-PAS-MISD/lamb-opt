@@ -6,8 +6,7 @@ load project_paths projectroot src_path;
 
 % input
 % central point
-I=145;
-J=141;
+I=145; J=141;
 % analyse Data(I,J+K,:) - K points on x axis from excitation
 K=70;
 dx=0.493/288;

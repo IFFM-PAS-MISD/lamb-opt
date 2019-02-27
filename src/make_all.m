@@ -9,9 +9,9 @@ spatial_to_wavenumber_wavefield_selected_script;
 % transformation of wavenumber field
 % from cartesian to polar coordinates at selected angles
 % processing of all files in interm exp folder
-cartesian_to_polar_wavefield_script;
+cartesian_to_polar_wavenumber_wavefield_script;
 
-% transformation of wave field
+% transformation of wavefield
 % from cartesian to polar
 % of selected file '289x289p_HANN100_x30_10Vpp_200Hz'
 
