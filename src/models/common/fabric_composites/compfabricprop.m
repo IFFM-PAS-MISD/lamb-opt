@@ -33,10 +33,10 @@ function [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
 %    [output1,output2] = compfabricprop(input1,input2) 
 %    [output1] = compfabricprop(input1,input2,input3) 
 % 
-% Other m-files required: plain_wave.m; plainweaveproperet.m; functionalHahn.m  
+% Other m-files required: plain_weave.m; plainweaveproperet.m; functionalHahn.m  
 % Subfunctions: none 
 % MAT-files required: none 
-% See also: OTHER_FUNCTION_NAME1,  OTHER_FUNCTION_NAME2 
+% See also: PLAIN_WEAVE, FUNCTIONALHAHN 
 % 
 
 % Author: Piotr Fiborek, D.Sc., Eng. 
