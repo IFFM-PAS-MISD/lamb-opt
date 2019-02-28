@@ -178,7 +178,7 @@ for k = num_test_case
                 
                 line([(Nexc+1),(Nexc+w),(Nexc+w),(Nexc+1),(Nexc+1)],[smin, smin, smax,smax,smin],'Color','m');
                 title('Sum of modes 1-4');
-                obj_score = obj_score + sum(abs(sp_sum(Nexc+1:Nexc+2,1)));
+                obj_score = obj_score + sum(abs(sp_sum(Nexc+1:Nexc+w,1)));
             end
             fprintf('Processing:\n%s\n',filename);
             return;
