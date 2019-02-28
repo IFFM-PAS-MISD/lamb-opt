@@ -13,8 +13,8 @@ function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C6
 %                                          m is the number of composite layers
 %    layup - composite layup (angles of reinforcing fibres), dimensions [1, m], Units: deg 
 %    h - thickness of each layer, double, dimensions [m, 1], Units: m
-%    wavenumber_min - minimum value of wavenumber for dispersion curves,double, dimensions [number_of_angles,1], Units: 1/m
-%    wavenumber_max - maximum value of wavenumber for dispersion curves,double, dimensions [number_of_angles,1], Units: 1/m
+%    wavenumber_min - minimum value of wavenumber for dispersion curves,double, dimensions [number_of_angles,1], Units: rad/m
+%    wavenumber_max - maximum value of wavenumber for dispersion curves,double, dimensions [number_of_angles,1], Units: rad/m
 %    number_of_wavenumber_points - number of wavenumber points, integer
 %    beta - vector of wave propagation angles under analysis, double,dimensions [1,number_of_angles]
 %    stack_dir - stacking direction (1,2 or 3)
@@ -22,7 +22,7 @@ function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C6
 %    nele_layer - number of spectral elements per ply, integer, default=1
 % 
 % Outputs: 
-%    wavenumber - vector of wavenumbers, dimensions [1, number_of_wavenumber_points], Units: 1/m 
+%    wavenumber - vector of wavenumbers, dimensions [1, number_of_wavenumber_points], Units: rad/m 
 %    CG - matrix of group velocities, double, dimensions [number_of_modes,number_of_wavenumber_points,number_of_angles], Units: m/s 
 %    FREQ - matrix of frequencies, double, dimensions [number_of_modes,number_of_wavenumber_points,number_of_angles], Units: Hz 
 % 
@@ -30,7 +30,7 @@ function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C6
 %    [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer) 
 %    [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,[0,90,0,90],h,wavenumber_max,512,[0,30,60,90],1,3,1) 
 % 
-% Other m-files required: SASE_om 
+% Other m-files required: get_om 
 % Subfunctions: none 
 % MAT-files required: none 
 % See also: 

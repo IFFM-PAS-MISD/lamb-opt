@@ -1,10 +1,10 @@
 function [Data_polar,number_of_points,radius] = cartesian_to_polar_wavefield(Data,Lx,Ly,beta)
-% CARTESIAN_TO_POLAR_WAVENUMBER_WAVEFIELD   transform wavefield to polar coordinates 
+% CARTESIAN_TO_POLAR_WAVEFIELD   transform wavefield to polar coordinates 
 %    Data is interpolated at given angles beta 
 %    The same number of points is used for interpolation at each angle 
 %    radius is the same at each angle
 % 
-% Syntax: [Data_polar,number_of_points,radius] = cartesian_to_polar_wavenumber_wavefield(Data,Lx,Ly,beta) 
+% Syntax: [Data_polar,number_of_points,radius] = cartesian_to_polar_wavefield(Data,Lx,Ly,beta) 
 % 
 % Inputs: 
 %    Data - Wavefield in space domain, double, dimensions [nPointsx, nPointsy, number_of_time_steps], Units:  
@@ -19,13 +19,13 @@ function [Data_polar,number_of_points,radius] = cartesian_to_polar_wavefield(Dat
 %    radius - the same radius at each angle, double, Units: m
 % 
 % Example: 
-%    [Data_polar,number_of_points,radius] = cartesian_to_polar_wavenumber_wavefield(Data,Lx,Ly,beta) 
-%    [Data_polar,number_of_points,radius] = cartesian_to_polar_wavenumber_wavefield(Data,Lx,Ly,[0:15:90])  
+%    [Data_polar,number_of_points,radius] = cartesian_to_polar_wavefield(Data,Lx,Ly,beta) 
+%    [Data_polar,number_of_points,radius] = cartesian_to_polar_wavefield(Data,Lx,Ly,[0:15:90])  
 % 
 % Other m-files required: none 
 % Subfunctions: none 
 % MAT-files required: none 
-% See also: OTHER_FUNCTION_NAME1,  OTHER_FUNCTION_NAME2 
+% See also: 
 % 
 
 % Author: Pawel Kudela, D.Sc., Ph.D., Eng. 
@@ -111,4 +111,4 @@ end
 Data_polar(isnan(Data_polar))=0;
 %---------------------- END OF CODE---------------------- 
 
-% ================ [cartesian_to_polar_wavenumber_wavefield.m] ================  
+% ================ [cartesian_to_polar_wavefield.m] ================  

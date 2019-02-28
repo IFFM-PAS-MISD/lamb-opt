@@ -14,6 +14,10 @@ cartesian_to_polar_wavenumber_wavefield_script;
 % transformation of wavefield
 % from cartesian to polar
 % of selected file '289x289p_HANN100_x30_10Vpp_200Hz'
+cartesian_to_polar_wavefield_script;
+
+% simulated pzt signals at distance about 14 cm at angles [0:15:90]
+extract_signals_from_polar_wavefield
 
 %% modelling
 % semi analytical spectral element (SASE) model dispersion curves 
