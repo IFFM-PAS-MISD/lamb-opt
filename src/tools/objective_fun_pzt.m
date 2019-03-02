@@ -1,4 +1,4 @@
-function [obj_score] = objective_fun_pzt(time,signals,L,FREQ,wavenumber,number_of_modes_considered,w,D0,Nb)
+function [obj_score] = objective_fun_pzt(time,signals,L,CG,FREQ,wavenumber,number_of_modes_considered,w,D0,Nb)
 % OBJECTIVE_FUN_PZT   score for dispersion compensated signals
 %    dispersion curve is calculated numerically whearas signals are experimental
 % 
@@ -51,8 +51,14 @@ obj_score = 0;
 for j=1:number_of_angles
     kvec=squeeze(wavenumber(:,j)); % angle j [rd/m]
     s=squeeze(Data_padded(j,:))'; % signal for dispersion compensation
+    sp1 = zeros(length(s),1);
+    sp = zeros(length(s),1);
+    %wavenumber_step = kvec(2) - kvec(1);
+    % mode tracing is unnecessary 
+    %[~,FREQ_new] = mode_tracing_pade(CG(1:number_of_modes_considered,:,j),squeeze(FREQ(1:number_of_modes_considered,:,j)),wavenumber_step);
     for k =1:number_of_modes_considered
         fvec1=squeeze(FREQ(k,:,j))'; % mode k, angle j [Hz]
+        %fvec1=FREQ_new(k,:)'; % mode k, angle j [Hz]
 %         figure;
 %         plot(s);
 %         y=abs(fft(s));
@@ -65,17 +71,23 @@ for j=1:number_of_angles
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % interpolate on liearly equally spaced vector of frequencies
         Wavenumber1 = interp1(fvec1,kvec,freq,'linear','extrap'); 
+        [I]=find(freq<20);
+        freq(I)=0;
+        Wavenumber1(I)=0;
+        [I2]=find(Wavenumber1<0);
+        freq(I2)=0;
+        Wavenumber1(I2)=0;
         % post compensation
-        sp1(:,1) = designed_waveform(s,-L,freq,Wavenumber1,D0,Nb);
+        sp(:,1) = designed_waveform(s,-L,freq,Wavenumber1,D0,Nb);
+        sp1 = sp1 + sp;
         %figure;plot(sp1,'k');
         % draw window
 %         smax = max(sp1(:,1));
 %         smin = min(sp1(:,1));
 %         line([(Nexc+1),(Nexc+w),(Nexc+w),(Nexc+1),(Nexc+1)],[smin, smin, smax,smax,smin],'Color','m');
-%         title(['Mode ',num2str(k)]);
-        obj_score = obj_score + sum(abs(sp1(Nexc+1:Nexc+w,1)));
-        
+%         title(['Mode ',num2str(k)]);      
     end
+    obj_score = obj_score + sum(abs(sp1(Nexc+1:Nexc+w,1)));
 end
 
 %---------------------- END OF CODE---------------------- 

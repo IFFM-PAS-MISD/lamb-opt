@@ -7,9 +7,9 @@ load project_paths projectroot src_path;
 
 D0 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
 Nb=1; % Butterworth filter order, integer
-w=16; % window size in points
+w=12; % window size in points
 overwrite = true; % allow overwriting existing results if true
-number_of_modes_considered = 1; % number of modes considered in calculation of objective function score
+number_of_modes_considered = 4; % number of modes considered in calculation of objective function score
 
 % create path to the experimental processed data folder
 data_path = fullfile( projectroot, 'data','raw','exp', 'pzt', filesep );
@@ -49,7 +49,7 @@ for iModel = 1:length(modelname)
                 output_name = [model_input_path,filesep,num2str(test_case),'output'];
                 % load numerical data file
                 load(output_name); % FREQ CG wavenumber
-                [score] = objective_fun_pzt(time,signals,L,FREQ,wavenumber,number_of_modes_considered,w,D0,Nb);
+                [score] = objective_fun_pzt(time,signals(:,1:512),L,CG,FREQ,wavenumber,number_of_modes_considered,w,D0,Nb);
                 objective_fun_score(test_case,1)=score;
                 %% END DATA PROCESSING
             end

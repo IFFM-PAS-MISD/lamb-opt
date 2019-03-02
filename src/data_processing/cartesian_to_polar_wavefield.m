@@ -78,7 +78,7 @@ for k=1:number_of_angles
     x(k,:) = R*cos(b(k));
     y(k,:) = R*sin(b(k));
 end
-
+%plot(x,y,'.');
  %%
  % convert Data from Cartesian to polar coordinates
  %%

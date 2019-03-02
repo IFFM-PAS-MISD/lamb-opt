@@ -19,7 +19,7 @@ overwrite = false; % allow overwriting existing results if true
 Length = 0.493;    
 Width = 0.493;
 exp_test_case=14; % select file number from experiment for processing
-num_test_case=29;%[25]; % select file numbers from SASE model for processing
+num_test_case=121;%[25]; % select file numbers from SASE model for processing
 modelfolder = 'SASE';
 modelname = 'SASE1';
 radians = false;
@@ -62,9 +62,9 @@ list = {'101x101p_Chirp10_0-250kHz', ...                % 1
 
 disp('Dispersion compensation');
 exp_filename = list{exp_test_case};
-data_path=fullfile( projectroot, 'data','processed','exp', filesep );
+data_path=fullfile( projectroot, 'data','processed','exp',filesep );
 % filename of parameter data
-interim_filename_param = ['polar_interim_',exp_filename]; 
+interim_filename_param = ['polar_interim_',exp_filename,'_KXKYF_param']; 
 load([data_path,interim_filename_param]); % wavenumber_max fmax beta number_of_wavenumber_points
 
  % load raw experimental data file

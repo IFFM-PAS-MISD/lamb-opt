@@ -9,7 +9,7 @@ function [stt] = designed_waveform(st,L,f,Wavenumber,D0,Nb)
 %    L - compensation distance, vector of doubles, dimensions [1,M], Units: [m]
 %    f - frequency components, repeated M colums, dimensions [NFFT,M], Units: [Hz]
 %    Wavenumber - wavenumber compponents of dispersion curve wavenumber(f),
-%                 repeated M columns, double, dimensions [NFFT,M], Units: rad/s
+%                 repeated M columns, double, dimensions [NFFT,M], Units: rad/m
 %    D0 - cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
 %    Nb - Butterworth filter order, integer
 % 
