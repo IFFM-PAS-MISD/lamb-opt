@@ -8,7 +8,7 @@ clc;close all;clear all;
 % load projectroot path
 load project_paths projectroot src_path;
 % input
-overwrite = true; % allow overwriting existing results if true
+overwrite = false; % allow overwriting existing results if true
 beta = 0:15:90;
 % length and width of full wavefield area
 Length = 0.493;    

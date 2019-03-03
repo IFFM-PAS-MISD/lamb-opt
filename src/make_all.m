@@ -62,9 +62,18 @@ SASE9;
 % based on simulated pzt distribution (17x17 points)
 SASE10;
 
-% call objective_fun for test cases calculated in SASE1,SASE2
-objective_fun_script;
-
+% objective functions for full wavefield laser measurements
+% call objective_fun for test cases calculated in SASE1,SASE2,SASE9,SASE10
+objective_fun_nmodes_4_script;
+objective_fun_nmodes_3_script;
+objective_fun_nmodes_2_script;
+objective_fun_nmodes_1_script;
+% objective functions for full simulated pzt sensors based on laser measurements
+% call objective_fun_pzt for test cases calculated in SASE1
+objective_fun_pzt_nmodes_4_script;
+objective_fun_pzt_nmodes_3_script;
+objective_fun_pzt_nmodes_2_script;
+objective_fun_pzt_nmodes_1_script;
 %% visualisation
 % plot and make figure for num dispersion curves on top of experimental results
 plot_num_exp_dispersion_SASE1;

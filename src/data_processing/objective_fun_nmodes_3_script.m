@@ -6,7 +6,7 @@ clear all; close all;
 load project_paths projectroot src_path;
 
 overwrite = false; % allow overwriting existing results if true
-number_of_modes_considered = 4; % number of modes considered in calculation of objective function score
+number_of_modes_considered = 3; % number of modes considered in calculation of objective function score
 
 % create path to the experimental processed data folder
 data_path = fullfile( projectroot, 'data','processed','exp', filesep );
@@ -22,7 +22,7 @@ exp_filename = {'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF',...
                 'polar_interim_9x9p_HANN100_x30_10Vpp_200Hz_KXKYF_pzt_simul1',...
                 'polar_interim_17x17p_HANN100_x30_10Vpp_200Hz_KXKYF_pzt_simul1'}; 
 % filename of interim data
-interim_filename = 'objective_fun_score';
+interim_filename = ['objective_fun_score_nmodes_',num2str(number_of_modes_considered)];
 
 for iModel = 1:length(modelname)
     
@@ -56,6 +56,6 @@ for iModel = 1:length(modelname)
     else
         fprintf('Filename: %s for model\n%s already exist\n', interim_filename,modelname{iModel});
     end
-    % save processed data to interim (intermidiate) data folder
+        % save processed data to interim (intermidiate) data folder
         save([model_output_path,filesep,interim_filename],'objective_fun_score');
 end
