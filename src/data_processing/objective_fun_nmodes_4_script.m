@@ -50,12 +50,12 @@ for iModel = 1:length(modelname)
                 %% END DATA PROCESSING
             end
             fprintf('Model: %s successfully processed\n', modelname{iModel});
+            % save processed data to interim (intermidiate) data folder
+            save([model_output_path,filesep,interim_filename],'objective_fun_score');
         catch
             fprintf('Failed model: %s\n', modelname{iModel});
         end
     else
         fprintf('Filename: %s for model\n%s already exist\n', interim_filename,modelname{iModel});
-    end
-        % save processed data to interim (intermidiate) data folder
-        save([model_output_path,filesep,interim_filename],'objective_fun_score');
+    end  
 end
