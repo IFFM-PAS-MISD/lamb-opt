@@ -11,7 +11,7 @@ switch pallete
         PURPLE = [170,51,119];
         GREY = [187,187,187];
         COLOURS = {BLUE,RED,GREEN,YELLOW,CYAN,PURPLE,GREY};
-    case 'high-contrst'
+    case 'high-contrast'
         % RGB High-contrast qualitative colour scheme (good greyscale reproduction)
         WHITE = [255,255,255];
         YELLOW = [221,170,51];
