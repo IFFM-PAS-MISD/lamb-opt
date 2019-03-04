@@ -1,4 +1,4 @@
-% plot numerical dispersion curves on top of experimental data
+% plot numerical dispersion curves
 
 clear all; close all;
 
