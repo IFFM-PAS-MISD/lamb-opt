@@ -88,6 +88,7 @@ for j=1:number_of_angles % beta
         set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
         fig.PaperPositionMode   = 'auto';
         print([output_path,figfilename],'-dpng', '-r600'); 
+        %% END PLOTTING
     else
         fprintf('Figure: %s already exist\n', figfilename);
     end

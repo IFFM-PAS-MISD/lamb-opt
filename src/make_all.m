@@ -118,3 +118,6 @@ plot_exp_dispersion;
 % plot chirp signals for reports and presentations
 plot_chirp_signals;
 
+% plot objective function scores for SASE1 comparing laser and simulated pzt
+plot_objective_fun_score; % vibrant colour palette
+plot_objective_fun_score_high_contrast; % high-contrast palette
