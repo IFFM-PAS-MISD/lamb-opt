@@ -37,8 +37,8 @@ function [q11, q12, q13, q22, q23, q33, q44, q55, q66] = ...
 % Website: https://www.imp.gda.pl/en/research-centres/o4/o4z1/people/ 
 
 %---------------------- BEGIN CODE---------------------- 
-g12_m = e11_m/(2*(1+ni12_m)); 
-g12_f = e11_f/(2*(1+ni12_f)); g23_f = e22_f/(2*(1+ni23_f));
+g12_m = e11_m./(2*(1+ni12_m)); 
+g12_f = e11_f./(2*(1+ni12_f)); g23_f = e22_f/(2*(1+ni23_f));
 ni23_m=ni12_m;
 
 P_f = e11_f; P_m = e11_m; eta = 1;
