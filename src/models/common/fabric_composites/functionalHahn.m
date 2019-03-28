@@ -54,7 +54,7 @@ P = (P_f.*vol+eta.*P_m.*(1-vol))./(vol+eta.*(1-vol));
 g12 = 1./P;  g13 = g12;
    
 eta = (3-4.*ni12_m+g12_m./g12_f)./(4*(1-ni12_m));
-P_f = 1/g23_f;
+P_f = 1./g23_f;
 P = (P_f.*vol+eta.*P_m.*(1-vol))./(vol+eta.*(1-vol));
 g23 = 1./P;
     
@@ -64,7 +64,8 @@ P = (P_f.*vol+eta.*P_m.*(1-vol))./(vol+eta.*(1-vol));
 K_T = 1./P;
 m=1+4*K_T.*ni12.^2./e11;
 e22 = (4*K_T.*g23)./(K_T+m.*g23);
-e22(vol==0)=e11_m; e22(vol==1)=e11_f;
+if ~isempty(e22(vol==0)); e22(vol==0)=e11_m; end
+if ~isempty(e22(vol==1)); e22(vol==1)=e11_f; end
 e33 = e22;
     
 ni23 = ni23_f.*vol+ni23_m.*(1-vol).*(1+ni12_m-ni12.*(e11_m./e11))./...
