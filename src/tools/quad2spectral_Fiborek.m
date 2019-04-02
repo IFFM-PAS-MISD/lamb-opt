@@ -75,8 +75,7 @@ nodeCoordinates_int_edge = [nodeCoordinatesX_temp nodeCoordinatesY_temp nodeCoor
 [b1,~,n1] = unique(nodeCoordinates_int_edge,'first','rows');
 
 nodeCoordinates_int_edge = b1;
-unqNodes = 1:length(b1);
-elementNodes_int_edge = reshape(unqNodes(n1),4*n_int,[])';
+elementNodes_int_edge = reshape(n1,4*n_int,[])';
 
 
 % coordinates of the nodes inside the element
@@ -143,8 +142,17 @@ for ii = 1:n
 end
 spec_element_nodes = elementNodes_pl3;
 
-U = unique(n1);
-boundary_nodes = U(1==histc(n1,unique(n1))) + double(max(max(elementNodes_fem)));
+
+[~,~,n0] = unique([edgemidpointX,edgemidpointY,edgemidpointZ],'first','rows');
+U=unique(n0);
+U_vrt = U(1==histc(n0,unique(n0)));
+edge_1 = 1:n;
+edge_2 = n:n:n^2;
+edge_3 = 1+n*(n-1):n^2;
+edge_4 = 1:n:1+n*(n-1);
+elementNodes_edge = spec_element_nodes(:,[edge_1 edge_2 edge_3 edge_4]);
+boundary_nodes = unique(elementNodes_edge(reshape((repmat(ismember(n0,U_vrt),1,n))',4*n,[])'));
+
 
 
 function [edgemidpoint, edgelength] = edgegeometry(nodeCoordinates,elementNodes,dim)
