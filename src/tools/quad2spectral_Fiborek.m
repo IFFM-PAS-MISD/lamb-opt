@@ -1,4 +1,4 @@
-function [spec_element_nodes,spec_coords] = ...
+function [spec_element_nodes,spec_coords,boundary_nodes] = ...
     quad2spectral_Fiborek(elementNodes_fem,nodeCoordinates_fem,N)
 % convert quad nodes mesh into spectral element mesh 
 %    only for linear quad elements 
@@ -14,7 +14,7 @@ function [spec_element_nodes,spec_coords] = ...
 % Outputs: 
 %    spec_element_nodes - spectral elements topology (element nodes), integer, dimensions [nQuadElements,(N+1)^2]
 %    spec_coords - coordinates of spectral element nodes, integer, dimensions [nSpecNodes, 3], Units: m 
-% 
+%    boundary_nodes - all nodes lying on the boundary of the structure
 %  13    14   15   16
 %   O----O----O----O   
 %   |    |    |    |
@@ -77,7 +77,8 @@ nodeCoordinates_int_edge = [nodeCoordinatesX_temp nodeCoordinatesY_temp nodeCoor
 nodeCoordinates_int_edge = b1;
 unqNodes = 1:length(b1);
 elementNodes_int_edge = reshape(unqNodes(n1),4*n_int,[])';
- 
+
+
 % coordinates of the nodes inside the element
 elementNodes_int_int = (1:(numberElements*n_int.^2))+...
     max(max(elementNodes_int_edge));
@@ -122,7 +123,7 @@ Z_int=ones(length(X_int),1).*unique(nodeCoordinates_int_edge(:,3));
 nodeCoordinates_int_int = [X_int,Y_int,Z_int];
 
 % regular spectral nodes topology
-elementNodes_int = [elementNodes_int_edge,elementNodes_int_int]+double(max(max(elementNodes_fem)));
+elementNodes_int = [elementNodes_int_edge,elementNodes_int_int] + double(max(max(elementNodes_fem)));
 nodeCoordinates_int = [nodeCoordinates_int_edge;nodeCoordinates_int_int];
 elementNodes_sem = [elementNodes_fem,elementNodes_int];
 spec_coords = [nodeCoordinates_fem;nodeCoordinates_int];
@@ -141,6 +142,10 @@ for ii = 1:n
     end
 end
 spec_element_nodes = elementNodes_pl3;
+
+U = unique(n1);
+boundary_nodes = U(1==histc(n1,unique(n1))) + double(max(max(elementNodes_fem)));
+
 
 function [edgemidpoint, edgelength] = edgegeometry(nodeCoordinates,elementNodes,dim)
         
