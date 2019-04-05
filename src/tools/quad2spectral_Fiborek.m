@@ -112,14 +112,20 @@ C42 = reshape((nodeCoordinates_int_edge(n_el4,2)-nodeCoordinates_int_edge(n_el2,
         nodeCoordinates_int_edge(n_el4,2),[],n_int);
 C42 = sparse(iSparse,jSparse,C42');
     
-W = nonzeros(A13'*B42-B13'*A42);
-Wx = nonzeros(B13'*C42-C13'*B42);
-Wy = nonzeros(C13'*A42-A13'*C42);
-    
-X_int=reshape(Wx./W,[],1);
-Y_int=reshape(Wy./W,[],1);
-Z_int=ones(length(X_int),1).*unique(nodeCoordinates_int_edge(:,3));
-nodeCoordinates_int_int = [X_int,Y_int,Z_int];
+iSparse = repmat(1:n_int*numberElements,n_int,1);
+jSparse = repmat(reshape(repmat(1:n_int:n_int*numberElements,n_int ,1),1,[]),n_int,1) + ...
+    repmat((0:n_int-1)',1,n_int*numberElements);
+AA = sparse(iSparse,jSparse,true);
+W = (A13'*B42-B13'*A42);
+W = W(AA);
+Wx = (B13'*C42-C13'*B42);
+Wx = Wx(AA);
+Wy = (C13'*A42-A13'*C42);
+Wy = Wy(AA);
+X_int = Wx./W;
+Y_int = Wy./W;
+Z_int = ones(length(X_int),1).*unique(nodeCoordinates_int_edge(:,3));
+nodeCoordinates_int_int = full([X_int,Y_int,Z_int]);
 
 % regular spectral nodes topology
 elementNodes_int = [elementNodes_int_edge,elementNodes_int_int] + double(max(max(elementNodes_fem)));
@@ -144,12 +150,8 @@ spec_element_nodes = elementNodes_pl3;
 
 
 [~,~,n0] = unique([edgemidpointX,edgemidpointY,edgemidpointZ],'first','rows');
-U=unique(n0);
-U_vrt = U(1==histc(n0,unique(n0)));
-edge_1 = 1:n;
-edge_2 = n:n:n^2;
-edge_3 = 1+n*(n-1):n^2;
-edge_4 = 1:n:1+n*(n-1);
+U=unique(n0); U_vrt = U(1==histc(n0,unique(n0)));
+edge_1 = 1:n; edge_2 = n:n:n^2; edge_3 = 1+n*(n-1):n^2; edge_4 = 1:n:1+n*(n-1);
 elementNodes_edge = spec_element_nodes(:,[edge_1 edge_2 edge_3 edge_4]);
 boundary_nodes = unique(elementNodes_edge(reshape((repmat(ismember(n0,U_vrt),1,n))',4*n,[])'));
 
