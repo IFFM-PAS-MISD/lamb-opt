@@ -1,8 +1,10 @@
-function [I_G,I_L]=nodesMaps_Fiborek(elementNodes,numberNodes,N)
-n = N+1;
+function [I_G,I_L]=nodesMaps_Fiborek(elementNodes,n,n_z)
+numberNodes = max(max(elementNodes));
+numberElements = size(elementNodes,1);
 Psi = zeros(numberNodes,1);
 phi_E = zeros(numberNodes,12);
 phi_L = zeros(numberNodes,12);
+
 for e = 1:numberElements
     for i = 1:n^2*n_z;
         k = elementNodes(e,i);
