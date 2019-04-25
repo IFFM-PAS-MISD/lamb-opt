@@ -37,8 +37,8 @@ function [q11, q12, q13, q22, q23, q33, q44, q55, q66] = ...
 % Website: https://www.imp.gda.pl/en/research-centres/o4/o4z1/people/ 
 
 %---------------------- BEGIN CODE---------------------- 
-g12_m = e11_m./(2*(1+ni12_m)); 
-g12_f = e11_f./(2*(1+ni12_f)); g23_f = e22_f/(2*(1+ni23_f));
+g12_m = e11_m/(2*(1+ni12_m)); 
+g12_f = e11_f/(2*(1+ni12_f)); g23_f = e22_f/(2*(1+ni23_f));
 ni23_m=ni12_m;
 
 P_f = e11_f; P_m = e11_m; eta = 1;
@@ -54,7 +54,7 @@ P = (P_f.*vol+eta.*P_m.*(1-vol))./(vol+eta.*(1-vol));
 g12 = 1./P;  g13 = g12;
    
 eta = (3-4.*ni12_m+g12_m./g12_f)./(4*(1-ni12_m));
-P_f = 1./g23_f;
+P_f = 1/g23_f;
 P = (P_f.*vol+eta.*P_m.*(1-vol))./(vol+eta.*(1-vol));
 g23 = 1./P;
     
@@ -64,8 +64,7 @@ P = (P_f.*vol+eta.*P_m.*(1-vol))./(vol+eta.*(1-vol));
 K_T = 1./P;
 m=1+4*K_T.*ni12.^2./e11;
 e22 = (4*K_T.*g23)./(K_T+m.*g23);
-if ~isempty(e22(vol==0)); e22(vol==0)=e11_m; end
-if ~isempty(e22(vol==1)); e22(vol==1)=e11_f; end
+e22(vol==0)=e11_m; e22(vol==1)=e11_f;
 e33 = e22;
     
 ni23 = ni23_f.*vol+ni23_m.*(1-vol).*(1+ni12_m-ni12.*(e11_m./e11))./...
