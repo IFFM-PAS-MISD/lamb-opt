@@ -42,7 +42,8 @@ wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
 %
 %% Input for material properties
 
-run(['inputs',filesep,'input1.m']);  % initial material properties
+%run(['inputs',filesep,'input1.m']);  % initial material properties
+run(['inputs',filesep,'Fabric_1.m']);
 % rhom0 = 1250; % kg/m^3
 % rhof0 = 1900; % kg/m^3
 % em0 = 3.43e9; % Pa
@@ -54,35 +55,44 @@ run(['inputs',filesep,'input1.m']);  % initial material properties
 variation = 0.2; % parametric sweep -20% to +20% of initial parameters
 number_of_points = 11; % number of points in grid search method
 variation_range=1-variation:2*variation/(number_of_points-1):1+variation;
-layup = [0 90 0 90 90 0 90 0];
+layup = [0 0 0 0 0 0 0 0];
 %layup = [0 90 0 90 0 90 0 90];
 nlayers = length(layup);
 h = [zeros(nlayers,1)+1]* 3e-3/nlayers; % thickness of layers;
 % Stacking direction
 stack_dir = 1;
 %% grid search approach - sweep over parameters
-rhom = rhom0; % kg/m^3
-rhof = rhof0; % kg/m^3
-em = em0; % Pa
-
-nim = nim0;
-nif =  nif0; 
+%rhom = rhom0; % kg/m^3
+%rhof = rhof0; % kg/m^3
+%em = em0; % Pa
+%nim = nim0;
+%nif =  nif0; 
+ef0 = e11_f;
 test_case = 0;
+vol0 = vol_0;
 for i1=1:number_of_points % ef
-    ef = ef0*(variation_range(i1));
+    %ef = ef0*(variation_range(i1));
+    e11_f = ef0*(variation_range(i1));
+    e22_f = 0.1*e11_f;
     for i2=1:number_of_points % vol
         test_case = test_case+1;
         output_name = [model_output_path,filesep,num2str(test_case),'output'];
         if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
             fprintf([modelname,' test case: %d\n'], test_case);
-            vol = vol0 *(variation_range(i2));
+            %vol = vol0 *(variation_range(i2)); % unidirectional
+            vol_0 = vol0*(variation_range(i2)); % fabric
             %% Mechanical properties  
             % homogenization of unidirectional fibre reinforce composite
-            [rho,e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23] = homogenization(rhom,rhof,em,ef,nim,nif,vol);
+            %[rho,e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23] = homogenization(rhom,rhof,em,ef,nim,nif,vol);
             % Elastic constants of composite lamina in terms of principal material directions
-            [C11,C12,C13,C22,C23,C33,C44,C55,C66] = lamina_3D(e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23);
+            %[C11,C12,C13,C22,C23,C33,C44,C55,C66] = lamina_3D(e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23);
+            [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
+            compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0, ...
+            e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f,false);
+        
             %% SASE
-            [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
+            %[wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
+            [wavenumber,CG,FREQ] = main_SASE(rho,Q11,Q12,Q13,Q22,Q23,Q33,Q44,Q55,Q66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
 
             % identify A0 and S0 mode
             % [FREQ_A0,FREQ_S0,CG_A0,CG_S0] = identify_A0_S0_modes2(FREQ,CG);
@@ -92,7 +102,8 @@ for i1=1:number_of_points % ef
             input_name = [model_output_path,filesep,num2str(test_case),'input'];
             %save(output_name,'wavenumber','FREQ_A0','FREQ_S0','CG_A0','CG_S0');
             save(output_name,'wavenumber','FREQ','CG');
-            save(input_name,'rhom','rhof','em','ef','nim','nif','vol');
+            %save(input_name,'rhom','rhof','em','ef','nim','nif','vol');
+            save(input_name,'rho_m','rho_f','e11_m','e11_f','ni12_m','ni12_f','vol_0');
         else
             fprintf([modelname,' test case: %d already exist\n'], test_case);
         end

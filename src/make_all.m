@@ -62,6 +62,11 @@ SASE9;
 % based on simulated pzt distribution (17x17 points)
 SASE10;
 
+% semi analytical spectral element (SASE) model dispersion curves 
+% grid search over volume fractions and Young modulus of fibres
+% plain weave fabric composite
+SASE11;
+
 % objective functions for full wavefield laser measurements
 % call objective_fun for test cases calculated in SASE1,SASE2,SASE9,SASE10
 objective_fun_nmodes_4_script;
