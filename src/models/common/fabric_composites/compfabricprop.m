@@ -1,6 +1,6 @@
 function [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
     compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0, ...
-    e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f)
+    e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f,plot_weave)
 % COMPFABRICPROP   Calculation of the effective mechanical properties of fabric composite 
 %    optional: more details about the function than in the H1 line 
 %    optional: more details about the function than in the H1 line 
@@ -26,7 +26,7 @@ function [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
 %    ni12_f - fiber Poisson's ratio ni12, dimensions [1, 1], Units: -
 %    ni23_f - fiber Poisson's ratio ni23, dimensions [1, 1], Units: -
 %    rho_f - fiber density , dimensions [1, 1], Units: kg/m3
-
+%    plot_weave - plot weave geometry if true, logical, troue or false, [-]
 % 
 % Outputs: 
 %    Q11...Q66 - stiffness matrix components, integer, dimensions [m, n], Units: GPa 
@@ -62,7 +62,7 @@ function [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
     switch fiberType
         case 'plainWeave'
          [H1,H2,H3,H4, Theta_f, Theta_w, vol_fw] = plain_weave(...
-   h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0,nNodes);  
+   h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0,nNodes,plot_weave);  
         otherwise
             disp('')
     end

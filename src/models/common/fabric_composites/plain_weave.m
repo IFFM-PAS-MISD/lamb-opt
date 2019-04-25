@@ -1,6 +1,6 @@
 
 function [Hx_1,Hx_2,Hx_3,Hx_4, Theta_f, Theta_w, vol_fw] = plain_weave(...
-   h, h_f, h_w, a_f, a_w, g_f, g_w, v_f0, nNodes)
+   h, h_f, h_w, a_f, a_w, g_f, g_w, v_f0, nNodes,plot_weave)
 % COMPFABRICPROP   Geometry of plain weave 
 %    optional: more details about the function than in the H1 line 
 %    optional: more details about the function than in the H1 line 
@@ -17,6 +17,7 @@ function [Hx_1,Hx_2,Hx_3,Hx_4, Theta_f, Theta_w, vol_fw] = plain_weave(...
 %    g_f - gap width along the fill, dimensions [1, 1], Units: m
 %    g_w - gap width along the warp, dimensions [1, 1], Units: m
 %    vol_0 - overall fiber volume fraction , dimensions [1, 1], Units: -
+%    plot_weave - plot weave geometry if true, logical, troue or false, [-]
 % 
 % Outputs: 
 %    Hx_1 - height of matrix 1 in RVE, dimensions [nNodes, nNodes], Units: m
@@ -120,7 +121,7 @@ vw = Aw*Lw;
 % fiber volume fraction inside the fill and warp tows
 vol_fw = v_f0*(h*(a_f+g_f)*(a_w+g_w))/4/(vf+vw);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-plot_weave = true;
+
 if plot_weave
     x = linspace(0,(a_w+g_w)/2,nNodes); y = linspace(0,(a_f+g_f)/2,nNodes);
     figure(1)

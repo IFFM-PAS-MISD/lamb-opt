@@ -1,5 +1,6 @@
 %inputFile 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'weave type';                     fiberType = 'plainWeave';
 'stack thickness sequence [m]';   h_p = 0.0980; 
 'thickness of the fill [m]';      h_f = 0.048;
 'thickness of the warp [m]';      h_w = 0.048;
@@ -20,8 +21,9 @@
 % fibres(1) - carbon
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 'Young modulus [Pa]';                   e11_f = 275.6;
-                                        e22_f = 0.1*i_e11f;
-'Poisson ratio';                        ni12_f = 0.2; 
+                                        e22_f = 0.1*e11_f;
+'Poisson ratio';                        ni12_f = 0.2;
+                                        ni23_f = 0.2;
 'density [kg/m3]';                      rho_f = 1900;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+'plot weave geometry';                  plot_weave = 'True';
