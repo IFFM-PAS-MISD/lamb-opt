@@ -91,7 +91,7 @@ for k=1:number_of_wavenumber_points
 end
 %% loop over angles
 for j=1:length(beta)
-    fprintf('SASE dispersion curves at angle: %2.1f\n', beta(j));
+    %fprintf('SASE dispersion curves at angle: %2.1f\n', beta(j));
     om_real = zeros(number_of_modes,number_of_wavenumber_points);
     %om_imag = zeros(number_of_modes,number_of_wavenumber_points);
     cg = zeros(number_of_modes,number_of_wavenumber_points);

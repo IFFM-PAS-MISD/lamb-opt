@@ -13,14 +13,15 @@ data_path = fullfile( projectroot, 'data','processed','exp', filesep );
 
 % create path to the numerical model data folder
 modelfolder = 'SASE';
-modelname = {'SASE1','SASE2','SASE9','SASE10'}; % cell list of models for processing
+modelname = {'SASE1','SASE2','SASE9','SASE10','SASE11'}; % cell list of models for processing
 % cell lists of corresponding experimental files
 % full field measurements after 3D FFT transform (1 quarter)
 % and conversion to polar coordinate system
 exp_filename = {'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF',...
                 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF',...
                 'polar_interim_9x9p_HANN100_x30_10Vpp_200Hz_KXKYF_pzt_simul1',...
-                'polar_interim_17x17p_HANN100_x30_10Vpp_200Hz_KXKYF_pzt_simul1'}; 
+                'polar_interim_17x17p_HANN100_x30_10Vpp_200Hz_KXKYF_pzt_simul1',...
+                'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF'}; 
 % filename of interim data
 interim_filename = ['objective_fun_score_nmodes_',num2str(number_of_modes_considered)];
 

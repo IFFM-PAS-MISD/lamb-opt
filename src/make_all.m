@@ -68,7 +68,7 @@ SASE10;
 SASE11;
 
 % objective functions for full wavefield laser measurements
-% call objective_fun for test cases calculated in SASE1,SASE2,SASE9,SASE10
+% call objective_fun for test cases calculated in SASE1,SASE2,SASE9,SASE10, SASE11
 objective_fun_nmodes_4_script;
 objective_fun_nmodes_3_script;
 objective_fun_nmodes_2_script;
@@ -117,6 +117,9 @@ plot_num_exp_dispersion_SASE9;
 % for simulated pzt distrubution (17x17 points)
 plot_num_exp_dispersion_SASE10;
 
+% plot and make figure for num dispersion curves on top of experimental results (fabric composite)
+plot_num_exp_dispersion_SASE11;
+
 % plot experimental dispersion curves for various excitation signals
 plot_exp_dispersion;
 
@@ -124,5 +127,5 @@ plot_exp_dispersion;
 plot_chirp_signals;
 
 % plot objective function scores for SASE1 comparing laser and simulated pzt
-plot_objective_fun_score; % vibrant colour palette
-plot_objective_fun_score_high_contrast; % high-contrast palette
+plot_objective_function_score; % vibrant colour palette
+plot_objective_function_score_high_contrast; % high-contrast palette
