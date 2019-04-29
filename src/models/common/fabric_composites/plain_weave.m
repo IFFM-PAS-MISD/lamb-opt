@@ -28,7 +28,7 @@ function [Hx_1,Hx_2,Hx_3,Hx_4, Theta_f, Theta_w, vol_fw] = plain_weave(...
 %    rad
 %    Theta_w - warp undulation angle, dimensions [nNodes, nNodes], Units:
 %    rad
-%    vol_fw - fiber volume fraction in fill and warp, dimensions [1, 1], Units: -    output2 - Description, double, dimensions [m, n], Units: m/s^2 
+%    vol_fw - fiber volume fraction in fill and warp, dimensions [1, 1], Units: -    
 % 
 % Example: 
 %    [output1,output2] = plain_weave(input1,input2,input3) 

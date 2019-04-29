@@ -9,7 +9,6 @@
 'width of the fill gap [mm]';      g_f = 0;
 'thickness of the warp gap [mm]';  g_w = 0;   
 'volume fraction of fibres';      vol_0 = 0.5;
-
 %composite material properties
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % matrix(1) - epoxy
@@ -26,4 +25,4 @@
                                         ni23_f = 0.2;
 'density [kg/m3]';                      rho_f = 1900;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-'plot weave geometry';                  plot_weave = true;
+'plot weave geometry';                  plot_weave = false;

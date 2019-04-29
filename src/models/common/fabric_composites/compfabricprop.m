@@ -26,6 +26,7 @@ function [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
 %    ni12_f - fiber Poisson's ratio ni12, dimensions [1, 1], Units: -
 %    ni23_f - fiber Poisson's ratio ni23, dimensions [1, 1], Units: -
 %    rho_f - fiber density , dimensions [1, 1], Units: kg/m3
+%    vol_fw - 
 %    plot_weave - plot weave geometry if true, logical, troue or false, [-]
 % 
 % Outputs: 
@@ -71,7 +72,6 @@ function [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
    
     [q11, q12, q13, q22, q23, q33, q44, q55, q66] = ...
     functionalHahn(e11_m, e11_f, e22_f, ni12_m, ni12_f, ni23_f, vol);
-    
     
     % fill
     [Q11_f, Q12_f, Q13_f, Q21_f, Q22_f, Q23_f, Q31_f, Q32_f, Q33_f,...

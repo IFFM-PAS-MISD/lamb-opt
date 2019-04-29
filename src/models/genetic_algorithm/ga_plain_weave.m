@@ -20,7 +20,7 @@ load([data_path,exp_filename{1}]); % Data_polar wavenumber_max fmax beta number_
 np = 3; % order of elements (3<=np<=5)
 nele_layer = 1; % no. of elements per ply
 wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
-layup = [0 90 0 90 90 0 90 0];
+layup = [0 0 0 0 0 0 0 0];
 nlayers = length(layup);
 h = [zeros(nlayers,1)+1]* 3e-3/nlayers; % thickness of layers;
 % Stacking direction
@@ -35,7 +35,7 @@ nim0 = 0.35;
 nif0 =  0.2; 
 vol0 = 0.5;
 
-variation = 0.2;
+variation = 0.5;
 rhom_lb = (1-variation)*rhom0; % lower bound of matrix density
 rhom_ub = (1+variation)*rhom0; % upper bound of matrix density
 rhof_lb = (1-variation)*rhof0; % lower bound of fibres density
@@ -76,8 +76,7 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
    gen = 0;			% generational counter
 
 % Evaluate initial population
-[ObjV] = obj_ga_unidirectional(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered);
-
+[ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered);
 
 % Generational loop
    while gen < MAXGEN
@@ -96,7 +95,7 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
 
     % Evaluate offspring, call objective function
         %tic;
-       [ObjVSel] = obj_ga_unidirectional(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered);
+       [ObjVSel] = obj_ga_plain_weave(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered);
         %toc
        % Reinsert offspring into current population
        [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);
@@ -119,28 +118,31 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
         drawnow;
         toc
    end 
-   
-%% Plot best case
+   save('test8');
+ %% Plot best case
 radians = false;
 % size 12cm by 8cm (1-column text)
 fig_width = 12; fig_height = 8; 
 [number_of_angles,number_of_wavenumber_points,number_of_frequency_points] = size(Data_polar);
 fvec = linspace(0,fmax,number_of_frequency_points);
-
-rhom = PBest(MAXGEN,1);
-rhof = PBest(MAXGEN,2);
-em = PBest(MAXGEN,3);
-ef = PBest(MAXGEN,4);
-nim = PBest(MAXGEN,5);
-nif = PBest(MAXGEN,6);
-vol = PBest(MAXGEN,7);
+load project_paths projectroot src_path;
+run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_1.m']);
+rho_m = PBest(MAXGEN,1);
+rho_f = PBest(MAXGEN,2);
+e11_m = PBest(MAXGEN,3)/1e9;
+e11_f = PBest(MAXGEN,4)/1e9;
+ni12_m = PBest(MAXGEN,5);
+ni12_f = PBest(MAXGEN,6);
+vol_0 = PBest(MAXGEN,7);
+e22_f = 0.1*e11_f;
+ni23_f = PBest(MAXGEN,6);
 %% Mechanical properties  
-% homogenization of unidirectional fibre reinforce composite
-[rho,e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23] = homogenization(rhom,rhof,em,ef,nim,nif,vol);
-% Elastic constants of composite lamina in terms of principal material directions
-[C11,C12,C13,C22,C23,C33,C44,C55,C66] = lamina_3D(e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23);
+ [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
+        compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0, ...
+        e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f,false);
 %% SASE
-[wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
+[wavenumber,CG,FREQ] = main_SASE(rho,Q11,Q12,Q13,Q22,Q23,Q33,Q44,Q55,Q66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
+
 for j=1:number_of_angles
     figure(j)
         set(gcf,'Color','w');
@@ -185,4 +187,4 @@ for j=1:number_of_angles
         % remove unnecessary white space
         set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
         fig.PaperPositionMode   = 'auto';
-end
+end  
