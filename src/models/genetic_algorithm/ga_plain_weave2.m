@@ -20,7 +20,7 @@ load([data_path,exp_filename{1}]); % Data_polar wavenumber_max fmax beta number_
 np = 3; % order of elements (3<=np<=5)
 nele_layer = 1; % no. of elements per ply
 wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
-layup = [0 0 0 0 0 0 0 0];
+layup = [0 0 0 0 0 0 0 0 0 0 0 0];
 nlayers = length(layup);
 h = [zeros(nlayers,1)+1]* 3e-3/nlayers; % thickness of layers;
 % Stacking direction
@@ -51,11 +51,11 @@ nif_ub = (1+variation)*nif0; % upper bound of Poisson's ratio of fibres
 vol_lb = (1-variation)*vol0; % lower bound of volume fraction
 vol_ub = (1+variation)*vol0; % upper bound of volume fraction
 %% genetic algorithm parameters
-NIND = 40;           % Number of individuals per subpopulations
-MAXGEN = 40;        % maximum Number of generations
-GGAP = 0.9;           % Generation gap, how many new individuals are created
+NIND = 50;           % Number of individuals per subpopulations
+MAXGEN = 100;        % maximum Number of generations
+GGAP = 0.96;           % Generation gap, how many new individuals are created
 NVAR = 7;           %number of variables in objective function
-PRECI = 12;          % Precision of binary representation of variables
+PRECI = 14;          % Precision of binary representation of variables
 
 lb=[rhom_lb,rhof_lb,em_lb,ef_lb,nim_lb,nif_lb,vol_lb]; % lower bound for variables
 ub=[rhom_ub,rhof_ub,em_ub,ef_ub,nim_ub,nif_ub,vol_ub]; % upper bound for variables
@@ -118,7 +118,7 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
         drawnow;
         toc
    end 
-   save('test11_3');
+   save('test9_2');
  %% Plot best case
 radians = false;
 % size 12cm by 8cm (1-column text)
@@ -126,7 +126,7 @@ fig_width = 12; fig_height = 8;
 [number_of_angles,number_of_wavenumber_points,number_of_frequency_points] = size(Data_polar);
 fvec = linspace(0,fmax,number_of_frequency_points);
 load project_paths projectroot src_path;
-run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_1.m']);
+run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_2.m']);
 rho_m = PBest(MAXGEN,1);
 rho_f = PBest(MAXGEN,2);
 e11_m = PBest(MAXGEN,3)/1e9;
@@ -196,7 +196,7 @@ fig_width = 12; fig_height = 8;
 [number_of_angles,number_of_wavenumber_points,number_of_frequency_points] = size(Data_polar);
 fvec = linspace(0,fmax,number_of_frequency_points);
 load project_paths projectroot src_path;
-run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_1.m']);
+run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_2.m']);
 rho_m = PBest(1,1);
 rho_f = PBest(1,2);
 e11_m = PBest(1,3)/1e9;

@@ -70,7 +70,8 @@ for j=1:number_of_angles % beta
             
         end
         box on;
-        axis([0 350 0 min(wavenumber_max)]);
+        %axis([0 350 0 min(wavenumber_max)]);
+        axis([0 500 0 min(wavenumber_max)]);
         set(gca, 'Layer', 'Top');
         set(gca,'Fontsize',10,'linewidth',1);
         xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');

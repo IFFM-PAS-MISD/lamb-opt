@@ -15,7 +15,7 @@ overwrite = false; % allow overwriting existing results if true
 fig_width = 7; fig_height = 5; 
 % create path to the numerical model data folder
 modelfolder = 'SASE';
-modelname = 'SASE6';
+modelname = 'SASE12';
 radians = false;
 % create output path
 output_path = prepare_figure_paths(modelfolder,modelname);
@@ -70,8 +70,7 @@ for j=1:number_of_angles % beta
             
         end
         box on;
-        %axis([0 350 0 min(wavenumber_max)]);
-        axis([0 500 0 min(wavenumber_max)]);
+        axis([0 700 0 min(wavenumber_max)]);
         set(gca, 'Layer', 'Top');
         set(gca,'Fontsize',10,'linewidth',1);
         xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
@@ -82,13 +81,14 @@ for j=1:number_of_angles % beta
         end
         set(gca,'FontName','Times');
         fig = gcf;
-        title({['${\nu}_{m} \pm$','20{\%}, ',num2str(beta(j)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+        title({['${\rho}_{m} \pm$','20{\%}, ',num2str(beta(j)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
         %set(gca, 'Position',[0 0 1.2 1.2]); % figure without axis and white border
         set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % size 12cm by 8cm (1-column text)
         % remove unnecessary white space
         set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
         fig.PaperPositionMode   = 'auto';
         print([output_path,figfilename],'-dpng', '-r600'); 
+        %% END PLOTTING
     else
         fprintf('Figure: %s already exist\n', figfilename);
     end

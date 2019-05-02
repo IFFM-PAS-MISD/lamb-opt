@@ -1,10 +1,10 @@
-function [ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered)
+function [ObjV] = obj_ga_plain_weave3(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered)
 % OBJ_GA_UNIDIRECTIONAL   One line description of what the function or script performs (H1 line) 
 %    optional: more details about the function than in the H1 line 
 %    optional: more details about the function than in the H1 line 
 %    optional: more details about the function than in the H1 line 
 % 
-% Syntax: [output1,output2] = obj_ga_plain_weave(input1,input2,input3) 
+% Syntax: [output1,output2] = obj_ga_plain_weave3(input1,input2,input3) 
 % 
 % Inputs: 
 %    input1 - Description, string, dimensions [m, n], Units: ms 
@@ -16,9 +16,9 @@ function [ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wave
 %    output2 - Description, double, dimensions [m, n], Units: m/s^2 
 % 
 % Example: 
-%    [output1,output2] = obj_ga_plain_weave(input1,input2,input3) 
-%    [output1,output2] = obj_ga_plain_weave(input1,input2) 
-%    [output1] = obj_ga_plain_weave(input1,input2,input3) 
+%    [output1,output2] = obj_ga_plain_weave3(input1,input2,input3) 
+%    [output1,output2] = obj_ga_plain_weave3(input1,input2) 
+%    [output1] = obj_ga_plain_weave3(input1,input2,input3) 
 % 
 % Other m-files required: none 
 % Subfunctions: none 
@@ -54,24 +54,21 @@ parfor k=1:size(Phen,1)
     rho_m = Phen(k,1);
     rho_f = Phen(k,2);
     e11_m = Phen(k,3)/1e9;
-    e11_f = Phen(k,4)/1e9;
-    ni12_m = Phen(k,5);
-    ni12_f = Phen(k,6);
-    vol_0 = Phen(k,7);
-    e22_f = 0.1*Phen(k,4)/1e9;
-    ni23_f =  Phen(k,6);
+    e11_f = 240;
+    ni12_m = Phen(k,4);
+    ni12_f = Phen(k,5);
+    vol_0 = Phen(k,6);
+    e22_f = 24e9;
+    ni23_f =  Phen(k,5);
     %% Mechanical properties  
-    
      [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
             compfabricprop(fiberType(k,:), h_p(k), h_f(k), h_w(k), a_f(k), a_w(k), g_f(k), g_w(k), vol_0, ...
             e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f,false);
 %     [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
 %         compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0, ...
 %         e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f,false);
-        
     %% SASE
     [wavenumber,CG,FREQ] = main_SASE(rho,Q11,Q12,Q13,Q22,Q23,Q33,Q44,Q55,Q66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
-
     [score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered);
     %ObjV(k)=1-score;
     ObjV(k)=0.5-score;
@@ -79,4 +76,4 @@ end
 
 %---------------------- END OF CODE---------------------- 
 
-% ================ [obj_ga_plain_weave.m] ================  
+% ================ [obj_ga_plain_weave3.m] ================  

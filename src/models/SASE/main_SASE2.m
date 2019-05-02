@@ -1,10 +1,10 @@
-function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer)
+function [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,fmin,fmax,number_of_frequency_points,beta,stack_dir,np,nele_layer)
 % MAIN_SASE   Dispersion curves of Lamb wave modes 
 %    includes symmetric, antisymmetric and shear horizontal modes 
 %    sweep over wavenumbers 
 %    only real values of elastic constant matrix (no attenuation) 
 % 
-% Syntax: [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer) 
+% Syntax: [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer) 
 % 
 % Inputs:
 %    rho - mass density of composite layers, double, Units: kg/m^3
@@ -27,8 +27,8 @@ function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C6
 %    FREQ - matrix of frequencies, double, dimensions [number_of_modes,number_of_wavenumber_points,number_of_angles], Units: Hz 
 % 
 % Example: 
-%    [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer) 
-%    [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,[0,90,0,90],h,wavenumber_max,512,[0,30,60,90],1,3,1) 
+%    [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer) 
+%    [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,[0,90,0,90],h,wavenumber_max,512,[0,30,60,90],1,3,1) 
 % 
 % Other m-files required: get_om 
 % Subfunctions: none 
@@ -59,16 +59,16 @@ function [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C6
 nlayers = length(layup);
 rot_angles = layup - 90; % set x axis horizontal 
 number_of_angles = length(beta);
-wavenumber_step=zeros(number_of_angles,1);
+frequency_step=zeros(number_of_angles,1);
 for j=1:number_of_angles
-    wavenumber_step(j)=(wavenumber_max(j)-wavenumber_min(j))/(number_of_wavenumber_points-1); % wavenumber step [1/m]
+    frequency_step(j)=(fmax(j)-fmin(j))/(number_of_frequency_points-1); % frequency step [Hz]
 end
 %% Transform material properties
 C = cell(nlayers,1);
 C0r = zeros(6,6);
 for ii=1:nlayers
     theta = rot_angles(ii);
-     if(length(C11) == 1)
+    if(length(C11) == 1)
         C0r(1,1) = C11; C0r(1,2)=C12;C0r(2,1)=C12; C0r(1,3)=C13;C0r(3,1)=C13;C0r(2,2)=C22;C0r(2,3)=C23;C0r(3,2)=C23;C0r(3,3)=C33;C0r(4,4)=C44;C0r(5,5)=C55;C0r(6,6)=C66;
     else
         C0r(1,1) = C11(ii); C0r(1,2)=C12(ii); C0r(2,1)=C12(ii);C0r(1,3)=C13(ii);C0r(3,1)=C13(ii);C0r(2,2)=C22(ii);C0r(2,3)=C23(ii);C0r(3,2)=C23(ii);C0r(3,3)=C33(ii);C0r(4,4)=C44(ii);C0r(5,5)=C55(ii);C0r(6,6)=C66(ii);
@@ -82,30 +82,31 @@ end
 [K, M] = get_KM(nele_layer,np,h,C,rho);
 %% dispersion curves
 number_of_modes=length(M);
-FREQ = zeros(number_of_modes,number_of_wavenumber_points,number_of_angles);
-CG = zeros(number_of_modes,number_of_wavenumber_points,number_of_angles);
-wavenumber = zeros(number_of_wavenumber_points,number_of_angles);
-for k=1:number_of_wavenumber_points
-    wavenumber(k,:) = wavenumber_min+(k-1)*wavenumber_step;
+FREQ = zeros(number_of_frequency_points,number_of_angles);
+CG = zeros(number_of_modes,number_of_frequency_points,number_of_angles);
+wavenumber = zeros(number_of_modes,number_of_frequency_points,number_of_angles);
+for k=1:number_of_frequency_points
+    FREQ(k,:) = fmin+(k-1)*frequency_step;
 end
 %% loop over angles
 for j=1:length(beta)
     %fprintf('SASE dispersion curves at angle: %2.1f\n', beta(j));
-    om_real = zeros(number_of_modes,number_of_wavenumber_points);
-    %om_imag = zeros(number_of_modes,number_of_wavenumber_points);
-    cg = zeros(number_of_modes,number_of_wavenumber_points);
-    for k=1:number_of_wavenumber_points
-        [cg(:,k),~, om_real(:,k), ~] = get_om(K,M,beta(j),wavenumber(k,j));    
+    wave_number_real = zeros(number_of_modes,number_of_frequency_points);
+    %om_imag = zeros(number_of_modes,number_of_frequency_points);
+    %cg = zeros(number_of_modes,number_of_frequency_points);
+    for k=1:number_of_frequency_points
+        %[cg(:,k),~, om_real(:,k), ~] = get_om(K,M,beta(j),wavenumber(k,j));    
+        [mode_shapes, wave_number_real(:,k), wave_number_imag] = get_k(K,M,beta(j),FREQ(k,j));
     end
     %% mode-tracing
     % Taylor approximation method
     %[cg_new,om_new] = mode_tracing(cg,om_real,wavenumber_step(j));
     %[cg_new,om_new] = mode_tracing_pade(cg,om_real,wavenumber_step(j));
-      cg_new=cg;
-      om_new=om_real;
-    FREQ(:,:,j) = om_new/(2*pi);
-    CG(:,:,j) = cg_new;
+      %cg_new=cg;
+  
+    wavenumber(:,:,j) = wave_number_real;
+    %CG(:,:,j) = cg_new;
 end
 %---------------------- END OF CODE---------------------- 
 
-% ================ [main_SASE.m] ================  
+% ================ [main_SASE2.m] ================  

@@ -8,7 +8,7 @@ load project_paths projectroot src_path;
 D0 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
 Nb=1; % Butterworth filter order, integer
 w=12; % window size in points
-overwrite = true; % allow overwriting existing results if true
+overwrite = false; % allow overwriting existing results if true
 number_of_modes_considered = 4; % number of modes considered in calculation of objective function score
 
 % create path to the experimental processed data folder
