@@ -1,9 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%                       get_om.m                       %%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% This function solves stabdard eigenvalue problem 
+% This function solves generalized eigenvalue problem 
 % [A-om^2*M] *eig_vect = 0
-% where in this case om are angular frequency components
+% where in this case eigen values are om^2
+% om are angular frequency components
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function [cg,QR,om_real,om_imag] = get_om(K,M,beta,wavenumber)

@@ -22,13 +22,13 @@ sb = sin(b);
 A = [zeros(size(M))     K11-omega^2*M;
     K11-omega^2*M       -1i*(cb*K13 + sb*K21 - sb*K12 - cb*K31)];
 
-D = [K11-omega^2*M      zeros(size(M));
+B = [K11-omega^2*M      zeros(size(M));
     zeros(size(M))      -(sb^2*K22 + cb^2*K33 - cb*sb*K23 - cb*sb*K32)];
 
 
 %% Generalized Eigenvalue problem
 
-[eig_vect, eig_val] = eig(A,D);
+[eig_vect, eig_val] = eig(A,B);
 eig_val = sort(diag(eig_val));
 
 
