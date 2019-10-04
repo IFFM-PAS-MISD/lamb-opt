@@ -120,9 +120,7 @@
 	%% \linenumbers
 	
 	%% main text
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Introduction}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	Elastic constant values are often difficult to obtain, especially for anisotropic media. These values are indispensable for the design of a structure which fulfils assumed requirements (strength, stiffness, vibration characteristics). For years elastic constants of isotropic materials have been estimated during destructive testing and strain gauge or static displacement recordings. Similar results can be achieved by dynamic tests which rely on eigenfrequencies~\cite{Beluch2014}. Measurements of velocities of bulk waves (longitudinal and shear) can also be used for determination of elastic constants~\cite{Rose1999}.
 	
 	For anisotropic media, determining the elastic constants is more complex. Destructive testing can still be used to determine some of the constants. Additional constants can be obtained by special cube-cutting procedures followed by destructive testing~\cite{Rose1991} or by using bulk wave measurement protocol for orthotropic media~\cite{Rose1999}. However, such experiments are cumbersome and expensive.  It should be noted that other ultrasonic methods exist such as leaky Lamb wave technique. In this technique, a specimen is immersed in a liquid tank and insonified with an acoustic beam at various incident angles and frequencies. The obtained pattern provides unique fingerprint of the underlying mechanical elasticity tensor at the insonified material spot.The method has been improved over the years by using the pulsed ultrasonic polar scan and inverse methods~\cite{Kersemans2014}. Due to simplicity, non-destructive methods based on one-sided Lamb wave propagation measurements have been evolving over the years.
@@ -151,7 +149,7 @@
 	
 	\section{Dispersion curves of guided waves \label{sec:dispersion_curves}}
 	\subsection{Semi-analytical model}
-	Lamb wave dispersion phenomenon is related to wavenumber  $k$ dependency on frequency $f$. Lamb wave dispersion curves depend on elasticity constants of the material in which Lamb waves propagate. Moreover, in composite laminates Lamb waves behaviour is strictly related to the angle of propagation. Parameters such as phase velocity and group velocity, which are directly related to dispersion curves, and wave attenuation depend on the angle of propagation. Therefore, for proper material characterization it is necessary to consider dispersion curves of Lamb waves at various angles of propagation.
+	Lamb wave dispersion phenomenon is related to wave number  $k$ dependency on frequency $f$. Lamb wave dispersion curves depend on elasticity constants of the material in which Lamb waves propagate. Moreover, in composite laminates Lamb waves behaviour is strictly related to the angle of propagation. Parameters such as phase velocity and group velocity, which are directly related to dispersion curves, and wave attenuation depend on the angle of propagation. Therefore, for proper material characterization it is necessary to consider dispersion curves of Lamb waves at various angles of propagation.
 
 	Dispersion curves can be calculated by semi-analytic spectral element (SASE) method. The implementation of the method is based on the method proposed in~\cite{Bartoli2006}. The modification includes application of spectral elements instead of classic finite elements along the thickness of a laminate, preserving wave equation in the propagation direction. Moreover, instead of two-dimensional approximation of cross-section of the laminate, one-dimensional spectral elements were applied. Additionally, according to the concept proposed by Taupin et~al.~\cite{Taupin2011}, equations for dispersion curves are derived so that stiffness and mass matrices are independent of the angle of propagation. Equations of dispersion curves have a form of eigenvalue problem:
 
@@ -175,22 +173,16 @@
 	
 	Equation~\ref{eq:eig_dispersion} can be solved numerically in two ways:
 	\begin{itemize}
-		\item as a standard eigenvalue problem $\omega (k)$ (assuming given real values of wavenumbers $k$)
+		\item as a standard eigenvalue problem $\omega (k)$ (assuming given real values of wave numbers $k$)
 		\item as a second-order polynomial eigenvalue problem $k(\omega)$ for given frequencies $\omega$.
 	\end{itemize}
-In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion}) to a first-order eigensystem by doubling its algebraic size.  The obtained wavenumbers are then of a complex character. This provides information about both the wave dispersion (real part of the wavenumbers) and the attenuation of the waves (imaginary part of the wave numbers).  However, due to the fact that the priority is the computation time and the fact that the information about the wave attenuation is not necessary, it is preferable to solve the standard eigenvalue problem $\omega (k)$.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In the later case, the solution consist of recasting Eq.~(\ref{eq:dispersion}) to a first-order eigensystem by doubling its algebraic size.  The obtained wave numbers are then of a complex character. This provides information about both the wave dispersion (real part of the wave numbers) and the attenuation of the waves (imaginary part of the wave numbers).  However, due to the fact that the priority is the computation time and the fact that the information about the wave attenuation is not necessary, it is preferable to solve the standard eigenvalue problem $\omega (k)$.
  \subsection{Reduction of the number of variables for optimization}
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Stiffness matrix components $\matr{K}_{mn}$ from Eq.~(\ref{eq:dispersion}) depend on an angle $\theta$ related to stacking sequence (see Eq.~(\ref{eq:stiffness_matrix})).
 	\section{Experimental measurements \label{sec:experiment}}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 	\section{Optimization \label{sec:optimization}}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Conclusions}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	
 	In summary, the current implementation is very well suited for 
@@ -199,19 +191,6 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
 	%% appendix sections are then done as normal sections
 	\appendix
 	 \section{Derivation of stiffness and mass matrices}
-	 The displacement field can be expressed in terms of the wavenumber and propagation angle $\beta$ as~\cite{Taupin2011}:
-	  \begin{equation}
-	 \vect{u}(x,y,z,t) = \matr{U}(x) \exp \left[ i (\omega t + k \sin (\beta) y - k \cos (\beta) z)\right].
-	 \end{equation}
-	 The discretization is done only through the thickness of the plate (along $x$ axis), while the propagation kernel depends on the two other space variables $y$ and $z$. The displacement at an arbitrary point in the plate can be written in terms of shape functions $ \matr{N}$, nodal displacements $ \vect{d}$, and the propagation term:
-	 \begin{equation}
-	 \vect{u}^{(e)}(x,y,z,t) = \matr{N} \vect{d}^{(e)} \exp \left[ i (\omega t + k \sin (\beta) y - k \cos (\beta) z)\right],
-	 \end{equation}
-	 where
-	 \begin{equation}
-	 \vect{d}^{(e)} =  \left[ d_x^{(e),1} \, d_y^{(e),1} \, d_z^{(e),1} \ldots  \, d_x^{(e),n} \, d_y^{(e),n} \, d_z^{(e),n} \right],
-	 \end{equation}
-	 and $d_x^{(e),j}$ denotes the nodal $x$ displacement component at the $j$-th node of element $(e)$.
 	 The strain vector $\bs{\varepsilon}$ for the element is given by:
 	  \begin{equation}
 	 \bs{\varepsilon}= \left[ \matr{B}_1 -i k_y \matr{B}_2 -i k_z \matr{B}_3 \right] \vect{d}^{(e)} \exp \left[ i (\omega t + k \sin (\beta) y - k \cos (\beta) z)\right]
@@ -256,16 +235,15 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
 	 and $\matr{N}$ is the matrix of shape functions:
 	  \begin{equation}
 	 \begin{split}
-	 & \matr{N} = \left[\begin{array}{cccccccccc} 
-	 \varphi_1 & 0 & 0  & \varphi_2 & 0 & 0& \ldots & \varphi_n & 0 & 0\\[4pt]
-	 0&\varphi_1&0 &  0&\varphi_2&0 & \ldots&  0&\varphi_n&0\\[4pt]
-	 0 &0&\varphi_1 & 0 &0&\varphi_2 & \ldots& 0 &0&\varphi_n 
+	 & \matr{N} = \left[\begin{array}{ccccccccc} 
+	 \varphi_1 & 0 & 0  & \varphi_2 & 0 & 0 & \varphi_3 & 0 & 0\\[4pt]
+	 0&\varphi_1&0 &  0&\varphi_2&0 &  0&\varphi_3&0\\[4pt]
+	 0 &0&\varphi_1 & 0 &0&\varphi_2 & 0 &0&\varphi_3 
 	 \end{array} \right], 
 	 \end{split}
 	 \end{equation}
 	 \begin{equation}
 	 \matr{k}^e= \int \limits_{(e)} \matr{B}_m^{T} \matr{D}_{\theta}^e \, \matr{B}_n\, \ud x 
-	 \label{eq:stiffness_matrix}
 	 \end{equation}
 	 \begin{equation}
 	 \matr{m}^e= \int \limits_{(e)}\rho \matr{N}^{T} \, \matr{N}\, \ud x 

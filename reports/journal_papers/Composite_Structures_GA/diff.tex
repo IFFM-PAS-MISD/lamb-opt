@@ -1,4 +1,7 @@
 
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL old.tex   Thu Oct  3 15:01:05 2019
+%DIF ADD new.tex   Fri Oct  4 07:43:37 2019
 %% 
 %% Copyright 2007, 2008, 2009 Elsevier Ltd
 %% 
@@ -64,6 +67,47 @@
 %% for the whole article with \linenumbers.
 %% \usepackage{lineno}
 \journal{Composite Structures}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFaddtex}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdeltex}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF HYPERREF PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
+%DIF LISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
 \begin{document}
 	\begin{frontmatter}
 		%% Title, authors and addresses
@@ -84,74 +128,72 @@
 		%% \cortext[cor1]{}
 		%% \address{Address\fnref{label3}}
 		%% \fntext[label3]{}
-		
+
 		%\title{Parallel spectral element method for model-assisted structural health monitoring}
 		\title{Elastic constants identification of composite laminates by using Lamb wave dispersion curves and genetic algorithm}
-		
+
 		%% use optional labels to link authors explicitly to addresses:
 		%% \author[label1,label2]{}
 		\address[IFFM]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
-		
+
 		\ead{pk@imp.gda.pl}
 		\cortext[cor1]{Corresponding author}
-		
+
 		\author{Pawel Kudela\corref{cor1}\fnref{IFFM}}
 		\author{Maciej Radzienski\fnref{IFFM}}
 		\author{Piotr Fiborek \fnref{IFFM}}
 		\author{Tomasz Wandowski \fnref{IFFM}}	
-		
+
 		\begin{abstract}
 			%% Text of abstract
 		Typically, material properties originate from destructive tests and are used in computational models in the design and analysis process of structures. This approach is well-established in relation to isotropic homogenous materials. However, if this approach is used for composite laminates, inaccuracies can arise that leads to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. In order to account for this problem, the alternative method is proposed, which utilizes Lamb wave propagation phenomenon and optimization technique. Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures. In the proposed approach, the elastic constants, which are utilized to determine dispersion curves of Lamb waves, are optimized to achieve a good correlation between model predictions and experimental observations. In the first step of this concept, parametric studies have been carried out in which the influence of mass density, Young's modulus, Poisson's ratio of reinforcing fibres as well as matrix of composite laminate and volume fraction of reinforcing fibres on dispersion curves of Lamb waves was investigated. The effective elasticity constants were calculated by using micromechanics and homogenization techniques considering variability of properties of composite constituents. The dispersion curves of Lamb wave were calculated by using semi-analytical spectral element method. The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning Doppler laser vibrometer and processed by 3D Fourier transform. Elastic constants were further optimized by using genetic algorithm which resulted in good correlation between numerical and experimental dispersion curves.
 		\end{abstract}
-		
+
 		\begin{keyword}
 			%% keywords here, in the form: keyword \sep keyword
 			Lamb waves \sep dispersion curves \sep semi-analytical spectral element method \sep composite laminates \sep elastic constants.
 			%% PACS codes here, in the form: \PACS code \sep code
-			
+
 			%% MSC codes here, in the form: \MSC code \sep code
 			%% or \MSC[2008] code \sep code (2000 is the default)
-			
+
 		\end{keyword}
-		
+
 	\end{frontmatter}
-	
+
 	%% \linenumbers
-	
+
 	%% main text
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Introduction}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	Elastic constant values are often difficult to obtain, especially for anisotropic media. These values are indispensable for the design of a structure which fulfils assumed requirements (strength, stiffness, vibration characteristics). For years elastic constants of isotropic materials have been estimated during destructive testing and strain gauge or static displacement recordings. Similar results can be achieved by dynamic tests which rely on eigenfrequencies~\cite{Beluch2014}. Measurements of velocities of bulk waves (longitudinal and shear) can also be used for determination of elastic constants~\cite{Rose1999}.
-	
+
 	For anisotropic media, determining the elastic constants is more complex. Destructive testing can still be used to determine some of the constants. Additional constants can be obtained by special cube-cutting procedures followed by destructive testing~\cite{Rose1991} or by using bulk wave measurement protocol for orthotropic media~\cite{Rose1999}. However, such experiments are cumbersome and expensive.  It should be noted that other ultrasonic methods exist such as leaky Lamb wave technique. In this technique, a specimen is immersed in a liquid tank and insonified with an acoustic beam at various incident angles and frequencies. The obtained pattern provides unique fingerprint of the underlying mechanical elasticity tensor at the insonified material spot.The method has been improved over the years by using the pulsed ultrasonic polar scan and inverse methods~\cite{Kersemans2014}. Due to simplicity, non-destructive methods based on one-sided Lamb wave propagation measurements have been evolving over the years.
-	
+
 	Lamb waves were named after their discoverer, Horace Lamb, who developed the theory of their propagation in 1917~\cite{Lamb1917}. Interestingly, Lamb was not able to physically generate the waves he discovered. This was achieved by Worlton~\cite{Worlton1961} in 1961, who also noticed their potential usefulness for damage detection. Lamb waves are defined as a type of elastic waves that propagate in infinite media bounded by two surfaces and arise as a result of the superposition of multiple reflections of longitudinal waves and shear vertical waves from the bounding surfaces. In the case of these waves, medium particle oscillations are very complex in character. Depending on the distribution of displacements on the top and bottom bounding surface, two modes of Lamb waves appear: symmetric, denoted as S0, S1, S2, …, and antisymmetric, denoted as A0, A1, A2, … One should note that the number of these modes is infinite.
-	
+
 	The analytic solution proposed by Lamb is limited to isotropic materials and infinite, unbounded media. The solution has highly nonlinear character, and numerical methods must be used to obtain dispersion curves. The numerical approach, based on Lamb solution, for calculation of dispersion curves for isotropic materials, can be found in a book by Rose~\cite{Rose1999}.
-	
+
 	Many studies have been devoted to the calculation of dispersion curves of Lamb waves propagating in composite laminates but only a few are related to the identification of elastic constants. Rose et al.~\cite{Rose1987} investigated Lamb wave propagation in unidirectional, two-directional, and quasi-isotropic graphite-epoxy composite panels. They derived polar characteristics of phase and group velocities of the low-frequency S0 Lamb mode. Mal et al.~\cite{Mal1993} and Karim et al.~\cite{Karim1990} determined dynamic elastic moduli of the fibre-reinforced composite. The elastic constants were derived by inversion of a set of data measured by the leaky Lamb wave technique. In 1995 Rogers~\cite{Rogers1995} proposed a technique to measure the isotropic elastic constants of plate materials using Rayleigh-Lamb waves. In his paper, he presents the effect of an increase in longitudinal wave velocities or changes in Young’s modulus or Poisson’s ratio on the dispersion curves.
-	
+
 	De\`an et al.~\cite{Dean2008} determined elastic constants and thickness of the aluminium by minimizing the error function comprised by the theoretical dispersion curves of Lamb waves and experimental data. They utilized full-field wavelength measurements of single-mode narrowband Lamb waves. Grinberg et al.~\cite{Grimberg2010} determined in-plane material parameters of CFRP from the equations for phase velocity of S0 and A0 modes at low-frequency range. 
 	The paper by Bartoli et al.~\cite{Bartoli2006} deals with a semi-analytical finite element (SAFE) method for modelling wave propagation in waveguides of arbitrary cross-section. The method simply requires the finite element discretization of the cross-section of the waveguide and assumes harmonic motion along the wave propagation direction. The general SAFE technique is extended to account for viscoelastic material damping by allowing for complex stiffness matrices for the material. The dispersive solutions are obtained in terms of phase velocity, group velocity (for undamped media), energy velocity (for damped media), attenuation, and cross-sectional mode shapes. Taupin et al.~\cite{Taupin2011} applied the SAFE method to analyse composite laminate of various stacking sequences.
-	
+
 	A new semi-analytical method using 3-D elasticity theory was derived by Wang and Juan~\cite{Wang2007}. In comparison with the results of the theory and experiment, it was confirmed that multiple higher-order Lamb waves could be excited from piezoelectric actuators and the measured group velocities agree well with those from 3-D elasticity theory. The thin quasi-isotropic laminate was investigated only.
-	
+
 	Pol and Banerjee~\cite{Pol2013} derived a simplified 2D semi-analytical model based on a global matrix method to investigate the dispersion characteristics of propagating guided wave modes in multilayered composite laminates due to transient surface excitations. A relatively thin symmetric eight layered cross-ply composite laminate subjected to both narrowband and broadband surface excitations was considered. Comparison of group velocity curves obtained from developed model and LS-DYNA has shown good agreement.
-	
+
 	The paper by Beluch and Burczyński~\cite{Beluch2014} deals with the two-scale approach to the identification of material constants in composite materials. Structures made of unidirectionally fibre-reinforced composites are examined. However, for optimization of elastic constants, static displacements and eigenfrequencies are used, not Lamb wave data. Additionally, plane strain state was assumed in the model.
-	
+
 	In 2016 Ong et al.~\cite{Ong2016} proposed a technique for determination of elastic properties of the woven composite panel using the Lamb wave dispersion characteristics. The investigated CFRP panel comprised of 16 plies with such a sequence so that it could be treated as quasi-isotropic material. Simple 2D plane strain model was assumed in the numerical simulations. The material properties were found by fitting dispersion curves from a numerical simulation with experimental data by the particle swarm optimisation method. 
-	
+
 	From the review of the literature, no research evidence was found to date which deals with the rapid and robust identification of elastic material properties of highly anisotropic composite structures. Therefore, it is essential to develop a robust material identification methodology for the inspection of a wide range of composite structures. Moreover, there is no method which enables online tracking of changes in elastic material properties.
-	
+
 	The subject of this study focuses exclusively on an approach in which access to only one side of the specimen is required. In the proposed approach, dispersion curves of Lamb waves are utilized for determination of elastic constants in composite laminates. The paper is organized as follows: section~\ref{sec:dispersion_curves} describe numerical method for calculation of dispersion curves in laminated composites, section~\ref{sec:experiment} is related to extraction of dispersion curves from full wavefield measurements, section~\ref{sec:optimization} describes optimization of elastic constants by using genetic algorithm followed by conclusions.
-	
+
 	
 	\section{Dispersion curves of guided waves \label{sec:dispersion_curves}}
 	\subsection{Semi-analytical model}
-	Lamb wave dispersion phenomenon is related to wavenumber  $k$ dependency on frequency $f$. Lamb wave dispersion curves depend on elasticity constants of the material in which Lamb waves propagate. Moreover, in composite laminates Lamb waves behaviour is strictly related to the angle of propagation. Parameters such as phase velocity and group velocity, which are directly related to dispersion curves, and wave attenuation depend on the angle of propagation. Therefore, for proper material characterization it is necessary to consider dispersion curves of Lamb waves at various angles of propagation.
+	Lamb wave dispersion phenomenon is related to wave number  $k$ dependency on frequency $f$. Lamb wave dispersion curves depend on elasticity constants of the material in which Lamb waves propagate. Moreover, in composite laminates Lamb waves behaviour is strictly related to the angle of propagation. Parameters such as phase velocity and group velocity, which are directly related to dispersion curves, and wave attenuation depend on the angle of propagation. Therefore, for proper material characterization it is necessary to consider dispersion curves of Lamb waves at various angles of propagation.
 
 	Dispersion curves can be calculated by semi-analytic spectral element (SASE) method. The implementation of the method is based on the method proposed in~\cite{Bartoli2006}. The modification includes application of spectral elements instead of classic finite elements along the thickness of a laminate, preserving wave equation in the propagation direction. Moreover, instead of two-dimensional approximation of cross-section of the laminate, one-dimensional spectral elements were applied. Additionally, according to the concept proposed by Taupin et~al.~\cite{Taupin2011}, equations for dispersion curves are derived so that stiffness and mass matrices are independent of the angle of propagation. Equations of dispersion curves have a form of eigenvalue problem:
 
@@ -169,49 +211,33 @@
 	\label{eq:dispersion}
 	\end{equation}
 	where  $s = \sin(\beta)$, $c = \cos(\beta)$, $i = \sqrt{-1}$, and $\beta$ is the angle of Lamb wave propagation. The transformation matrix $\matr{T}$ is diagonal and it is introduced in order to eliminate imaginary elements from Eq.~(\ref{eq:dispersion}) (see~\cite{Bartoli2006} for more details). It should be noted that the system of equations~(\ref{eq:dispersion}) explicitly depends on the angle $\beta$. Predicting the anisotropic behaviour of guided wave properties makes it necessary to loop over $\beta$ for each direction considered.
-	
+
 	Stiffness matrices $\matr{K}$ from Eq.~(\ref{eq:dispersion}) depend on elastic constants of composite laminate and relations between displacements and strains. The definitions of these matrices are given in appendix.
-	
+
 	
 	Equation~\ref{eq:eig_dispersion} can be solved numerically in two ways:
 	\begin{itemize}
-		\item as a standard eigenvalue problem $\omega (k)$ (assuming given real values of wavenumbers $k$)
+		\item as a standard eigenvalue problem $\omega (k)$ (assuming given real values of wave numbers $k$)
 		\item as a second-order polynomial eigenvalue problem $k(\omega)$ for given frequencies $\omega$.
 	\end{itemize}
-In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion}) to a first-order eigensystem by doubling its algebraic size.  The obtained wavenumbers are then of a complex character. This provides information about both the wave dispersion (real part of the wavenumbers) and the attenuation of the waves (imaginary part of the wave numbers).  However, due to the fact that the priority is the computation time and the fact that the information about the wave attenuation is not necessary, it is preferable to solve the standard eigenvalue problem $\omega (k)$.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \subsection{Reduction of the number of variables for optimization}
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Stiffness matrix components $\matr{K}_{mn}$ from Eq.~(\ref{eq:dispersion}) depend on an angle $\theta$ related to stacking sequence (see Eq.~(\ref{eq:stiffness_matrix})).
-	\section{Experimental measurements \label{sec:experiment}}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In the later case, the solution consist of recasting Eq.~(\ref{eq:dispersion}) to a first-order eigensystem by doubling its algebraic size.  The obtained wave numbers are then of a complex character. This provides information about both the wave dispersion (real part of the wave numbers) and the attenuation of the waves (imaginary part of the wave numbers).  However, due to the fact that the priority is the computation time and the fact that the information about the wave attenuation is not necessary, it is preferable to solve the standard eigenvalue problem $\omega (k)$.
+ \DIFdelbegin %DIFDELCMD < 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DIFDELCMD < 	%%%
+\DIFdelend \DIFaddbegin \subsection{\DIFadd{Reduction of the number of variables for optimization}}
+	\DIFaddend \section{Experimental measurements \label{sec:experiment}}
+
+
 	\section{Optimization \label{sec:optimization}}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Conclusions}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	
 	In summary, the current implementation is very well suited for 
-	 
+
 	%% The Appendices part is started with the command \appendix;
 	%% appendix sections are then done as normal sections
 	\appendix
 	 \section{Derivation of stiffness and mass matrices}
-	 The displacement field can be expressed in terms of the wavenumber and propagation angle $\beta$ as~\cite{Taupin2011}:
-	  \begin{equation}
-	 \vect{u}(x,y,z,t) = \matr{U}(x) \exp \left[ i (\omega t + k \sin (\beta) y - k \cos (\beta) z)\right].
-	 \end{equation}
-	 The discretization is done only through the thickness of the plate (along $x$ axis), while the propagation kernel depends on the two other space variables $y$ and $z$. The displacement at an arbitrary point in the plate can be written in terms of shape functions $ \matr{N}$, nodal displacements $ \vect{d}$, and the propagation term:
-	 \begin{equation}
-	 \vect{u}^{(e)}(x,y,z,t) = \matr{N} \vect{d}^{(e)} \exp \left[ i (\omega t + k \sin (\beta) y - k \cos (\beta) z)\right],
-	 \end{equation}
-	 where
-	 \begin{equation}
-	 \vect{d}^{(e)} =  \left[ d_x^{(e),1} \, d_y^{(e),1} \, d_z^{(e),1} \ldots  \, d_x^{(e),n} \, d_y^{(e),n} \, d_z^{(e),n} \right],
-	 \end{equation}
-	 and $d_x^{(e),j}$ denotes the nodal $x$ displacement component at the $j$-th node of element $(e)$.
 	 The strain vector $\bs{\varepsilon}$ for the element is given by:
 	  \begin{equation}
 	 \bs{\varepsilon}= \left[ \matr{B}_1 -i k_y \matr{B}_2 -i k_z \matr{B}_3 \right] \vect{d}^{(e)} \exp \left[ i (\omega t + k \sin (\beta) y - k \cos (\beta) z)\right]
@@ -256,16 +282,15 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
 	 and $\matr{N}$ is the matrix of shape functions:
 	  \begin{equation}
 	 \begin{split}
-	 & \matr{N} = \left[\begin{array}{cccccccccc} 
-	 \varphi_1 & 0 & 0  & \varphi_2 & 0 & 0& \ldots & \varphi_n & 0 & 0\\[4pt]
-	 0&\varphi_1&0 &  0&\varphi_2&0 & \ldots&  0&\varphi_n&0\\[4pt]
-	 0 &0&\varphi_1 & 0 &0&\varphi_2 & \ldots& 0 &0&\varphi_n 
+	 & \matr{N} = \left[\begin{array}{ccccccccc} 
+	 \varphi_1 & 0 & 0  & \varphi_2 & 0 & 0 & \varphi_3 & 0 & 0\\[4pt]
+	 0&\varphi_1&0 &  0&\varphi_2&0 &  0&\varphi_3&0\\[4pt]
+	 0 &0&\varphi_1 & 0 &0&\varphi_2 & 0 &0&\varphi_3 
 	 \end{array} \right], 
 	 \end{split}
 	 \end{equation}
 	 \begin{equation}
 	 \matr{k}^e= \int \limits_{(e)} \matr{B}_m^{T} \matr{D}_{\theta}^e \, \matr{B}_n\, \ud x 
-	 \label{eq:stiffness_matrix}
 	 \end{equation}
 	 \begin{equation}
 	 \matr{m}^e= \int \limits_{(e)}\rho \matr{N}^{T} \, \matr{N}\, \ud x 
@@ -277,7 +302,7 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
 	%% \label{}
 	\section*{Acknowledgement}
    The research was funded by the Polish National Science Center under grant agreement no 2018/29/B/ST8/00045. 
-	
+
 	
 	
 	%% If you have bibdatabase file and want bibtex to generate the
@@ -285,7 +310,7 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
 	%%
 	%%  \bibliographystyle{elsarticle-harv} 
 	%%  \bibliography{<your bibdatabase>}
-	
+
 	%% else use the following coding to input the bibitems directly in the
 	%% TeX file.
 	%\section*{Reference}
