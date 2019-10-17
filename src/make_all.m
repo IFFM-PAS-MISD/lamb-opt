@@ -5,7 +5,10 @@
 % transformation from 2D-space-time to wavenumber-frequency
 % of selected file '289x289p_HANN100_x30_10Vpp_200Hz'
 spatial_to_wavenumber_wavefield_selected_script;
-
+% 3D FFT of full wavefield data (plain waeve specimen) 
+% transformation from 2D-space-time to wavenumber-frequency
+% of selected file '499x499p_chp200_x40_18Vpp_250Hz'
+spatial_to_wavenumber_wavefield_selected_script_plain_weave;
 % transformation of wavenumber field
 % from cartesian to polar coordinates at selected angles
 % processing of all files in interm exp folder
@@ -73,7 +76,7 @@ objective_fun_nmodes_4_script;
 objective_fun_nmodes_3_script;
 objective_fun_nmodes_2_script;
 objective_fun_nmodes_1_script;
-% objective functions for full simulated pzt sensors based on laser measurements
+% objective functions for simulated pzt sensors based on laser measurements
 % call objective_fun_pzt for test cases calculated in SASE1
 objective_fun_pzt_nmodes_4_script;
 objective_fun_pzt_nmodes_3_script;
@@ -122,7 +125,7 @@ plot_num_exp_dispersion_SASE11;
 
 % plot experimental dispersion curves for various excitation signals
 plot_exp_dispersion;
-
+plot_exp_dispersion_plain_weave;
 % plot chirp signals for reports and presentations
 plot_chirp_signals;
 

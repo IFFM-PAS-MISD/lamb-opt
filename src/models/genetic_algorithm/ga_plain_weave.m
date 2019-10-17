@@ -9,22 +9,39 @@ number_of_modes_considered = 4; % number of modes considered in calculation of o
 %% Load parameters which are used in experiment
 % create path to the experimental processed data folder
 data_path=fullfile( projectroot, 'data','processed','exp', filesep );
+input_file = 2;
 % filename of parameter data
- filename = 'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF_param'; 
- load([data_path,filename]); % wavenumber_max fmax beta number_of_wavenumber_points
+ filename = {'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF_param',...
+                    'polar_interim_499x499p_chp200_x40_18Vpp_250Hz_KXKYF_param'}; 
+ load([data_path,filename{input_file}]); % wavenumber_max fmax beta number_of_wavenumber_points
 % load experimental data file
-exp_filename = {'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF'};
-load([data_path,exp_filename{1}]); % Data_polar wavenumber_max fmax beta number_of_wavenumber_points  
+exp_filename = {'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF',... % 1 old plain weave
+                            'polar_interim_499x499p_chp200_x40_18Vpp_250Hz_KXKYF'};         % 2 new plain weave
+load([data_path,exp_filename{input_file}]); % Data_polar wavenumber_max fmax beta number_of_wavenumber_points  
 %% Input for SASE
 %beta = 0:15:90; % angles for dispersion curves in polar plot [deg]
+%ht = 3/1000; % [m] laminate total thickness; old plain weave
+ht = 3.9/1000; % [m] laminate total thickness; new plain weave
 np = 3; % order of elements (3<=np<=5)
 nele_layer = 1; % no. of elements per ply
 wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
-layup = [0 0 0 0 0 0 0 0];
+%layup = [0 0 0 0 0 0 0 0];
+layup =[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 nlayers = length(layup);
-h = [zeros(nlayers,1)+1]* 3e-3/nlayers; % thickness of layers;
+
+h = [zeros(nlayers,1)+1]* ht/nlayers; % thickness of layers; new plain weave
 % Stacking direction
 stack_dir = 1;
+%% input material properties for woven fabric
+'weave type';                     fiberType = 'plainWeave';
+'lamina thickness [mm]';     h_p = ht/nlayers; % 
+'thickness of the fill [mm]';      h_f = h_p/2;
+'thickness of the warp [mm]';      h_w = h_p/2;
+'width of the fill [mm]';          a_f = 1.9;
+'width of the warp [mm]';      a_w = 2;
+'width of the fill gap [mm]';      g_f = 0.05;
+'width of the warp gap [mm]';  g_w = 0.05;   
+%% input for optimization
 % lower and upper bounds of variables
 %run(['inputs',filesep,'input1.m']);  % initial material properties
 rhom0 = 1250; % kg/m^3
@@ -64,6 +81,10 @@ scale=[0,0,0,0,0,0,0]; %arithmetic scale
 lbin=  [1,1,1,1,1,1,1];%include lower bound of variable range
 ubin= [1,1,1,1,1,1,1];%include upper bound of variable range
 %%
+%% tests loop
+%%
+for k_test = 1:1%100
+    [k_test,100]
 % Build field descriptor
 %FieldD = [rep([PRECI],[1,NVAR]);lb;ub;code;scale;lbin;ubin];
 FieldD = [rep([PRECI],[1,NVAR]);lb;ub; rep([1;0;1;1],[1,NVAR])];
@@ -76,7 +97,7 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
    gen = 0;			% generational counter
 
 % Evaluate initial population
-[ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered);
+[ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType);
 
 % Generational loop
    while gen < MAXGEN
@@ -95,7 +116,7 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
 
     % Evaluate offspring, call objective function
         %tic;
-       [ObjVSel] = obj_ga_plain_weave(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered);
+       [ObjVSel] = obj_ga_plain_weave(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType);
         %toc
        % Reinsert offspring into current population
        [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);
@@ -118,7 +139,11 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
         drawnow;
         toc
    end 
-   save('test11_3');
+   %save(['test_',num2str(k_test),'_3.9mm_16lay']);
+%    save(['test_',num2str(k_test),'_3.9mm_8lay_Fabric_3']);
+% save(['test_',num2str(k_test),'_4mm_8lay_Fabric_5']);
+%save(['test_',num2str(k_test),'_3.9mm_8lay_plain_wave.mat']);
+
  %% Plot best case
 radians = false;
 % size 12cm by 8cm (1-column text)
@@ -126,7 +151,7 @@ fig_width = 12; fig_height = 8;
 [number_of_angles,number_of_wavenumber_points,number_of_frequency_points] = size(Data_polar);
 fvec = linspace(0,fmax,number_of_frequency_points);
 load project_paths projectroot src_path;
-run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_1.m']);
+%run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_6.m']);
 rho_m = PBest(MAXGEN,1);
 rho_f = PBest(MAXGEN,2);
 e11_m = PBest(MAXGEN,3)/1e9;
@@ -136,10 +161,20 @@ ni12_f = PBest(MAXGEN,6);
 vol_0 = PBest(MAXGEN,7);
 e22_f = 0.1*e11_f;
 ni23_f = PBest(MAXGEN,6);
+format long;
+[rho_m rho_f ]
+[e11_m e11_f ]
+[ni12_m ni12_f]
+vol_0
+ObjVal=min(ObjV);
 %% Mechanical properties  
  [C11,C12,C13,C21,C22,C23,C31,C32,C33,C44,C55,C66,rho] = ...
         compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0, ...
         e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f,false);
+ [C11,C12,C13,C22,C23,C33,C44,C55,C66]
+ save(['out',filesep,'test_',num2str(k_test),'_3.9mm_',num2str(nlayers),'lay_plain_wave.mat'],'rho_m','rho_f','e11_m','e11_f','ni12_m','ni12_f','vol_0','C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal');
+end
+
 %% SASE
 [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
 
@@ -189,23 +224,32 @@ for j=1:number_of_angles
         fig.PaperPositionMode   = 'auto';
 end  
 
-%% Plot first generation
+%% Plot first generation/initial param
 radians = false;
 % size 12cm by 8cm (1-column text)
 fig_width = 12; fig_height = 8; 
 [number_of_angles,number_of_wavenumber_points,number_of_frequency_points] = size(Data_polar);
 fvec = linspace(0,fmax,number_of_frequency_points);
 load project_paths projectroot src_path;
-run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_1.m']);
-rho_m = PBest(1,1);
-rho_f = PBest(1,2);
-e11_m = PBest(1,3)/1e9;
-e11_f = PBest(1,4)/1e9;
-ni12_m = PBest(1,5);
-ni12_f = PBest(1,6);
-vol_0 = PBest(1,7);
+%run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_5.m']);
+% rho_m = PBest(1,1);
+% rho_f = PBest(1,2);
+% e11_m = PBest(1,3)/1e9;
+% e11_f = PBest(1,4)/1e9;
+% ni12_m = PBest(1,5);
+% ni12_f = PBest(1,6);
+% vol_0 = PBest(1,7);
+% e22_f = 0.1*e11_f;
+% ni23_f = PBest(1,6);
+% rho_m = PBest(1,1);
+rho_f = rhof0;
+e11_m = em0/1e9;
+e11_f = ef0/1e9;
+ni12_m = nim0;
+ni12_f = nif0;
+vol_0 = vol0;
 e22_f = 0.1*e11_f;
-ni23_f = PBest(1,6);
+ni23_f = ni12_f;
 %% Mechanical properties  
  [C11,C12,C13,C21,C22,C23,C31,C32,C33,C44,C55,C66,rho] = ...
         compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0, ...

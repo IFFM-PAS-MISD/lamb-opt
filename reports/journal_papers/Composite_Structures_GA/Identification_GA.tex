@@ -86,7 +86,7 @@
 		%% \fntext[label3]{}
 		
 		%\title{Parallel spectral element method for model-assisted structural health monitoring}
-		\title{Elastic constants identification of composite laminates by using Lamb wave dispersion curves and genetic algorithm}
+		\title{Elastic constants identification of woven fabric composite laminates by using guided wave dispersion curves and genetic algorithm}
 		
 		%% use optional labels to link authors explicitly to addresses:
 		%% \author[label1,label2]{}
@@ -146,7 +146,7 @@
 	
 	From the review of the literature, no research evidence was found to date which deals with the rapid and robust identification of elastic material properties of highly anisotropic composite structures. Therefore, it is essential to develop a robust material identification methodology for the inspection of a wide range of composite structures. Moreover, there is no method which enables online tracking of changes in elastic material properties.
 	
-	The subject of this study focuses exclusively on an approach in which access to only one side of the specimen is required. In the proposed approach, dispersion curves of Lamb waves are utilized for determination of elastic constants in composite laminates. The paper is organized as follows: section~\ref{sec:dispersion_curves} describe numerical method for calculation of dispersion curves in laminated composites, section~\ref{sec:experiment} is related to extraction of dispersion curves from full wavefield measurements, section~\ref{sec:optimization} describes optimization of elastic constants by using genetic algorithm followed by conclusions.
+	The subject of this study focuses exclusively on an approach in which access to only one side of the specimen is required. In the proposed approach, dispersion curves of Lamb waves are utilized for determination of elastic constants in composite laminates. The paper is organized as follows: section~\ref{sec:dispersion_curves} describe numerical method for calculation of dispersion curves in laminated composites, section~\ref{sec:experiment} is related to extraction of dispersion curves from full wavefield measurements, section~\ref{sec:optimization} describes optimization of elastic constants by using genetic algorithm (GA) followed by conclusions.
 	
 	
 	\section{Dispersion curves of guided waves \label{sec:dispersion_curves}}
@@ -240,9 +240,10 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
  
  In order to reduce computation cost, the number of independent variables can be decreased by considering properties of composite constituents, namely matrix and fibres, separately. Thus,  7 parameters must be taken into account: matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. The effective elastic constants can be calculated by using the rule of mixture and homogenization techniques.
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \subsection{Parametric studies}
+ \subsection{Parametric studies of dispersion curves \label{sec:parametric}}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- The dispersion curves shown in all figures presented here are in the form $k(f)$ where $f=\omega/(2 \pi)$ is the frequency measured in hertz.
+ The SASE model was used for parametric studies of dispersion curves. The influence of carbon fibre-reinforced polymer (CFRP) composite material properties on dispersion curves were analysed. Properties of matrix, fibres and volume fraction of reinforcing fibres were analysed. The initial values of constants characterising composite material constituents are given in Table~\ref{tab:matprop} (epoxy resin and carbon fibres). The influence of each parameter on dispersion curves was studied separately. The variability range of each parameter was assumed as $\pm$20\% in respect to initial values. It was assumed that the composite laminate has a stacking sequence [0 90 0 90]\textsubscript{s} and the total thickness is 3~mm.
+ 
  \begin{table}[h]
  	\renewcommand{\arraystretch}{1.3}
  	\centering \footnotesize
@@ -267,6 +268,8 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
  	\end{tabular} 
  	\label{tab:matprop}
  \end{table}
+ 
+ The dispersion curves shown in all figures presented here are in the form $k(f)$ where $f=\omega/(2 \pi)$ is the frequency measured in hertz.
  
  The influence of matrix density on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:rhom}. The parameter has moderate influence on each mode of propagating waves.
  
@@ -604,12 +607,78 @@ The influence of volume fraction of reinforcing fibres on dispersion curves depe
 \end{figure}
 
 \clearpage
+It should be underlined that in all cases considered the changes of dispersion curves are higher at higher frequencies. Therefore, it is expected that higher accuracy of elastic constants determination can be achieved if dispersion curves are captured experimentally at higher frequencies. Moreover, as expected, the dependence of dispersion curves on angle of propagation is significant. Hence, this fact should be considered during construction of fitness function.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental measurements \label{sec:experiment}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% plain wave composite; constants provided by manufacturer
+Guided wave propagation was analysed in carbon/epoxy laminate composed of 4 layers of plain weave fabric. 16 layers of prepreg GG 205  P (fibres Toray FT 300 - 3K 200 tex) by G. Angeloni and epoxy resin MP503Z-HT by Impregnatex Compositi was used for fabrication of the specimen. The composite laminate dimensions was 1200$\times$1200$\times$1200 mm. The average thickness was 3.9 mm. 
+% laser vibrometer mesurements
+Piezoelectric transducer disc of diameter 10 mm was bonded to the surface of the specimen at their centre. A chirp signal was applied to piezoelectric transducer. Full wavefield measurements of guided waves were conducted by using scanning laser Doppler vibrometer (Polytec PSV-400) on the central area of width 0.726 m and length 0.726 m. A grid of 499 $\times$ 499 measurement point covering surface of the specimen opposite to the piezoelectric transducer was used. 40 measurements were taken for each grid point and averaged.
+
+3D Fourier Transform was applied to the full wavefield data in the space-time domain ($x$, $y$, $t$). Next 3D matrix was transformed from ($k_x$, $k_y$, $\omega$) coordinates to cylindrical coordinates ($\beta$,$k$,$f$). Interpolation was employed to obtain 2D images ($k$,$f$) representing dispersion curves $k(f)$ at selected angles $\beta = 0^{\circ} \ldots 90^{\circ}$ with the step of $15^{\circ}$, resulting in 9 2D matrices. Let's denote these matrices representing dispersion curves by $\matr{D}_{\beta}$. The size of the matrix  $\matr{D}_{\beta}$ in the current approach was 512 $\times$ 512.  An example of such matrix at angle $ 60^{\circ}$ is presented in Fig.~\ref{fig:initial_optimized}. Dispersion curves in Fig.~\ref{fig:dispersion60deg_initial} calculated by using SASE model and material properties given in Table~\ref{tab:matprop} in the form of yellow curves are overlayed on the image for reference. It can be seen that there is high discrepancy between semi-analytic dispersion curves and experimental one. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Optimization \label{sec:optimization}}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	The Sheffield Genetic Algorithm Toolbox for Matlab developed at Department of Automatic Control and Systems Engineering at The University of Sheffield was used for the optimization~\cite{Chipperfield1994}.
+	\subsection{Genetic algorithm parameters}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Two approaches were considered:
+	\begin{enumerate}
+	\item indirect - by using composite constituents and homogenisation techniques;
+	The genetic algorithm was used for determination of the following properties:  matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. 
+	\item direct - determination of C-tensor components and mass density.
+	The genetic algorithm was used for determination of the following properties: $C_{11}$, $C_{12}$, $C_{13}$,  $C_{22}$, $C_{23}$, $C_{33}$, $C_{44}$, $C_{55}$, $C_{66}$ and $\rho$.
+	\end{enumerate}
+	The overall density of composite specimen $\rho$ was not evaluated experimentally and that is why it is included in the list of optimization variables.
+	The following GA parameters were used for optimization:
+	\begin{itemize}
+		\item Number of individuals per subpopulation: 40
+		\item Maximum number of generations: 40
+		\item Generation gap: 0.9
+		\item Number of variables in objective function: 7(10)
+		\item Precision of binary representation of variables: 12 bit
+		\item Gray coding was used for representation of each variable.
+   \end{itemize}
+    It should be noted that 12 bits precision was used for each variable. However, according to parametric studies in section~\ref{sec:parametric} certain material properties such as Poisson's ratio of reinforcing fibres have less influence on dispersion curves, hence the precision for their representation can be decreased.
+  
+	Upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table~\ref{tab:matprop}.
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Objective function}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{equation}
+	\min_j \sum_{\beta}\sum_{m} \| k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)}) -k^{exp}_{m}(\beta,\omega) \|
+	\end{equation}
+	where $m$ denotes the mode of propagating wave.
+	\begin{equation}
+	O_{val} = (-1)  \cdot \sum_{\beta} \| \matr{D}^{SASE}_{\beta}  .*  \matr{D}^{exp}_{\beta} \|
+	\end{equation}
+	\subsection{Results}
+	\begin{figure} [h!]
+		\centering
+		\begin{subfigure}[b]{\textwidth}
+			\centering
+			% size fitted
+			%\includegraphics[width=\textwidth]{dispersion60deg_initia.png}
+			% size 100%
+			\includegraphics[]{dispersion60deg_initial.png}
+			\caption{initial parameters}
+			\label{fig:dispersion60deg_initial}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+			\centering
+			% size fitted
+			%\includegraphics[width=\textwidth]{dispersion60deg.png}
+			% size 100%
+			\includegraphics[]{dispersion60deg}
+			\caption{optimized}
+			\label{fig:dispersion60deg}
+		\end{subfigure}
+	\caption{Dispersion curves at angle $\beta = 60^{\circ}$; yellow curves: SASE model; image: experiment }
+	\label{fig:initial_optimized}
+	\end{figure}
+\clearpage
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Conclusions}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

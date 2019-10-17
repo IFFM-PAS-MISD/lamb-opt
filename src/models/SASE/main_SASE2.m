@@ -1,7 +1,7 @@
 function [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,fmin,fmax,number_of_frequency_points,beta,stack_dir,np,nele_layer)
 % MAIN_SASE   Dispersion curves of Lamb wave modes 
 %    includes symmetric, antisymmetric and shear horizontal modes 
-%    sweep over wavenumbers 
+%    sweep over frequencies 
 %    only real values of elastic constant matrix (no attenuation) 
 % 
 % Syntax: [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer) 

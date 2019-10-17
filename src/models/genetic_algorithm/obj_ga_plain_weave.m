@@ -1,4 +1,4 @@
-function [ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered)
+function [ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType)
 % OBJ_GA_UNIDIRECTIONAL   One line description of what the function or script performs (H1 line) 
 %    optional: more details about the function than in the H1 line 
 %    optional: more details about the function than in the H1 line 
@@ -36,8 +36,11 @@ function [ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wave
 
 % load projectroot path
 load project_paths projectroot src_path;
-run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_1.m']);
+%run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_1.m']);
 %run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_2.m']);
+%run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_3.m']);
+%run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_4.m']);
+%run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_6.m']);
 ObjV = zeros(size(Phen,1),1);
 fiberType = repmat(fiberType,[size(Phen,1),1]);
 h_p = repmat(h_p,[size(Phen,1),1]);
@@ -74,7 +77,8 @@ parfor k=1:size(Phen,1)
 
     [score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered);
     %ObjV(k)=1-score;
-    ObjV(k)=0.5-score;
+    %ObjV(k)=0.5-score;
+    ObjV(k)=(-1)*score;
 end
 
 %---------------------- END OF CODE---------------------- 
