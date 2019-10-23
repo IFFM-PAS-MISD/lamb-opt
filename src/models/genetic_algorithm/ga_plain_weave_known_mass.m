@@ -41,10 +41,14 @@ stack_dir = 1;
 'width of the warp [mm]';      a_w = 2;
 'width of the fill gap [mm]';      g_f = 0.05;
 'width of the warp gap [mm]';  g_w = 0.05;   
+%%
+% known parameters
+m=8.55; % total mass of the specimen [kg]
+V=1.2*1.2*ht; % specimen volume [m^3]
+rho = m/V;
 %% input for optimization
 % lower and upper bounds of variables
 %run(['inputs',filesep,'input1.m']);  % initial material properties
-rhom0 = 1250; % kg/m^3
 rhof0 = 1900; % kg/m^3
 em0 = 3.43e9; % Pa
 ef0 = 240e9; % Pa
@@ -53,8 +57,8 @@ nif0 =  0.2;
 vol0 = 0.5;
 
 variation = 0.2;
-rhom_lb = (1-variation)*rhom0; % lower bound of matrix density
-rhom_ub = (1+variation)*rhom0; % upper bound of matrix density
+rhom_lb = 1150; % lower bound of cured resing density (from manufacturer)
+rhom_ub = 1250; % upper bound of cured resing density (from manufacturer)
 rhof_lb = (1-variation)*rhof0; % lower bound of fibres density
 rhof_ub = (1+variation)*rhof0; % upper bound of fibres density
 em_lb = (1-variation)*em0; % lower bound of Young's modulus of matrix
@@ -69,21 +73,21 @@ vol_lb = (1-variation)*vol0; % lower bound of volume fraction
 vol_ub = (1+variation)*vol0; % upper bound of volume fraction
 %% genetic algorithm parameters
 NIND = 100;           % Number of individuals per subpopulations
-MAXGEN = 60;        % maximum Number of generations
+MAXGEN = 50;        % maximum Number of generations
 GGAP = 0.9;           % Generation gap, how many new individuals are created
-NVAR = 7;           %number of variables in objective function
+NVAR = 6;           %number of variables in objective function
 PRECI = 12;          % Precision of binary representation of variables
 
-lb=[rhom_lb,rhof_lb,em_lb,ef_lb,nim_lb,nif_lb,vol_lb]; % lower bound for variables
-ub=[rhom_ub,rhof_ub,em_ub,ef_ub,nim_ub,nif_ub,vol_ub]; % upper bound for variables
-code=[1,1,1,1,1,1,1]; % Gray coding
-scale=[0,0,0,0,0,0,0]; %arithmetic scale
-lbin=  [1,1,1,1,1,1,1];%include lower bound of variable range
-ubin= [1,1,1,1,1,1,1];%include upper bound of variable range
+lb=[rhom_lb,em_lb,ef_lb,nim_lb,nif_lb,vol_lb]; % lower bound for variables
+ub=[rhom_ub,em_ub,ef_ub,nim_ub,nif_ub,vol_ub]; % upper bound for variables
+code=[1,1,1,1,1,1]; % Gray coding
+scale=[0,0,0,0,0,0]; %arithmetic scale
+lbin=  [1,1,1,1,1,1];%include lower bound of variable range
+ubin= [1,1,1,1,1,1];%include upper bound of variable range
 %%
 %% tests loop
 %%
-for k_test = 51:100
+for k_test = 1:50
     [k_test,100]
 % Build field descriptor
 %FieldD = [rep([PRECI],[1,NVAR]);lb;ub;code;scale;lbin;ubin];
@@ -93,12 +97,12 @@ Chrom = crtbp(NIND, NVAR*PRECI);
 Phen = bs2rv(Chrom,FieldD); % convert binary to real
 % Reset counters
    Best = NaN*ones(MAXGEN,1);	% best in current population
-   PBest = NaN*ones(MAXGEN,7);	% best in current population
+   Mean = NaN*ones(MAXGEN,1);	% mean in current population
+   PBest = NaN*ones(MAXGEN,NVAR);	% best in current population
    gen = 0;			% generational counter
 
 % Evaluate initial population
-[ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType);
-
+[ObjV] = obj_ga_plain_weave_known_mass(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType,rho);
 % Generational loop
    while gen < MAXGEN
         tic;
@@ -106,8 +110,8 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
        FitnV = ranking(ObjV);
 
     % Select individuals for breeding
-       SelCh = select('sus', Chrom, FitnV, GGAP);
-
+       SelCh = select('sus', Chrom, FitnV, GGAP); % stochastic universal sampling
+       %SelCh = select('rws', Chrom, FitnV, GGAP); % stochastic sampling with replacement
     % Recombine selected individuals (crossover)
        SelCh = recombin('xovsp',SelCh,0.7);
 
@@ -116,8 +120,8 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
 
     % Evaluate offspring, call objective function
         %tic;
-       [ObjVSel] = obj_ga_plain_weave(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType);
-        %toc
+       [ObjVSel] = obj_ga_plain_weave_known_mass(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType,rho);
+       %toc
        % Reinsert offspring into current population
        [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);
 
@@ -126,15 +130,18 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
        fprintf('Generation number: %d\n', gen);
     % Update display and record current best individual
         [Best(gen),I] = min(ObjV);
+        Mean(gen) = mean(ObjV);
         fprintf('Best individual objective function value: %d\n', Best(gen));
         
         P=bs2rv(Chrom,FieldD);
         PBest(gen,:) = P(I,:);
         figure(1);
-        plot(PBest(:,7),'o-');
+        plot(PBest(:,6),'o-');
         title('Volume fraction');
         figure(2);
-        plot(Best,'o-');
+        plot(Best,'bo-');hold on;
+        plot(Mean,'rd-');
+        legend('Best','Mean');
         title(['Objective fun value, generation: ',num2str(gen)])
         drawnow;
         toc
@@ -152,15 +159,16 @@ fig_width = 12; fig_height = 8;
 fvec = linspace(0,fmax,number_of_frequency_points);
 load project_paths projectroot src_path;
 %run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_6.m']);
-rho_m = PBest(MAXGEN,1);
-rho_f = PBest(MAXGEN,2);
-e11_m = PBest(MAXGEN,3)/1e9;
-e11_f = PBest(MAXGEN,4)/1e9;
-ni12_m = PBest(MAXGEN,5);
-ni12_f = PBest(MAXGEN,6);
-vol_0 = PBest(MAXGEN,7);
+
+rho_m =  PBest(MAXGEN,1);
+e11_m =  PBest(MAXGEN,2)/1e9;
+e11_f = PBest(MAXGEN,3)/1e9;
+ni12_m = PBest(MAXGEN,4);
+ni12_f = PBest(MAXGEN,5);
+vol_0 = PBest(MAXGEN,6);
+rho_f = (rho - rho_m*(1-vol_0))/vol_0;
 e22_f = 0.1*e11_f;
-ni23_f = PBest(MAXGEN,6);
+ni23_f =  ni12_f ;
 format long;
 [rho_m rho_f ]
 [e11_m e11_f ]
@@ -172,7 +180,7 @@ ObjVal=min(ObjV);
         compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0, ...
         e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f,false);
  [C11,C12,C13,C22,C23,C33,C44,C55,C66]
- save(['out',filesep,'test_',num2str(k_test),'_3.9mm_',num2str(nlayers),'lay_plain_wave.mat'],'rho_m','rho_f','e11_m','e11_f','ni12_m','ni12_f','vol_0','C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal');
+ save(['out',filesep,'test_',num2str(k_test),'_3.9mm_',num2str(nlayers),'lay_plain_wave_known_mass.mat'],'rho_m','rho_f','e11_m','e11_f','ni12_m','ni12_f','vol_0','C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal');
 end
 
 %% SASE

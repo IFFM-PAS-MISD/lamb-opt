@@ -51,39 +51,55 @@ ef0 = 240e9; % Pa
 nim0 = 0.35;
 nif0 =  0.2; 
 vol0 = 0.5;
+rho_0 = 1500;
+Q11_0 = 54e9;
+Q12_0 = 5e9;
+Q13_0 = 5e9;
+Q22_0 = 54e9;
+Q23_0 = 5e9;
+Q33_0 = 9e9;
+Q44_0 = 3e9;
+Q55_0 = 3e9;
+Q66_0 = 3.3e9;
 
 variation = 0.2;
-rhom_lb = (1-variation)*rhom0; % lower bound of matrix density
-rhom_ub = (1+variation)*rhom0; % upper bound of matrix density
-rhof_lb = (1-variation)*rhof0; % lower bound of fibres density
-rhof_ub = (1+variation)*rhof0; % upper bound of fibres density
-em_lb = (1-variation)*em0; % lower bound of Young's modulus of matrix
-em_ub = (1+variation)*em0; % upper bound of Young's modulus of matrix
-ef_lb = (1-variation)*ef0; % lower bound of Young's modulus of fibres
-ef_ub = (1+variation)*ef0; % upper bound of Young's modulus of fibres
-nim_lb = (1-variation)*nim0; % lower bound of Poisson's ratio of matrix
-nim_ub = (1+variation)*nim0; % upper bound of Poisson's ratio of matrix
-nif_lb = (1-variation)*nif0; % lower bound of Poisson's ratio of fibres
-nif_ub = (1+variation)*nif0; % upper bound of Poisson's ratio of fibres
-vol_lb = (1-variation)*vol0; % lower bound of volume fraction
-vol_ub = (1+variation)*vol0; % upper bound of volume fraction
+rho_lb = (1-variation)*rho_0; % lower bound of density
+rho_ub = (1+variation)*rho_0; % upper bound of density
+Q11_lb = (1-variation)*Q11_0; 
+Q11_ub = (1+variation)*Q11_0; 
+Q12_lb = (1-variation)*Q12_0; 
+Q12_ub = (1+variation)*Q12_0; 
+Q13_lb = (1-variation)*Q13_0; 
+Q13_ub = (1+variation)*Q13_0; 
+Q22_lb = (1-variation)*Q22_0; 
+Q22_ub = (1+variation)*Q22_0; 
+Q23_lb = (1-variation)*Q23_0; 
+Q23_ub = (1+variation)*Q23_0; 
+Q33_lb = (1-variation)*Q33_0; 
+Q33_ub = (1+variation)*Q33_0; 
+Q44_lb = (1-variation)*Q44_0; 
+Q44_ub = (1+variation)*Q44_0; 
+Q55_lb = (1-variation)*Q55_0; 
+Q55_ub = (1+variation)*Q55_0; 
+Q66_lb = (1-variation)*Q66_0; 
+Q66_ub = (1+variation)*Q66_0; 
 %% genetic algorithm parameters
 NIND = 100;           % Number of individuals per subpopulations
-MAXGEN = 60;        % maximum Number of generations
+MAXGEN = 50;        % maximum Number of generations
 GGAP = 0.9;           % Generation gap, how many new individuals are created
-NVAR = 7;           %number of variables in objective function
+NVAR = 10;           %number of variables in objective function
 PRECI = 12;          % Precision of binary representation of variables
 
-lb=[rhom_lb,rhof_lb,em_lb,ef_lb,nim_lb,nif_lb,vol_lb]; % lower bound for variables
-ub=[rhom_ub,rhof_ub,em_ub,ef_ub,nim_ub,nif_ub,vol_ub]; % upper bound for variables
-code=[1,1,1,1,1,1,1]; % Gray coding
-scale=[0,0,0,0,0,0,0]; %arithmetic scale
-lbin=  [1,1,1,1,1,1,1];%include lower bound of variable range
-ubin= [1,1,1,1,1,1,1];%include upper bound of variable range
+lb=[rho_lb,Q11_lb,Q12_lb,Q13_lb,Q22_lb,Q23_lb,Q33_lb,Q44_lb,Q55_lb,Q66_lb]; % lower bound for variables
+ub=[rho_ub,Q11_ub,Q12_ub,Q13_ub,Q22_ub,Q23_ub,Q33_ub,Q44_ub,Q55_ub,Q66_ub]; % upper bound for variables
+code=[1,1,1,1,1,1,1,1,1,1]; % Gray coding
+scale=[0,0,0,0,0,0,0,0,0,0]; %arithmetic scale
+lbin=  [1,1,1,1,1,1,1,1,1,1];%include lower bound of variable range
+ubin= [1,1,1,1,1,1,1,1,1,1];%include upper bound of variable range
 %%
 %% tests loop
 %%
-for k_test = 51:100
+for k_test = 2:50
     [k_test,100]
 % Build field descriptor
 %FieldD = [rep([PRECI],[1,NVAR]);lb;ub;code;scale;lbin;ubin];
@@ -93,12 +109,11 @@ Chrom = crtbp(NIND, NVAR*PRECI);
 Phen = bs2rv(Chrom,FieldD); % convert binary to real
 % Reset counters
    Best = NaN*ones(MAXGEN,1);	% best in current population
-   PBest = NaN*ones(MAXGEN,7);	% best in current population
+   PBest = NaN*ones(MAXGEN,NVAR);	% best in current population
    gen = 0;			% generational counter
 
 % Evaluate initial population
-[ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType);
-
+[ObjV] = obj_ga_C_tensor(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered);
 % Generational loop
    while gen < MAXGEN
         tic;
@@ -116,7 +131,7 @@ Phen = bs2rv(Chrom,FieldD); % convert binary to real
 
     % Evaluate offspring, call objective function
         %tic;
-       [ObjVSel] = obj_ga_plain_weave(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType);
+       [ObjVSel] = obj_ga_C_tensor(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered);
         %toc
        % Reinsert offspring into current population
        [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);
@@ -152,27 +167,21 @@ fig_width = 12; fig_height = 8;
 fvec = linspace(0,fmax,number_of_frequency_points);
 load project_paths projectroot src_path;
 %run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_6.m']);
-rho_m = PBest(MAXGEN,1);
-rho_f = PBest(MAXGEN,2);
-e11_m = PBest(MAXGEN,3)/1e9;
-e11_f = PBest(MAXGEN,4)/1e9;
-ni12_m = PBest(MAXGEN,5);
-ni12_f = PBest(MAXGEN,6);
-vol_0 = PBest(MAXGEN,7);
-e22_f = 0.1*e11_f;
-ni23_f = PBest(MAXGEN,6);
-format long;
-[rho_m rho_f ]
-[e11_m e11_f ]
-[ni12_m ni12_f]
-vol_0
+rho = PBest(MAXGEN,1);
+C11 = PBest(MAXGEN,2);
+C12 = PBest(MAXGEN,3);
+C13 = PBest(MAXGEN,4);
+C22 = PBest(MAXGEN,5);
+C23 = PBest(MAXGEN,6);
+C33 = PBest(MAXGEN,7);
+C44 = PBest(MAXGEN,8);
+C55 = PBest(MAXGEN,9);
+C66 = PBest(MAXGEN,10);
+
 ObjVal=min(ObjV);
-%% Mechanical properties  
- [C11,C12,C13,C21,C22,C23,C31,C32,C33,C44,C55,C66,rho] = ...
-        compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0, ...
-        e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f,false);
+
  [C11,C12,C13,C22,C23,C33,C44,C55,C66]
- save(['out',filesep,'test_',num2str(k_test),'_3.9mm_',num2str(nlayers),'lay_plain_wave.mat'],'rho_m','rho_f','e11_m','e11_f','ni12_m','ni12_f','vol_0','C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal');
+ save(['out',filesep,'test_',num2str(k_test),'_3.9mm_',num2str(nlayers),'lay_plain_wave_C_tensor.mat'],'C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal');
 end
 
 %% SASE

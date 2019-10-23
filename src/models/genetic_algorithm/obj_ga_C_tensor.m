@@ -1,4 +1,4 @@
-function [ObjV] = obj_ga_plain_weave(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType)
+function [ObjV] = obj_ga_C_tensor(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered)
 % OBJ_GA_UNIDIRECTIONAL   One line description of what the function or script performs (H1 line) 
 %    optional: more details about the function than in the H1 line 
 %    optional: more details about the function than in the H1 line 
@@ -42,38 +42,24 @@ load project_paths projectroot src_path;
 %run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_4.m']);
 %run([src_path,filesep,'models',filesep,'SASE',filesep,'inputs',filesep,'Fabric_6.m']);
 ObjV = zeros(size(Phen,1),1);
-fiberType = repmat(fiberType,[size(Phen,1),1]);
-h_p = repmat(h_p,[size(Phen,1),1]);
-h_f = repmat(h_f,[size(Phen,1),1]);
-h_w = repmat(h_w,[size(Phen,1),1]);
-a_f = repmat(a_f,[size(Phen,1),1]);
-a_w = repmat(a_w,[size(Phen,1),1]);
-g_f = repmat(g_f,[size(Phen,1),1]);
-g_w = repmat(g_w,[size(Phen,1),1]);
+
 % fittnes function scaling factors
 a=100;
 b=310;
 %for k=1:size(Phen,1)
 parfor k=1:size(Phen,1)
     %[k,size(Phen,1)]
-    rho_m = Phen(k,1);
-    rho_f = Phen(k,2);
-    e11_m = Phen(k,3)/1e9;
-    e11_f = Phen(k,4)/1e9;
-    ni12_m = Phen(k,5);
-    ni12_f = Phen(k,6);
-    vol_0 = Phen(k,7);
-    e22_f = 0.1*Phen(k,4)/1e9;
-    ni23_f =  Phen(k,6);
-    %% Mechanical properties  
-    
-     [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
-            compfabricprop(fiberType(k,:), h_p(k), h_f(k), h_w(k), a_f(k), a_w(k), g_f(k), g_w(k), vol_0, ...
-            e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f,false);
-%     [Q11,Q12,Q13,Q21,Q22,Q23,Q31,Q32,Q33,Q44,Q55,Q66,rho] = ...
-%         compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol_0, ...
-%         e11_m, ni12_m, rho_m, e11_f, e22_f, ni12_f, ni23_f, rho_f,false);
-        
+    rho = Phen(k,1);
+    Q11 = Phen(k,2);
+    Q12 = Phen(k,3);
+    Q13 = Phen(k,4);
+    Q22 = Phen(k,5);
+    Q23 = Phen(k,6);
+    Q33 = Phen(k,7);
+    Q44 = Phen(k,8);
+    Q55 = Phen(k,9);
+    Q66 = Phen(k,10);
+      
     %% SASE
     [wavenumber,CG,FREQ] = main_SASE(rho,Q11,Q12,Q13,Q22,Q23,Q33,Q44,Q55,Q66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
 

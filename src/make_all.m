@@ -30,6 +30,7 @@ SASE1;
 % semi analytical spectral element (SASE) model dispersion curves 
 % parametric search over matrix density
 SASE2;
+SASE2_plain_weave;
 
 % semi analytical spectral element (SASE) model dispersion curves 
 % parametric search over fibre density
@@ -88,29 +89,37 @@ plot_num_exp_dispersion_SASE1;
 
 % plot and make figures for dispersion curves variability depending on matrix density
 plot_param_dispersion_curves_SASE2;
+plot_param_dispersion_curves_SASE2_color;
+plot_param_dispersion_curves_SASE2_plain_weave_color;
 
 % plot and make figures for dispersion curves variability depending on fibre density
 plot_param_dispersion_curves_SASE3;
+plot_param_dispersion_curves_SASE3_color;
 
 % plot and make figures for dispersion curves variability depending on Young
 % modulus of matrix
 plot_param_dispersion_curves_SASE4;
+plot_param_dispersion_curves_SASE4_color;
 
 % plot and make figures for dispersion curves variability depending on Young
 % modulus of fibres
 plot_param_dispersion_curves_SASE5;
+plot_param_dispersion_curves_SASE5_color;
 
 % plot and make figures for dispersion curves variability depending on Poisson
 % ratio of matrix
 plot_param_dispersion_curves_SASE6;
+plot_param_dispersion_curves_SASE6_color;
 
 % plot and make figures for dispersion curves variability depending on Poisson
 % ratio of fibres
 plot_param_dispersion_curves_SASE7;
+plot_param_dispersion_curves_SASE7_color;
 
 % plot and make figures for dispersion curves variability depending on volume
 % fraction
 plot_param_dispersion_curves_SASE8;
+plot_param_dispersion_curves_SASE8_color;
 
 % plot and make figure for num dispersion curves on top of experimental results
 % for simulated pzt distrubution (9x9 points)
