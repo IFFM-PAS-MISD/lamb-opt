@@ -7,7 +7,7 @@
 % composite [0 90 0 90 90 0 90 0]
 % parametric study of material constituents
 % rule of mixture homogenization
-% parametric search over Poisson ratio of fibres
+% parametric search over Poisson's ratio of fibres
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all;close all;

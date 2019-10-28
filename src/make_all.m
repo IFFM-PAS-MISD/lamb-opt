@@ -35,26 +35,32 @@ SASE2_plain_weave;
 % semi analytical spectral element (SASE) model dispersion curves 
 % parametric search over fibre density
 SASE3;
+SASE3_plain_weave;
 
 % semi analytical spectral element (SASE) model dispersion curves 
 % parametric search over Young modulus of matrix
 SASE4;
+SASE4_plain_weave;
 
 % semi analytical spectral element (SASE) model dispersion curves 
 % parametric search over Young modulus of fibres
 SASE5;
+SASE5_plain_weave;
 
 % semi analytical spectral element (SASE) model dispersion curves 
 % parametric search over Poisson ratio of matrix
 SASE6;
+SASE6_plain_weave;
 
 % semi analytical spectral element (SASE) model dispersion curves 
 % parametric search over Poisson ratio of fibres
 SASE7;
+SASE7_plain_weave;
 
 % semi analytical spectral element (SASE) model dispersion curves 
 % parametric search over volume fraction of reinforcing fibres
 SASE8;
+SASE8_plain_weave;
 
 % semi analytical spectral element (SASE) model dispersion curves 
 % grid search over volume fractions and Young modulus of fibres
@@ -95,31 +101,37 @@ plot_param_dispersion_curves_SASE2_plain_weave_color;
 % plot and make figures for dispersion curves variability depending on fibre density
 plot_param_dispersion_curves_SASE3;
 plot_param_dispersion_curves_SASE3_color;
+plot_param_dispersion_curves_SASE3_plain_weave_color;
 
 % plot and make figures for dispersion curves variability depending on Young
 % modulus of matrix
 plot_param_dispersion_curves_SASE4;
 plot_param_dispersion_curves_SASE4_color;
+plot_param_dispersion_curves_SASE4_plain_weave_color;
 
 % plot and make figures for dispersion curves variability depending on Young
 % modulus of fibres
 plot_param_dispersion_curves_SASE5;
 plot_param_dispersion_curves_SASE5_color;
+plot_param_dispersion_curves_SASE5_plain_weave_color;
 
 % plot and make figures for dispersion curves variability depending on Poisson
 % ratio of matrix
 plot_param_dispersion_curves_SASE6;
 plot_param_dispersion_curves_SASE6_color;
+plot_param_dispersion_curves_SASE6_plain_weave_color;
 
 % plot and make figures for dispersion curves variability depending on Poisson
 % ratio of fibres
 plot_param_dispersion_curves_SASE7;
 plot_param_dispersion_curves_SASE7_color;
+plot_param_dispersion_curves_SASE7_plain_weave_color;
 
 % plot and make figures for dispersion curves variability depending on volume
 % fraction
 plot_param_dispersion_curves_SASE8;
 plot_param_dispersion_curves_SASE8_color;
+plot_param_dispersion_curves_SASE8_plain_weave_color;
 
 % plot and make figure for num dispersion curves on top of experimental results
 % for simulated pzt distrubution (9x9 points)
@@ -131,6 +143,13 @@ plot_num_exp_dispersion_SASE10;
 
 % plot and make figure for num dispersion curves on top of experimental results (fabric composite)
 plot_num_exp_dispersion_SASE11;
+% plot and make figure for optimized num dispersion curves on top of experimental results (plain weave)
+plot_dispersion_curves_ga_plain_weave_known_mass;
+plot_dispersion_curves_ga_plain_weave_known_mass_large;
+
+% plot and make figure for initial num dispersion curves on top of experimental results (plain weave)
+plot_dispersion_curves_ga_plain_weave_known_mass_initial;
+plot_dispersion_curves_ga_plain_weave_known_mass_initial_large;
 
 % plot experimental dispersion curves for various excitation signals
 plot_exp_dispersion;

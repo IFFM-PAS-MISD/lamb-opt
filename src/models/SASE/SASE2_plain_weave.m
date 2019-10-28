@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                   SASE2                                 %
+%                                   SASE2_plain_weave                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This script calls main_SASE function for a given wavenumbers (in 1/m) 
 % and gets the real frequencies and group velocities.
 % Dispersion curves are calculated at different angles (beta) 
-% composite [0 90 0 90 90 0 90 0]
+% composite reinforced by plain weave fabric
 % parametric study of material constituents
 % rule of mixture homogenization
 % parametric search over matrix density
@@ -71,6 +71,7 @@ stack_dir = 1;
 'width of the fill gap [mm]';      g_f = 0.05;
 'width of the warp gap [mm]';  g_w = 0.05;   
 %% grid search approach - sweep over parameters
+%rhom = rhom0; % kg/m^3
 rhof = rhof0; % kg/m^3
 nim = nim0;
 nif =  nif0; 

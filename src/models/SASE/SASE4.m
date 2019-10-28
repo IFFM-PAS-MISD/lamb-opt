@@ -7,7 +7,7 @@
 % composite [0 90 0 90 90 0 90 0]
 % parametric study of material constituents
 % rule of mixture homogenization
-% parametric search over Young modulus of matrix
+% parametric search over Young's modulus of matrix
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all;close all;

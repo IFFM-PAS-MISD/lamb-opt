@@ -85,8 +85,7 @@
 		%% \address{Address\fnref{label3}}
 		%% \fntext[label3]{}
 		
-		%\title{Parallel spectral element method for model-assisted structural health monitoring}
-		\title{Elastic constants identification of woven fabric reinforced composites by using guided wave dispersion curves and genetic algorithm}
+		\title{Elastic constants identification of fibre-reinforced composites by using guided wave dispersion curves and genetic algorithm}
 		
 		%% use optional labels to link authors explicitly to addresses:
 		%% \author[label1,label2]{}
@@ -238,7 +237,7 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
  \end{equation} 
  which gives 13 independent elastic constants per lamina. Of course determination of such large number of elastic constants by optimization methods is prohibitive due to high computation cost. 
  
- In order to reduce computation cost, the number of independent variables can be decreased by considering properties of composite constituents, namely matrix and fibres, separately. Thus,  7 parameters must be taken into account: matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. One parameter can be further eliminated if the overall density $\rho$ of composite is known. The effective elastic constants can be calculated by using the rule of mixture and homogenization techniques.
+ In order to reduce computation cost, the number of independent variables can be decreased by considering properties of composite constituents, namely matrix and fibres, separately. Thus,  7 parameters must be taken into account: matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. The effective elastic constants can be calculated by using the rule of mixture and homogenization techniques.
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \subsection{Parametric studies of dispersion curves \label{sec:parametric}}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -274,7 +273,7 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
  The influence of matrix density on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:rhom}. The parameter has moderate influence on each mode of propagating waves.
  
  \begin{figure} [h!]
- 	\newcommand{\modelname}{SASE2_plain_weave}
+ 	\newcommand{\modelname}{SASE2}
  	\centering
  	\begin{subfigure}[b]{0.49\textwidth}
  		\centering
@@ -319,11 +318,11 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
  \end{figure}
 \clearpage
 
-The influence of fibres density on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:rhof}. Similar changes of dispersion curves as in case of matrix density can be noticed.
+The influence of fibres density on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:rhof}. Large changes of dispersion curves of antisymmetric modes can be observed. Contrary, changes of dispersion curves of symmetric modes are small.
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE3_plain_weave}
+	\newcommand{\modelname}{SASE3}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -367,11 +366,11 @@ The influence of fibres density on dispersion curves depending on the propagatio
 \end{figure}
 \clearpage
 
-The influence of matrix Young's modulus on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:em}. Large changes of dispersion curves of antisymmetric modes can be observed. Contrary, changes of dispersion curves of symmetric modes at frequencies up to about 300~kHz are small.
+The influence of matrix Young's modulus on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:em}. Large changes of dispersion curves of antisymmetric modes can be observed. Contrary, changes of dispersion curves of symmetric modes are small.
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE4_plain_weave}
+	\newcommand{\modelname}{SASE4}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -415,11 +414,11 @@ The influence of matrix Young's modulus on dispersion curves depending on the pr
 \end{figure}
 \clearpage
 
-The influence of fibres Young's modulus on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:ef}. In this case small to moderate changes of dispersion curves depending on guided wave mode can be observed. 
+The influence of fibres Young's modulus on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:ef}. In this case only small changes of dispersion curves of symmetric modes can be observed. 
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE5_plain_weave}
+	\newcommand{\modelname}{SASE5}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -463,11 +462,11 @@ The influence of fibres Young's modulus on dispersion curves depending on the pr
 \end{figure}
 \clearpage
 
-The influence of matrix Poisson's ratio on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:nim}. Small changes of dispersion curves can be observed.
+The influence of matrix Poisson's ratio on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:nim}.Small changes of dispersion curves, mainly of antisymmetric modes, has been observed.
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE6_plain_weave}
+	\newcommand{\modelname}{SASE6}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -511,11 +510,11 @@ The influence of matrix Poisson's ratio on dispersion curves depending on the pr
 \end{figure}
 \clearpage
 
-The influence of fibres Poisson's ratio on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:nif}. It can be noticed that this parameter influences least the dispersion curves of guided waves.
+The influence of fibres Poisson's ratio on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:nif}. It has been noticed that this parameter influences least the dispersion curves of guided waves.
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE7_plain_weave}
+	\newcommand{\modelname}{SASE7}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -559,11 +558,11 @@ The influence of fibres Poisson's ratio on dispersion curves depending on the pr
 \end{figure}
 \clearpage
 
-The influence of volume fraction of reinforcing fibres on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:vol}. It is the most essential parameter among analysed properties because it has the greatest influence on dispersion curves of guided waves.
+The influence of volume fraction of reinforcing fibres on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:vol}. It is most essential parameter among analysed properties because it has the greatest influence on dispersion curves of guided waves. In particular, large changes of antisymmetric modes are visible. This parameter has a little less influence on symmetric modes of dispersion curves. 
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE8_plain_weave}
+	\newcommand{\modelname}{SASE8}
 	%\newcommand{\modelname}{SASE8}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
@@ -608,16 +607,13 @@ The influence of volume fraction of reinforcing fibres on dispersion curves depe
 \end{figure}
 
 \clearpage
-It can be seen that increase of densities causes increase of wavenumber values, whereas increase of Young's modulus and volume fraction of reinforcing fibres causes decrease of wavenumber values. The changes of Poisson's ratio causes mixed influence on dispersion curves in this regard depending on propagation mode.
-
-It should be underlined that in all cases considered the changes of dispersion curves are higher at higher frequencies. Therefore, it is expected that higher accuracy of elastic constants determination can be achieved if dispersion curves are captured experimentally at higher frequencies. Moreover, as expected, the dependence of dispersion curves on angle of propagation is significant. Hence, this fact should be considered during construction of objective function.
+It should be underlined that in all cases considered the changes of dispersion curves are higher at higher frequencies. Therefore, it is expected that higher accuracy of elastic constants determination can be achieved if dispersion curves are captured experimentally at higher frequencies. Moreover, as expected, the dependence of dispersion curves on angle of propagation is significant. Hence, this fact should be considered during construction of fitness function.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental measurements \label{sec:experiment}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % plain wave composite; constants provided by manufacturer
 Guided wave propagation was analysed in carbon/epoxy laminate composed of 4 layers of plain weave fabric. 16 layers of prepreg GG 205  P (fibres Toray FT 300 - 3K 200 tex) by G. Angeloni and epoxy resin MP503Z-HT by Impregnatex Compositi was used for fabrication of the specimen. The composite laminate dimensions was 1200$\times$1200~mm. The average thickness was 3.9 mm. 
 
-The total weight of a specimen was 8550 g, hence, based on the volume of the specimen the density is about~1522.4~kg/m\textsuperscript{3}.
 % geometry of plain weave
 The parameters describing geometry of a plain weave textile reinforced composite estimated based on micrograph are given in Table~\ref{tab:weave_geo}. 
  \begin{table}[h]
@@ -658,21 +654,17 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 	Two approaches were considered:
 	\begin{enumerate}
 	\item indirect - by using composite constituents and homogenisation techniques;
-	The genetic algorithm was used for determination of the following properties:  matrix density $\rho_m$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$.  The fibre density was calculated based on the rule of mixture as:
-	\begin{equation}
-	\rho_f = \frac{\rho - \rho_m (1-V)}{V},
-	\end{equation}
-	where $V$ is the volume fraction of reinforcing fibres. Hence, only 6 variables needs to be optimised.
-	\item direct - determination of C-tensor components.
-	The genetic algorithm was used for determination of the following properties: $C_{11}$, $C_{12}$, $C_{13}$,  $C_{22}$, $C_{23}$, $C_{33}$, $C_{44}$, $C_{55}$ and $C_{66}$. Hence, 9 variables needs to be optimised.
+	The genetic algorithm was used for determination of the following properties:  matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. 
+	\item direct - determination of C-tensor components and mass density.
+	The genetic algorithm was used for determination of the following properties: $C_{11}$, $C_{12}$, $C_{13}$,  $C_{22}$, $C_{23}$, $C_{33}$, $C_{44}$, $C_{55}$, $C_{66}$ and $\rho$.
 	\end{enumerate}
-
-	The following GA parameters were used for optimisation:
+	The overall density of composite specimen $\rho$ was not evaluated experimentally and that is why it is included in the list of optimization variables.
+	The following GA parameters were used for optimization:
 	\begin{itemize}
-		\item Number of individuals per subpopulation: 100
-		\item Maximum number of generations: 50
+		\item Number of individuals per subpopulation: 40
+		\item Maximum number of generations: 40
 		\item Generation gap: 0.9
-		\item Number of variables in objective function: 6 (indirect approach), 9 (direct approach)
+		\item Number of variables in objective function: 7 (approach~1), 10 (approach~2)
 		\item Precision of binary representation of variables: 12 bit
 		\item Gray coding was used for representation of each variable.
    \end{itemize}
@@ -680,13 +672,11 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
     
     It should be noted that 12 bits precision was used for each variable. However, according to parametric studies in section~\ref{sec:parametric} certain material properties such as Poisson's ratio of reinforcing fibres have less influence on dispersion curves, hence the precision for their representation can be decreased. In contrast, volume fraction of reinforcing fibres has greatest influence on dispersion curves, hence the precision of representation of this variable can be increased.
   
-	In case of indirect approach upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table~\ref{tab:matprop}, except of matrix density $\rho_m$ which bound values were fixed according to data sheet delivered by manufactures in which range of cured resin density is 1150--1250~kg/m\textsuperscript{3}.
-	
-	In case of direct approach upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table ...
+	Upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table~\ref{tab:matprop}.
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Objective function}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	The optimization problem can be described as a minimization of objective function:
+	The optimization problem can be described as a minimization of objective function as follows:
 	\begin{equation}
 	\min_j \sum_{\beta}\sum_{m} \| k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)}) -k^{exp}_{m}(\beta,\omega) \|
 	\end{equation}
@@ -712,15 +702,13 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 	\subsection{Results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{figure} [h!]
-		\newcommand{\modelname}{ga_plain_weave_known_mass}
 		\centering
 		\begin{subfigure}[b]{\textwidth}
 			\centering
 			% size fitted
-			%\includegraphics[width=\textwidth]{dispersion60deg_initial.png}
+			%\includegraphics[width=\textwidth]{dispersion60deg_initia.png}
 			% size 100%
-			%\includegraphics[]{dispersion60deg_initial.png}
-		   \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_60_dispersion_curves_initial_large.png}
+			\includegraphics[]{dispersion60deg_initial.png}
 			\caption{initial parameters}
 			\label{fig:dispersion60deg_initial}
 		\end{subfigure}
@@ -729,59 +717,13 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 			% size fitted
 			%\includegraphics[width=\textwidth]{dispersion60deg.png}
 			% size 100%
-			%\includegraphics[]{dispersion60deg}
-			\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_60_dispersion_curves_test_case_2_large.png}
+			\includegraphics[]{dispersion60deg}
 			\caption{optimized}
 			\label{fig:dispersion60deg}
 		\end{subfigure}
-	\caption{Dispersion curves at angle $\beta = 60^{\circ}$; yellow curves: SASE model; image: experiment. }
+	\caption{Dispersion curves at angle $\beta = 60^{\circ}$; yellow curves: SASE model; image: experiment }
 	\label{fig:initial_optimized}
 	\end{figure}
-
-
-\begin{figure} [h!]
-	\newcommand{\modelname}{ga_plain_weave_known_mass}
-	\centering
-	\begin{subfigure}[b]{0.49\textwidth}
-		\centering
-			\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_0_dispersion_curves_test_case_2.png}
-		\caption{}
-		\label{fig:dispersion0deg_initial}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.49\textwidth}
-		\centering
-		\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_15_dispersion_curves_test_case_2.png}
-		\caption{}
-		\label{fig:dispersion15deg}
-	\end{subfigure}
-   \begin{subfigure}[b]{0.49\textwidth}
-	   	\centering
-	   	\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_30_dispersion_curves_test_case_2.png}
-	   	\caption{}
-	   	\label{fig:dispersion30deg}
-   \end{subfigure}
-	\begin{subfigure}[b]{0.49\textwidth}
-		\centering
-		\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_45_dispersion_curves_test_case_2.png}
-		\caption{}
-		\label{fig:dispersion45deg}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.49\textwidth}
-		\centering
-		\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_75_dispersion_curves_test_case_2.png}
-		\caption{}
-		\label{fig:dispersion75deg}
-	\end{subfigure}
-    \begin{subfigure}[b]{0.49\textwidth}
-    	\centering
-    	\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_90_dispersion_curves_test_case_2.png}
-    	\caption{}
-    	\label{fig:dispersion90deg}
-    \end{subfigure}
-	\caption{Dispersion curves for optimised elastic constants at angles $\beta$: (a) 0$^{\circ}$, (b) 15$^{\circ}$, (c) 30$^{\circ}$, (d) 45$^{\circ}$, (e) 75$^{\circ}$, (f) 90$^{\circ}$; yellow curves: SASE model; image: experiment. }
-	\label{fig:optimized}
-\end{figure}
-
 \clearpage
 
  \begin{table}[h]

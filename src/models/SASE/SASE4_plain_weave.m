@@ -1,13 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                   SASE6                                 %
+%                                   SASE4_plain_weave                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This script calls main_SASE function for a given wavenumbers (in 1/m) 
 % and gets the real frequencies and group velocities.
 % Dispersion curves are calculated at different angles (beta) 
-% composite [0 90 0 90 90 0 90 0]
+% composite reinforced by plain weave fabric
 % parametric study of material constituents
 % rule of mixture homogenization
-% parametric search over Poisson's ratio of matrix
+% parametric search over Young's modulus of matrix
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all;close all;
@@ -34,6 +34,7 @@ model_output_path = prepare_model_paths('raw','num',modelfolder,modelname);
 
 %% Input for SASE
 %beta = 0:15:90; % angles for dispersion curves in polar plot [deg]
+ht = 3.9/1000; % [m] laminate total thickness; new plain weave
 np = 3; % order of elements (3<=np<=5)
 nele_layer = 1; % no. of elements per ply
 wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
@@ -51,27 +52,38 @@ run(['inputs',filesep,'input1.m']); % initial material properties
 % nif0 =  0.2; 
 % vol0 = 0.5;
 
+%%
 variation = 0.2; % parametric sweep -20% to +20% of initial parameters
 number_of_points = 11; % number of points in grid search method
 variation_range=1-variation:2*variation/(number_of_points-1):1+variation;
-layup = [0 90 0 90 90 0 90 0];
-%layup = [0 90 0 90 0 90 0 90];
+layup = [0 0 0 0 0 0 0 0];
 nlayers = length(layup);
-h = [zeros(nlayers,1)+1]* 3e-3/nlayers; % thickness of layers;
+h = [zeros(nlayers,1)+1]* ht/nlayers; % thickness of layers;
 % Stacking direction
 stack_dir = 1;
+%% input material properties for woven fabric
+'weave type';                     fiberType = 'plainWeave';
+'lamina thickness [mm]';     h_p = ht/nlayers; % 
+'thickness of the fill [mm]';      h_f = h_p/2;
+'thickness of the warp [mm]';      h_w = h_p/2;
+'width of the fill [mm]';          a_f = 1.92;
+'width of the warp [mm]';      a_w = 2;
+'width of the fill gap [mm]';      g_f = 0.05;
+'width of the warp gap [mm]';  g_w = 0.05;   
 %% grid search approach - sweep over parameters
 rhom = rhom0; % kg/m^3
 rhof = rhof0; % kg/m^3
-em = em0; % Pa
-ef=ef0; % Pa
-%nim = nim0;
+nim = nim0;
 nif =  nif0; 
 vol=vol0;
+%em = em0/1e9;
+ef = ef0/1e9;
+e22_f = 0.1*ef;
+ni23_f =  nif ;
 test_case = 0;
-for i1=1:number_of_points % ef
+for i1=1:number_of_points % em
     
-    nim = nim0*(variation_range(i1));
+    em = em0*(variation_range(i1))/1e9;
     
         test_case = test_case+1;
         output_name = [model_output_path,filesep,num2str(test_case),'output'];
@@ -79,10 +91,9 @@ for i1=1:number_of_points % ef
             fprintf([modelname,' test case: %d\n'], test_case);
             
             %% Mechanical properties  
-            % homogenization of unidirectional fibre reinforce composite
-            [rho,e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23] = homogenization(rhom,rhof,em,ef,nim,nif,vol);
-            % Elastic constants of composite lamina in terms of principal material directions
-            [C11,C12,C13,C22,C23,C33,C44,C55,C66] = lamina_3D(e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23);
+            [C11,C12,C13,C21,C22,C23,C31,C32,C33,C44,C55,C66,rho] = ...
+            compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol, ...
+            em, nim, rhom, ef, e22_f, nif, ni23_f, rhof,false);
             %% SASE
             [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
 
