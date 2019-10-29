@@ -46,6 +46,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{booktabs} % for nice tables
+\usepackage{csvsimple} % for csv read
 %\usepackage{breqn}
 % matrix command 
 \newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
@@ -102,7 +103,7 @@
 		
 		\begin{abstract}
 			%% Text of abstract
-		Typically, material properties originate from destructive tests and are used in computational models in the design and analysis process of structures. This approach is well-established in relation to isotropic homogenous materials. However, if this approach is used for composite laminates, inaccuracies can arise that leads to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. In order to account for this problem, the alternative method is proposed, which utilizes Lamb wave propagation phenomenon and optimization technique. Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures. In the proposed approach, the elastic constants, which are utilized to determine dispersion curves of Lamb waves, are optimized to achieve a good correlation between model predictions and experimental observations. In the first step of this concept, parametric studies have been carried out in which the influence of mass density, Young's modulus, Poisson's ratio of reinforcing fibres as well as matrix of composite laminate and volume fraction of reinforcing fibres on dispersion curves of Lamb waves was investigated. The effective elasticity constants were calculated by using micromechanics and homogenization techniques considering variability of properties of composite constituents. The dispersion curves of Lamb wave were calculated by using semi-analytical spectral element method. The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning Doppler laser vibrometer and processed by 3D Fourier transform. Elastic constants were further optimized by using genetic algorithm which resulted in good correlation between numerical and experimental dispersion curves.
+		Typically, material properties originate from destructive tests and are used in computational models in the design and analysis process of structures. This approach is well-established in relation to isotropic homogenous materials. However, if this approach is used for composite laminates, inaccuracies can arise that leads to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. In order to account for this problem, the alternative method is proposed, which utilizes Lamb wave propagation phenomenon and optimisation technique. Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures. In the proposed approach, the elastic constants, which are utilized to determine dispersion curves of Lamb waves, are optimised to achieve a good correlation between model predictions and experimental observations. In the first step of this concept, parametric studies have been carried out in which the influence of mass density, Young's modulus, Poisson's ratio of reinforcing fibres as well as matrix of composite laminate and volume fraction of reinforcing fibres on dispersion curves of Lamb waves was investigated. The effective elasticity constants were calculated by using micromechanics and homogenization techniques considering variability of properties of composite constituents. The dispersion curves of Lamb wave were calculated by using semi-analytical spectral element method. The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning Doppler laser vibrometer and processed by 3D Fourier transform. Elastic constants were further optimised by using genetic algorithm which resulted in good correlation between numerical and experimental dispersion curves.
 		\end{abstract}
 		
 		\begin{keyword}
@@ -140,13 +141,13 @@
 	
 	Pol and Banerjee~\cite{Pol2013} derived a simplified 2D semi-analytical model based on a global matrix method to investigate the dispersion characteristics of propagating guided wave modes in multilayered composite laminates due to transient surface excitations. A relatively thin symmetric eight layered cross-ply composite laminate subjected to both narrowband and broadband surface excitations was considered. Comparison of group velocity curves obtained from developed model and LS-DYNA has shown good agreement.
 	
-	The paper by Beluch and Burczyński~\cite{Beluch2014} deals with the two-scale approach to the identification of material constants in composite materials. Structures made of unidirectionally fibre-reinforced composites are examined. However, for optimization of elastic constants, static displacements and eigenfrequencies are used, not Lamb wave data. Additionally, plane strain state was assumed in the model.
+	The paper by Beluch and Burczyński~\cite{Beluch2014} deals with the two-scale approach to the identification of material constants in composite materials. Structures made of unidirectionally fibre-reinforced composites are examined. However, for optimisation of elastic constants, static displacements and eigenfrequencies are used, not Lamb wave data. Additionally, plane strain state was assumed in the model.
 	
 	In 2016 Ong et al.~\cite{Ong2016} proposed a technique for determination of elastic properties of the woven composite panel using the Lamb wave dispersion characteristics. The investigated CFRP panel comprised of 16 plies with such a sequence so that it could be treated as quasi-isotropic material. Simple 2D plane strain model was assumed in the numerical simulations. The material properties were found by fitting dispersion curves from a numerical simulation with experimental data by the particle swarm optimisation method. 
 	
 	From the review of the literature, no research evidence was found to date which deals with the rapid and robust identification of elastic material properties of highly anisotropic composite structures. Therefore, it is essential to develop a robust material identification methodology for the inspection of a wide range of composite structures. Moreover, there is no method which enables online tracking of changes in elastic material properties.
 	
-	The subject of this study focuses exclusively on an approach in which access to only one side of the specimen is required. In the proposed approach, dispersion curves of Lamb waves are utilized for determination of elastic constants in composite laminates. The paper is organized as follows: section~\ref{sec:dispersion_curves} describe numerical method for calculation of dispersion curves in laminated composites, section~\ref{sec:experiment} is related to extraction of dispersion curves from full wavefield measurements, section~\ref{sec:optimization} describes optimization of elastic constants by using genetic algorithm (GA) followed by conclusions.
+	The subject of this study focuses exclusively on an approach in which access to only one side of the specimen is required. In the proposed approach, dispersion curves of Lamb waves are utilized for determination of elastic constants in composite laminates. The paper is organized as follows: section~\ref{sec:dispersion_curves} describe numerical method for calculation of dispersion curves in laminated composites, section~\ref{sec:experiment} is related to extraction of dispersion curves from full wavefield measurements, section~\ref{sec:optimization} describes optimisation of elastic constants by using genetic algorithm (GA) followed by conclusions.
 	
 	
 	\section{Dispersion curves of guided waves \label{sec:dispersion_curves}}
@@ -200,9 +201,9 @@
 		\item as a standard eigenvalue problem $\omega (k)$ (assuming given real values of wavenumbers $k$)
 		\item as a second-order polynomial eigenvalue problem $k(\omega)$ for given frequencies $\omega$.
 	\end{itemize}
-In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion}) to a first-order eigensystem by doubling its algebraic size.  The obtained wavenumbers are then of a complex character. This provides information about both the wave dispersion (real part of the wavenumbers) and the attenuation of the waves (imaginary part of the wave numbers).  However, due to the fact that the priority is the computation time and the that the information about the wave attenuation is not necessary, it is preferable to solve the standard eigenvalue problem $\omega (k)$.
+In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion}) to a first-order eigensystem by doubling its algebraic size.  The obtained wavenumbers are then of a complex character. This provides information about both the wave dispersion (real part of the wavenumbers) and the attenuation of the waves (imaginary part of the wave numbers).  However, due to the fact that the priority is the computation time and that the information about the wave attenuation is not necessary, it is preferable to solve the standard eigenvalue problem $\omega (k)$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \subsection{Reduction of the number of variables for optimization}
+ \subsection{Reduction of the number of variables for optimisation}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  Stiffness matrix components $\matr{k}_{mn}^e$ from Eq.~(\ref{eq:stiffness_matrix_e}) depend on an angle $\theta$ related to the layer orientation in the stacking sequence of a composite laminate. Hence, the material's stiffness matrix $\tilde{\matr{C}}$ corresponding to composite lamina is rotated by an angle $\theta$ using a standard calculation~\cite{Bartoli2006,Taupin2011}:
  \begin{equation}
@@ -225,7 +226,7 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
   \end{array}\right]. 
   \label{eq:elastic_constatns}
  \end{equation} 
- It means that there are 9 independent coefficients which should be determined by using optimization technique. But this is only applicable for the case in which the same material is used in each lamina and the layer orientation is known so that the Eq.~\ref{eq:elasticity_tensor} can be used. However, if the stacking sequence is unknown or there is a misalignment in the layer orientation, the more general case should be considered in which the matrix of elastic constants is more populated:
+ It means that there are 9 independent coefficients which should be determined by using optimisation technique. But this is only applicable for the case in which the same material is used in each lamina and the layer orientation is known so that the Eq.~\ref{eq:elasticity_tensor} can be used. However, if the stacking sequence is unknown or there is a misalignment in the layer orientation, the more general case should be considered in which the matrix of elastic constants is more populated:
  \begin{equation}
  \matr{C}_{\theta} = \left[\begin{array}{cccccc} C_{\theta 11} & C_{\theta 12}& C_{\theta 13} & 0&0&C_{\theta 16}\\[2pt]
  C_{\theta 12}& C_{\theta 22} & C_{\theta 23}& 0 &0&C_{\theta 26}\\[2pt]
@@ -236,7 +237,7 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
  \end{array}\right], 
  \label{eq:elastic_constatns_theta}
  \end{equation} 
- which gives 13 independent elastic constants per lamina. Of course determination of such large number of elastic constants by optimization methods is prohibitive due to high computation cost. 
+ which gives 13 independent elastic constants per lamina. Of course determination of such large number of elastic constants by optimisation methods is prohibitive due to high computation cost. 
  
  In order to reduce computation cost, the number of independent variables can be decreased by considering properties of composite constituents, namely matrix and fibres, separately. Thus,  7 parameters must be taken into account: matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. One parameter can be further eliminated if the overall density $\rho$ of composite is known. The effective elastic constants can be calculated by using the rule of mixture and homogenization techniques.
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -650,9 +651,9 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 3D Fourier Transform was applied to the full wavefield data in the space-time domain ($x$, $y$, $t$). Next 3D matrix was transformed from ($k_x$, $k_y$, $\omega$) coordinates to cylindrical coordinates ($\beta$,$k$,$f$). Interpolation was employed to obtain 2D images ($k$,$f$) representing dispersion curves $k(f)$ at selected angles $\beta = 0^{\circ} \ldots 90^{\circ}$ with the step of $15^{\circ}$, resulting in 9 2D matrices. Let's denote these matrices representing dispersion curves by $\matr{D}_{\beta}$. The size of the matrix  $\matr{D}_{\beta}$ in the current approach was $n_k=512$ $\times$$n_f= 512$, where $n_k$ is the number of wavenumber points and $n_f$ is the number of frequency points.  An example of such matrix at angle $ 60^{\circ}$ is presented in Fig.~\ref{fig:initial_optimized}. Dispersion curves in Fig.~\ref{fig:dispersion60deg_initial} calculated by using SASE model and material properties given in Table~\ref{tab:matprop} in the form of yellow curves are overlayed on the image for reference. It can be seen that there is high discrepancy between semi-analytic dispersion curves and experimental one. 
 % overlayed = superimposed
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Optimization \label{sec:optimization}}
+	\section{Optimisation \label{sec:optimization}}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	The Sheffield Genetic Algorithm Toolbox for Matlab developed at Department of Automatic Control and Systems Engineering at The University of Sheffield was used for the optimization~\cite{Chipperfield1994}.
+	The Sheffield Genetic Algorithm Toolbox for Matlab developed at Department of Automatic Control and Systems Engineering at The University of Sheffield was used for the optimisation~\cite{Chipperfield1994}.
 	\subsection{Genetic algorithm parameters}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	Two approaches were considered:
@@ -682,18 +683,34 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
   
 	In case of indirect approach upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table~\ref{tab:matprop}, except of matrix density $\rho_m$ which bound values were fixed according to data sheet delivered by manufactures in which range of cured resin density is 1150--1250~kg/m\textsuperscript{3}.
 	
-	In case of direct approach upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table ...
+	In case of direct approach upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table~\ref{tab:Ctensor_initial}.
+	
+	\begin{table}[h!]
+		\renewcommand{\arraystretch}{1.3}
+		\centering \footnotesize
+		\caption{Initial values of elastic constants used in direct approach of optimisation. Units: [GPa]}
+		\begin{tabular}{ccccccccc} 
+			%\hline
+			\toprule
+			$C_{11}$ & $C_{12}$ & $C_{13}$  & $C_{22}$ & $C_{23}$ & $C_{33}$ & $C_{44}$  & $C_{55}$ & $C_{66}$ \\
+			\midrule
+			50 &5& 5&  50 & 5 & 9 & 3 & 3 & 3\\
+			%\hline 
+			\bottomrule 
+		\end{tabular} 
+		\label{tab:Ctensor_initial}
+	\end{table}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Objective function}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	The optimization problem can be described as a minimization of objective function:
+	The optimisation problem can be described as a minimization of objective function:
 	\begin{equation}
-	\min_j \sum_{\beta}\sum_{m} \| k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)}) -k^{exp}_{m}(\beta,\omega) \|
+	\min_j \sum_{\beta}\sum_{m} \| k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)}) -k^{EXP}_{m}(\beta,\omega) \|
 	\end{equation}
 	where $m$ denotes the mode of propagating wave.
-	The objective function is correlation between dispersion curves calculated by using SASE model $k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)})$ and dispersion curves from experiment $k^{exp}_{m}(\beta,\omega)$. However, in the model we have actual curves for each propagation mode $m$ depending on the matrix of elastic constants $\matr{C}^{(j)}$ and propagation angle $\beta$ but the data from the experiment have a form of a matrix (image) $\matr{D}^{exp}_{\beta}$ at each angle $\beta$ (see Fig.~\ref{fig:initial_optimized}). Extraction of dispersion curves $k^{exp}_{m}(\beta,\omega)$ from images $\matr{D}^{exp}_{\beta}$ is cumbersome and could lead to inherent errors. Moreover, in order to formulate correlation coefficient, dispersion curves in SASE model must be sorted (which increases computation costs). Therefore, dispersion curves corresponding to modes $m=1,\ldots, 4$ calculated by using SASE model were converted to image $\matr{D}^{SASE}_{\beta} $ in which dimensions are the same as in experiment ($n_k=512$ $\times$$n_f= 512$). Pixels of image $\matr{D}^{SASE}_{\beta} $ which corresponds to dispersion curves are assigned value 1 whereas the remaining pixels have value 0. It leads to logic matrix or mask which can be applied for filtering experimental images: 
+	The objective function is correlation between dispersion curves calculated by using SASE model $k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)})$ and dispersion curves from experiment $k^{EXP}_{m}(\beta,\omega)$. However, in the model we have actual curves for each propagation mode $m$ depending on the matrix of elastic constants $\matr{C}^{(j)}$ and propagation angle $\beta$ but the data from the experiment have a form of a matrix (image) $\matr{D}^{EXP}_{\beta}$ at each angle $\beta$ (see Fig.~\ref{fig:initial_optimized}). Extraction of dispersion curves $k^{EXP}_{m}(\beta,\omega)$ from images $\matr{D}^{EXP}_{\beta}$ is cumbersome and could lead to inherent errors. Moreover, in order to formulate correlation coefficient, dispersion curves in SASE model must be sorted (which increases computation costs). Therefore, dispersion curves corresponding to modes $m=1,\ldots, 4$ calculated by using SASE model were converted to image $\matr{D}^{SASE}_{\beta} $ in which dimensions are the same as in experiment ($n_k=512$ $\times$$n_f= 512$). Pixels of image $\matr{D}^{SASE}_{\beta} $ which corresponds to dispersion curves are assigned value 1 whereas the remaining pixels have value 0. It leads to logic matrix or mask which can be applied for filtering experimental images: 
 	\begin{equation}
-		\tilde{\matr{D}}^{\beta} =  \matr{D}^{SASE}_{\beta}  .*    \matr{D}^{exp}_{\beta} ,
+		\tilde{\matr{D}}^{\beta} =  \matr{D}^{SASE}_{\beta}  .*    \matr{D}^{EXP}_{\beta} ,
    \end{equation}	
     where $.*$ is the element wise multiplication (such notation is used in Matlab). If dispersion curves from SASE model align well with high values of experimental images, it leads to high values in filtered image and vice versa.
 	The objective function value can be finally calculated as: 
@@ -731,7 +748,7 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 			% size 100%
 			%\includegraphics[]{dispersion60deg}
 			\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_60_dispersion_curves_test_case_2_large.png}
-			\caption{optimized}
+			\caption{optimised}
 			\label{fig:dispersion60deg}
 		\end{subfigure}
 	\caption{Dispersion curves at angle $\beta = 60^{\circ}$; yellow curves: SASE model; image: experiment. }
@@ -784,35 +801,83 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 
 \clearpage
 
- \begin{table}[h]
+% \begin{table}[h]
+%	\renewcommand{\arraystretch}{1.3}
+%	\centering \footnotesize
+%	\caption{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 100 GA runs; Elastic constants [GPa].}
+%	%\begin{tabular}{@{}ccccccc@{}} % remove spaces from vertical lines
+%	\begin{tabular}{crrrrrr} 
+%		%\hline
+%		\toprule
+%		&\multicolumn{3}{c}{\textbf{indirect method} }	& \multicolumn{3}{c}{\textbf{direct method} }  \\ 
+%		%	\hline \hline
+%		\midrule
+%		&Best & $\mu$ & $\sigma$& Best& $\mu$ & $\sigma$\\
+%		\cmidrule(lr){2-4} \cmidrule(lr){5-7} 
+%		%\hline
+%		$C_{11}$&50.19&1.10& 1.0  & 1.0  & 1.0 & 1.0 \\ 
+%		$C_{12}$&4.88&0.97& 1.0  & 1.0  & 1.0 & 1.0 \\ 
+%		$C_{13}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
+%		$C_{22}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
+%		$C_{23}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
+%		$C_{33}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
+%		$C_{44}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
+%		$C_{55}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
+%		$C_{66}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
+%		$F$          &1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
+%		%\hline 
+%		\bottomrule 
+%	\end{tabular} 
+%	\label{tab:results}
+%\end{table}
+
+ %\begin{table}[h]
+%	\renewcommand{\arraystretch}{1.3}
+%	\centering \footnotesize
+%	\caption{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 100 GA runs; Elastic constants [GPa].}	
+%		\csvreader[tabular=crrr, table head=\toprule  & Best & $\mu$  & $\sigma$ \\ \midrule,
+%		late after line=\\ ,table foot=\bottomrule]%
+%		{results_indirect.csv}{Row=\constants,Cbest=\cbest,Cmean=\cmean,Cstd=\cstd}%
+%		{\constants & \cbest & \cmean & \cstd}%
+%	\label{tab:csv_results}
+%\end{table}
+
+%\begin{table}[h]
+%	\renewcommand{\arraystretch}{1.3}
+%	\centering \footnotesize
+%	\caption{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 100 GA runs; Elastic constants [GPa].}	
+%	\begin{tabular}{crrr} \toprule
+%		&\multicolumn{3}{c}{\textbf{indirect method}}\\
+%		& Best & $\mu$  & $\sigma$ \\ 
+%		\cmidrule(lr){2-4}
+%		\csvreader[table head=\toprule ,
+%		late after line=\\ ]%
+%		{results_indirect.csv}{Row=\constants,Cbest=\cbest,Cmean=\cmean,Cstd=\cstd}%
+%		{\constants & \cbest & \cmean & \cstd}%
+%		\bottomrule
+%	\end{tabular}	
+%		\label{tab:csv_results2}
+%\end{table}
+
+\begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
-	\caption{GA optimization results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 100 GA runs; Elasticity constants [GPa].}
-	%\begin{tabular}{@{}ccccccc@{}} % remove spaces from vertical lines
-	\begin{tabular}{crrrrrr} 
-		%\hline
-		\toprule
-		&\multicolumn{3}{c}{\textbf{indirect method} }	& \multicolumn{3}{c}{\textbf{direct method} }  \\ 
-		%	\hline \hline
-		\midrule
-		&Best & $\mu$ & $\sigma$& Best& $\mu$ & $\sigma$\\
+	\caption{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 100 GA runs; Elastic constants [GPa].}	
+	\begin{tabular}{crrrrrr} \toprule
+		&\multicolumn{3}{c}{\textbf{indirect method}} & \multicolumn{3}{c}{\textbf{direct method} }\\
+		%\midrule
 		\cmidrule(lr){2-4} \cmidrule(lr){5-7} 
-		%\hline
-		$C_{11}$&50.19&1.10& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{12}$&4.88&0.97& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{13}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{22}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{23}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{33}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{44}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{55}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{66}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$F$          &1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		%\hline 
-		\bottomrule 
-	\end{tabular} 
-	\label{tab:results}
+	&Best & $\mu$ & $\sigma$& Best& $\mu$ & $\sigma$\\
+	\cmidrule(lr){2-4} \cmidrule(lr){5-7} 
+		\csvreader[table head=\toprule ,
+		late after line=\\ ]%
+		{results_indirect_direct.csv}{Row=\constants,Cbest=\cbest,Cmean=\cmean,Cstd=\cstd,Cdbest=\cdbest,Cdmean=\cdmean,Cdstd=\cdstd}%
+		{\constants & \cbest & \cmean & \cstd& \cdbest & \cdmean & \cdstd}%	
+		\bottomrule
+	\end{tabular}	
+	\label{tab:csv_results}
 \end{table}
+%\csvautobooktabular{results_indirect.csv}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Conclusions}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
