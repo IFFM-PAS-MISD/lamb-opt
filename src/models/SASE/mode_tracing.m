@@ -11,7 +11,7 @@ function [cg_new,om_new] = mode_tracing(cg,om,wavenumber_step)
 % 
 % Outputs: 
 %    cg_new - sorted group velocity modes, double, dimensions [num_of_modes,number_of_wavenumber_points], Units: m/s 
-%    om_new - sorted angular frequencies, double, double, dimensions [num_of_modes,number_of_wavenumber_points], Units: [rad/s] 
+%    om_new - sorted angular frequencies, double, dimensions [num_of_modes,number_of_wavenumber_points], Units: [rad/s] 
 % 
 % Example: 
 %    [cg_new,om_new] = mode_tracing(cg,om) 

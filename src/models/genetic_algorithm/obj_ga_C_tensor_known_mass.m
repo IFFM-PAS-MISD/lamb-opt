@@ -1,4 +1,4 @@
-function [ObjV] = obj_ga_C_tensor(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered)
+function [ObjV] = obj_ga_C_tensor_known_mass(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho)
 % OBJ_GA_C_TENSOR   One line description of what the function or script performs (H1 line) 
 %    optional: more details about the function than in the H1 line 
 %    optional: more details about the function than in the H1 line 
@@ -44,16 +44,15 @@ b=310;
 %for k=1:size(Phen,1)
 parfor k=1:size(Phen,1)
     %[k,size(Phen,1)]
-    rho = Phen(k,1);
-    Q11 = Phen(k,2);
-    Q12 = Phen(k,3);
-    Q13 = Phen(k,4);
-    Q22 = Phen(k,5);
-    Q23 = Phen(k,6);
-    Q33 = Phen(k,7);
-    Q44 = Phen(k,8);
-    Q55 = Phen(k,9);
-    Q66 = Phen(k,10);
+    Q11 = Phen(k,1);
+    Q12 = Phen(k,2);
+    Q13 = Phen(k,3);
+    Q22 = Phen(k,4);
+    Q23 = Phen(k,5);
+    Q33 = Phen(k,6);
+    Q44 = Phen(k,7);
+    Q55 = Phen(k,8);
+    Q66 = Phen(k,9);
       
     %% SASE
     [wavenumber,CG,FREQ] = main_SASE(rho,Q11,Q12,Q13,Q22,Q23,Q33,Q44,Q55,Q66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);

@@ -1,0 +1,17 @@
+\beamer@slide {frameone}{1}
+\beamer@slide {frameone<1>}{1}
+\beamer@slide {frameone}{1}
+\beamer@slide {frametwo<1>}{2}
+\beamer@slide {frametwo}{2}
+\beamer@slide {framethree<1>}{3}
+\beamer@slide {framethree}{3}
+\beamer@slide {framefour<1>}{4}
+\beamer@slide {framefour}{4}
+\beamer@slide {framefive<1>}{5}
+\beamer@slide {framefive}{5}
+\beamer@slide {framefive<2>}{6}
+\beamer@slide {framefive<1>}{7}
+\beamer@slide {framefive}{7}
+\beamer@slide {framefive<1>}{8}
+\beamer@slide {framefive}{8}
+\beamer@slide {framefive<2>}{9}

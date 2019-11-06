@@ -103,7 +103,7 @@
 		
 		\begin{abstract}
 			%% Text of abstract
-		Typically, material properties originate from destructive tests and are used in computational models in the design and analysis process of structures. This approach is well-established in relation to isotropic homogenous materials. However, if this approach is used for composite laminates, inaccuracies can arise that leads to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. In order to account for this problem, the alternative method is proposed, which utilizes Lamb wave propagation phenomenon and optimisation technique. Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures. In the proposed approach, the elastic constants, which are utilized to determine dispersion curves of Lamb waves, are optimised to achieve a good correlation between model predictions and experimental observations. In the first step of this concept, parametric studies have been carried out in which the influence of mass density, Young's modulus, Poisson's ratio of reinforcing fibres as well as matrix of composite laminate and volume fraction of reinforcing fibres on dispersion curves of Lamb waves was investigated. The effective elasticity constants were calculated by using micromechanics and homogenization techniques considering variability of properties of composite constituents. The dispersion curves of Lamb wave were calculated by using semi-analytical spectral element method. The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning Doppler laser vibrometer and processed by 3D Fourier transform. Elastic constants were further optimised by using genetic algorithm which resulted in good correlation between numerical and experimental dispersion curves.
+		Typically, material properties are usually estimated by destructive tests and used in computational models in the design and analysis process of structures. This approach is well-established in relation to isotropic homogenous materials. However, if this approach is used for composite laminates, inaccuracies can arise that leads to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. In order to account for this problem, the alternative method is proposed, which utilizes Lamb wave propagation phenomenon and optimisation technique. Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures. In the proposed approach, the elastic constants, which are utilized to determine dispersion curves of Lamb waves, are optimised to achieve a good correlation between model predictions and experimental observations. In the first step of this concept, parametric studies have been carried out in which the influence of mass density, Young's modulus, Poisson's ratio of reinforcing fibres as well as a matrix of composite laminate and volume fraction of reinforcing fibres on dispersion curves of Lamb waves was investigated. The effective elasticity constants were calculated by using micromechanics and homogenisation techniques considering the variability of properties of composite constituents. The dispersion curves of Lamb wave were calculated by using the semi-analytical spectral element method. The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning laser Doppler vibrometer and processed by 3D Fourier transform. Next, elastic constants were optimised by using a genetic algorithm which resulted in a good correlation between numerical and experimental dispersion curves.
 		\end{abstract}
 		
 		\begin{keyword}
@@ -126,35 +126,35 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	Elastic constant values are often difficult to obtain, especially for anisotropic media. These values are indispensable for the design of a structure which fulfils assumed requirements (strength, stiffness, vibration characteristics). For years elastic constants of isotropic materials have been estimated during destructive testing and strain gauge or static displacement recordings~\cite{Wang2000}. Similar results can be achieved by dynamic tests which rely on natural frequencies~\cite{Wang2000a, Wesolowski2009,Beluch2014}. Measurements of velocities of bulk waves (longitudinal and shear) can also be used for determination of elastic constants~\cite{Rose1999}.
 	
-	For anisotropic media, determining the elastic constants is more complex. Destructive testing can still be used to determine some of the constants. Additional constants can be obtained by special cube-cutting procedures followed by destructive testing~\cite{Rose1991} or by using bulk wave measurement protocol for orthotropic media~\cite{Rose1999}. However, such experiments are cumbersome and expensive.  It should be noted that other ultrasonic methods exist such as leaky Lamb wave technique. In this technique, a specimen is immersed in a liquid tank and insonified with an acoustic beam at various incident angles and frequencies. The obtained pattern provides unique fingerprint of the underlying mechanical elasticity tensor at the insonified material spot.The method has been improved over the years by using the pulsed ultrasonic polar scan and inverse methods~\cite{Kersemans2014}. Due to simplicity, non-destructive methods based on one-sided Lamb wave propagation measurements have been evolving over the years.
+	For anisotropic media, the determination of elastic constants is more complex. Destructive testing can still be used to determine some of the constants. Additional constants can be obtained by special cube-cutting procedures followed by destructive testing~\cite{Rose1991} or by using bulk wave measurement protocol for orthotropic media~\cite{Rose1999}. However, such experiments are cumbersome and expensive.  It should be noted that other ultrasonic methods exist such as the leaky Lamb wave technique~\cite{Karim1990,Karim1990a}. In this technique, a specimen is immersed in a liquid tank and insonified with an acoustic beam at various incident angles and frequencies. The obtained pattern provides a unique fingerprint of the underlying mechanical elasticity tensor at the insonified material spot. The method has been improved over the years by using the pulsed ultrasonic polar scan and inverse methods~\cite{Kersemans2014,Martens2017}. Due to simplicity, non-destructive methods based on one-sided Lamb wave propagation measurements have been evolving over the years.
 	
 	Lamb waves were named after their discoverer, Horace Lamb, who developed the theory of their propagation in 1917~\cite{Lamb1917}. Interestingly, Lamb was not able to physically generate the waves he discovered. This was achieved by Worlton~\cite{Worlton1961} in 1961, who also noticed their potential usefulness for damage detection. Lamb waves are defined as a type of elastic waves that propagate in infinite media bounded by two surfaces and arise as a result of the superposition of multiple reflections of longitudinal waves and shear vertical waves from the bounding surfaces. In the case of these waves, medium particle oscillations are very complex in character. Depending on the distribution of displacements on the top and bottom bounding surface, two modes of Lamb waves appear: symmetric, denoted as S0, S1, S2, …, and antisymmetric, denoted as A0, A1, A2, … One should note that the number of these modes is infinite.
 	
-	The analytic solution proposed by Lamb is limited to isotropic materials and infinite, unbounded media. The solution has highly nonlinear character, and numerical methods must be used to obtain dispersion curves. The numerical approach, based on Lamb solution, for calculation of dispersion curves for isotropic materials, can be found in a book by Rose~\cite{Rose1999}.
+	The analytic solution proposed by Lamb is limited to isotropic materials and infinite, unbounded media. The solution has a highly nonlinear character, and numerical methods must be used to obtain dispersion curves. The numerical approach, based on Lamb solution, for calculation of dispersion curves for isotropic materials, can be found in a book by Rose~\cite{Rose1999}.
 	
 	Many studies have been devoted to the calculation of dispersion curves of Lamb waves propagating in composite laminates but only a few are related to the identification of elastic constants. Rose et al.~\cite{Rose1987} investigated Lamb wave propagation in unidirectional, two-directional, and quasi-isotropic graphite-epoxy composite panels. They derived polar characteristics of phase and group velocities of the low-frequency S0 Lamb mode. Mal et al.~\cite{Mal1993} and Karim et al.~\cite{Karim1990} determined dynamic elastic moduli of the fibre-reinforced composite. The elastic constants were derived by inversion of a set of data measured by the leaky Lamb wave technique. In 1995 Rogers~\cite{Rogers1995} proposed a technique to measure the isotropic elastic constants of plate materials using Rayleigh-Lamb waves. In his paper, he presents the effect of an increase in longitudinal wave velocities or changes in Young’s modulus or Poisson’s ratio on the dispersion curves.
 	
-	De\`an et al.~\cite{Dean2008} determined elastic constants and thickness of the aluminium by minimizing the error function comprised by the theoretical dispersion curves of Lamb waves and experimental data. They utilized full-field wavelength measurements of single-mode narrowband Lamb waves. Grinberg et al.~\cite{Grimberg2010} determined in-plane material parameters of CFRP from the equations for phase velocity of S0 and A0 modes at low-frequency range. 
-	The paper by Bartoli et al.~\cite{Bartoli2006} deals with a semi-analytical finite element (SAFE) method for modelling wave propagation in waveguides of arbitrary cross-section. The method simply requires the finite element discretization of the cross-section of the waveguide and assumes harmonic motion along the wave propagation direction. The general SAFE technique is extended to account for viscoelastic material damping by allowing for complex stiffness matrices for the material. The dispersive solutions are obtained in terms of phase velocity, group velocity (for undamped media), energy velocity (for damped media), attenuation, and cross-sectional mode shapes. Taupin et al.~\cite{Taupin2011} applied the SAFE method to analyse composite laminate of various stacking sequences.
+	De\`an et al.~\cite{Dean2008} determined elastic constants and thickness of the aluminium by minimizing the error function comprised of the theoretical dispersion curves of Lamb waves and experimental data. They utilized full-field wavelength measurements of single-mode narrowband Lamb waves. Grinberg et al.~\cite{Grimberg2010} determined in-plane material parameters of composite fibre reinforced polymer (CFRP) from the equations for phase velocity of S0 and A0 modes at low-frequency range. 
+	The paper by Bartoli et al.~\cite{Bartoli2006} deals with a semi-analytical finite element (SAFE) method for modelling wave propagation in waveguides of arbitrary cross-section. The method simply requires the finite element discretization of the cross-section of the waveguide and assumes harmonic motion along the wave propagation direction. The general SAFE technique is extended to account for viscoelastic material damping by incorporating complex stiffness matrices. The dispersive solutions are obtained in terms of phase velocity, group velocity (for undamped media), energy velocity (for damped media), attenuation, and cross-sectional mode shapes. Taupin et al.~\cite{Taupin2011} applied the SAFE method to analyse composite laminates of various stacking sequences.
 	
-	A new semi-analytical method using 3-D elasticity theory was derived by Wang and Juan~\cite{Wang2007}. In comparison with the results of the theory and experiment, it was confirmed that multiple higher-order Lamb waves could be excited from piezoelectric actuators and the measured group velocities agree well with those from 3-D elasticity theory. The thin quasi-isotropic laminate was investigated only.
+	A new semi-analytical method using 3D elasticity theory was derived by Wang and Juan~\cite{Wang2007}. The group velocities of multiple higher-order Lamb waves obtained by the proposed model agrees well with experimental measurements. However, the studies covered only wave propagation phenomenon in thin quasi-isotropic laminate. 
 	
-	Pol and Banerjee~\cite{Pol2013} derived a simplified 2D semi-analytical model based on a global matrix method to investigate the dispersion characteristics of propagating guided wave modes in multilayered composite laminates due to transient surface excitations. A relatively thin symmetric eight layered cross-ply composite laminate subjected to both narrowband and broadband surface excitations was considered. Comparison of group velocity curves obtained from developed model and LS-DYNA has shown good agreement.
+	Pol and Banerjee~\cite{Pol2013} derived a simplified 2D semi-analytical model based on a global matrix method to investigate the dispersion characteristics of propagating guided wave modes in multilayered composite laminates due to transient surface excitations. A relatively thin symmetric eight layered cross-ply composite laminate subjected to both narrowband and broadband surface excitations was considered. Comparison of group velocity curves obtained from the developed model and LS-DYNA has shown good agreement.
 	
-	The paper by Beluch and Burczyński~\cite{Beluch2014} deals with the two-scale approach to the identification of material constants in composite materials. Structures made of unidirectionally fibre-reinforced composites are examined. However, for optimisation of elastic constants, static displacements and eigenfrequencies are used, not Lamb wave data. Additionally, plane strain state was assumed in the model.
+	The paper by Beluch and Burczyński~\cite{Beluch2014} deals with the two-scale approach to the identification of material constants in composite materials. Structures made of unidirectional fibre-reinforced composites were examined. However, instead of Lamb wave data for optimisation of elastic constants, static displacements and eigenfrequencies were used. Additionally, plane strain state was assumed in the model.
 	
-	In 2016 Ong et al.~\cite{Ong2016} proposed a technique for determination of elastic properties of the woven composite panel using the Lamb wave dispersion characteristics. The investigated CFRP panel comprised of 16 plies with such a sequence so that it could be treated as quasi-isotropic material. Simple 2D plane strain model was assumed in the numerical simulations. The material properties were found by fitting dispersion curves from a numerical simulation with experimental data by the particle swarm optimisation method. 
+	In 2016 Ong et al.~\cite{Ong2016} proposed a technique for determination of elastic properties of the woven composite panel using the Lamb wave dispersion characteristics. The investigated CFRP panel comprised of 16 plies with such a sequence so that it could be treated as quasi-isotropic material. A simple 2D plane strain model was assumed in the numerical simulations. The material properties were found by fitting dispersion curves from a numerical simulation with experimental data by the particle swarm optimisation method. 
 	
 	From the review of the literature, no research evidence was found to date which deals with the rapid and robust identification of elastic material properties of highly anisotropic composite structures. Therefore, it is essential to develop a robust material identification methodology for the inspection of a wide range of composite structures. Moreover, there is no method which enables online tracking of changes in elastic material properties.
 	
-	The subject of this study focuses exclusively on an approach in which access to only one side of the specimen is required. In the proposed approach, dispersion curves of Lamb waves are utilized for determination of elastic constants in composite laminates. The paper is organized as follows: section~\ref{sec:dispersion_curves} describe numerical method for calculation of dispersion curves in laminated composites, section~\ref{sec:experiment} is related to extraction of dispersion curves from full wavefield measurements, section~\ref{sec:optimization} describes optimisation of elastic constants by using genetic algorithm (GA) followed by conclusions.
+	The subject of this study focuses exclusively on an approach in which access to only one side of the specimen is required. In the proposed approach, dispersion curves of Lamb waves are utilized for determination of elastic constants in composite laminates. The paper is organized as follows: section~\ref{sec:dispersion_curves} describes numerical method for calculation of dispersion curves of laminated composites, section~\ref{sec:experiment} is related to extraction of dispersion curves from full wavefield measurements, section~\ref{sec:optimization} describes optimisation of elastic constants by using genetic algorithm (GA) followed by conclusions.
 	
 	
 	\section{Dispersion curves of guided waves \label{sec:dispersion_curves}}
 	\subsection{Semi-analytical model}
-	Lamb wave dispersion phenomenon is related to wavenumber  $k$ dependency on frequency $f$. Lamb wave dispersion curves depend on elasticity constants of the material in which Lamb waves propagate. Moreover, in composite laminates Lamb waves behaviour is strictly related to the angle of propagation. Parameters such as phase velocity and group velocity, which are directly related to dispersion curves, and wave attenuation depend on the angle of propagation. Therefore, for proper material characterization it is necessary to consider dispersion curves of Lamb waves at various angles of propagation.
+	Lamb wave dispersion phenomenon is related to wavenumber  $k$ dependency on frequency $f$. Lamb wave dispersion curves depend on elasticity constants of the material in which Lamb waves propagate. Moreover, in composite laminates Lamb waves behaviour is strictly related to the angle of propagation. Parameters such as phase velocity and group velocity, which are directly related to dispersion curves, and wave attenuation depend on the angle of propagation. Therefore, for proper material characterization, it is necessary to consider dispersion curves of Lamb waves at various angles of propagation.
 	
-	The mathematical model is presented here for the case of a plate-like waveguide as shown in Fig.~\ref{fig:layered_composite_SASE}.  The waveguide can generally be composed of anisotropic viscoelastic materials. Orthotropic material is shown in Fig.~\ref{fig:layered_composite_SASE} in which reinforcing fibres are at angle $\theta$ in respect to $z$ axis.The model is a modification of the semi-analytical finite element (SAFE) method proposed in~\cite{Bartoli2006}. The modification includes application of spectral elements instead of classic finite elements through the thickness of a laminate, preserving wave equation in the propagation direction. Hence, we propose to name it semi-analytical spectral element (SASE) method. Moreover, instead of two-dimensional approximation of cross-section of the laminate, one-dimensional spectral elements were applied. Four-node spectral element is shown in Fig.~\ref{fig:layered_composite_SASE}. It has non-uniform distribution of nodes and three degrees of freedom per node.
+	The physical model of a plate-like waveguide is shown in Fig.~\ref{fig:layered_composite_SASE}.  The waveguide can generally be composed of anisotropic viscoelastic materials but for simplicity only orthotropic material is shown in Fig.~\ref{fig:layered_composite_SASE} in which reinforcing fibres are at angle $\theta$ in respect to $z$ axis. The current mathematical model is a modification of the semi-analytical finite element (SAFE) method proposed in~\cite{Bartoli2006}. The modification includes application of spectral elements instead of classic finite elements through the thickness of a laminate, preserving wave equation in the propagation direction. Hence, we propose to name it the semi-analytical spectral element (SASE) method. Moreover, instead of two-dimensional approximation of cross-section of the laminate, one-dimensional spectral elements were applied. Four-node spectral element is shown in Fig.~\ref{fig:layered_composite_SASE}. It has non-uniform distribution of nodes and three degrees of freedom per node.
 	
 		\begin{figure} [h!]
 		\centering
@@ -186,7 +186,7 @@
 	\end{aligned}
 	\label{eq:dispersion}
 	\end{equation}
-	where  $s = \sin(\beta)$, $c = \cos(\beta)$, $i = \sqrt{-1}$, and $\beta$ is the angle of guided wave propagation. The transformation matrix $\matr{T}$ is diagonal and it is introduced in order to eliminate imaginary elements from Eq.~(\ref{eq:dispersion}) (see~\cite{Bartoli2006} for more details). It should be noted that the system of equations~(\ref{eq:eig_dispersion}) explicitly depends on the angle $\beta$. Predicting the anisotropic behaviour of guided wave properties makes it necessary to loop over $\beta$ for each direction considered.
+	where  $s = \sin(\beta)$, $c = \cos(\beta)$, $i = \sqrt{-1}$, and $\beta$ is the angle of guided wave propagation. The transformation matrix $\matr{T}$ is diagonal and it is introduced in order to eliminate imaginary elements from Eq.~(\ref{eq:dispersion}) (see~\cite{Bartoli2006} for more details). It should be noted that the system of equations~(\ref{eq:eig_dispersion}) explicitly depends on the angle $\beta$. Predicting the anisotropic behaviour of guided wave properties makes it necessary to loop over each direction considered.
 	
 	Stiffness matrices $\matr{K}_{mn}$ from Eq.~(\ref{eq:dispersion}) depend on elastic constants of composite laminate and relations between displacements and strains (more detailed derivation can be found in Appendix). The definitions of these matrices on an elemental level are:
 	
@@ -201,16 +201,16 @@
 		\item as a standard eigenvalue problem $\omega (k)$ (assuming given real values of wavenumbers $k$)
 		\item as a second-order polynomial eigenvalue problem $k(\omega)$ for given frequencies $\omega$.
 	\end{itemize}
-In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion}) to a first-order eigensystem by doubling its algebraic size.  The obtained wavenumbers are then of a complex character. This provides information about both the wave dispersion (real part of the wavenumbers) and the attenuation of the waves (imaginary part of the wave numbers).  However, due to the fact that the priority is the computation time and that the information about the wave attenuation is not necessary, it is preferable to solve the standard eigenvalue problem $\omega (k)$.
+In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion}) to a first-order eigensystem by doubling its algebraic size.  The obtained wavenumbers are then of a complex character. This provides information about both the wave dispersion (real part of the wavenumbers) and the attenuation of the waves (imaginary part of the wavenumbers).  However, due to the fact that the priority is the computation time and that the information about the wave attenuation is not necessary, it is preferable to solve the standard eigenvalue problem $\omega (k)$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \subsection{Reduction of the number of variables for optimisation}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Stiffness matrix components $\matr{k}_{mn}^e$ from Eq.~(\ref{eq:stiffness_matrix_e}) depend on an angle $\theta$ related to the layer orientation in the stacking sequence of a composite laminate. Hence, the material's stiffness matrix $\tilde{\matr{C}}$ corresponding to composite lamina is rotated by an angle $\theta$ using a standard calculation~\cite{Bartoli2006,Taupin2011}:
+ Stiffness matrix components $\matr{k}_{mn}^e$ from Eq.~(\ref{eq:stiffness_matrix_e}) depend on an angle $\theta$ related to the layer orientation in the stacking sequence of a composite laminate. Hence, the stiffness matrix of material $\tilde{\matr{C}}$ corresponding to composite lamina is rotated by an angle $\theta$ using a standard calculation~\cite{Bartoli2006,Taupin2011}:
  \begin{equation}
 	\tilde{ \matr{C}_{\theta}}= \matr{R}_1(\theta) \,\tilde{\matr{C}} \,\matr{R}_2^{-1}(\theta).
 	 \label{eq:elasticity_tensor}
  \end{equation}
- It should be noted that in general the material's stiffness matrix can be complex:
+ It should be noted that in general the stiffness matrix of material can be complex:
  \begin{equation}
  \tilde{\matr{C}}= \matr{C} - i \bs{\eta},
  \label{eq:complex_elasticity_tensor}
@@ -226,7 +226,7 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
   \end{array}\right]. 
   \label{eq:elastic_constatns}
  \end{equation} 
- It means that there are 9 independent coefficients which should be determined by using optimisation technique. But this is only applicable for the case in which the same material is used in each lamina and the layer orientation is known so that the Eq.~\ref{eq:elasticity_tensor} can be used. However, if the stacking sequence is unknown or there is a misalignment in the layer orientation, the more general case should be considered in which the matrix of elastic constants is more populated:
+ It means that there are 9 independent coefficients which should be determined by using an optimisation technique. But this is only applicable for the case in which the same material is used in each lamina and the layer orientation is known so that the Eq.~\ref{eq:elasticity_tensor} can be used. However, if the stacking sequence is unknown or there is a misalignment in the layer orientation, the more general case should be considered in which the matrix of elastic constants is more populated:
  \begin{equation}
  \matr{C}_{\theta} = \left[\begin{array}{cccccc} C_{\theta 11} & C_{\theta 12}& C_{\theta 13} & 0&0&C_{\theta 16}\\[2pt]
  C_{\theta 12}& C_{\theta 22} & C_{\theta 23}& 0 &0&C_{\theta 26}\\[2pt]
@@ -239,16 +239,16 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
  \end{equation} 
  which gives 13 independent elastic constants per lamina. Of course determination of such large number of elastic constants by optimisation methods is prohibitive due to high computation cost. 
  
- In order to reduce computation cost, the number of independent variables can be decreased by considering properties of composite constituents, namely matrix and fibres, separately. Thus,  7 parameters must be taken into account: matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. One parameter can be further eliminated if the overall density $\rho$ of composite is known. The effective elastic constants can be calculated by using the rule of mixture and homogenization techniques.
+ In order to reduce computation cost, the number of independent variables can be decreased by considering properties of composite constituents, namely matrix and fibres, separately. Thus,  7 parameters must be taken into account: matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. One parameter can be further eliminated if the overall density $\rho$ of the composite is known. The effective elastic constants can be calculated by using the rule of mixture and homogenization techniques.
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \subsection{Parametric studies of dispersion curves \label{sec:parametric}}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- The SASE model was used for parametric studies of dispersion curves. The influence of plain-weave textile reinforced composite material properties on dispersion curves were analysed. Properties of epoxy matrix, carbon fibres and volume fraction of reinforcing fibres were analysed. The initial values of constants characterising composite material constituents are given in Table~\ref{tab:matprop} (epoxy resin and carbon fibres). The influence of each parameter on dispersion curves was studied separately. The variability range of each parameter was assumed as $\pm$20\% in respect to initial values. The assumed parameters describing geometry of a plain weave textile reinforced composite are given in Table~\ref{tab:weave_geo}. It was assumed that laminate is composed of 8 layers of total thickness 3.9 mm. Homogenisation techniques described in~\cite{Barbero2006,Adumitroaie2012} were employed to calculate matrix of elastic constants.
+ The SASE model was used for parametric studies of dispersion curves. The influence of plain-weave textile reinforced composite material properties on dispersion curves were analysed. Properties of epoxy matrix, carbon fibres and volume fraction of reinforcing fibres were analysed. The initial values of constants characterising composite material constituents are given in Table~\ref{tab:matprop} (epoxy resin and carbon fibres). The influence of each parameter on dispersion curves was studied separately. The variability range of each parameter was assumed as $\pm$20\% in respect to initial values. The assumed parameters describing geometry of a plain weave textile reinforced composite are given in Table~\ref{tab:weave_geo}. It was assumed that the laminate is composed of 8 layers of total thickness 3.9 mm. The homogenisation techniques described in~\cite{Barbero2006,Adumitroaie2012} were employed to calculate the matrix of elastic constants.
  
  \begin{table}[h]
  	\renewcommand{\arraystretch}{1.3}
  	\centering \footnotesize
- 	\caption{Initial values of constants characterising composite material constituents.}
+ 	\caption{Initial values of constants characterising the composite material constituents.}
  	%\begin{tabular}{@{}ccccccc@{}} % remove spaces from vertical lines
  	\begin{tabular}{ccccccc} 
  		%\hline
@@ -272,7 +272,7 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
  
  The dispersion curves shown in all figures presented here are in the form $k(f)$ where $f=\omega/(2 \pi)$ is the frequency measured in hertz. Black curves are calculated for initial values of material properties given in Table~\ref{tab:matprop}, red curves represent changes of dispersion curves due to increase of these parameters whereas blue curves represent changes of dispersion curves due to decrease of these parameters.
  
- The influence of matrix density on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:rhom}. The parameter has moderate influence on each mode of propagating waves.
+ The influence of matrix density on dispersion curves for selected angle $\beta$ is shown in Fig.~\ref{fig:rhom}. The parameter has moderate influence on each mode of propagating waves.
  
  \begin{figure} [h!]
  	\newcommand{\modelname}{SASE2_plain_weave}
@@ -315,12 +315,12 @@ In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_dispersion
  		\caption{}
  		\label{fig:rhom90}
  	\end{subfigure}
- 	\caption{The influence of matrix density on dispersion curves depending on the propagation angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+ 	\caption{The influence of matrix density on dispersion curves for selected angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
  	\label{fig:rhom}
  \end{figure}
 \clearpage
 
-The influence of fibres density on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:rhof}. Similar changes of dispersion curves as in case of matrix density can be noticed.
+The influence of fibres density on dispersion curves for selected angle $\beta$ is shown in Fig.~\ref{fig:rhof}. Similar changes of dispersion curves as in case of matrix density can be noticed.
 
 \begin{figure} [h!]
 	\centering
@@ -363,12 +363,12 @@ The influence of fibres density on dispersion curves depending on the propagatio
 		\caption{}
 		\label{fig:rhof90}
 	\end{subfigure}
-	\caption{The influence of fibres density on dispersion curves depending on the propagation angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\caption{The influence of fibres density on dispersion curves for selected angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
 	\label{fig:rhof}
 \end{figure}
 \clearpage
 
-The influence of matrix Young's modulus on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:em}. Large changes of dispersion curves of antisymmetric modes can be observed. Contrary, changes of dispersion curves of symmetric modes at frequencies up to about 300~kHz are small.
+The influence of matrix Young's modulus on dispersion curves for selected angle $\beta$ is shown in Fig.~\ref{fig:em}. Large changes of dispersion curves of antisymmetric modes can be observed. Contrary, changes of dispersion curves of symmetric modes at frequencies up to about 300~kHz are small.
 
 \begin{figure} [h!]
 	\centering
@@ -411,12 +411,12 @@ The influence of matrix Young's modulus on dispersion curves depending on the pr
 		\caption{}
 		\label{fig:em90}
 	\end{subfigure}
-	\caption{The influence of matrix Young's modulus on dispersion curves depending on the propagation angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\caption{The influence of matrix Young's modulus on dispersion curves for selected angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
 	\label{fig:em}
 \end{figure}
 \clearpage
 
-The influence of fibres Young's modulus on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:ef}. In this case small to moderate changes of dispersion curves depending on guided wave mode can be observed. 
+The influence of fibres Young's modulus on dispersion curves for selected angle $\beta$ is shown in Fig.~\ref{fig:ef}. In this case small to moderate changes of dispersion curves depending on guided wave mode can be observed. 
 
 \begin{figure} [h!]
 	\centering
@@ -459,12 +459,12 @@ The influence of fibres Young's modulus on dispersion curves depending on the pr
 		\caption{}
 		\label{fig:ef90}
 	\end{subfigure}
-	\caption{The influence of fibres Young's modulus on dispersion curves depending on the propagation angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\caption{The influence Young's modulus of fibres on dispersion curves for selected angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
 	\label{fig:ef}
 \end{figure}
 \clearpage
 
-The influence of matrix Poisson's ratio on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:nim}. Small changes of dispersion curves can be observed.
+The influence of  Poisson's ratio of matrix on dispersion curves for selected angle $\beta$ is shown in Fig.~\ref{fig:nim}. Small changes of dispersion curves can be observed.
 
 \begin{figure} [h!]
 	\centering
@@ -507,12 +507,12 @@ The influence of matrix Poisson's ratio on dispersion curves depending on the pr
 		\caption{}
 		\label{fig:nim90}
 	\end{subfigure}
-	\caption{The influence of matrix Poisson's ratio on dispersion curves depending on the propagation angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\caption{The influence of matrix Poisson's ratio on dispersion curves for selected angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
 	\label{fig:nim}
 \end{figure}
 \clearpage
 
-The influence of fibres Poisson's ratio on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:nif}. It can be noticed that this parameter influences least the dispersion curves of guided waves.
+The influence of Poisson's ratio of fibres  on dispersion curves for selected angle $\beta$ is shown in Fig.~\ref{fig:nif}. It can be noticed that this parameter influences least the dispersion curves of guided waves.
 
 \begin{figure} [h!]
 	\centering
@@ -555,12 +555,12 @@ The influence of fibres Poisson's ratio on dispersion curves depending on the pr
 		\caption{}
 		\label{fig:nif90}
 	\end{subfigure}
-	\caption{The influence of fibres Poisson's ratio on dispersion curves depending on the propagation angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\caption{The influence of Poisson's ratio of fibres on dispersion curves for selected angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
 	\label{fig:nif}
 \end{figure}
 \clearpage
 
-The influence of volume fraction of reinforcing fibres on dispersion curves depending on the propagation angle $\beta$ is shown in Fig.~\ref{fig:vol}. It is the most essential parameter among analysed properties because it has the greatest influence on dispersion curves of guided waves.
+The influence of volume fraction of reinforcing fibres on dispersion curves for selected angle $\beta$ is shown in Fig.~\ref{fig:vol}. It is the most essential parameter among analysed properties because it has the greatest influence on dispersion curves of guided waves.
 
 \begin{figure} [h!]
 	\centering
@@ -604,21 +604,21 @@ The influence of volume fraction of reinforcing fibres on dispersion curves depe
 		\caption{}
 		\label{fig:vol90}
 	\end{subfigure}
-	\caption{The influence of volume fraction of reinforcing fibres on dispersion curves depending on the propagation angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
+	\caption{The influence of volume fraction of reinforcing fibres on dispersion curves for selected angle $\beta$: (a) 0$^{\circ}$, (b) 30$^{\circ}$, (c) 45$^{\circ}$, (d) 90$^{\circ}$.} 
 	\label{fig:vol}
 \end{figure}
 
 \clearpage
-It can be seen that increase of densities causes increase of wavenumber values, whereas increase of Young's modulus and volume fraction of reinforcing fibres causes decrease of wavenumber values. The changes of Poisson's ratio causes mixed influence on dispersion curves in this regard depending on propagation mode.
+It can be seen that increase of densities causes increase of the wavenumber values, whereas increase of  Young's modulus and the volume fraction of reinforcing fibres causes decrease of the wavenumber values. The changes of Poisson's ratio causes mixed influence on dispersion curves in this regard depending on the propagation mode.
 
 It should be underlined that in all cases considered the changes of dispersion curves are higher at higher frequencies. Therefore, it is expected that higher accuracy of elastic constants determination can be achieved if dispersion curves are captured experimentally at higher frequencies. Moreover, as expected, the dependence of dispersion curves on angle of propagation is significant. Hence, this fact should be considered during construction of objective function.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experimental measurements \label{sec:experiment}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % plain wave composite; constants provided by manufacturer
-Guided wave propagation was analysed in carbon/epoxy laminate composed of 4 layers of plain weave fabric. 16 layers of prepreg GG 205  P (fibres Toray FT 300 - 3K 200 tex) by G. Angeloni and epoxy resin MP503Z-HT by Impregnatex Compositi was used for fabrication of the specimen. The composite laminate dimensions was 1200$\times$1200~mm. The average thickness was 3.9 mm. 
+Guided wave propagation was analysed in carbon/epoxy laminate composed of 4 layers of plain weave fabric. The prepreg composed of 16 layers of  GG 205  P (fibres Toray FT 300 - 3K 200 tex) by G. Angeloni and epoxy resin MP503Z-HT by Impregnatex Compositi was used for fabrication of the specimen. The composite laminate dimensions was 1200$\times$1200~mm. The average thickness was 3.9 mm. 
 
-The total weight of a specimen was 8550 g, hence, based on the volume of the specimen the density is about~1522.4~kg/m\textsuperscript{3}.
+The total weight of the specimen was 8550 g, hence, based on the volume of the specimen the density is about~1522.4~kg/m\textsuperscript{3}.
 % geometry of plain weave
 The parameters describing geometry of a plain weave textile reinforced composite estimated based on micrograph are given in Table~\ref{tab:weave_geo}. 
  \begin{table}[h]
@@ -645,29 +645,30 @@ The parameters describing geometry of a plain weave textile reinforced composite
 	\label{tab:weave_geo}
 \end{table}
 
-% laser vibrometer mesurements
-Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of the specimen at their centre. A chirp signal was applied to piezoelectric transducer. Full wavefield measurements of guided waves were conducted by using scanning laser Doppler vibrometer (Polytec PSV-400) on the central area of width 0.726 m and length 0.726 m. A grid of 499 $\times$ 499 measurement point covering surface of the specimen opposite to the piezoelectric transducer was used. 40 measurements were taken for each grid point and averaged.
+% laser vibrometer mesurements - add chirp signal parameters
+The piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of the specimen at their centre. A chirp signal in the range of 0-500 kHz lasting 200~$\mu$s was applied to the piezoelectric transducer. Full wavefield measurements of guided waves were conducted by using scanning laser Doppler vibrometer (Polytec PSV-400) on the central area of width 0.726 m and length 0.726 m. A grid of 499 $\times$ 499 measurement point covering surface of the specimen opposite to the piezoelectric transducer was used. 40 measurements were taken for each grid point and averaged.
 
-3D Fourier Transform was applied to the full wavefield data in the space-time domain ($x$, $y$, $t$). Next 3D matrix was transformed from ($k_x$, $k_y$, $\omega$) coordinates to cylindrical coordinates ($\beta$,$k$,$f$). Interpolation was employed to obtain 2D images ($k$,$f$) representing dispersion curves $k(f)$ at selected angles $\beta = 0^{\circ} \ldots 90^{\circ}$ with the step of $15^{\circ}$, resulting in 9 2D matrices. Let's denote these matrices representing dispersion curves by $\matr{D}_{\beta}$. The size of the matrix  $\matr{D}_{\beta}$ in the current approach was $n_k=512$ $\times$$n_f= 512$, where $n_k$ is the number of wavenumber points and $n_f$ is the number of frequency points.  An example of such matrix at angle $ 60^{\circ}$ is presented in Fig.~\ref{fig:initial_optimized}. Dispersion curves in Fig.~\ref{fig:dispersion60deg_initial} calculated by using SASE model and material properties given in Table~\ref{tab:matprop} in the form of yellow curves are overlayed on the image for reference. It can be seen that there is high discrepancy between semi-analytic dispersion curves and experimental one. 
+3D Fourier transform was applied to the full wavefield data in the space-time domain ($x$, $y$, $t$). Next 3D matrix was transformed from ($k_x$, $k_y$, $\omega$) coordinates to cylindrical coordinates ($\beta$, $k$, $f$). Interpolation was employed to obtain 2D images ($k$, $f$) representing dispersion curves $k(f)$ at selected angles $\beta = 0^{\circ} \ldots 90^{\circ}$ with the step of $15^{\circ}$, resulting in 9 2D matrices. Let's denote these matrices representing dispersion curves by $\matr{D}_{\beta}$. The size of the matrix  $\matr{D}_{\beta}$ in the current approach was $n_k=512$ $\times$$n_f= 512$, where $n_k$ is the number of wavenumber points and $n_f$ is the number of frequency points.  An example of such matrix at angle $ 60^{\circ}$ is presented in Fig.~\ref{fig:initial_optimized}. The dispersion curves presented in Fig.~\ref{fig:dispersion60deg_initial} calculated by using SASE model and material properties given in Table~\ref{tab:matprop} in the form of yellow curves are overlayed on the image for reference. It can be seen that there is high discrepancy between semi-analytic dispersion curves and experimental one. 
 % overlayed = superimposed
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Optimisation \label{sec:optimization}}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	The Sheffield Genetic Algorithm Toolbox for Matlab developed at Department of Automatic Control and Systems Engineering at The University of Sheffield was used for the optimisation~\cite{Chipperfield1994}.
-	\subsection{Genetic algorithm parameters}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
 	Two approaches were considered:
 	\begin{enumerate}
-	\item indirect - by using composite constituents and homogenisation techniques;
-	The genetic algorithm was used for determination of the following properties:  matrix density $\rho_m$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$.  The fibre density was calculated based on the rule of mixture as:
-	\begin{equation}
-	\rho_f = \frac{\rho - \rho_m (1-V)}{V},
-	\end{equation}
-	where $V$ is the volume fraction of reinforcing fibres. Hence, only 6 variables needs to be optimised.
-	\item direct - determination of C-tensor components.
-	The genetic algorithm was used for determination of the following properties: $C_{11}$, $C_{12}$, $C_{13}$,  $C_{22}$, $C_{23}$, $C_{33}$, $C_{44}$, $C_{55}$ and $C_{66}$. Hence, 9 variables needs to be optimised.
+		\item \textbf{indirect} - by using composite constituents and homogenisation techniques;
+		The genetic algorithm was used for determination of the following properties:  matrix density $\rho_m$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$.  The fibre density was calculated based on the rule of mixture as:
+		\begin{equation}
+		\rho_f = \frac{\rho - \rho_m (1-V)}{V},
+		\end{equation}
+		where $V$ is the volume fraction of reinforcing fibres. Hence, only 6~variables needs to be optimised.
+		\item \textbf{direct} - determination of C-tensor components.
+		The genetic algorithm was used for determination of the following properties: $C_{11}$, $C_{12}$, $C_{13}$,  $C_{22}$, $C_{23}$, $C_{33}$, $C_{44}$, $C_{55}$ and $C_{66}$. Hence, 9 variables needs to be optimised.
 	\end{enumerate}
 
+	\subsection{Genetic algorithm parameters}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	The following GA parameters were used for optimisation:
 	\begin{itemize}
 		\item Number of individuals per subpopulation: 100
@@ -677,11 +678,17 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 		\item Precision of binary representation of variables: 12 bit
 		\item Gray coding was used for representation of each variable.
    \end{itemize}
-    Generation gap of 0.9 means that 90\% chromosomes from old population is replaced by 90\% best found chromosomes from new population while preserving 10\% best found chromosomes from old population into new population.
+    Generation gap of 0.9 means that 90\% chromosomes from old population are replaced by 90\% best found chromosomes from new population while preserving 10\% best found chromosomes from old population into new population.
+    
+    The probability of mutation $P_m$ is calculated as follows~\cite{Chipperfield1994}:
+    \begin{equation}
+    	P_m = 0.7/L
+    \end{equation}
+    where $L$ is the length of chromosome structure.
     
     It should be noted that 12 bits precision was used for each variable. However, according to parametric studies in section~\ref{sec:parametric} certain material properties such as Poisson's ratio of reinforcing fibres have less influence on dispersion curves, hence the precision for their representation can be decreased. In contrast, volume fraction of reinforcing fibres has greatest influence on dispersion curves, hence the precision of representation of this variable can be increased.
   
-	In case of indirect approach upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table~\ref{tab:matprop}, except of matrix density $\rho_m$ which bound values were fixed according to data sheet delivered by manufactures in which range of cured resin density is 1150--1250~kg/m\textsuperscript{3}.
+	In case of indirect approach upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table~\ref{tab:matprop}, except of matrix density $\rho_m$ which bound values were fixed according to data sheet delivered by manufactures in which range of cured resin density is 1150--1250~kg/m\textsuperscript{3}. Also initial value of volume fraction of reinforcing fibres $V$ was different i.e.~45\%.
 	
 	In case of direct approach upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table~\ref{tab:Ctensor_initial}.
 	
@@ -705,7 +712,7 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	The optimisation problem can be described as a minimization of objective function:
 	\begin{equation}
-	\min_j \sum_{\beta}\sum_{m} \| k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)}) -k^{EXP}_{m}(\beta,\omega) \|
+	\min_j \sum_{\beta}\sum_{m} \| k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)}) -k^{EXP}_{m}(\beta,\omega) \|,
 	\end{equation}
 	where $m$ denotes the mode of propagating wave.
 	The objective function is correlation between dispersion curves calculated by using SASE model $k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)})$ and dispersion curves from experiment $k^{EXP}_{m}(\beta,\omega)$. However, in the model we have actual curves for each propagation mode $m$ depending on the matrix of elastic constants $\matr{C}^{(j)}$ and propagation angle $\beta$ but the data from the experiment have a form of a matrix (image) $\matr{D}^{EXP}_{\beta}$ at each angle $\beta$ (see Fig.~\ref{fig:initial_optimized}). Extraction of dispersion curves $k^{EXP}_{m}(\beta,\omega)$ from images $\matr{D}^{EXP}_{\beta}$ is cumbersome and could lead to inherent errors. Moreover, in order to formulate correlation coefficient, dispersion curves in SASE model must be sorted (which increases computation costs). Therefore, dispersion curves corresponding to modes $m=1,\ldots, 4$ calculated by using SASE model were converted to image $\matr{D}^{SASE}_{\beta} $ in which dimensions are the same as in experiment ($n_k=512$ $\times$$n_f= 512$). Pixels of image $\matr{D}^{SASE}_{\beta} $ which corresponds to dispersion curves are assigned value 1 whereas the remaining pixels have value 0. It leads to logic matrix or mask which can be applied for filtering experimental images: 
@@ -715,19 +722,27 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
     where $.*$ is the element wise multiplication (such notation is used in Matlab). If dispersion curves from SASE model align well with high values of experimental images, it leads to high values in filtered image and vice versa.
 	The objective function value can be finally calculated as: 
 	\begin{equation}
-	\tilde{F} = \frac{(-1)}{n_k \, n_f}  \cdot \sum_{\beta}  \sum_{i=1}^{n_k} \sum_{j=1}^{n_f}	\tilde{D}_{ij}^{\beta} 
+	\tilde{F} = \frac{(-1)}{n_k \, n_f}  \cdot \sum_{\beta}  \sum_{i=1}^{n_k} \sum_{j=1}^{n_f}	\tilde{D}_{ij}^{\beta}. 
 	\end{equation}
 	In this way rich experimental data is fully used and roots sorting of SASE dispersion curves is not necessary. Additionally, objective function scaling can be applied in the form:
 	\begin{equation}
 	F = a \,  \tilde{F} + b,
 	\end{equation}
 	where $a$ and $b$ are scaling parameters ($a=100$, $b=310$ were assumed in the current studies).
-		% rich data
-	% logical matrix
-	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-	\subsection{Results}
+\subsection{GA convergence}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The proposed objective function enables quite fast convergence of GA. An exemplary convergence of objective function with increasing generation number is shown in Fig.~\ref{fig:GAconvergence}. Objective function values were calculated for the best chromosome and also for the mean value of all chromosomes in a generation. Objective function stabilises in both cases after about 40 generations.
+	\begin{figure} [h!]
+		\centering
+		\includegraphics[]{GA_convergence.png}
+		\caption{GA convergence in direct approach.}
+		\label{fig:GAconvergence}
+	\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	\subsection{Results and discussion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+It seems that from the perspective of wave propagation modelling in composite laminates, it is easier to select properties of composite material constituents than composite ply. It is because data related to the mechanical properties of fibres and epoxy matrix is widely available. However, it has been shown in Fig.~\ref{fig:dispersion60deg_initial} that even for very reasonably assumed values of constants characterising the composite material constituents (Table~\ref{tab:matprop}) there is a huge discrepancy between the model and experimental data. The easiest way to improve the model is by tweaking the volume fraction of reinforcing fibres (grid search approach). But this method does not guarantee a good match between numerical and experimental dispersion curves. The best option is optimisation of all necessary parameters which leads to excellent agreement between numerical and experimental dispersion curves as it is shown in Fig.~\ref{fig:dispersion60deg}.
 	\begin{figure} [h!]
 		\newcommand{\modelname}{ga_plain_weave_known_mass}
 		\centering
@@ -755,6 +770,12 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 	\label{fig:initial_optimized}
 	\end{figure}
 
+The exemplary results of optimised dispersion curves obtained in the indirect method are shown in Fig.~\ref{fig:optimized}. It is for the case in which the objective function value is $F=8.1285$. It can be seen that for each considered angle of propagation, the modelled dispersion curves fit very well to the experimental data. It should be noted that one of the dispersion curves (linear function), especially at angles $0^{\circ}$, $15^{\circ}$ and $90^{\circ}$, does not superimpose with high values of the experimental image. This is natural because it corresponds to shear horizontal wave which is more difficult to excite by conventional piezoelectric transducer than S0 and A0 Lamb wave modes. Shear horizontal wave mode excitability is slightly higher at angle $75^{\circ}$ at which good match between modelled SH0 mode and experimental data is observed (see Fig.~\ref{fig:dispersion75deg}). Contrary, in direct method, wavenumber values of SH0 mode are overestimated (see Fig.~\ref{fig:dispersion75deg_direct}). In other words the velocity of the modelled SH0 mode is slower than in the experiment.
+
+Turning now to the direct method, better results in terms of the objective function value were obtained. The optimisation results for indirect and direct method obtained in 30 GA runs are compared in Table~\ref{tab:csv_results}. The mean value of objective function for the best chromosome in the indirect method is 8.32 whereas in the direct method is -2.37. However, this is occupied by non-physical behaviour of shear horizontal wave mode as it is observed e.g. in Fig.~\ref{fig:dispersion0deg_direct} or Fig.~\ref{fig:dispersion90deg_direct}. Dispersion curve corresponding to SH0 mode tends to overlap with another dispersion curve (A0 mode) contributing significantly to objective function value. Non-physical behaviour confirms also mean value of $C_{66}$ which is lower than $C_{44}$ and $C_{55}$ (see the direct method in Table~\ref{tab:csv_results}). In real--world the opposite behaviour is expected. Other dispersion curves calculated for optimised elastic constants fit well the experimental data as it is shown in Fig.~\ref{fig:optimized_direct}. It is the example for the case in which the objective function value is $F=-1.8246$.
+
+Finally, it should be pointed out that GA optimisation results are consistent, they have a small spread as evidenced by the low values of the standard deviation in Table~\ref{tab:csv_results}. 
+
 
 \begin{figure} [h!]
 	\newcommand{\modelname}{ga_plain_weave_known_mass}
@@ -763,7 +784,7 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 		\centering
 			\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_0_dispersion_curves_test_case_2.png}
 		\caption{}
-		\label{fig:dispersion0deg_initial}
+		\label{fig:dispersion0deg}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
@@ -795,8 +816,53 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
     	\caption{}
     	\label{fig:dispersion90deg}
     \end{subfigure}
-	\caption{Dispersion curves for optimised elastic constants at angles $\beta$: (a) 0$^{\circ}$, (b) 15$^{\circ}$, (c) 30$^{\circ}$, (d) 45$^{\circ}$, (e) 75$^{\circ}$, (f) 90$^{\circ}$; yellow curves: SASE model; image: experiment. }
+	\caption{Dispersion curves for optimised elastic constants in \textbf{indirect method} at angles $\beta$: (a) 0$^{\circ}$, (b) 15$^{\circ}$, (c) 30$^{\circ}$, (d) 45$^{\circ}$, (e) 75$^{\circ}$, (f) 90$^{\circ}$; yellow curves: SASE model; image: experiment. }
 	\label{fig:optimized}
+\end{figure}
+
+\clearpage
+
+\begin{figure} [h!]
+	\newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass}
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_0_dispersion_curves_test_case_1.png}
+		\caption{}
+		\label{fig:dispersion0deg_direct}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_15_dispersion_curves_test_case_1.png}
+		\caption{}
+		\label{fig:dispersion15deg_direct}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_30_dispersion_curves_test_case_1.png}
+		\caption{}
+		\label{fig:dispersion30deg_direct}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_45_dispersion_curves_test_case_1.png}
+		\caption{}
+		\label{fig:dispersion45deg_direct}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_75_dispersion_curves_test_case_1.png}
+		\caption{}
+		\label{fig:dispersion75deg_direct}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_90_dispersion_curves_test_case_1.png}
+		\caption{}
+		\label{fig:dispersion90deg_direct}
+	\end{subfigure}
+	\caption{Dispersion curves for optimised elastic constants in \textbf{direct method} at angles $\beta$: (a) 0$^{\circ}$, (b) 15$^{\circ}$, (c) 30$^{\circ}$, (d) 45$^{\circ}$, (e) 75$^{\circ}$, (f) 90$^{\circ}$; yellow curves: SASE model; image: experiment. }
+	\label{fig:optimized_direct}
 \end{figure}
 
 \clearpage
@@ -862,7 +928,7 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
-	\caption{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 100 GA runs; Elastic constants [GPa].}	
+	\caption{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 30 GA runs; Units of  elastic constants: [GPa].}	
 	\begin{tabular}{crrrrrr} \toprule
 		&\multicolumn{3}{c}{\textbf{indirect method}} & \multicolumn{3}{c}{\textbf{direct method} }\\
 		%\midrule
@@ -882,8 +948,13 @@ Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of th
 	\section{Conclusions}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+	This work has demonstrated that the proposed method based on guided wave dispersion curves combined with the genetic algorithm is well suited for identification of elastic constants of woven fabric reinforced composites. Two approaches have been investigated: indirect and direct.  In the indirect approach, material properties of composite constituents are selected as optimisation variables which are next used for calculation of elastic constants of lamina by using micromechanics and homogenisation techniques. On the other hand, in the direct approach, the elastic constants of the composite laminate are selected as optimisation variables. The motivation behind the indirect approach is the fact that fewer variables are involved in the optimisation process. However, it has been found that the indirect method leads to results which are more physically justified than the results obtained by using the direct approach. This fact is demonstrated by dispersion curves calculated by SASE model which matches very well experimental data coming from SLDV measurements. 
 	
-	In summary, the current implementation is very well suited for 
+	The advantage of the proposed methodology is one--sided non--contact measurements which can be conducted even directly on existing structures without the necessity of preparation of special samples.
+	
+	The results from this study imply that the matrix of elastic constants of fabric reinforced composite can be estimated with a small spread which is connected with the nature of GA. However, a number of potential sources of measurement errors, as well as the limitation of the devised methodology should be considered. The most important source of errors lies in variability of the thickness of the specimen. There is inherent deviation in the thickness of a composite occurred during manufacturing. The thickness variability cannot be taken into account in the SASE model -- averaged thickness must be assumed in the model instead. Another important issue is the temperature influence on propagating guided waves. Since SLDV measurements can take even few hours, temperature variation during measurement period can affect material properties of the investigated specimen. Less important source of errors comes from the measurements of the length and width of the scanned area. It should be added that the accuracy of the proposed methodology depends on frequency range and the respective number of modes which can be captured experimentally.
+	
+	It should be underlined, that the devised methodology can be applied to composite laminates of higher anisotropy level. We are now in the process of investigating composite laminates reinforced by unidirectional fibres.
 	 
 	%% The Appendices part is started with the command \appendix;
 	%% appendix sections are then done as normal sections

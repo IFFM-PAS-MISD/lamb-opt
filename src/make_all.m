@@ -160,3 +160,7 @@ plot_chirp_signals;
 % plot objective function scores for SASE1 comparing laser and simulated pzt
 plot_objective_function_score; % vibrant colour palette
 plot_objective_function_score_high_contrast; % high-contrast palette
+
+% plot exemplary dispersion curves showing modes tracking problem
+plot_exemplary_dispersion_curves_SASE2;
+plot_exemplary_dispersion_curves_SASE2_sorted;
