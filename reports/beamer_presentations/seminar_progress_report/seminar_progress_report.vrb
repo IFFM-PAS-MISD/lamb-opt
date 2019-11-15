@@ -1,9 +1,22 @@
 \frametitle{Backup slides}
-Sometimes, it is useful to add slides at the end of your presentation to
-  refer to during audience questions.
+\begin{equation*}
+\matr{C} = \left[\begin{array}{cccccc} C_{11} & C_{12}& C_{13} & 0&0&0\\[2pt]
+C_{12}& C_{22} & C_{23}& 0&0&0\\[2pt]
+C_{13}&C_{23}&C_{33}&0&0&0\\[2pt]
+0& 0 &0&C_{44}& 0&0\\[2pt]
+0&0&0&0&C_{55}&0\\[2pt]
+0&0&0&0&0&C_{66}
+\end{array}\right]
+\label{eq:elastic_constatns}
+\end{equation*}
 
-  The best way to do this is to include the \verb|appendixnumberbeamer|
-  package in your preamble and call \verb|\appendix| before your backup slides.
-
-  \themename will automatically turn off slide numbering and progress bars for
-  slides in the appendix.
+\begin{equation*}
+\matr{S} = \left[\begin{array}{cccccc} \frac{1}{E_1} & - \frac{\nu_{21}}{E_2}& - \frac{\nu_{31}}{E_3} & 0&0&0\\[2pt]
+- \frac{\nu_{12}}{E_1}& \frac{1}{E_2} & - \frac{\nu_{32}}{E_3} & 0&0&0\\[2pt]
+- \frac{\nu_{13}}{E_1}&- \frac{\nu_{23}}{E_2}&\frac{1}{E_3} &0&0&0\\[2pt]
+0& 0 &0&\frac{1}{G_{23}}& 0&0\\[2pt]
+0&0&0&0&\frac{1}{G_{31}}&0\\[2pt]
+0&0&0&0&0&\frac{1}{G_{12}}
+\end{array}\right]
+\label{eq:compliance_matrix}
+\end{equation*}

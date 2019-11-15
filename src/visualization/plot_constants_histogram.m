@@ -30,7 +30,7 @@ C66_=zeros(100,1);
 
 ObjVal_=zeros(100,1);
 c=0;
-range=[1:20,51:61];
+range=[1:29,51:61];
 %range=[1:15];
 for test_case=range
     c=c+1;
@@ -130,7 +130,7 @@ C66_=zeros(100,1);
 
 ObjVal_=zeros(100,1);
 c=0;
-range=[1:30];
+range=[1:47];
 
 for test_case=range
     c=c+1;
@@ -198,7 +198,7 @@ C66best=C66_(range(I));
  Cdstd=cellstr(num2str([Tab_direct(:,3);Fdstd],'%.2f'));
  %% plot histogram
 figure;
-hist(C11_(range),5);
+hist(C11_(range),8);
 
  % prepare csv table for latex document
  paper_path=[projectroot,'reports',filesep,'journal_papers',filesep,'Composite_Structures_GA',filesep];
