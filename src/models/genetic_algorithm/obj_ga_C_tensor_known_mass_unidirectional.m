@@ -1,4 +1,4 @@
-function [ObjV] = obj_ga_C_tensor_known_mass(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho,a,b)
+function [ObjV] = obj_ga_C_tensor_known_mass_unidirectional(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho)
 % OBJ_GA_C_TENSOR   One line description of what the function or script performs (H1 line) 
 %    optional: more details about the function than in the H1 line 
 %    optional: more details about the function than in the H1 line 
@@ -38,7 +38,9 @@ function [ObjV] = obj_ga_C_tensor_known_mass(Phen,Data_polar,layup,h,wavenumber_
 load project_paths projectroot src_path;
 ObjV = zeros(size(Phen,1),1);
 
-
+% fittnes function scaling factors
+a=100;
+b=250;
 %for k=1:size(Phen,1)
 parfor k=1:size(Phen,1)
     %[k,size(Phen,1)]

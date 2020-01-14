@@ -42,7 +42,11 @@ function [rho,e11,e22,e33,ni12,ni13,ni21,ni23,ni31,ni32,g12,g13,g23] = homogeniz
 rho=rhof.*vol+rhom.*(1-vol);
 gm=em./(1+nim)/2; gf=ef./(1+nif)/2;
 e11=ef.*vol+em.*(1-vol);
-e22=((ef+em)+(ef-em).*vol)./((ef+em)-(ef-em).*vol).*em;
+%e22=0.1*e11; % 1
+%e22=((ef+em)+(ef-em).*vol)./((ef+em)-(ef-em).*vol).*em; % 2
+% vol_bundle = 0.8; % 3
+vol_bundle = 0.6; % 4
+e22=((vol_bundle*ef+em)+(vol_bundle*ef-em).*vol)./((vol_bundle*ef+em)-(vol_bundle*ef-em).*vol).*em; % 3
 e33=e22;
 ni12=nif.*vol+nim.*(1-vol);
 ni13=ni12;

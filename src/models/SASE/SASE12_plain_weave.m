@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                   SASE8_plain_weave                                 %
+%                                   SASE12_plain_weave                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This script calls main_SASE function for a given wavenumbers (in 1/m) 
 % and gets the real frequencies and group velocities.
@@ -7,7 +7,7 @@
 % composite reinforced by plain weave fabric
 % parametric study of material constituents
 % rule of mixture homogenization
-% parametric search over volume fraction of reinforcing fibres
+% parametric search over C66
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all;close all;
@@ -42,16 +42,16 @@ wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
 %number_of_wavenumber_points=512;
 %
 %% Input for material properties
-
-run(['inputs',filesep,'input1.m']); % initial material properties
-% rhom0 = 1250; % kg/m^3
-% rhof0 = 1900; % kg/m^3
-% em0 = 3.43e9; % Pa
-% ef0 = 240e9; % Pa
-% nim0 = 0.35;
-% nif0 =  0.2; 
-% vol0 = 0.5;
-
+C11_0=50e9; % Pa
+C12_0=5e9; % Pa
+C13_0=5e9; % Pa
+C22_0=50e9; % Pa
+C23_0=5e9; % Pa
+C33_0=9e9; % Pa
+C44_0=3e9; % Pa
+C55_0=3e9; % Pa
+C66_0=3e9; % Pa
+rho=1522; %kg/m^3
 %%
 variation = 0.2; % parametric sweep -20% to +20% of initial parameters
 number_of_points = 11; % number of points in grid search method
@@ -61,39 +61,25 @@ nlayers = length(layup);
 h = [zeros(nlayers,1)+1]* ht/nlayers; % thickness of layers;
 % Stacking direction
 stack_dir = 1;
-%% input material properties for woven fabric
-'weave type';                     fiberType = 'plainWeave';
-'lamina thickness [mm]';     h_p = ht/nlayers; % 
-'thickness of the fill [mm]';      h_f = h_p/2;
-'thickness of the warp [mm]';      h_w = h_p/2;
-'width of the fill [mm]';          a_f = 1.92;
-'width of the warp [mm]';      a_w = 2;
-'width of the fill gap [mm]';      g_f = 0.05;
-'width of the warp gap [mm]';  g_w = 0.05;   
 %% grid search approach - sweep over parameters
-rhom = rhom0; % kg/m^3
-rhof = rhof0; % kg/m^3
-nim = nim0;
-nif =  nif0; 
-%vol=vol0;
-em = em0/1e9;
-ef = ef0/1e9;
-e22_f = 0.1*ef;
-ni23_f =  nif ;
+C11=C11_0;
+C12=C12_0;
+C13=C13_0;
+C22=C22_0;
+C23=C23_0;
+C33=C33_0;
+C44=C44_0;
+C55=C55_0;
 test_case = 0;
-for i1=1:number_of_points % vol
+for i1=1:number_of_points 
     
-    vol = vol0*(variation_range(i1));
+    C66 = C66_0*(variation_range(i1));
     
         test_case = test_case+1;
         output_name = [model_output_path,filesep,num2str(test_case),'output'];
         if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
             fprintf([modelname,' test case: %d\n'], test_case);
             
-            %% Mechanical properties  
-            [C11,C12,C13,C21,C22,C23,C31,C32,C33,C44,C55,C66,rho] = ...
-            compfabricprop(fiberType, h_p, h_f, h_w, a_f, a_w, g_f, g_w, vol, ...
-            em, nim, rhom, ef, e22_f, nif, ni23_f, rhof,false);
             %% SASE
             [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
 
@@ -105,7 +91,7 @@ for i1=1:number_of_points % vol
             input_name = [model_output_path,filesep,num2str(test_case),'input'];
             %save(output_name,'wavenumber','FREQ_A0','FREQ_S0','CG_A0','CG_S0');
             save(output_name,'wavenumber','FREQ','CG');
-            save(input_name,'rhom','rhof','em','ef','nim','nif','vol');
+            save(input_name,'rho','C11','C12','C13','C22','C23','C33','C44','C55','C66');
         else
             fprintf([modelname,' test case: %d already exist\n'], test_case);
         end

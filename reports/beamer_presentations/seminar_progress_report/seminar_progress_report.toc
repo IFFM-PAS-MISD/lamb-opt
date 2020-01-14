@@ -1,6 +1,6 @@
 \beamer@sectionintoc {1}{Introduction}{3}{0}{1}
 \beamer@sectionintoc {2}{SASE for dispersion curves}{26}{0}{2}
 \beamer@sectionintoc {3}{Experimental measurements}{33}{0}{3}
-\beamer@sectionintoc {4}{Parametric studies}{38}{0}{4}
-\beamer@sectionintoc {5}{Optimisation}{72}{0}{5}
-\beamer@sectionintoc {6}{Conclusions}{93}{0}{6}
+\beamer@sectionintoc {4}{Parametric studies}{39}{0}{4}
+\beamer@sectionintoc {5}{Optimisation}{73}{0}{5}
+\beamer@sectionintoc {6}{Conclusions}{95}{0}{6}

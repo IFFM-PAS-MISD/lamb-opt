@@ -1,4 +1,4 @@
-function [ObjV] = obj_ga_plain_weave_known_mass(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType,rho)
+function [ObjV] = obj_ga_plain_weave_known_mass(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,h_p,h_f,h_w,a_f,a_w,g_f,g_w,fiberType,rho,a,b)
 % OBJ_GA_UNIDIRECTIONAL   One line description of what the function or script performs (H1 line) 
 %    optional: more details about the function than in the H1 line 
 %    optional: more details about the function than in the H1 line 
@@ -50,9 +50,7 @@ a_f = repmat(a_f,[size(Phen,1),1]);
 a_w = repmat(a_w,[size(Phen,1),1]);
 g_f = repmat(g_f,[size(Phen,1),1]);
 g_w = repmat(g_w,[size(Phen,1),1]);
-% fittnes function scaling factors
-a=100;
-b=310;
+
 %for k=1:size(Phen,1)
 parfor k=1:size(Phen,1)
     %[k,size(Phen,1)]

@@ -22,24 +22,23 @@ number_of_modes_considered = 4; % number of modes considered in calculation of o
 %% Load parameters which are used in experiment
 % create path to the experimental processed data folder
 data_path=fullfile( projectroot, 'data','processed','exp', filesep );
-input_file = 2;
+input_file = 1;
 % filename of parameter data
- filename = {'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF_param',...
-                    'polar_interim_499x499p_chp200_x40_18Vpp_250Hz_KXKYF_param'}; 
+ filename = {'polar_interim_499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni_KXKYF_param',...
+                    'polar_interim_499x499p_chp200_x40_6Vpp_250Hz_uni_KXKYF_param'}; 
  load([data_path,filename{input_file}]); % wavenumber_max fmax beta number_of_wavenumber_points
 % load experimental data file
-exp_filename = {'polar_interim_289x289p_HANN100_x30_10Vpp_200Hz_KXKYF',... % 1 old plain weave
-                            'polar_interim_499x499p_chp200_x40_18Vpp_250Hz_KXKYF'};         % 2 new plain weave
+exp_filename = {'polar_interim_499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni_KXKYF',... % 1 small area unidirectional
+                            'polar_interim_499x499p_chp200_x40_6Vpp_250Hz_uni_KXKYF'};         % 2 large area unidirectional
 load([data_path,exp_filename{input_file}]); % Data_polar wavenumber_max fmax beta number_of_wavenumber_points  
 %% Input for SASE
 %beta = 0:15:90; % angles for dispersion curves in polar plot [deg]
-%ht = 3/1000; % [m] laminate total thickness; old plain weave
-ht = 3.9/1000; % [m] laminate total thickness; new plain weave
+ht = 2.85/1000; % [m] laminate total thickness; unidirectional
 np = 3; % order of elements (3<=np<=5)
 nele_layer = 1; % no. of elements per ply
 wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
-layup = [0 0 0 0 0 0 0 0];
-%layup =[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+layup = [90 90 90 90 90 90 90 90];
+
 nlayers = length(layup);
 
 h = [zeros(nlayers,1)+1]* ht/nlayers; % thickness of layers; new plain weave
@@ -47,20 +46,20 @@ h = [zeros(nlayers,1)+1]* ht/nlayers; % thickness of layers; new plain weave
 stack_dir = 1;
 %%
 % known parameters
-m=8.55; % total mass of the specimen [kg]
+m=6.46; % total mass of the specimen [kg]
 V=1.2*1.2*ht; % specimen volume [m^3]
 rho = m/V;
 %% input for optimization
 % lower and upper bounds of variables
-Q11_0 = 50e9;
-Q12_0 = 5e9;
-Q13_0 = 5e9;
-Q22_0 = 50e9;
-Q23_0 = 5e9;
-Q33_0 = 9e9;
-Q44_0 = 3e9;
-Q55_0 = 3e9;
-Q66_0 = 3e9;
+Q11_0 = 100e9;
+Q12_0 = 5.7e9;
+Q13_0 = 5.7e9;
+Q22_0 = 12e9;
+Q23_0 = 5.5e9;
+Q33_0 = 12e9;
+Q44_0 = 3.3e9;
+Q55_0 = 4.6e9;
+Q66_0 = 4.6e9;
 
 variation = 0.2;
 Q11_lb = (1-variation)*Q11_0; 
@@ -82,9 +81,6 @@ Q55_ub = (1+variation)*Q55_0;
 Q66_lb = (1-variation)*Q66_0; 
 Q66_ub = (1+variation)*Q66_0; 
 %% genetic algorithm parameters
-% fittnes function scaling factors
-a=100;
-b=310;
 NIND = 100;           % Number of individuals per subpopulations
 MAXGEN = 70;        % maximum Number of generations
 GGAP = 0.9;           % Generation gap, how many new individuals are created
@@ -100,7 +96,7 @@ ubin= [1,1,1,1,1,1,1,1,1];%include upper bound of variable range
 %%
 %% tests loop
 %%
-for test_case = [31:50]
+for test_case = [50:50]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
@@ -115,11 +111,11 @@ for test_case = [31:50]
        Best = NaN*ones(MAXGEN,1);	% best in current population
        Mean = NaN*ones(MAXGEN,1);	% mean in current population
        PBest = NaN*ones(MAXGEN,NVAR);	% best in current population
-       ObjV_limit = 8.5; % stopping criteria
+       ObjV_limit = 8.0; % stopping criteria
        gen = 0;			% generational counter
 
         % Evaluate initial population
-        [ObjV] = obj_ga_C_tensor_known_mass(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho,a,b);
+        [ObjV] = obj_ga_C_tensor_known_mass_unidirectional(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho);
         % Generational loop
        while gen < MAXGEN
             tic;
@@ -137,7 +133,7 @@ for test_case = [31:50]
 
         % Evaluate offspring, call objective function
             %tic;
-           [ObjVSel] = obj_ga_C_tensor_known_mass(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho,a,b);
+           [ObjVSel] = obj_ga_C_tensor_known_mass_unidirectional(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho);
            %toc
            % Reinsert offspring into current population
            [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);

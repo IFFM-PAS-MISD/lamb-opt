@@ -42,11 +42,30 @@ for j=1:number_of_angles % beta
     %% Function to logical matrix
     % convert numerical dispersion curve into logical matrix
 
-    H=logical(zeros(number_of_wavenumber_points,number_of_frequency_points));
+    H=zeros(number_of_wavenumber_points,number_of_frequency_points);
     for i=1:number_of_wavenumber_points
         for k =1:number_of_modes_considered
             [~,I] = min(abs( FREQ(k,i,j) - fvec )); % mode 1 : number_of_modes_considered (default=4)
-            H(i,I) = 1;
+            if(k==2)
+                switch j
+                    case 1 % 0 deg
+                        H(i,I)=0.1;
+                    case 2 % 15 deg
+                        H(i,I)=2;
+                    case 3 % 30 deg
+                        H(i,I)=1.5;
+                    case 4 % 45 deg
+                        H(i,I)=1;
+                    case 5 % 60 deg
+                        H(i,I)=1.5;
+                    case 6 % 75 deg
+                        H(i,I)=2;
+                    case 7 % 90 deg
+                        H(i,I)=0.1;
+                end
+            else
+                H(i,I) = 1;
+            end
         end
     end
     

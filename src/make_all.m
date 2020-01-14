@@ -5,10 +5,18 @@
 % transformation from 2D-space-time to wavenumber-frequency
 % of selected file '289x289p_HANN100_x30_10Vpp_200Hz'
 spatial_to_wavenumber_wavefield_selected_script;
-% 3D FFT of full wavefield data (plain waeve specimen) 
+
+% 3D FFT of full wavefield data (plain weave specimen) 
 % transformation from 2D-space-time to wavenumber-frequency
 % of selected file '499x499p_chp200_x40_18Vpp_250Hz'
 spatial_to_wavenumber_wavefield_selected_script_plain_weave;
+
+% 3D FFT of full wavefield data (unidirectional specimen) 
+% transformation from 2D-space-time to wavenumber-frequency
+% of selected files '499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni'
+% '499x499p_chp200_x40_6Vpp_250Hz_uni'
+spatial_to_wavenumber_wavefield_selected_script_unidirectional;
+
 % transformation of wavenumber field
 % from cartesian to polar coordinates at selected angles
 % processing of all files in interm exp folder
@@ -77,6 +85,10 @@ SASE10;
 % plain weave fabric composite
 SASE11;
 
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C66
+SASE12_plain_weave;
+
 % objective functions for full wavefield laser measurements
 % call objective_fun for test cases calculated in SASE1,SASE2,SASE9,SASE10, SASE11
 objective_fun_nmodes_4_script;
@@ -89,6 +101,11 @@ objective_fun_pzt_nmodes_4_script;
 objective_fun_pzt_nmodes_3_script;
 objective_fun_pzt_nmodes_2_script;
 objective_fun_pzt_nmodes_1_script;
+%% genetic algorithm
+% Composite_Structures_GA paper
+ga_plain_weave_known_mass_50;
+ga_plain_weave_C_tensor_known_mass_50;
+
 %% visualisation
 % plot and make figure for num dispersion curves on top of experimental results
 plot_num_exp_dispersion_SASE1;
@@ -133,6 +150,9 @@ plot_param_dispersion_curves_SASE8;
 plot_param_dispersion_curves_SASE8_color;
 plot_param_dispersion_curves_SASE8_plain_weave_color;
 
+% plot and make figures for dispersion curves variability depending on C66
+plot_param_dispersion_curves_SASE12_plain_weave_color;
+
 % plot and make figure for num dispersion curves on top of experimental results
 % for simulated pzt distrubution (9x9 points)
 plot_num_exp_dispersion_SASE9;
@@ -164,3 +184,19 @@ plot_objective_function_score_high_contrast; % high-contrast palette
 % plot exemplary dispersion curves showing modes tracking problem
 plot_exemplary_dispersion_curves_SASE2;
 plot_exemplary_dispersion_curves_SASE2_sorted;
+
+% Composite_Structures_GA paper
+% tables
+plot_constants_histogram_50;
+
+% GA convergence fig (commented at the end)
+%ga_plain_weave_C_tensor_known_mass.m;
+
+% num - exp dispersion curves initial
+plot_dispersion_curves_ga_plain_weave_known_mass_initial_large;
+
+% num - exp dispersion curves optimized
+plot_dispersion_curves_ga_plain_weave_known_mass_large;
+
+% copy figs to paper folder
+copy_fig_Composite_Structures_GA;

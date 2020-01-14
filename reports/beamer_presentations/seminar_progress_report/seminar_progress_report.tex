@@ -283,7 +283,7 @@
 	\begin{alertblock}{Definition}
 		A \textbf{dispersion relation} relates the wavelength $\lambda$ or wavenumber $k$ of a wave to its frequency $\omega$.\\
 		 \vspace{10pt}
-		$k(\omega)$ $[\frac{1}{\mathrm{rad}}]$\\
+		$k(\omega)$ $[\frac{\mathrm{rad}}{\mathrm{m}}]$\\
 			 \vspace{6pt}
 		$k(f)$ $[\frac{1}{\mathrm{m}}]$
 	\end{alertblock}
@@ -602,13 +602,7 @@ where $\omega$ is the angular frequency, $\matr{M}$ is the mass matrix, $\matr{U
 \end{table}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame13]{SLDV measurements and processing}
-	\begin{figure}
-	\makebox[\textwidth][c]{\includegraphics[width=1.15\textwidth]{Full_wavefield_2_dispersion_curves_experiment.png}}
-	\end{figure}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame14]{SLDV measurements}
+\begin{frame}[t,label=frame13]{SLDV measurements}
 \begin{columns}[T]
 	\column{0.5\textwidth}
 	\begin{figure}
@@ -624,14 +618,26 @@ where $\omega$ is the angular frequency, $\matr{M}$ is the mass matrix, $\matr{U
 	\end{enumerate}
 \end{columns}
 {\small
- Vibrometer allows measurements of vibration velocities in range 0.01~$\mu$m/s $-$ 10 m/s for frequencies from DC up to 1.5~MHz for measuring distance from 40~cm up to dozens of meters. Scanning resolution is 0.002$^{\circ}$  which provides possibility of defining about 300 000 points in laser working area.}\end{frame}
+ Vibrometer allows measurements of vibration velocities in range 0.01~$\mu$m/s $-$ 10 m/s for frequencies from DC up to 1.5~MHz for measuring distance from 40~cm up to dozens of meters. Scanning resolution is 0.002$^{\circ}$  which provides possibility of defining about 300 000 points in laser working area.}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame14]{SLDV measurements and processing}
+\begin{figure}
+	\makebox[\textwidth][c]{\includegraphics[width=1.15\textwidth]{Full_wavefield_2_dispersion_curves_experiment.png}}
+\end{figure}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[t,label=frame15]{Experimental dispersion curves}
 \begin{figure} [h!]
 	\newcommand{\modelname}{ga_plain_weave_known_mass}
 	\centering
-		\includegraphics[width=0.9\textwidth]{genetic_algorithm/\modelname_out/\modelname_angle_60_dispersion_curves_initial_large.png}
+	\only<1>{
+		\includegraphics[width=0.9\textwidth]{genetic_algorithm/\modelname_out/\modelname_angle_60_dispersion_curves_exp_large.png}
+	}
+	\only<2>{
+	\includegraphics[width=0.9\textwidth]{genetic_algorithm/\modelname_out/\modelname_angle_60_dispersion_curves_initial_large.png}
 		\caption{Numerical dispersion curves calculated for initial parameters overlayed on experimental data}
+	}
 		\label{fig:dispersion60deg_initial}
 \end{figure}
 \end{frame}
@@ -964,7 +970,7 @@ Optimisation method: \textbf{genetic algorithm}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame22]{Objective function}
+\begin{frame}[t,label=frame22]{Objective function (1)}
 \only<1-2>{
 	\begin{equation*}
 	\min_j \sum_{\beta}\sum_{m} \| k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)}) -k^{EXP}_{m}(\beta,\omega) \|
@@ -983,14 +989,35 @@ Optimisation method: \textbf{genetic algorithm}
 	$\matr{D}^{SASE}_{\beta}$ - logical matrix\\
 	$ \matr{D}^{EXP}_{\beta} $ - matrix from experiment (image)\\
 	$.*$ - element wise multiplication 
-	\begin{equation*}
-	\tilde{F} = \frac{(-1)}{n_k \, n_f}  \cdot \sum_{\beta}  \sum_{i=1}^{n_k} \sum_{j=1}^{n_f}	\tilde{D}_{ij}^{\beta}
-	\end{equation*}
-	$n_k \, n_f$ - image size (number of wavenumber points and frequency points, respectively)
 }
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame23]{Genetic algorithm parameters}
+\begin{frame}[t,label=frame23]{Objective function (2)}
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\begin{figure} [h!]
+		\newcommand{\modelname}{ga_plain_weave_known_mass}
+		%\centering
+			\includegraphics[width=0.9\textwidth]{genetic_algorithm/\modelname_out/\modelname_angle_60_dispersion_curves_initial.png}
+			\caption{Numerical dispersion curves calculated for initial parameters overlayed on experimental data}
+		\label{fig:dispersion60deg_initial_}
+	\end{figure}
+	\column{0.5\textwidth}
+	\begin{figure} [h!]
+		\newcommand{\modelname}{ga_plain_weave_known_mass}
+		%\centering
+		\includegraphics[width=0.9\textwidth]{genetic_algorithm/\modelname_out/\modelname_angle_60_dispersion_curves_test_case_2.png}
+		\caption{Numerical dispersion curves calculated for optimised parameters overlayed on experimental data}
+		\label{fig:dispersion60deg_optimized}
+	\end{figure}
+\end{columns}
+	\begin{equation*}
+\tilde{F} = \frac{(-1)}{n_k \, n_f}  \cdot \sum_{\beta}  \sum_{i=1}^{n_k} \sum_{j=1}^{n_f}	\tilde{D}_{ij}^{\beta}
+\end{equation*}
+$n_k \, n_f$ - image size (number of wavenumber points and frequency points, respectively)
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t,label=frame24]{Genetic algorithm parameters}
 \begin{itemize}
 	\item Number of individuals per subpopulation: 100
 	\item Maximum number of generations: 50
@@ -1008,7 +1035,7 @@ Optimisation method: \textbf{genetic algorithm}
 \end{block}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[c,label=frame24]{Genetic algorithm convergence}
+\begin{frame}[c,label=frame25]{Genetic algorithm convergence}
 	\begin{figure} [h!]
 	\centering
 	\includegraphics[]{GA_convergence.png}
@@ -1020,7 +1047,7 @@ F = a \,  \tilde{F} + b,
 $a$ and $b$ are scaling parameters ($a=100$, $b=310$).
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame25]{Numerical and experimental dispersion curves in \alert{indirect} method}
+\begin{frame}[t,label=frame26]{Numerical and experimental dispersion curves in \alert{indirect} method}
 %\vspace{6pt}
 \def\myindenta{0.05\textwidth} % define myindenta variable  for correcting caption placement
 \newcommand{\modelname}{ga_plain_weave_known_mass}
@@ -1057,7 +1084,7 @@ $a$ and $b$ are scaling parameters ($a=100$, $b=310$).
 \end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame26]{Summary of results}
+\begin{frame}[t,label=frame27]{Summary of results}
 \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
@@ -1078,7 +1105,7 @@ $a$ and $b$ are scaling parameters ($a=100$, $b=310$).
 \end{table}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame27]{Numerical and experimental dispersion curves in \alert{direct} method}
+\begin{frame}[t,label=frame28]{Numerical and experimental dispersion curves in \alert{direct} method}
 %\vspace{6pt}
 \def\myindenta{0.05\textwidth} % define myindenta variable  for correcting caption placement
 \newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass}
@@ -1117,7 +1144,7 @@ $a$ and $b$ are scaling parameters ($a=100$, $b=310$).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[t,label=frame28]{Summary}
+\begin{frame}[t,label=frame29]{Summary}
 \begin{itemize}
 	\item The devised methodology can be applied to orthotropic materials such as composite laminates
 	\item Indirect and direct method have been investigated. It has been found that the indirect method leads to results which are more physically justified

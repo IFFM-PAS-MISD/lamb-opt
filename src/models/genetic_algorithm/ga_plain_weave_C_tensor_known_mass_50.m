@@ -18,7 +18,7 @@ modelfolder = pathstr(idx(end)+1:end); % name of folder
 modelname = name; 
 % prepare model output path
 model_output_path = prepare_model_paths('raw','num',modelfolder,modelname);
-number_of_modes_considered = 4; % number of modes considered in calculation of objective function score
+number_of_modes_considered = 6; % number of modes considered in calculation of objective function score
 %% Load parameters which are used in experiment
 % create path to the experimental processed data folder
 data_path=fullfile( projectroot, 'data','processed','exp', filesep );
@@ -62,7 +62,7 @@ Q44_0 = 3e9;
 Q55_0 = 3e9;
 Q66_0 = 3e9;
 
-variation = 0.2;
+variation = 0.5;
 Q11_lb = (1-variation)*Q11_0; 
 Q11_ub = (1+variation)*Q11_0; 
 Q12_lb = (1-variation)*Q12_0; 
@@ -84,7 +84,7 @@ Q66_ub = (1+variation)*Q66_0;
 %% genetic algorithm parameters
 % fittnes function scaling factors
 a=100;
-b=310;
+b=360;
 NIND = 100;           % Number of individuals per subpopulations
 MAXGEN = 70;        % maximum Number of generations
 GGAP = 0.9;           % Generation gap, how many new individuals are created
@@ -100,7 +100,7 @@ ubin= [1,1,1,1,1,1,1,1,1];%include upper bound of variable range
 %%
 %% tests loop
 %%
-for test_case = [31:50]
+for test_case = [8,13,14]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
