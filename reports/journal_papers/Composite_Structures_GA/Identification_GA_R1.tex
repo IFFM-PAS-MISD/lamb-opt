@@ -196,7 +196,7 @@
 	\end{equation}
 	where $\matr{C}_{\theta}$ is the elastic tensor and $\matr{B}$ is the matrix relating displacements and strains.
 	
-	Equation~\ref{eq:eig_dispersion} can be solved numerically in two ways:
+	Equation~(\ref{eq:eig_dispersion}) can be solved numerically in two ways:
 	\begin{itemize}
 		\item as a standard eigenvalue problem $\omega (k)$ (assuming given real values of wavenumbers $k$)
 		\item as a second-order polynomial eigenvalue problem $k(\omega)$ for given frequencies $\omega$.
@@ -226,7 +226,7 @@ In the later case, the solution consists of recasting Eq.~(\ref{eq:eig_dispersio
   \end{array}\right]. 
   \label{eq:elastic_constatns}
  \end{equation} 
- It means that there are 9 independent coefficients which should be determined by using an optimisation technique. But this is only applicable for the case in which the same material is used in each lamina and the layer orientation is known so that the Eq.~\ref{eq:elasticity_tensor} can be used. However, if the stacking sequence is unknown or there is a misalignment in the layer orientation, the more general case should be considered in which the matrix of elastic constants is more populated:
+ It means that there are 9 independent coefficients which should be determined by using an optimisation technique. But this is only applicable for the case in which the same material is used in each lamina and the layer orientation is known so that the Eq.~(\ref{eq:elasticity_tensor}) can be used. However, if the stacking sequence is unknown or there is a misalignment in the layer orientation, the more general case should be considered in which the matrix of elastic constants is more populated:
  \begin{equation}
  \matr{C}_{\theta} = \left[\begin{array}{cccccc} C_{\theta 11} & C_{\theta 12}& C_{\theta 13} & 0&0&C_{\theta 16}\\[2pt]
  C_{\theta 12}& C_{\theta 22} & C_{\theta 23}& 0 &0&C_{\theta 26}\\[2pt]
@@ -749,23 +749,23 @@ It seems that from the perspective of wave propagation modelling in composite la
 	\begin{figure} [h!]
 		\newcommand{\modelname}{ga_plain_weave_known_mass}
 		\centering
-		\begin{subfigure}[b]{\textwidth}
+		\begin{subfigure}[b]{0.49\textwidth}
 			\centering
 			% size fitted
 			%\includegraphics[width=\textwidth]{dispersion60deg_initial.png}
 			% size 100%
 			%\includegraphics[]{dispersion60deg_initial.png}
-		   \includegraphics[]{\modelname_angle_60_dispersion_curves_initial_large.png}
+		   \includegraphics[]{\modelname_angle_60_dispersion_curves_initial.png}
 			\caption{initial parameters}
 			\label{fig:dispersion60deg_initial}
 		\end{subfigure}
-		\begin{subfigure}[b]{\textwidth}
+		\begin{subfigure}[b]{0.49\textwidth}
 			\centering
 			% size fitted
 			%\includegraphics[width=\textwidth]{dispersion60deg.png}
 			% size 100%
 			%\includegraphics[]{dispersion60deg}
-			\includegraphics[]{\modelname_angle_60_dispersion_curves_test_case_2_large.png}
+			\includegraphics[]{ga_plain_weave_known_mass_50_angle_60_dispersion_curves_test_case_4.png}
 			\caption{optimised}
 			\label{fig:dispersion60deg}
 		\end{subfigure}
@@ -781,41 +781,41 @@ Finally, it should be pointed out that GA optimisation results are consistent, t
 
 
 \begin{figure} [h!]
-	\newcommand{\modelname}{ga_plain_weave_known_mass}
+	\newcommand{\modelname}{ga_plain_weave_known_mass_50}
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-			\includegraphics[]{\modelname_angle_0_dispersion_curves_test_case_2.png}
+			\includegraphics[]{\modelname_angle_0_dispersion_curves_test_case_4.png}
 		\caption{}
 		\label{fig:dispersion0deg}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_15_dispersion_curves_test_case_2.png}
+		\includegraphics[]{\modelname_angle_15_dispersion_curves_test_case_4.png}
 		\caption{}
 		\label{fig:dispersion15deg}
 	\end{subfigure}
    \begin{subfigure}[b]{0.49\textwidth}
 	   	\centering
-	   	\includegraphics[]{\modelname_angle_30_dispersion_curves_test_case_2.png}
+	   	\includegraphics[]{\modelname_angle_30_dispersion_curves_test_case_4.png}
 	   	\caption{}
 	   	\label{fig:dispersion30deg}
    \end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_45_dispersion_curves_test_case_2.png}
+		\includegraphics[]{\modelname_angle_45_dispersion_curves_test_case_4.png}
 		\caption{}
 		\label{fig:dispersion45deg}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_75_dispersion_curves_test_case_2.png}
+		\includegraphics[]{\modelname_angle_75_dispersion_curves_test_case_4.png}
 		\caption{}
 		\label{fig:dispersion75deg}
 	\end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\includegraphics[]{\modelname_angle_90_dispersion_curves_test_case_2.png}
+    	\includegraphics[]{\modelname_angle_90_dispersion_curves_test_case_4.png}
     	\caption{}
     	\label{fig:dispersion90deg}
     \end{subfigure}
@@ -824,43 +824,67 @@ Finally, it should be pointed out that GA optimisation results are consistent, t
 \end{figure}
 
 \clearpage
-
 \begin{figure} [h!]
-	\newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass}
+	\newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass_50}
+	\centering
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[]{\modelname_angle_0_dispersion_curves_test_case_2_large.png}
+		\caption{}
+		\label{fig:dispersion0deg_direct_SH0}
+	\end{subfigure}
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[]{\modelname_angle_15_dispersion_curves_test_case_2_large.png}
+		\caption{}
+		\label{fig:dispersion15deg_direct_SH0}
+	\end{subfigure}
+	\caption{Dispersion curves for optimised elastic constants in \textbf{direct method} at angles $\beta$: (a) 0$^{\circ}$, (b) 15$^{\circ}$; yellow curves: SASE model; red curve: SH0 mode; image: experiment. }
+	\label{fig:SH0_problem}
+\end{figure}
+
+In order to alleviate the issue with the SH0 mode we modified the matrix $\matr{D}^{SASE}_{\beta} $  from Eq.~(\ref{eq:objective_fun}). For the dispersion curve $m=2$ corresponding to the SH0 mode instead of value 1 we inserted the following angle-dependent values:
+\begin{equation}
+\left. \matr{D}^{SASE}_{0^{\circ}}\right\vert_{m=2} = 0.1, \, \left. \matr{D}^{SASE}_{15^{\circ}}\right\vert_{m=2} = 2.0, \, \left. \matr{D}^{SASE}_{30^{\circ}}\right\vert_{m=2} = 1.5
+\label{eq:objective_fun_mod}
+\end{equation}	
+and symmetrically for the remaining angles in respect to 45$^{\circ}$. Therefore the matrix $\matr{D}^{SASE}_{\beta} $ is no longer logical matrix but it is still functioning as a filter mask with tweaked weights.
+\begin{figure} [h!]
+	\newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass_50}
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_0_dispersion_curves_test_case_1.png}
+		\includegraphics[]{\modelname_angle_0_dispersion_curves_test_case_6.png}
 		\caption{}
 		\label{fig:dispersion0deg_direct}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_15_dispersion_curves_test_case_1.png}
+		\includegraphics[]{\modelname_angle_15_dispersion_curves_test_case_6.png}
 		\caption{}
 		\label{fig:dispersion15deg_direct}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_30_dispersion_curves_test_case_1.png}
+		\includegraphics[]{\modelname_angle_30_dispersion_curves_test_case_6.png}
 		\caption{}
 		\label{fig:dispersion30deg_direct}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_45_dispersion_curves_test_case_1.png}
+		\includegraphics[]{\modelname_angle_45_dispersion_curves_test_case_6.png}
 		\caption{}
 		\label{fig:dispersion45deg_direct}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_75_dispersion_curves_test_case_1.png}
+		\includegraphics[]{\modelname_angle_75_dispersion_curves_test_case_6.png}
 		\caption{}
 		\label{fig:dispersion75deg_direct}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_90_dispersion_curves_test_case_1.png}
+		\includegraphics[]{\modelname_angle_90_dispersion_curves_test_case_6.png}
 		\caption{}
 		\label{fig:dispersion90deg_direct}
 	\end{subfigure}

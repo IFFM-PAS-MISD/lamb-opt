@@ -33,7 +33,7 @@ C66_=zeros(100,1);
 
 ObjVal_=zeros(100,1);
 c=0;
-range=[5:7];
+range=[4:9];
 for test_case=range
     c=c+1;
     output_name = [model_input_path,filesep,num2str(test_case),'output'];

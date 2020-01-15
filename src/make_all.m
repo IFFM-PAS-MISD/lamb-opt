@@ -166,6 +166,13 @@ plot_num_exp_dispersion_SASE11;
 % plot and make figure for optimized num dispersion curves on top of experimental results (plain weave)
 plot_dispersion_curves_ga_plain_weave_known_mass;
 plot_dispersion_curves_ga_plain_weave_known_mass_large;
+plot_dispersion_curves_ga_plain_weave_known_mass_50;
+plot_dispersion_curves_ga_plain_weave_known_mass_50_large;
+plot_dispersion_curves_ga_plain_weave_C_tensor_known_mass_50;
+plot_dispersion_curves_ga_plain_weave_C_tensor_known_mass_50_l;
+% SH0 mode problem
+%plot_dispersion_curves_ga_plain_weave_C_tensor_known_mass_SH0
+plot_dispersion_curves_ga_plain_weave_C_tensor_known_mass_SH0_l;
 
 % plot and make figure for initial num dispersion curves on top of experimental results (plain weave)
 plot_dispersion_curves_ga_plain_weave_known_mass_initial;
@@ -191,12 +198,6 @@ plot_constants_histogram_50;
 
 % GA convergence fig (commented at the end)
 %ga_plain_weave_C_tensor_known_mass.m;
-
-% num - exp dispersion curves initial
-plot_dispersion_curves_ga_plain_weave_known_mass_initial_large;
-
-% num - exp dispersion curves optimized
-plot_dispersion_curves_ga_plain_weave_known_mass_large;
 
 % copy figs to paper folder
 copy_fig_Composite_Structures_GA;

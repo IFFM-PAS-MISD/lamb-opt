@@ -104,7 +104,7 @@ ubin= [1,1,1,1,1,1];%include upper bound of variable range
 %%
 %% tests loop
 %%
-for test_case = [8:13]
+for test_case = [11:13]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))

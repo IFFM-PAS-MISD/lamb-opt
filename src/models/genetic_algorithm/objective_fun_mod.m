@@ -1,7 +1,8 @@
-function [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered)
-% OBJECTIVE_FUN   score for overlap of numerical and experimental dispersion curves
+function [obj_score] = objective_fun_mod(Data_polar,fmax,FREQ,number_of_modes_considered)
+% objective_fun_mod   score for overlap of numerical and experimental
+% dispersion curves (modified for second mode)
 % 
-% Syntax: [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered) 
+% Syntax: [obj_score] = objective_fun_mod(Data_polar,fmax,FREQ,number_of_modes_considered) 
 % 
 % Inputs: 
 %    Data_polar - Experimental dispersion curves, complex double, dimensions [number_of_angles,number_of_wavenumber_points,number_of_frequency_points]  
@@ -14,8 +15,8 @@ function [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_consid
 %    obj_score - Objective function score, double, dimensions [m, n], Units: - 
 % 
 % Example: 
-%    [obj_score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered)
-%    [obj_score] = objective_fun(Data_polar,fmax,FREQ) 
+%    [obj_score] = objective_fun_mod(Data_polar,fmax,FREQ,number_of_modes_considered)
+%    [obj_score] = objective_fun_mod(Data_polar,fmax,FREQ) 
 % 
 % Other m-files required: none 
 % Subfunctions: none 
@@ -87,4 +88,4 @@ end
 
 %---------------------- END OF CODE---------------------- 
 
-% ================ [objective_fun.m] ================  
+% ================ [objective_fun_mod.m] ================  
