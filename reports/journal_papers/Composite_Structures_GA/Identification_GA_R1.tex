@@ -745,7 +745,7 @@ The proposed objective function enables quite fast convergence of GA. An exempla
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 	\subsection{Results and discussion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-It seems that from the perspective of wave propagation modelling in composite laminates, it is easier to select properties of composite material constituents than composite ply. It is because data related to the mechanical properties of the fibres and epoxy matrix is widely available. However, it has been shown in Fig.~\ref{fig:dispersion60deg_initial} that even for deliberately assumed values of constants characterising the composite material constituents (Table~\ref{tab:matprop}) there is a huge discrepancy between the model and experimental data. The easiest way to improve the model is by tweaking the volume fraction of reinforcing fibres (grid search approach). But this method does not guarantee a good match between numerical and experimental dispersion curves. The best option is a identification of all necessary parameters by using optimisation methods which leads to excellent agreement between numerical and experimental dispersion curves as it is shown in Fig.~\ref{fig:dispersion60deg}. It should be added that a linear colour scale is applied for all experimental images.
+It seems that from the perspective of wave propagation modelling in composite laminates, it is easier to select properties of composite material constituents than composite ply. It is because data related to the mechanical properties of the fibres and epoxy matrix is widely available. However, it has been shown in Fig.~\ref{fig:dispersion60deg_initial} that even for deliberately assumed values of constants characterising the composite material constituents (Table~\ref{tab:matprop}) there is a huge discrepancy between the model and experimental data. The easiest way to improve the model is by tweaking the volume fraction of reinforcing fibres (grid search approach). But this method does not guarantee a good match between numerical and experimental dispersion curves. The best option is an identification of all necessary parameters by using optimisation methods which leads to excellent agreement between numerical and experimental dispersion curves as it is shown in Fig.~\ref{fig:dispersion60deg}. It should be added that a linear colour scale is applied for all experimental images.
 	\begin{figure} [h!]
 		\newcommand{\modelname}{ga_plain_weave_known_mass}
 		\centering
@@ -898,15 +898,9 @@ The dispersion curves calculated by using modified objective function fit well t
 \subsubsection{Comparison of indirect and direct method}
 The GA algorithm was run 15 times for indirect as well as direct method. The optimisation results for the indirect  method are given in Table~\ref{tab:csv_indirect_results}. It should be noted that the standard deviations are high. The volume fraction of reinforcing fibres compete with Young’s modulus of fibres and matrix, i.e. for higher volume fractions the Young’s modulus is lower and vice versa. It can be concluded that the results are ambiguous. This issue can be alleviated only by reducing the bounds of parameter space.
 
+The values given in  in Table~\ref{tab:csv_indirect_results} were used next for calculation of $C_{ij}$ constants. In this way the results of indirect and direct method can be compared (see Table~\ref{tab:csv_results}). It can be seen that the direct method leads to slightly lower objective function values indicating better match between numerical and experimental results. Moreover, standard deviations for the direct method are much lower than for the indirect method. The largest discrepancies up to about 20\% between these methods are for constants $C_{12}$ and $C_{66}$. It confirms that the results in the form of $C_{ij}$ constants obtained by the indirect method converge close to the results by the direct method. Nevertheless, due to large spread of identified material properties of composite constituents, the indirect method leads to unsatisfactory results. 
 
-
-The optimisation results for indirect and direct method obtained in 50 GA runs are compared in Table~\ref{tab:csv_results}. The mean value of the objective function for the best chromosome in the indirect method is 8.32 whereas in the direct method is -2.37.
-
-Finally, it should be pointed out that GA optimisation results are consistent, they have a small spread as evidenced by the low values of the standard deviation in Table~\ref{tab:csv_results}. 
-
-
-
-
+Contrary, it should be pointed out that GA optimisation results for the direct method are consistent, they have a relative small spread as evidenced by the quite low values of the standard deviation in Table~\ref{tab:csv_results}. In our opinion, further reduction of standard deviation is possible only by taking into account larger frequency range and in turn, more modes of propagating waves. However, the limitation here is the SLDV. Probably, higher frequency range can be considered by using newest lasers. 
 
 % \begin{table}[h]
 %	\renewcommand{\arraystretch}{1.3}
@@ -969,7 +963,7 @@ Finally, it should be pointed out that GA optimisation results are consistent, t
 \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
-	\caption{GA optimisation results for the indirect approach based on statistics (mean $\mu$ and standard deviation $\sigma$) of 50 GA runs.}	
+	\caption{GA optimisation results for the indirect approach based on statistics (mean $\mu$ and standard deviation $\sigma$) of 15 GA runs.}	
 	\begin{tabular}{lrrr} \toprule
 		&\multicolumn{3}{c}{\textbf{indirect method}} \\
 		%\midrule
@@ -984,11 +978,10 @@ Finally, it should be pointed out that GA optimisation results are consistent, t
 	\end{tabular}	
 	\label{tab:csv_indirect_results}
 \end{table}
-
 \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
-	\caption{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 50 GA runs; Units of  elastic constants: [GPa].}	
+	\caption{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 15 GA runs; Units of  elastic constants: [GPa].}	
 	\begin{tabular}{crrrrrr} \toprule
 		&\multicolumn{3}{c}{\textbf{indirect method}} & \multicolumn{3}{c}{\textbf{direct method} }\\
 		%\midrule
@@ -1004,15 +997,15 @@ Finally, it should be pointed out that GA optimisation results are consistent, t
 	\label{tab:csv_results}
 \end{table}
 %\csvautobooktabular{results_indirect.csv}
+\clearpage
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Conclusions}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-	This work has demonstrated that the proposed method based on guided wave dispersion curves combined with the genetic algorithm is well suited for identification of elastic constants of woven fabric reinforced composites. Two approaches have been investigated: indirect and direct.  In the indirect approach, material properties of composite constituents are selected as optimisation variables which are next used for calculation of elastic constants of lamina by using micromechanics and homogenisation techniques. On the other hand, in the direct approach, the elastic constants of the composite laminate are selected as optimisation variables. The motivation behind the indirect approach is the fact that fewer variables are involved in the optimisation process. However, it has been found that the indirect method leads to results which are more physically justified than the results obtained by using the direct approach. This fact is demonstrated by dispersion curves calculated by SASE model which matches very well experimental data coming from SLDV measurements. 
+	This work has demonstrated that the proposed method based on guided wave dispersion curves combined with the genetic algorithm is well suited for identification of elastic constants of woven fabric reinforced composites. Two approaches have been investigated: indirect and direct.  In the indirect approach, material properties of composite constituents are selected as optimisation variables which are next used for calculation of elastic constants of lamina by using micromechanics and homogenisation techniques. On the other hand, in the direct approach, the elastic constants of the composite laminate are selected as optimisation variables. The motivation behind the indirect approach is the fact that fewer variables are involved in the optimisation process. However, it has been found that for parameter space bounds  $\pm$50\% in respect to the initial values, in spite of low value of the objective function, the indirect method leads to ambiguous results.  Much better results have been obtained by the direct method. This fact is demonstrated by the dispersion curves calculated by the SASE model which matches very well the experimental data coming from the SLDV measurements. 
 	
 	The advantage of the proposed methodology is one-sided non-contact measurements with contact excitation which can be conducted even directly on existing structures without the necessity of preparation of special samples.
 	
-	The results from this study imply that the matrix of elastic constants of fabric reinforced composite can be estimated with a small spread which is connected with the nature of GA. However, a number of potential sources of measurement errors, as well as the limitation of the devised methodology should be considered. The most important source of errors lies in the variability of the thickness of the specimen. There is an inherent deviation in the thickness of a composite occurred during manufacturing. The thickness variability cannot be taken into account in the SASE model -- averaged thickness must be assumed in the model instead. Another important issue is the temperature influence on propagating guided waves. Since SLDV measurements can take even a few hours, temperature variation during the measurement period can affect the material properties of the investigated specimen. A less important source of errors comes from the measurements of the length and width of the scanned area. It should be added that the accuracy of the proposed methodology depends on frequency range and the respective number of modes which can be captured experimentally.
+	The results from this study imply that the matrix of elastic constants of fabric reinforced composite can be estimated with a quite small spread which is connected with the nature of GA. However, a number of potential sources of measurement errors, as well as the limitation of the devised methodology should be considered. The most important source of errors lies in the variability of the thickness of the specimen. There is an inherent deviation in the thickness of a composite occurred during manufacturing. The thickness variability cannot be taken into account in the SASE model -- averaged thickness must be assumed in the model instead. Another important issue is the temperature influence on propagating guided waves. Since SLDV measurements can take even a few hours, temperature variation during the measurement period can affect the material properties of the investigated specimen. A less important source of errors comes from the measurements of the length and width of the scanned area. It should be added that the accuracy of the proposed methodology depends on the frequency range and the respective number of modes which can be captured experimentally.
 	
 	It should be underlined, that the devised methodology can be applied to composite laminates of higher anisotropy level. Further studies on composite laminates reinforced by unidirectional fibres are ongoing.
 	 
