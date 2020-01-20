@@ -731,7 +731,7 @@ The piezoelectric transducer disc of 10 mm diameter  was bonded to the surface o
 	\end{equation}
 	where $a$ and $b$ are scaling parameters. The parameters can be selected so that the values of objective function are positive ($a=100$, $b=360$ were assumed in the current studies).
 	
-	It should be added that the calculation of the objective function is quite computationally intensive. It takes about 5 minutes on Intel Xeon X5660 2.8~GHz to compute 100 evaluations of objective function. 
+	It should be added that the calculation of the objective function is quite computationally intensive. It takes about 5 minutes on Intel Xeon X5660 2.8~GHz to compute 100 evaluations of the objective function. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 \subsection{GA convergence}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -772,12 +772,9 @@ It seems that from the perspective of wave propagation modelling in composite la
 	\caption{Dispersion curves at angle $\beta = 60^{\circ}$; yellow curves: SASE model; image: experiment. }
 	\label{fig:initial_optimized}
 	\end{figure}
+\subsubsection{Indirect method}
+The exemplary results of optimised dispersion curves obtained in the indirect method are shown in Fig.~\ref{fig:optimized}. It is for the case in which the objective function value is $F=29.5845$. It can be seen that for each considered angle of propagation, the modelled dispersion curves fit very well to the experimental data. It should be noted that one of the dispersion curves (linear function), especially at angles $0^{\circ}$, $15^{\circ}$ and $90^{\circ}$, does not superimpose with high values of the experimental image. This is natural because it corresponds to shear horizontal wave which is more difficult to excite by conventional piezoelectric transducer than S0 and A0 Lamb wave modes. Shear horizontal wave mode excitability is slightly higher at angle $75^{\circ}$ at which good match between modelled SH0 mode and experimental data is observed (see Fig.~\ref{fig:dispersion75deg}). 
 
-The exemplary results of optimised dispersion curves obtained in the indirect method are shown in Fig.~\ref{fig:optimized}. It is for the case in which the objective function value is $F=8.1285$. It can be seen that for each considered angle of propagation, the modelled dispersion curves fit very well to the experimental data. It should be noted that one of the dispersion curves (linear function), especially at angles $0^{\circ}$, $15^{\circ}$ and $90^{\circ}$, does not superimpose with high values of the experimental image. This is natural because it corresponds to shear horizontal wave which is more difficult to excite by conventional piezoelectric transducer than S0 and A0 Lamb wave modes. Shear horizontal wave mode excitability is slightly higher at angle $75^{\circ}$ at which good match between modelled SH0 mode and experimental data is observed (see Fig.~\ref{fig:dispersion75deg}). Contrary, in the direct method, wavenumber values of SH0 mode are overestimated (see Fig.~\ref{fig:dispersion75deg_direct}). In other words, the velocity of the modelled SH0 mode is lower than in the experiment.
-
-Turning now to the direct method, better results in terms of the objective function value were obtained. The optimisation results for indirect and direct method obtained in 50 GA runs are compared in Table~\ref{tab:csv_results}. The mean value of the objective function for the best chromosome in the indirect method is 8.32 whereas in the direct method is -2.37. However, this is occupied by non-physical behaviour of shear horizontal wave mode as it is observed e.g. in Fig.~\ref{fig:dispersion0deg_direct} or Fig.~\ref{fig:dispersion90deg_direct}. Dispersion curve corresponding to SH0 mode tends to overlap with another dispersion curve (A0 mode) contributing significantly to the objective function value. Non-physical behaviour confirms also mean value of $C_{66}$ which is lower than $C_{44}$ and $C_{55}$ (see the direct method in Table~\ref{tab:csv_results}). In real-world, the opposite behaviour is expected. Other dispersion curves calculated for optimised elastic constants fit well the experimental data as it is shown in Fig.~\ref{fig:optimized_direct}. It is the example for the case in which the objective function value is $F=-1.8246$.
-
-Finally, it should be pointed out that GA optimisation results are consistent, they have a small spread as evidenced by the low values of the standard deviation in Table~\ref{tab:csv_results}. 
 
 
 \begin{figure} [h!]
@@ -785,7 +782,7 @@ Finally, it should be pointed out that GA optimisation results are consistent, t
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-			\includegraphics[]{\modelname_angle_0_dispersion_curves_test_case_4.png}
+		\includegraphics[]{\modelname_angle_0_dispersion_curves_test_case_4.png}
 		\caption{}
 		\label{fig:dispersion0deg}
 	\end{subfigure}
@@ -795,12 +792,12 @@ Finally, it should be pointed out that GA optimisation results are consistent, t
 		\caption{}
 		\label{fig:dispersion15deg}
 	\end{subfigure}
-   \begin{subfigure}[b]{0.49\textwidth}
-	   	\centering
-	   	\includegraphics[]{\modelname_angle_30_dispersion_curves_test_case_4.png}
-	   	\caption{}
-	   	\label{fig:dispersion30deg}
-   \end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[]{\modelname_angle_30_dispersion_curves_test_case_4.png}
+		\caption{}
+		\label{fig:dispersion30deg}
+	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		\includegraphics[]{\modelname_angle_45_dispersion_curves_test_case_4.png}
@@ -813,17 +810,28 @@ Finally, it should be pointed out that GA optimisation results are consistent, t
 		\caption{}
 		\label{fig:dispersion75deg}
 	\end{subfigure}
-    \begin{subfigure}[b]{0.49\textwidth}
-    	\centering
-    	\includegraphics[]{\modelname_angle_90_dispersion_curves_test_case_4.png}
-    	\caption{}
-    	\label{fig:dispersion90deg}
-    \end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+		\includegraphics[]{\modelname_angle_90_dispersion_curves_test_case_4.png}
+		\caption{}
+		\label{fig:dispersion90deg}
+	\end{subfigure}
 	\caption{Dispersion curves for optimised elastic constants in \textbf{indirect method} at angles $\beta$: (a) 0$^{\circ}$, (b) 15$^{\circ}$, (c) 30$^{\circ}$, (d) 45$^{\circ}$, (e) 75$^{\circ}$, (f) 90$^{\circ}$; yellow curves: SASE model; image: experiment. }
 	\label{fig:optimized}
 \end{figure}
 
 \clearpage
+\subsubsection{Direct method}
+Turning now to the direct method, similar results in terms of the objective function value were obtained.  However, this is occupied by non-physical behaviour of shear horizontal wave mode as it is observed in Fig.~\ref{fig:dispersion0deg_direct_SH0} . Dispersion curve corresponding to SH0 mode (red curve) tends to overlap with another dispersion curve (A0 mode) contributing significantly to the objective function value. Additionally, wavenumber values of SH0 mode are overestimated (see Fig.~\ref{fig:dispersion15deg_direct_SH0}). In other words, the velocity of the modelled SH0 mode is lower than in the experiment.
+
+In order to alleviate the issue with the SH0 mode we modified the matrix $\matr{D}^{SASE}_{\beta} $  from Eq.~(\ref{eq:objective_fun}). For the dispersion curve $m=2$ corresponding to the SH0 mode, instead of value 1 we inserted the following angle-dependent values:
+\begin{equation}
+\left. \matr{D}^{SASE}_{0^{\circ}}\right\vert_{m=2} = 0.1, \, \left. \matr{D}^{SASE}_{15^{\circ}}\right\vert_{m=2} = 2.0, \, \left. \matr{D}^{SASE}_{30^{\circ}}\right\vert_{m=2} = 1.5
+\label{eq:objective_fun_mod}
+\end{equation}	
+and symmetrically for the remaining angles in respect to 45$^{\circ}$. Therefore the matrix $\matr{D}^{SASE}_{\beta} $ is no longer logical matrix but it is still functioning as a filter mask with tweaked weights.
+
+The dispersion curves calculated by using modified objective function fit well the experimental data as it is shown in Fig.~\ref{fig:optimized_direct} for each considered angle. 
 \begin{figure} [h!]
 	\newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass_50}
 	\centering
@@ -843,12 +851,6 @@ Finally, it should be pointed out that GA optimisation results are consistent, t
 	\label{fig:SH0_problem}
 \end{figure}
 
-In order to alleviate the issue with the SH0 mode we modified the matrix $\matr{D}^{SASE}_{\beta} $  from Eq.~(\ref{eq:objective_fun}). For the dispersion curve $m=2$ corresponding to the SH0 mode instead of value 1 we inserted the following angle-dependent values:
-\begin{equation}
-\left. \matr{D}^{SASE}_{0^{\circ}}\right\vert_{m=2} = 0.1, \, \left. \matr{D}^{SASE}_{15^{\circ}}\right\vert_{m=2} = 2.0, \, \left. \matr{D}^{SASE}_{30^{\circ}}\right\vert_{m=2} = 1.5
-\label{eq:objective_fun_mod}
-\end{equation}	
-and symmetrically for the remaining angles in respect to 45$^{\circ}$. Therefore the matrix $\matr{D}^{SASE}_{\beta} $ is no longer logical matrix but it is still functioning as a filter mask with tweaked weights.
 \begin{figure} [h!]
 	\newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass_50}
 	\centering
@@ -893,6 +895,18 @@ and symmetrically for the remaining angles in respect to 45$^{\circ}$. Therefore
 \end{figure}
 
 \clearpage
+\subsubsection{Comparison of indirect and direct method}
+The GA algorithm was run 15 times for indirect as well as direct method. The optimisation results for the indirect  method are given in Table~\ref{tab:csv_indirect_results}. It should be noted that the standard deviations are high. The volume fraction of reinforcing fibres compete with Young’s modulus of fibres and matrix, i.e. for higher volume fractions the Young’s modulus is lower and vice versa. It can be concluded that the results are ambiguous. This issue can be alleviated only by reducing the bounds of parameter space.
+
+
+
+The optimisation results for indirect and direct method obtained in 50 GA runs are compared in Table~\ref{tab:csv_results}. The mean value of the objective function for the best chromosome in the indirect method is 8.32 whereas in the direct method is -2.37.
+
+Finally, it should be pointed out that GA optimisation results are consistent, they have a small spread as evidenced by the low values of the standard deviation in Table~\ref{tab:csv_results}. 
+
+
+
+
 
 % \begin{table}[h]
 %	\renewcommand{\arraystretch}{1.3}
