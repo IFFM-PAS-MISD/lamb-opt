@@ -124,6 +124,8 @@ data/raw/exp/**
 data/raw/num/**
 # exception to the rule
 !data/raw/num/.gitkeep 
+!bin/.gitkeep
+!bin/external/.gitkeep
 
 # exclude external models from source control
 src/external/**
