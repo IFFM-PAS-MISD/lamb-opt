@@ -1,0 +1,3 @@
+C:\Strawberry\perl\bin\latexdiff
+
+latexdiff.pl "E:\work\projects\opus15\lamb-opt\reports\journal_papers\Composite_Structures_GA\Identification_GA.tex" "E:\work\projects\opus15\lamb-opt\reports\journal_papers\Composite_Structures_GA\Identification_GA_R1.tex" > "E:\work\projects\opus15\lamb-opt\reports\journal_papers\Composite_Structures_GA\diff.tex"
