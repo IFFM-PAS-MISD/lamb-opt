@@ -60,7 +60,7 @@
 \newcommand{\veca}[2]{\mathbf{#1}{#2}}
 \renewcommand{\bm}[1]{\mathbf{#1}}
 \newcommand{\bs}[1]{\boldsymbol{#1}}
-\graphicspath{{figs/}{../../figures/}}
+\graphicspath{{figs/}}
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
 %% The lineno packages adds line numbers. Start line numbering with
@@ -209,7 +209,7 @@
 
 		\begin{figure} [h!]
 		\centering
-		\includegraphics[width=\textwidth]{layered_composite_SASE.png}
+		\includegraphics[width=\textwidth]{figure1.png}
 		%\includegraphics{layered_composite_SASE.png}	
 		\caption{SASE model of wave propagation along with degrees of freedom of a mono-dimensional four-node spectral element.}
 		\label{fig:layered_composite_SASE}
@@ -293,7 +293,7 @@ In the later case, the solution consists of recasting Eq.~(\ref{eq:eig_dispersio
  \end{equation} 
  which gives 13 independent elastic constants per lamina. Of course, the determination of such a large number of elastic constants by optimisation methods is prohibitive due to high computation cost. 
 
- In order to reduce computation cost, the number of independent variables can be decreased by considering properties of composite constituents, namely matrix and fibres, separately. Thus,  \DIFdelbegin \DIFdel{7 }\DIFdelend \DIFaddbegin \DIFadd{8 }\DIFaddend parameters must be taken into account: matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus \DIFdelbegin \DIFdel{$E_f$}\DIFdelend \DIFaddbegin \DIFadd{along fibres $E_{11f}$ and perpendicular to fibres $E_{22f}$}\DIFaddend , Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. One parameter can be further eliminated if the overall density $\rho$ of the composite is known. \DIFaddbegin \DIFadd{Moreover, it can be assumed that $E_{22f} = 0.1\, E_{11f}$ thus the total number of independent parameters can be reduced to 6. It should be noted that the notation $E_f = E_{11f}$ was used further in the text for simplicity. }\DIFaddend The effective elastic constants can be calculated by using the rule of mixture and homogenization techniques.
+ In order to reduce computation cost, the number of independent variables can be decreased by considering properties of composite constituents, namely matrix and fibres, separately. Thus,  \DIFdelbegin \DIFdel{7 }\DIFdelend \DIFaddbegin \DIFadd{8 }\DIFaddend parameters must be taken into account: matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus \DIFdelbegin \DIFdel{$E_f$}\DIFdelend \DIFaddbegin \DIFadd{along fibres $E_{11f}$ and perpendicular to fibres $E_{22f} = E_{33f}$}\DIFaddend , Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. One parameter can be further eliminated if the overall density $\rho$ of the composite is known. \DIFaddbegin \DIFadd{Moreover, it can be assumed that $E_{22f} = 0.1\, E_{11f}$ thus the total number of independent parameters can be reduced to 6. It should be noted that the notation $E_f = E_{11f}$ was used further in the text for simplicity. }\DIFaddend The effective elastic constants can be calculated by using the rule of mixture and homogenization techniques.
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \subsection{Parametric studies of dispersion curves \label{sec:parametric}}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -329,7 +329,6 @@ In the later case, the solution consists of recasting Eq.~(\ref{eq:eig_dispersio
  The influence of matrix density on dispersion curves for selected angle $\beta$ is shown in Fig.~\ref{fig:rhom}. The parameter has a moderate influence on each mode of propagating waves.
 
  \begin{figure} [h!]
- 	\newcommand{\modelname}{SASE2_plain_weave}
  	\centering
  	\begin{subfigure}[b]{0.49\textwidth}
  		\centering
@@ -338,7 +337,7 @@ In the later case, the solution consists of recasting Eq.~(\ref{eq:eig_dispersio
  		% size 100%
  		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
 %DIFDELCMD <  		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_0_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure2a.png}
  		\DIFaddendFL \caption{}
  		\label{fig:rhom0}
  	\end{subfigure}
@@ -350,7 +349,7 @@ In the later case, the solution consists of recasting Eq.~(\ref{eq:eig_dispersio
  		% size 100%
  		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves_color.png}
 %DIFDELCMD <  		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_30_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure2b.png}
  		\DIFaddendFL \caption{}
  		\label{fig:rhom30}
  	\end{subfigure}
@@ -383,7 +382,6 @@ The influence of fibres density on dispersion curves for selected angle $\beta$ 
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE3_plain_weave}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -391,7 +389,7 @@ The influence of fibres density on dispersion curves for selected angle $\beta$ 
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_0_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure3a.png}
 		\DIFaddendFL \caption{}
 		\label{fig:rhof0}
 	\end{subfigure}
@@ -403,7 +401,7 @@ The influence of fibres density on dispersion curves for selected angle $\beta$ 
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_30_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure3b.png}
 		\DIFaddendFL \caption{}
 		\label{fig:rhof30}
 	\end{subfigure}
@@ -435,7 +433,6 @@ The influence of Young's modulus of matrix on dispersion curves for selected ang
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE4_plain_weave}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -443,7 +440,7 @@ The influence of Young's modulus of matrix on dispersion curves for selected ang
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_0_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure4a.png}
 		\DIFaddendFL \caption{}
 		\label{fig:em0}
 	\end{subfigure}
@@ -455,7 +452,7 @@ The influence of Young's modulus of matrix on dispersion curves for selected ang
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_30_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure4b.png}
 		\DIFaddendFL \caption{}
 		\label{fig:em30}
 	\end{subfigure}
@@ -487,7 +484,6 @@ The influence of Young's modulus of fibres on dispersion curves for selected ang
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE5_plain_weave}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -495,7 +491,7 @@ The influence of Young's modulus of fibres on dispersion curves for selected ang
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_0_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure5a.png}
 		\DIFaddendFL \caption{}
 		\label{fig:ef0}
 	\end{subfigure}
@@ -507,7 +503,7 @@ The influence of Young's modulus of fibres on dispersion curves for selected ang
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_30_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure5b.png}
 		\DIFaddendFL \caption{}
 		\label{fig:ef30}
 	\end{subfigure}
@@ -539,7 +535,6 @@ The influence of  Poisson's ratio of matrix on dispersion curves for selected an
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE6_plain_weave}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -547,7 +542,7 @@ The influence of  Poisson's ratio of matrix on dispersion curves for selected an
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_0_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure6a.png}
 		\DIFaddendFL \caption{}
 		\label{fig:nim0}
 	\end{subfigure}
@@ -557,7 +552,7 @@ The influence of  Poisson's ratio of matrix on dispersion curves for selected an
 		% size fitted
 		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves_color.png}
 		% size 100%
-		\includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves_color.png}
+		\includegraphics[]{figure6b.png}
 		\caption{}
 		\label{fig:nim30}
 	\end{subfigure}
@@ -589,7 +584,6 @@ The influence of Poisson's ratio of fibres  on dispersion curves for selected an
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE7_plain_weave}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -597,7 +591,7 @@ The influence of Poisson's ratio of fibres  on dispersion curves for selected an
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_0_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure7a.png}
 		\DIFaddendFL \caption{}
 		\label{fig:nif0}
 	\end{subfigure}
@@ -609,7 +603,7 @@ The influence of Poisson's ratio of fibres  on dispersion curves for selected an
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_30_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure7b.png}
 		\DIFaddendFL \caption{}
 		\label{fig:nif30}
 	\end{subfigure}
@@ -641,7 +635,6 @@ The influence of volume fraction of reinforcing fibres on dispersion curves for 
 
 \begin{figure} [h!]
 	\centering
-	\newcommand{\modelname}{SASE8_plain_weave}
 	%\newcommand{\modelname}{SASE8}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
@@ -650,7 +643,7 @@ The influence of volume fraction of reinforcing fibres on dispersion curves for 
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_0_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure8a.png}
 		\DIFaddendFL \caption{}
 		\label{fig:vol0}
 	\end{subfigure}
@@ -662,7 +655,7 @@ The influence of volume fraction of reinforcing fibres on dispersion curves for 
 		% size 100%
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves_color.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_30_param_dispersion_curves_color.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure8b.png}
 		\DIFaddendFL \caption{}
 		\label{fig:vol30}
 	\end{subfigure}
@@ -828,7 +821,7 @@ The piezoelectric transducer disc of 10 mm diameter  was bonded to the surface o
 The proposed objective function enables quite fast convergence of GA. An exemplary convergence of objective function with increasing generation number is shown in Fig.~\ref{fig:GAconvergence}. Objective function values were calculated for the best chromosome and also for the mean value of all chromosomes in a generation. Objective function stabilises in both cases after about 40 generations.
 	\begin{figure} [h!]
 		\centering
-		\includegraphics[]{GA_convergence.png}
+		\includegraphics[]{figure9.png}
 		\caption{GA convergence in direct approach.}
 		\label{fig:GAconvergence}
 	\end{figure}
@@ -837,7 +830,6 @@ The proposed objective function enables quite fast convergence of GA. An exempla
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 It seems that from the perspective of wave propagation modelling in composite laminates, it is easier to select properties of composite material constituents than composite ply. It is because data related to the mechanical properties of the fibres and epoxy matrix is widely available. However, it has been shown in Fig.~\ref{fig:dispersion60deg_initial} that even for \DIFdelbegin \DIFdel{very reasonably }\DIFdelend \DIFaddbegin \DIFadd{deliberately }\DIFaddend assumed values of constants characterising the composite material constituents (Table~\ref{tab:matprop}) there is a huge discrepancy between the model and experimental data. The easiest way to improve the model is by tweaking the volume fraction of reinforcing fibres (grid search approach). But this method does not guarantee a good match between numerical and experimental dispersion curves. The best option is \DIFdelbegin \DIFdel{an optimisation }\DIFdelend \DIFaddbegin \DIFadd{an identification }\DIFaddend of all necessary parameters \DIFaddbegin \DIFadd{by using optimisation methods }\DIFaddend which leads to excellent agreement between numerical and experimental dispersion curves as it is shown in Fig.~\ref{fig:dispersion60deg}. \DIFaddbegin \DIFadd{It should be added that a linear colour scale is applied for all experimental images.
 	}\DIFaddend \begin{figure} [h!]
-		\newcommand{\modelname}{ga_plain_weave_known_mass}
 		\centering
 		\DIFdelbeginFL %DIFDELCMD < \begin{subfigure}[b]{\textwidth}
 %DIFDELCMD < 			%%%
@@ -849,7 +841,7 @@ It seems that from the perspective of wave propagation modelling in composite la
 			%\includegraphics[]{dispersion60deg_initial.png}
 		   \DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_60_dispersion_curves_initial_large.png}
 %DIFDELCMD < 			%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_60_dispersion_curves_initial.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure10a.png}
 			\DIFaddendFL \caption{initial parameters}
 			\label{fig:dispersion60deg_initial}
 		\end{subfigure}
@@ -863,7 +855,7 @@ It seems that from the perspective of wave propagation modelling in composite la
 			%\includegraphics[]{dispersion60deg}
 			\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_60_dispersion_curves_test_case_2_large.png}
 %DIFDELCMD < 			%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{ga_plain_weave_known_mass_50_angle_60_dispersion_curves_test_case_4.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure10b.png}
 			\DIFaddendFL \caption{optimised}
 			\label{fig:dispersion60deg}
 		\end{subfigure}
@@ -881,41 +873,40 @@ It seems that from the perspective of wave propagation modelling in composite la
 
 
 \DIFaddbegin \begin{figure} [h!]
-	\newcommand{\modelname}{ga_plain_weave_known_mass_50}
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_0_dispersion_curves_test_case_4.png}
+		\includegraphics[]{figure11a.png}
 		\caption{}
 		\label{fig:dispersion0deg}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_15_dispersion_curves_test_case_4.png}
+		\includegraphics[]{figure11b.png}
 		\caption{}
 		\label{fig:dispersion15deg}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_30_dispersion_curves_test_case_4.png}
+		\includegraphics[]{figure11c.png}
 		\caption{}
 		\label{fig:dispersion30deg}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_45_dispersion_curves_test_case_4.png}
+		\includegraphics[]{figure11d.png}
 		\caption{}
 		\label{fig:dispersion45deg}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_75_dispersion_curves_test_case_4.png}
+		\includegraphics[]{figure11e.png}
 		\caption{}
 		\label{fig:dispersion75deg}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
-		\includegraphics[]{\modelname_angle_90_dispersion_curves_test_case_4.png}
+		\includegraphics[]{figure11f.png}
 		\caption{}
 		\label{fig:dispersion90deg}
 	\end{subfigure}
@@ -949,7 +940,7 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 }\DIFaddend \begin{figure} [h!]
 	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{ga_plain_weave_known_mass}
 %DIFDELCMD < 	%%%
-\DIFdelendFL \DIFaddbeginFL \newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass_50}
+\DIFdelendFL \DIFaddbeginFL 
 	\DIFaddendFL \centering
 	\DIFdelbeginFL %DIFDELCMD < \begin{subfigure}[b]{0.49\textwidth}
 %DIFDELCMD < 		%%%
@@ -957,7 +948,7 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 		\DIFaddendFL \centering
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_0_dispersion_curves_test_case_2.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_0_dispersion_curves_test_case_2_large.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure12a.png}
 		\DIFaddendFL \caption{}
 		\DIFdelbeginFL %DIFDELCMD < \label{fig:dispersion0deg}
 %DIFDELCMD < 	%%%
@@ -969,7 +960,7 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 		\DIFaddendFL \centering
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_15_dispersion_curves_test_case_2.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_15_dispersion_curves_test_case_2_large.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure12b.png}
 		\DIFaddendFL \caption{}
 		\DIFdelbeginFL %DIFDELCMD < \label{fig:dispersion15deg}
 %DIFDELCMD < 	%%%
@@ -1030,13 +1021,13 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 \DIFdelend \begin{figure} [h!]
 	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass}
 %DIFDELCMD < 	%%%
-\DIFdelendFL \DIFaddbeginFL \newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass_50}
+\DIFdelendFL \DIFaddbeginFL 
 	\DIFaddendFL \centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_0_dispersion_curves_test_case_1.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_0_dispersion_curves_test_case_6.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure13a.png}
 		\DIFaddendFL \caption{}
 		\label{fig:dispersion0deg_direct}
 	\end{subfigure}
@@ -1044,7 +1035,7 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 		\centering
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_15_dispersion_curves_test_case_1.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_15_dispersion_curves_test_case_6.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure13b.png}
 		\DIFaddendFL \caption{}
 		\label{fig:dispersion15deg_direct}
 	\end{subfigure}
@@ -1052,7 +1043,7 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 		\centering
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_30_dispersion_curves_test_case_1.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_30_dispersion_curves_test_case_6.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure13c.png}
 		\DIFaddendFL \caption{}
 		\label{fig:dispersion30deg_direct}
 	\end{subfigure}
@@ -1060,7 +1051,7 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 		\centering
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_45_dispersion_curves_test_case_1.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_45_dispersion_curves_test_case_6.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure13d.png}
 		\DIFaddendFL \caption{}
 		\label{fig:dispersion45deg_direct}
 	\end{subfigure}
@@ -1068,7 +1059,7 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 		\centering
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_75_dispersion_curves_test_case_1.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_75_dispersion_curves_test_case_6.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure13e.png}
 		\DIFaddendFL \caption{}
 		\label{fig:dispersion75deg_direct}
 	\end{subfigure}
@@ -1076,7 +1067,7 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 		\centering
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_90_dispersion_curves_test_case_1.png}
 %DIFDELCMD < 		%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[]{\modelname_angle_90_dispersion_curves_test_case_6.png}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure13f.png}
 		\DIFaddendFL \caption{}
 		\label{fig:dispersion90deg_direct}
 	\end{subfigure}

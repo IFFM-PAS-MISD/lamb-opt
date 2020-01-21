@@ -120,7 +120,8 @@ bin/**
 data/external/**
 data/interim/**
 data/processed/**
-data/raw/**
+data/raw/exp/**
+data/raw/num/**
 
 # exclude external models from source control
 src/external/**
