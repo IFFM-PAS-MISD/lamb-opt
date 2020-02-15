@@ -89,6 +89,38 @@ SASE11;
 % parametric search over C66
 SASE12_plain_weave;
 
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C55
+SASE13_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C44
+SASE14_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C33
+SASE15_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C23
+SASE16_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C22
+SASE17_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C13
+SASE18_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C12
+SASE19_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C11
+SASE20_plain_weave;
+
 % objective functions for full wavefield laser measurements
 % call objective_fun for test cases calculated in SASE1,SASE2,SASE9,SASE10, SASE11
 objective_fun_nmodes_4_script;
@@ -152,6 +184,31 @@ plot_param_dispersion_curves_SASE8_plain_weave_color;
 
 % plot and make figures for dispersion curves variability depending on C66
 plot_param_dispersion_curves_SASE12_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C55
+plot_param_dispersion_curves_SASE13_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C44
+plot_param_dispersion_curves_SASE14_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C33
+plot_param_dispersion_curves_SASE15_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C23
+plot_param_dispersion_curves_SASE16_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C22
+plot_param_dispersion_curves_SASE17_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C13
+plot_param_dispersion_curves_SASE18_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C12
+plot_param_dispersion_curves_SASE19_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C11
+plot_param_dispersion_curves_SASE20_plain_weave_color;
+
 
 % plot and make figure for num dispersion curves on top of experimental results
 % for simulated pzt distrubution (9x9 points)
