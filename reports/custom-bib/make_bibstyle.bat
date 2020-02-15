@@ -1,0 +1,1 @@
+start "C:\Users\pkudela\AppData\Local\Programs\MiKTeX 2.9\miktex\bin\x64" latex.exe makebst.tex

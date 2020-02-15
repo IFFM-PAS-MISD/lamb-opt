@@ -1,0 +1,449 @@
+% Template for SPRAWOZDANIE_IMP
+% Requires non standard compilation!
+% see user_commands_texstudio.txt for seting up TeXstudio for compilation by F1 key
+% assumes that bibsync folder is on the same level as sprawozdanie_imp folder
+
+\documentclass[10pt,a4paper]{article}
+\usepackage{latexsym}
+\usepackage[pdftex]{graphicx,color}
+\usepackage[T1,plmath]{polski}
+\usepackage[cp1250]{inputenc}
+\usepackage{indentfirst}
+\usepackage[numbers,sort&compress]{natbib} % sortuj i kompaktuj cytowania
+\usepackage{multibbl}
+\usepackage{multirow}
+\usepackage{geometry}
+\newgeometry{tmargin=2cm, bmargin=2cm, lmargin=2.25cm, rmargin=2.25cm} 
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{helvet}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+\begin{document}
+		\newcommand{\reportyear}{2019}
+\begin{center}
+P o l s k a \hspace{3pt}  A k a d e m i a \hspace{3pt}  N a u k
+\end{center}
+
+\begin{center}
+I n s t y t u t \hspace{3pt} M a s z y n \hspace{3pt} P r z e p ³ y w o w y c h
+\end{center}
+
+\begin{center}
+w Gdañsku
+\end{center}
+
+\begin{center}
+Zak³ad Mechaniki Struktur Inteligentnych
+\end{center}
+
+
+\begin{center}
+\textbf{{\LARGE S P R A W O Z D A N I E}}
+\end{center}
+
+\begin{center}
+z prac wykonanych w roku \textbf{\reportyear} w ramach dzia³alnoœci statutowej
+\end{center}
+
+\begin{center}
+Temat O4/Z1/T1:
+\end{center}
+
+\begin{center}
+\textbf{METODY MODELOWANIA, IDENTYFIKACJI I PROGNOZOWANIA USZKODZEÑ \\W~ELEMENTACH KONSTRUKCJI}
+\end{center}
+
+\underline {Kierownik tematu:} \textbf{prof. dr hab. in¿. Wies³aw Ostachowicz}
+
+\vspace{10pt}
+\underline {Wykonawcy:}\\
+\vspace{5pt}
+\hspace{60pt} prof. dr hab. in¿. Grzegorz Zboiñski\\
+\vspace{5pt}
+\hspace{60pt} dr hab. in¿. Pawe³ Kudela\\
+\vspace{5pt}
+\hspace{60pt} dr hab. Pawe³ Malinowski\\
+\vspace{5pt}
+\hspace{60pt} dr hab. in¿. Magdalena Mieloszyk\\
+\vspace{5pt}
+\hspace{60pt} dr hab. in¿. Tomasz Wandowski\\
+\vspace{5pt}
+\hspace{60pt} dr hab. in¿. Alfred Zmitrowicz\\
+\vspace{5pt}
+\hspace{60pt} dr Katarzyna Majewska\\
+\vspace{5pt}
+\hspace{60pt} dr in¿. Maciej Radzieñski\\
+\vspace{5pt}
+\hspace{60pt} dr in¿. Shirsendu Sikdar, do 31.10.2019\\
+\vspace{5pt}
+\hspace{60pt} dr in¿. Rohan Soman\\
+\vspace{5pt}
+\hspace{60pt} mgr in¿. Piotr Fiborek\\
+\vspace{5pt}
+\hspace{60pt} mgr Renata Opieka-Sowiñska
+
+\vspace{10pt}
+\underline {Doktoranci:}\\
+\vspace{5pt}
+\hspace{60pt} mgr in¿. Kaleeswaran Balasubramaniam, od 01.03.2018\\
+\vspace{5pt}
+\hspace{60pt} mgr in¿. Sebastian Demczyñski, od 01.10.2017\\
+\vspace{5pt}
+\hspace{60pt} mgr in¿. Shishir Kumar Singh, od 01.12.2017
+
+\vspace{10pt}
+\underline {Stypendyœci:}\\
+\vspace{5pt}
+\hspace{60pt} in¿. Aditya Choure, Dresden International University, 01.01-28.02.2019, 01.04-30.09.2019 \\
+\vspace{5pt}
+\hspace{60pt} in¿. Ganggang Sha, Hohai University, do 31.08.2019
+
+\vspace{10pt}
+\underline {Goœcie:}\\
+\vspace{5pt}
+\hspace{60pt} prof. Mathias Kersemans, University of Ghent, 14.05.2019
+
+\vspace{100pt}
+\begin{center}
+\textbf{Gdañsk, 30 listopada \reportyear}
+\end{center}
+
+\thispagestyle{empty}
+
+\newpage 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{merytoryka2019}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+% BIBLIOGRAPHY DEFINITIONS
+% use o4z1.bst bibliography style
+% Nr Arch. is included in annote field (Notes in mendeley desktop)
+\newbibliography{monograph_a}
+\bibliographystyle{monograph_a}{o4z1}
+\newbibliography{monograph_b}
+\bibliographystyle{monograph_b}{o4z1}
+\newbibliography{journal_c}
+\bibliographystyle{journal_c}{o4z1}
+\newbibliography{journal_d}
+\bibliographystyle{journal_d}{o4z1}
+\newbibliography{conference_e}
+\bibliographystyle{conference_e}{o4z1}
+\newbibliography{conference_f}
+\bibliographystyle{conference_f}{o4z1}
+\newbibliography{report_g}
+\bibliographystyle{report_g}{o4z1}
+\newbibliography{submitted_h}
+\bibliographystyle{submitted_h}{o4z1_submitted}
+
+\nocite{monograph_a}{*}
+\nocite{monograph_b}{*}
+\nocite{journal_c}{*}
+\nocite{journal_d}{*}
+\nocite{conference_e}{*}
+\nocite{conference_f}{*}
+\nocite{report_g}{*}
+\nocite{submitted_h}{*}
+
+\begin{center}
+	\textbf{PRACE OPUBLIKOWANE}
+\end{center}
+
+\begin{itemize}
+	\item[\textbf{A.}] \textbf{MONOGRAFIE / ROZDZIA£Y W MONOGRAFII WYMIENIONE W AKTUALNYM WYKAZIE MNISW}
+
+\bibliography{monograph_a}{../bibsync/O4Z1-\reportyear-A-MONOGRAFIE-ROZDZIALY-MNISW}{\vspace{-40pt}}
+
+%	\begin{enumerate}[label=A\arabic*.]
+%		\item Nazwisko1 I., Nazwisko2 I.: Tytu³, Wydawnictwo, Rok, ISBN, Poziom I / Poziom II, Nr Arch. xxx/2019
+%		\item xxx
+%		\item Nazwisko1 I., Nazwisko2 I.: Tytu³ rozdzia³u, [w] Edytorzy, Tytu³ monografii, Strony, Wydawnictwo, Rok, ISBN, Poziom I / Poziom II, Nr Arch. xxx/2019
+%		\item xxx
+%	\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+	\item[\textbf{B.}] \textbf{MONOGRAFIE / ROZDZIA£Y W MONOGRAFII W INNYCH WYDAWNICTWACH}
+
+
+\bibliography{monograph_b}{../bibsync/O4Z1-\reportyear-B-MONOGRAFIE-ROZDZIALY-INNE}{\vspace{-40pt}}
+
+%	\begin{enumerate}[label=B\arabic*.]
+%		\item Nazwisko1 I., Nazwisko2 I.: Tytu³, Wydawnictwo, Rok, ISBN, Nr Arch. xxx/2019
+%		\item xxx
+%		\item Nazwisko1 I., Nazwisko2 I.: Tytu³ rozdzia³u, [w] Edytorzy, Tytu³ monografii, Strony, Wydawnictwo, Rok, ISBN, Nr Arch. xxx/2019
+%		\item xxx
+%	\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+	\item[\textbf{C.}] \textbf{PUBLIKACJE W CZASOPIŒMIE WYMIENIONYM W AKTUALNYM WYKAZIE MNISW W~DYSCYPLINIE IN¯YNIERIA MECHANICZNA}
+	
+	\bibliography{journal_c}{../bibsync/O4Z1-\reportyear-C-PUBLIKACJE-MNISW-INZYNIERIA-MECHANICZNA}{\vspace{-40pt}}
+	
+%		\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+	\item[\textbf{D.}] \textbf{PUBLIKACJE W INNYCH CZASOPISMACH}
+	
+	\bibliography{journal_d}{../bibsync/O4Z1-\reportyear-D-PUBLIKACJE-W-INNYCH-CZASOPISMACH}{\vspace{-40pt}}
+
+\end{itemize}
+
+\begin{itemize}
+	\item[\textbf{E.}] \textbf{PUBLIKACJE W RECENZOWANYCH MATERIA£ACH KONFERENCJI MIÊDZYNARODOWEJ}
+	
+	\bibliography{conference_e}{../bibsync/O4Z1-\reportyear-E-RECENZOWANE-KONFERENCJE-MIEDZYNARODOWE}{\vspace{-40pt}}
+
+\end{itemize}
+
+\begin{itemize}
+	\item[\textbf{F.}] \textbf{INNE KONFERENCJE}
+	
+		\bibliography{conference_f}{../bibsync/O4Z1-\reportyear-F-INNE-KONFERENCJE}{\vspace{-40pt}}
+
+\end{itemize}
+
+\begin{itemize}
+	\item[\textbf{G.}] \textbf{OPRACOWANIA WEWNÊTRZNE}
+	
+		\bibliography{report_g}{../bibsync/O4Z1-\reportyear-G-OPRACOWANIA-WEWNETRZNE}{\vspace{-40pt}}
+\end{itemize}
+
+\begin{itemize}
+	\item[\textbf{H.}] \textbf{PRACE ZG£OSZONE I PRZYJÊTE DO DRUKU}
+	
+		\bibliography{submitted_h}{../bibsync/O4Z1-\reportyear-H-PRACE-ZGLOSZONE-I-PRZYJETE-DO-DRUKU}{\vspace{-40pt}}
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage 
+\begin{center}
+	\textbf{KRAJOWA DZIA£ALNOŒÆ DYDAKTYCZNA}
+\end{center}
+
+\begin{enumerate}
+	\item Pawe³ Kudela
+	\begin{itemize}
+		\item recenzent monografii habilitacyjnej Piotra Nazarko: Diagnostyka konstrukcji z wykorzystaniem fal sprê¿ystych i sztucznych sieci neuronowych, \textbf{Nr~Arch.~776/2019}
+	\end{itemize}
+		\item Pawe³ Malinowski
+	\begin{itemize}
+		\item sekretarz komisji w postêpowaniu habilitacyjnym Tomasza Ochrymiuka (IMP PAN), \linebreak \textbf{Nr~Arch.~540/2019}
+	\end{itemize}
+	\item Magdalena Mieloszyk
+	\begin{itemize}
+		\item cz³onek Rady Trójmiejskiej Szko³y Doktorskiej PAN
+	\end{itemize}
+	\item Wies³aw Ostachowicz
+	\begin{itemize}
+		\item przewodnicz¹cy komisji w postêpowaniu habilitacyjnym
+		\begin{itemize} 
+			\item Adama Martowicza z Akademii Górniczo-Hutniczej w Krakowie, \textbf{Nr~Arch.~527/2019}
+			\item Agnieszki Ozgi z Akademii Górniczo-Hutniczej w Krakowie, \textbf{Nr~Arch.~424/2019}
+			\item £ukasza Pieczonki z Akademii Górniczo-Hudniczej w Krakowie, \textbf{Nr~Arch.~1162/2018}
+			\item Roberta Panowicza z Wojskowej Akademii Technicznej w Warszawie \textbf{Nr~Arch.~854/2019}
+			\item Paw³a Borkowskiego z Politechniki Warszawskiej w Warszawie, \textbf{Nr~Arch.~853/2019}
+			\item Piotra Marka z Politechniki Warszawskiej w Warszawie, \textbf{Nr~Arch.~852/2019}
+			\item Bart³omieja Stêpnia z Akademii Górniczo-Hutniczej w Krakowie, \textbf{Nr~Arch.~851/2019}
+			\item  Dariusza Jarz¹bka z Instytutu Podstawowych Problemów Techniki PAN w Warszawie, \linebreak \textbf{Nr~Arch.~850/2019}
+			\item Danuty Miedziñskiej z Wojskowej Akademii Technicznej w Warszawie \textbf{Nr~Arch.~849/2019}
+			\item Gra¿yny Sypniewskiej-Kamiñskiej z Politechniki Poznañskiej w Poznaniu, \textbf{Nr~Arch.~848/2019}
+			\item Ma³gorzaty Jankowskiej z Politechniki Poznañskiej w Poznaniu, \textbf{Nr~Arch.~847/2019}														
+		\end{itemize}
+		\item recenzent w postêpowaniu o nadanie tytu³u profesora
+		\begin{itemize}
+			\item Micha³a Basisty z Instytutu Podstawowych Problemów Techniki PAN w Warszawie, \linebreak \textbf{Nr~Arch.~589/2019}
+			\item Bogdana KaŸmierczaka z Instytutu Podstawowych Problemów Techniki PAN w Warszawie, \textbf{Nr~Arch.~588/2019}
+			\item Ryszarda Maroñskiego z Politechniki Warszawskiej w Warszawie, \textbf{Nr~Arch.~587/2019}
+		\end{itemize}
+	\end{itemize}
+	\item Rohan Soman, Pawe³ Malinowski
+	\begin{itemize}
+		\item prezentacja tematyki badawczej zespo³u w Przedszkolu nr 8 w Sopocie (7 maja 2019), \linebreak \textbf{Nr~Arch.~782/2019}
+	\end{itemize}
+	\item Tomasz Wandowski
+	\begin{itemize}
+		\item cz³onek komisji w postêpowaniu habilitacyjnym Micha³a Paku³y z Politechniki Œl¹skiej w Gliwicach, \textbf{Nr~Arch.~568/2019}
+		\item sekretarz komisji w postêpowaniu habilitacyjnym Grzegorza ¯ywicy (IMP PAN), \linebreak \textbf{Nr~Arch.~569/2019}
+	\end{itemize}
+ 	\item Grzegorz Zboiñski
+ 	\begin{itemize}
+ 		\item wyk³ad zaproszony -- Zastosowanie adaptacyjnej metody elementów skoñczonych w mechanice cia³a sta³ego, IV~Konferencja naukowa: Szko³a in¿ynierii uk³adów bio-technicznych, \linebreak 18-21.09.2019, Nowa Kaletka, 2019, \textbf{Nr~Arch.~965/2019}
+ 		\item wyk³ady i æwiczenia z: podstaw metod numerycznych, numerycznych metod obliczeniowych, przetwarzania sygna³ów, dynamiki maszyn i dynamiki konstrukcji na Wydziale Nauk Technicznych Uniwersytetu Warmiñsko-Mazurskiego w Olsztynie, w wymiarze 240 godzin
+ 		\item recenzent w postêpowaniu o nadanie tytu³u profesora Maciejowi Kuciejowi z Politechniki Bia³ostockiej w Bia³ymstoku, \textbf{Nr~Arch.~992/2019}
+ 		\item recenzent w postêpowaniu habilitacyjnym Magdaleny Mieloszyk (IMP PAN), \textbf{Nr~Arch.~991/2019}
+ 		\item cz³onek komisji w postêpowaniu habilitacyjnym
+ 		\begin{itemize}
+ 			\item Grzegorza ¯ywicy (IMP PAN), \textbf{Nr~Arch.~990/2019}
+ 			\item Magdaleny Mieloszyk (IMP PAN), \textbf{Nr~Arch.~964/2019}
+ 		\end{itemize} 
+ 	\end{itemize}
+ 	\item Alfred Zmitrowicz
+ 	\begin{itemize}
+ 		\item kierownik Studium Doktoranckiego IMP PAN
+ 		\item dyrektor Trójmiejskiej Szko³y Doktorskiej PAN
+ 		\item sekretarz komisji w postêpowaniu habilitacyjnym Magdaleny Mieloszyk	(IMP PAN), \linebreak 	\textbf{Nr~Arch.~590/2019}	
+ 	\end{itemize}
+\end{enumerate}
+
+\begin{center}
+	\textbf{MIÊDZYNARODOWA DZIA£ALNOŒÆ DYDAKTYCZNA}
+\end{center}
+
+\begin{enumerate}
+	\item Katarzyna Majewska
+	\begin{itemize}
+		\item recenzje artyku³ów zg³oszonych na konferncjê ASME 2019 Pressure Vessels \& Piping Conference, San Antonio, Texas, USA, 14-19.06.2019, \textbf{Nr~Arch.~790/2019, 791/2019}
+	\end{itemize}
+	\item Pawe³ Malinowski
+	\begin{itemize}
+		\item wyk³ad zaproszony -- Studies of damage detection approaches for effective SHM using guided waves, International Congress on Ultrasonics, 03-06.09.2019, 	Brugia, Belgia,  \textbf{Nr~Arch.~541/2019}
+		\item recenzja projektu badawczego dla American University of Beirut, \textbf{Nr~Arch.~801/2019}
+	\end{itemize}
+	\item Wies³aw Ostachowicz, Pawe³ Malinowski, Pawe³ Kudela 
+	\begin{itemize}
+		\item organizacja minisympozjum MS04: Health Monitoring of Advanced Composite Structures podczas SMART 2019, 9th ECCOMAS Thematic Conference on Smart Structures and Materials, 08-11.07.2019, Pary¿, Francja, \textbf{Nr~Arch.~630/2019}
+	\end{itemize}
+	\item Rohan Soman
+	\begin{itemize}
+		\item wyk³ad zaproszony -- Opportunities for funding for young researchers: A national and EU perspective, Youth Investigator’s conference, 1-5.09.2019, Krakow, Polska, \textbf{Nr~Arch.~435/2019}
+		\item zaproszony panelista -- Invited Discussion Panelist representig Young researches in Poland, ERC Meeting with Members of the ERC Scientific Council, 24.10.2019, Warszawa, \textbf{Nr~Arch.~786/2019}
+	\end{itemize}
+	\item Wies³aw Ostachowicz
+	\begin{itemize}
+		\item organizacja sesji na konferencji miêdzynarodowej International Workshop on Structural Health Monitoring, Stanford University, 10-12.09.2019, Palo Alto, USA
+		\begin{itemize}
+			\item SHM Technology in Wind Turbines, \textbf{Nr~Arch.~1018/2019}
+			\item Guided Waves for Structures for SHM, \textbf{Nr~Arch.~1017/2019}
+		\end{itemize}
+	\end{itemize}
+	\item Grzegorz Zboiñski
+	\begin{itemize}
+		\item organizacja minisympozjum Adaptive Methods, Higher Order Approximation, and Error Control w ramach 4th Polish Congress of Mechanics and 23rd International Conference on Computer Methods in Mechanics, 08-11.09.2019, Krakow, Polska, \textbf{Nr~Arch.~963/2019}
+	\end{itemize}
+\item Zespó³ wykona³ ³¹cznie 124 recenzje dla czasopim wymienionym w aktualnym wykazie MNiSW
+\end{enumerate}
+
+\begin{center}
+	\textbf{WSPÓ£PRACA Z ZAGRANIC¥}
+\end{center}
+
+\begin{enumerate}
+	\item Maosen Cao wraz z zespo³em, Hohai University, Department of Engineering Mechanics, Nanjing, ChRL
+	\item Jochen Moll, Department of Physics, Terahertz Photonics, Goethe University of Frankfurt am Main, Frankfurt am Main, Niemcy
+	\item Ruta Rimasauskiene, Kaunas Technical University, Mechanical Engineering and Design Faculty and Institute of Mechatronics, Kowno, Litwa
+	\item Eleni Chatzi, ETH Zurich, Zurich, Szwajcaria
+	\item Kara Peters, North Carolina State University, Raleigh, USA
+	\item Martin Schagerl, Johannes Kepler University, Linz, Austria
+	\item Kai Schroder, RWTH Aachen, Aachen, Niemiecy
+	\item LIXIL WATER TECHNOLOGY AMERICAS, 865 Centennial Avenue, Piscataway, NJ  08854, USA, od~02.10.2018
+\end{enumerate}
+
+\begin{center}
+	\textbf{KRAJOWE PROJEKTY BADAWCZE}
+\end{center}
+
+\begin{enumerate}
+	\item 2016/23/B/ST8/03088, Wp³yw jednoczesnego oddzia³ywania temperatury i wilgotnoœci na struktury anizotropowe: od teorii do badañ doœwiadczalnych, 2017-2020, badawczy, NCN, Opus, 12, Wies³aw Ostachowicz
+	\item 2018/29/B/ST8/00045, Identyfikacja sta³ych sprê¿ystych laminatów kompozytowych poprzez wykorzystanie krzywych dyspersji fal Lamba i metod optymalizacji, 2019-2022, NCN, Opus, 15, \linebreak Pawe³ Kudela
+	\item 2018/31/B/ST8/00454, Studia wykonalnoœci diagnostyki opartej na sztucznej inteligencji, 2019-2022, NCN, Opus, 16, Pawe³ Kudela
+	\item 2018/31/N/ST8/02865, Zastosowanie funkcji identyfikacji uszkodzenia wspomaganej modelowaniem numerycznym do monitorowania stanu technicznego konstrukcji kompozytowych w zmiennych warunkach otoczenia, 2019-2022, NCN, Preludium, 16, Piotr Fiborek
+	\item 2016/23/N/ST8/01326, Badania wp³ywu rozklejenia w przek³adkowych materia³ach kompozytowych z~plastrem miodu poddanych wp³ywom œrodowiska, 2017-2019, NCN, Preludium, 12, Shirsendu Sikdar
+	\item 2018/29/B/ST8/02904, Probabilistic Active Health Monitoring of Advanced Composite Structures \linebreak under Variable Loading and Environmental Conditions, 01.2019-10.2019, NCN, Opus, 15, Shirsendu \linebreak Sikdar
+	\item 2016/22/E/ST8/00068, Badanie rozmieszczenia czujników piezoelektrycznych i ich oddzia³ywania z~elementami konstrukcji, 2017-2021, badawczy, NCN, Sonata BIS, 6, Pawe³ Malinowski
+	\item 2018/31/D/ST8/00463, Struktury polimerowe z wbudowanymi czujnikami œwiat³owodowymi typu FBG, 2019-2021, badawczy, NCN, Sonata 14, Magdalena Mieloszyk
+	\item 2018/31/B/ST8/012, Zjawisko transformacji fal akustycznych w fale sprê¿yste na skutek interakcji z~cia³em sta³ym, 2019-2022 NCN,  Opus, 16, Tomasz Wandowski
+	\item DIR.ZPSW.62.17.2019, Trzecia edycja konkursu w ramach programu „Doktorat wdro¿eniowy”, 2019-2023, MNISW, Koszt: 1~354~529,48~z³, osoba do kontaktów: Alfred Zmitrowicz
+\end{enumerate}
+
+\begin{center}
+	\textbf{MIÊDZYNARODOWE PROJEKTY BADAWCZE}
+\end{center}
+
+\begin{enumerate}
+	\item CA18120, CERTBOND -- Reliable roadmap for certification of bonded primary structures , 04.04.2019-03.04.2023, COST Assocciation, COST Action, Dr Sofia Teixeira de Freitas (TU Delft), Lider WG4 (In-service life phase -- diagnosis and prognosis) Wies³aw Ostachowicz 
+	\item RAMMS, Reliable and Autonomous Monitoring System for Maritime Structures, 2016-2019, ERA NET/MARTEC II, Koordynator Fraunhofer LBF (Niemcy), Kierownik IMP PAN Wies³aw Ostachowicz
+	\item TURBO-REFLEX, TURBOmachinery REtrofits enabling FLEXible back–up capacity for the transition of the European energy system, 2017-2020, Horizon 2020 (H2020–LCE–2017–RES–CCS–RIA), Koordynator General Electric (Niemcy), Kierownik IMP PAN Wies³aw Ostachowicz
+	\item NAWA Program im. Bekkera „Œredniookresowa mobilnoœæ naukowców” -- Towards model-assisted structural health monitoring, 01.06.2019-31.08.2019, Pawe³ Kudela	
+\end{enumerate}
+%
+%\begin{center}
+%	\textbf{PATENTY I ZG£OSZENIA PATENTOWE}
+%\end{center}
+
+%\begin{enumerate}
+%	\item Nr patentu, Tytu³ patentu, Autorzy (Nazwisko I.), Data
+%\end{enumerate}
+\newpage
+\begin{center}
+	\textbf{NAGRODY/ WYRÓ¯NIENIA}
+\end{center}
+
+\begin{enumerate}
+	\item Wies³aw Ostachowicz
+	\begin{itemize}
+		\item SHM Lifetime Achievement Award, 13.09.2019,  wyró¿nienie zagraniczne, Przyznawane przez Boeing Company, nagroda indywidualna, \textbf{Nr~Arch.~423/2019}
+	\end{itemize}
+	\item Rohan Soman
+	\begin{itemize}
+		\item Outstanding Reviewer Award, 12.03.2019, wyró¿nienie zagraniczne, czasopismo: Smart Materials and Structures, nagroda indywidualna
+		\item Nagroda dla m³odych naukowców na najlepsz¹ pracê twórcz¹ opublikowan¹ w 2018 roku, \linebreak 14.06.2019, nagroda Oddzia³u PAN w Gdañsku, nagroda indywidualna, \textbf{Nr~Arch.~436/2019}  
+		\item Top Peer Reviewer 2019 Award, 17.09.2019, wyró¿nienie zagraniczne, Publons in partnership with Web of Science group, nagroda indywidualna
+	\end{itemize}
+\end{enumerate}
+
+\begin{center}
+	\textbf{CZ£ONKOSTWO W KOMITETACH NAUKOWYCH PAN\\I RADACH PROGRAMOWYCH CZASOPISM ZAGRANICZNYCH}
+\end{center}
+
+\begin{enumerate}
+	\item Pawe³ Kudela
+	\begin{itemize}
+		\item Cz³onek Stowarzyszony Sekcji Metod Obliczeniowych i Optymalizacji Komitetu Mechaniki PAN, od 01.09.2016, \textbf{Nr~Arch.~572/2019}
+	\end{itemize}
+	\item Pawe³ Malinowski
+	\begin{itemize}
+		\item Cz³onek komitetu redakcyjnego, MDPI, Vibration, od 24.10.2019, \textbf{Nr~Arch.~800/2019}
+		\item Redaktor akademicki, HINDAWI, Journal of Sensors, od 04.06.2018
+		\item Cz³onek Stowarzyszony Sekcji Metod Eksperymentalnych Mechaniki Komitetu Mechaniki PAN, od 21.04.2017, \textbf{Nr~Arch.~578/2019}
+		\item Cz³onek Komitetu Mechaniki PAN, od 27.08.2019, \textbf{Nr~Arch.~543/2019}
+		\item Cz³onek Akademii M³odych Uczonych, 1.07.2019-30.06.2024, \textbf{Nr~Arch.~542/2019}
+	\end{itemize}
+	\item Wies³aw Ostachowicz
+	\begin{itemize}
+	\item Cz³onek korespondent PAN
+	\item Cz³onek ASME -- American Society of Mechanical Engineers
+	\item Cz³onek Komitetu Mechaniki PAN
+	\item Associate Editor of Structural Health Monitoring Journal
+	\item Associate Editor of Smart Materials and Structures Journal
+	\item Associate Editor of Intelligent Material Systems and Structures Journal
+	\item Associate Editor of Mechanical Systems and Signal Processing Journal
+	\item Associate Editor of ASME Journal–Nondestructive Evaluation, Diagnostics and Prognostics of Engineering Systems
+	\item Editorial Board Member of Strain Journal, (Wiley)
+	\item Editorial Board Member of Mechanical Engineering Science Journal, (SAGE Publications)
+	\end{itemize}
+	\item Tomasz Wandowski
+	\begin{itemize}
+		\item Redaktor akademicki, HINDAWI, Journal of Sensors, od 2018
+		\item Cz³onek stowarzyszony Sekcji Metod Eksperymentalnych Mechaniki Komitetu Mechaniki PAN, od 2018, \textbf{Nr~Arch.~570/2019}
+	\end{itemize}	
+	\item Grzegorz Zboiñski
+	\begin{itemize}
+		\item Cz³onek stowarzyszony Sekcji Konstrukcji Komitetu Budowy Maszyn PAN, 2016-2020
+		\item Redaktor akademicki (Academic Editor) czasopisma zagranicznego: British Journal of Applied Science and Technology, Sciencedomain International (poza list¹ JCR), od 2013
+		\item Cz³onek doradczego kolegium wydawniczego (Editorial Advisory Board) czasopisma The Open Numerical Methods Journal, Bentham Open (poza list¹ JCR), od 2008.
+		\item Cz³onek kolegium redakcyjnego czasopisma zagranicznego: International Journal of Material and Mechanical Engineering, Science and Engineering Publishing Company (poza list¹ JCR), od 2012
+		\item Cz³onek kolegium redakcyjnego czasopisma zagranicznego: Applied Mathematics, Informatics and Mechanics, Tbilisi University Press (poza list¹ JCR), od 2015
+		\item Cz³onek doradczego kolegium redakcyjnego czasopisma: Transactions of the Institute of Fluid-Flow Machinery, IFFM Publishers (poza list¹ JCR), od 2015
+	\end{itemize}
+	\item Alfred Zmitrowicz
+	\begin{itemize}
+		\item Cz³onek Stowarzyszony Sekcji Mechaniki Materia³ów Komitetu Mechaniki PAN, kadencja \linebreak 2016-2020
+		\item Cz³onek G³ównej Komisji Rewizyjnej Towarzystwa Naukowego Societas Humboldtiana \linebreak Polonorum, kadencja 2019-2022
+	\end{itemize}	
+\end{enumerate}
+
+\end{document}
