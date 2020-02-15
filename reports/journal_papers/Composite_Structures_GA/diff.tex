@@ -1,7 +1,7 @@
 
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL E:\work\projects\opus15\lamb-opt\reports\journal_papers\Composite_Structures_GA\Identification_GA.tex      Fri Nov  8 08:26:55 2019
-%DIF ADD E:\work\projects\opus15\lamb-opt\reports\journal_papers\Composite_Structures_GA\Identification_GA_R1.tex   Mon Jan 20 14:54:52 2020
+%DIF DEL Identification_GA.tex      Fri Nov  8 08:26:55 2019
+%DIF ADD Identification_GA_R1.tex   Tue Jan 21 13:00:55 2020
 %% 
 %% Copyright 2007, 2008, 2009 Elsevier Ltd
 %% 
@@ -60,7 +60,11 @@
 \newcommand{\veca}[2]{\mathbf{#1}{#2}}
 \renewcommand{\bm}[1]{\mathbf{#1}}
 \newcommand{\bs}[1]{\boldsymbol{#1}}
-\graphicspath{{figs/}}
+%DIF 60c60
+%DIF < \graphicspath{{figs/}{../../figures/}}
+%DIF -------
+\graphicspath{{figs/}} %DIF > 
+%DIF -------
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
 %% The lineno packages adds line numbers. Start line numbering with
@@ -209,8 +213,10 @@
 
 		\begin{figure} [h!]
 		\centering
-		\includegraphics[width=\textwidth]{figure1.png}
-		%\includegraphics{layered_composite_SASE.png}	
+		\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{layered_composite_SASE.png}
+%DIFDELCMD < 		%%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{figure1.png}
+		\DIFaddendFL %\includegraphics{layered_composite_SASE.png}	
 		\caption{SASE model of wave propagation along with degrees of freedom of a mono-dimensional four-node spectral element.}
 		\label{fig:layered_composite_SASE}
 	\end{figure}
@@ -293,7 +299,7 @@ In the later case, the solution consists of recasting Eq.~(\ref{eq:eig_dispersio
  \end{equation} 
  which gives 13 independent elastic constants per lamina. Of course, the determination of such a large number of elastic constants by optimisation methods is prohibitive due to high computation cost. 
 
- In order to reduce computation cost, the number of independent variables can be decreased by considering properties of composite constituents, namely matrix and fibres, separately. Thus,  \DIFdelbegin \DIFdel{7 }\DIFdelend \DIFaddbegin \DIFadd{8 }\DIFaddend parameters must be taken into account: matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus \DIFdelbegin \DIFdel{$E_f$}\DIFdelend \DIFaddbegin \DIFadd{along fibres $E_{11f}$ and perpendicular to fibres $E_{22f} = E_{33f}$}\DIFaddend , Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. One parameter can be further eliminated if the overall density $\rho$ of the composite is known. \DIFaddbegin \DIFadd{Moreover, it can be assumed that $E_{22f} = 0.1\, E_{11f}$ thus the total number of independent parameters can be reduced to 6. It should be noted that the notation $E_f = E_{11f}$ was used further in the text for simplicity. }\DIFaddend The effective elastic constants can be calculated by using the rule of mixture and homogenization techniques.
+ In order to reduce computation cost, the number of independent variables can be decreased by considering properties of composite constituents, namely matrix and fibres, separately. Thus,  \DIFdelbegin \DIFdel{7 }\DIFdelend \DIFaddbegin \DIFadd{8 }\DIFaddend parameters must be taken into account: matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus \DIFdelbegin \DIFdel{$E_f$}\DIFdelend \DIFaddbegin \DIFadd{along fibres $E_{11f}$ and perpendicular to fibres $E_{22f}=E_{33f}$}\DIFaddend , Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. One parameter can be further eliminated if the overall density $\rho$ of the composite is known. \DIFaddbegin \DIFadd{Moreover, it can be assumed that $E_{22f} = 0.1\, E_{11f}$ thus the total number of independent parameters can be reduced to 6. It should be noted that the notation $E_f = E_{11f}$ was used further in the text for simplicity. }\DIFaddend The effective elastic constants can be calculated by using the rule of mixture and homogenization techniques.
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \subsection{Parametric studies of dispersion curves \label{sec:parametric}}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -329,7 +335,9 @@ In the later case, the solution consists of recasting Eq.~(\ref{eq:eig_dispersio
  The influence of matrix density on dispersion curves for selected angle $\beta$ is shown in Fig.~\ref{fig:rhom}. The parameter has a moderate influence on each mode of propagating waves.
 
  \begin{figure} [h!]
- 	\centering
+ 	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{SASE2_plain_weave}
+%DIFDELCMD <  	%%%
+\DIFdelendFL \centering
  	\begin{subfigure}[b]{0.49\textwidth}
  		\centering
  		% size fitted
@@ -382,7 +390,9 @@ The influence of fibres density on dispersion curves for selected angle $\beta$ 
 
 \begin{figure} [h!]
 	\centering
-	\begin{subfigure}[b]{0.49\textwidth}
+	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{SASE3_plain_weave}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
 		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
@@ -433,7 +443,9 @@ The influence of Young's modulus of matrix on dispersion curves for selected ang
 
 \begin{figure} [h!]
 	\centering
-	\begin{subfigure}[b]{0.49\textwidth}
+	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{SASE4_plain_weave}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
 		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
@@ -484,7 +496,9 @@ The influence of Young's modulus of fibres on dispersion curves for selected ang
 
 \begin{figure} [h!]
 	\centering
-	\begin{subfigure}[b]{0.49\textwidth}
+	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{SASE5_plain_weave}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
 		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
@@ -535,7 +549,9 @@ The influence of  Poisson's ratio of matrix on dispersion curves for selected an
 
 \begin{figure} [h!]
 	\centering
-	\begin{subfigure}[b]{0.49\textwidth}
+	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{SASE6_plain_weave}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
 		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
@@ -552,8 +568,10 @@ The influence of  Poisson's ratio of matrix on dispersion curves for selected an
 		% size fitted
 		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves_color.png}
 		% size 100%
-		\includegraphics[]{figure6b.png}
-		\caption{}
+		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{SASE/\modelname_out/\modelname_angle_30_param_dispersion_curves_color.png}
+%DIFDELCMD < 		%%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure6b.png}
+		\DIFaddendFL \caption{}
 		\label{fig:nim30}
 	\end{subfigure}
 %	\begin{subfigure}[b]{0.49\textwidth}
@@ -584,7 +602,9 @@ The influence of Poisson's ratio of fibres  on dispersion curves for selected an
 
 \begin{figure} [h!]
 	\centering
-	\begin{subfigure}[b]{0.49\textwidth}
+	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{SASE7_plain_weave}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
 		%\includegraphics[width=\textwidth]{SASE/\modelname_out/\modelname_angle_0_param_dispersion_curves_color.png}
@@ -635,7 +655,9 @@ The influence of volume fraction of reinforcing fibres on dispersion curves for 
 
 \begin{figure} [h!]
 	\centering
-	%\newcommand{\modelname}{SASE8}
+	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{SASE8_plain_weave}
+%DIFDELCMD < 	%%%
+\DIFdelendFL %\newcommand{\modelname}{SASE8}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		% size fitted
@@ -735,7 +757,7 @@ The piezoelectric transducer disc of 10 mm diameter  was bonded to the surface o
 		The genetic algorithm was used for determination of the following properties:  matrix density $\rho_m$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$ \DIFaddbegin \DIFadd{(along fibres)}\DIFaddend , Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$.  The fibre density was calculated based on the rule of mixture as:
 		\begin{equation}
 		\rho_f = \frac{\rho - \rho_m (1-V)}{V},
-		\end{equation}
+		$$
 		where $V$ is the volume fraction of reinforcing fibres. Hence, only 6~variables needs to be \DIFdelbegin \DIFdel{optimised}\DIFdelend \DIFaddbegin \DIFadd{determined}\DIFaddend .
 		\item \textbf{direct} - determination of C-tensor components.
 		The genetic algorithm was used for determination of the following properties: $C_{11}$, $C_{12}$, $C_{13}$,  $C_{22}$, $C_{23}$, $C_{33}$, $C_{44}$, $C_{55}$ and $C_{66}$. Hence, 9 variables needs to be \DIFdelbegin \DIFdel{optimised}\DIFdelend \DIFaddbegin \DIFadd{determined}\DIFaddend .
@@ -797,7 +819,7 @@ The piezoelectric transducer disc of 10 mm diameter  was bonded to the surface o
 	\label{eq:error_fun}
 	\end{equation}
 	where $m$ denotes the mode of propagating wave.
-	The objective function is the norm of a difference between dispersion curves calculated by using SASE model $k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)})$ and dispersion curves from experiment $k^{EXP}_{m}(\beta,\omega)$. However, in the model we have actual curves for each propagation mode $m$ depending on the matrix of elastic constants $\matr{C}^{(j)}$ and propagation angle $\beta$ but the data from the experiment have a form of a matrix (image) $\matr{D}^{EXP}_{\beta}$ at each angle $\beta$ (see Fig.~\ref{fig:initial_optimized}). Extraction of dispersion curves $k^{EXP}_{m}(\beta,\omega)$ from images $\matr{D}^{EXP}_{\beta}$ is cumbersome and could lead to inherent errors. Moreover, in order to minimise the error function in Eq.~\ref{eq:error_fun}, dispersion curves in SASE model must be sorted (which increases computation costs). Therefore, dispersion curves corresponding to \DIFdelbegin \DIFdel{modes $m=1,\ldots, 4$ }\DIFdelend \DIFaddbegin \DIFadd{all modes in the investigated frequency range, i.e. $m=1,\ldots, 6$ }\DIFaddend calculated by using SASE model were converted to \DIFaddbegin \DIFadd{an }\DIFaddend image $\matr{D}^{SASE}_{\beta} $ in which dimensions are the same as in \DIFaddbegin \DIFadd{the }\DIFaddend experiment ($n_k=512 \times n_f= 512$). Pixels of \DIFaddbegin \DIFadd{the }\DIFaddend image $\matr{D}^{SASE}_{\beta} $ which corresponds to dispersion curves are assigned value 1 whereas the remaining pixels have value 0. It leads to logic matrix or mask which can be applied for filtering experimental images: 
+	The objective function is the norm of a difference between dispersion curves calculated by using SASE model $k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)})$ and dispersion curves from experiment $k^{EXP}_{m}(\beta,\omega)$. However, in the model we have actual curves for each propagation mode $m$ depending on the matrix of elastic constants $\matr{C}^{(j)}$ and propagation angle $\beta$ but the data from the experiment have a form of a matrix (image) $\matr{D}^{EXP}_{\beta}$ at each angle $\beta$ (see Fig.~\ref{fig:initial_optimized}). Extraction of dispersion curves $k^{EXP}_{m}(\beta,\omega)$ from images $\matr{D}^{EXP}_{\beta}$ is cumbersome and could lead to inherent errors. Moreover, in order to minimise the error function in Eq.~\ref{eq:error_fun}, dispersion curves in SASE model must be sorted (which increases computation costs). Therefore, dispersion curves corresponding to \DIFdelbegin \DIFdel{modes $m=1,\ldots, 4$ }\DIFdelend \DIFaddbegin \DIFadd{all modes in the investigated frequency range, i.e. $m=1,\ldots, 6$ }\DIFaddend calculated by using SASE model were converted to \DIFaddbegin \DIFadd{an }\DIFaddend image $\matr{D}^{SASE}_{\beta} $ in which dimensions are the same as in \DIFaddbegin \DIFadd{the }\DIFaddend experiment ($n_k=512$ $\times\end{equation}n_f= 512$). Pixels of \DIFaddbegin \DIFadd{the }\DIFaddend image $\matr{D}^{SASE}_{\beta} $ which corresponds to dispersion curves are assigned value 1 whereas the remaining pixels have value 0. It leads to logic matrix or mask which can be applied for filtering experimental images: 
 	\begin{equation}
 		\tilde{\matr{D}}^{\beta} =  \matr{D}^{SASE}_{\beta}  .*    \matr{D}^{EXP}_{\beta} ,
 		\label{eq:objective_fun}
@@ -821,16 +843,20 @@ The piezoelectric transducer disc of 10 mm diameter  was bonded to the surface o
 The proposed objective function enables quite fast convergence of GA. An exemplary convergence of objective function with increasing generation number is shown in Fig.~\ref{fig:GAconvergence}. Objective function values were calculated for the best chromosome and also for the mean value of all chromosomes in a generation. Objective function stabilises in both cases after about 40 generations.
 	\begin{figure} [h!]
 		\centering
-		\includegraphics[]{figure9.png}
-		\caption{GA convergence in direct approach.}
+		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{GA_convergence.png}
+%DIFDELCMD < 		%%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[]{figure9.png}
+		\DIFaddendFL \caption{GA convergence in direct approach.}
 		\label{fig:GAconvergence}
 	\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 	\subsection{Results and discussion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-It seems that from the perspective of wave propagation modelling in composite laminates, it is easier to select properties of composite material constituents than composite ply. It is because data related to the mechanical properties of the fibres and epoxy matrix is widely available. However, it has been shown in Fig.~\ref{fig:dispersion60deg_initial} that even for \DIFdelbegin \DIFdel{very reasonably }\DIFdelend \DIFaddbegin \DIFadd{deliberately }\DIFaddend assumed values of constants characterising the composite material constituents (Table~\ref{tab:matprop}) there is a huge discrepancy between the model and experimental data. The easiest way to improve the model is by tweaking the volume fraction of reinforcing fibres (grid search approach). But this method does not guarantee a good match between numerical and experimental dispersion curves. The best option is \DIFdelbegin \DIFdel{an optimisation }\DIFdelend \DIFaddbegin \DIFadd{an identification }\DIFaddend of all necessary parameters \DIFaddbegin \DIFadd{by using optimisation methods }\DIFaddend which leads to excellent agreement between numerical and experimental dispersion curves as it is shown in Fig.~\ref{fig:dispersion60deg}. \DIFaddbegin \DIFadd{It should be added that a linear colour scale is applied for all experimental images.
+It seems that from the perspective of wave propagation modelling in composite laminates, it is easier to select properties of composite material constituents than composite ply. It is because data related to the mechanical properties of the fibres and epoxy matrix is widely available. However, it has been shown in Fig.~\ref{fig:dispersion60deg_initial} that even for \DIFdelbegin \DIFdel{very reasonably }\DIFdelend \DIFaddbegin \DIFadd{deliberately }\DIFaddend assumed values of constants characterising the composite material constituents (Table~\ref{tab:matprop}) there is a huge discrepancy between the model and experimental data. The easiest way to improve the model is by tweaking the volume fraction of reinforcing fibres (grid search approach). But this method does not guarantee a good match between numerical and experimental dispersion curves. The best option is an \DIFdelbegin \DIFdel{optimisation }\DIFdelend \DIFaddbegin \DIFadd{identification }\DIFaddend of all necessary parameters \DIFaddbegin \DIFadd{by using optimisation methods }\DIFaddend which leads to excellent agreement between numerical and experimental dispersion curves as it is shown in Fig.~\ref{fig:dispersion60deg}. \DIFaddbegin \DIFadd{It should be added that a linear colour scale is applied for all experimental images.
 	}\DIFaddend \begin{figure} [h!]
-		\centering
+		\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{ga_plain_weave_known_mass}
+%DIFDELCMD < 		%%%
+\DIFdelendFL \centering
 		\DIFdelbeginFL %DIFDELCMD < \begin{subfigure}[b]{\textwidth}
 %DIFDELCMD < 			%%%
 \DIFdelendFL \DIFaddbeginFL \begin{subfigure}[b]{0.49\textwidth}
@@ -872,7 +898,8 @@ It seems that from the perspective of wave propagation modelling in composite la
 
 
 
-\DIFaddbegin \begin{figure} [h!]
+\DIFaddbegin \begin{figure} [\DIFaddFL{h!}]
+	\newcommand{\modelname}{ga_plain_weave_known_mass_50}
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
@@ -940,8 +967,7 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 }\DIFaddend \begin{figure} [h!]
 	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{ga_plain_weave_known_mass}
 %DIFDELCMD < 	%%%
-\DIFdelendFL \DIFaddbeginFL 
-	\DIFaddendFL \centering
+\DIFdelendFL \centering
 	\DIFdelbeginFL %DIFDELCMD < \begin{subfigure}[b]{0.49\textwidth}
 %DIFDELCMD < 		%%%
 \DIFdelendFL \DIFaddbeginFL \begin{subfigure}[b]{\textwidth}
@@ -1021,8 +1047,7 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 \DIFdelend \begin{figure} [h!]
 	\DIFdelbeginFL %DIFDELCMD < \newcommand{\modelname}{ga_plain_weave_C_tensor_known_mass}
 %DIFDELCMD < 	%%%
-\DIFdelendFL \DIFaddbeginFL 
-	\DIFaddendFL \centering
+\DIFdelendFL \centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\centering
 		\DIFdelbeginFL %DIFDELCMD < \includegraphics[]{genetic_algorithm/\modelname_out/\modelname_angle_0_dispersion_curves_test_case_1.png}
@@ -1147,17 +1172,19 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
-	\caption{GA optimisation results for the indirect approach based on statistics (mean $\mu$ and standard deviation $\sigma$) of 15 GA runs.}	
-	\begin{tabular}{lrrr} \toprule
+	\caption{GA optimisation results \DIFaddbeginFL \DIFaddFL{for the indirect approach }\DIFaddendFL based on statistics (mean $\mu$ and standard deviation $\sigma$) of \DIFdelbeginFL \DIFdelFL{50 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{15 }\DIFaddendFL GA runs\DIFdelbeginFL \DIFdelFL{; Units of  elastic constants: }%DIFDELCMD < [%%%
+\DIFdelFL{GPa}%DIFDELCMD < ]%%%
+\DIFdelendFL .}	
+	\DIFaddbeginFL \begin{tabular}{lrrr} \toprule
 		&\multicolumn{3}{c}{\textbf{indirect method}} \\
-		%\midrule
-		\cmidrule(lr){2-4} 
-		&Best & $\mu$ & $\sigma$\\
-		\cmidrule(lr){2-4}
+		%DIF > \midrule
+		\cmidrule\DIFaddFL{(lr)}{\DIFaddFL{2-4}} 
+		&\DIFaddFL{Best }& \DIFaddFL{$\mu$ }& \DIFaddFL{$\sigma$}\\
+		\cmidrule\DIFaddFL{(lr)}{\DIFaddFL{2-4}}
 		\csvreader[table head=\toprule ,
-		late after line=\\ ]%
-		{results_indirect_50.csv}{Row=\constantst,Tbest=\tbest,Tmean=\tmean,Tstd=\tstd}%
-		{\constantst & \tbest & \tmean & \tstd}%	
+		late after line=\\ ]%DIF > 
+		{\DIFaddFL{results_indirect_50.csv}}{\DIFaddFL{Row=}\constantst\DIFaddFL{,Tbest=}\tbest\DIFaddFL{,Tmean=}\tmean\DIFaddFL{,Tstd=}\tstd}%DIF > 
+		{\constantst & \tbest & \tmean & \tstd}%DIF > 	
 		\bottomrule
 	\end{tabular}	
 	\label{tab:csv_indirect_results}
@@ -1165,27 +1192,30 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
-	\caption{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 15 GA runs; Units of  elastic constants: [GPa].}	
-	\begin{tabular}{crrrrrr} \toprule
+	\caption{\DIFaddFL{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 15 GA runs; Units of  elastic constants: }[\DIFaddFL{GPa}]\DIFaddFL{.}}	
+	\DIFaddendFL \begin{tabular}{crrrrrr} \toprule
 		&\multicolumn{3}{c}{\textbf{indirect method}} & \multicolumn{3}{c}{\textbf{direct method} }\\
 		%\midrule
 		\cmidrule(lr){2-4} \cmidrule(lr){5-7} 
-		&Best & $\mu$ & $\sigma$& Best& $\mu$ & $\sigma$\\
-		\cmidrule(lr){2-4} \cmidrule(lr){5-7} 
+	&Best & $\mu$ & $\sigma$& Best& $\mu$ & $\sigma$\\
+	\cmidrule(lr){2-4} \cmidrule(lr){5-7} 
 		\csvreader[table head=\toprule ,
 		late after line=\\ ]%
-		{results_indirect_direct_50.csv}{Row=\constants,Cbest=\cbest,Cmean=\cmean,Cstd=\cstd,Cdbest=\cdbest,Cdmean=\cdmean,Cdstd=\cdstd}%
+		{results_indirect_direct\DIFdelbeginFL \DIFdelFL{.}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{_50.}\DIFaddendFL csv}{Row=\constants,Cbest=\cbest,Cmean=\cmean,Cstd=\cstd,Cdbest=\cdbest,Cdmean=\cdmean,Cdstd=\cdstd}%
 		{\constants & \cbest & \cmean & \cstd& \cdbest & \cdmean & \cdstd}%	
 		\bottomrule
 	\end{tabular}	
 	\label{tab:csv_results}
 \end{table}
 %\csvautobooktabular{results_indirect.csv}
- \clearpage
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DIFaddbegin \clearpage
+	\DIFaddend %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\section{Conclusions}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- This work has demonstrated that the proposed method based on guided wave dispersion curves combined with the genetic algorithm is well suited for identification of elastic constants of woven fabric reinforced composites. Two approaches have been investigated: indirect and direct.  In the indirect approach, material properties of composite constituents are selected as optimisation variables which are next used for calculation of elastic constants of lamina by using micromechanics and homogenisation techniques. On the other hand, in the direct approach, the elastic constants of the composite laminate are selected as optimisation variables. The motivation behind the indirect approach is the fact that fewer variables are involved in the optimisation process. However, it has been found that \DIFdelbegin \DIFdel{the }\DIFdelend \DIFaddbegin \DIFadd{for parameter space bounds  $\pm$50\% in respect to the initial values, in spite of low value of the objective function, the }\DIFaddend indirect method leads to \DIFdelbegin \DIFdel{results which are more physically justified than the results obtained by using the direct approach}\DIFdelend \DIFaddbegin \DIFadd{ambiguous results.  Much better results have been obtained by the direct method}\DIFaddend . This fact is demonstrated by \DIFaddbegin \DIFadd{the }\DIFaddend dispersion curves calculated by \DIFaddbegin \DIFadd{the }\DIFaddend SASE model which matches very well \DIFaddbegin \DIFadd{the }\DIFaddend experimental data coming from \DIFaddbegin \DIFadd{the }\DIFaddend SLDV measurements. 
+	\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < 	%%%
+\DIFdelend This work has demonstrated that the proposed method based on guided wave dispersion curves combined with the genetic algorithm is well suited for identification of elastic constants of woven fabric reinforced composites. Two approaches have been investigated: indirect and direct.  In the indirect approach, material properties of composite constituents are selected as optimisation variables which are next used for calculation of elastic constants of lamina by using micromechanics and homogenisation techniques. On the other hand, in the direct approach, the elastic constants of the composite laminate are selected as optimisation variables. The motivation behind the indirect approach is the fact that fewer variables are involved in the optimisation process. However, it has been found that \DIFdelbegin \DIFdel{the }\DIFdelend \DIFaddbegin \DIFadd{for parameter space bounds  $\pm$50\% in respect to the initial values, in spite of low value of the objective function, the }\DIFaddend indirect method leads to \DIFdelbegin \DIFdel{results which are more physically justified than the results obtained by using the direct approach}\DIFdelend \DIFaddbegin \DIFadd{ambiguous results.  Much better results have been obtained by the direct method}\DIFaddend . This fact is demonstrated by \DIFaddbegin \DIFadd{the }\DIFaddend dispersion curves calculated by \DIFaddbegin \DIFadd{the }\DIFaddend SASE model which matches very well \DIFaddbegin \DIFadd{the }\DIFaddend experimental data coming from \DIFaddbegin \DIFadd{the }\DIFaddend SLDV measurements. 
 
 	The advantage of the proposed methodology is one-sided non-contact measurements \DIFaddbegin \DIFadd{with contact excitation }\DIFaddend which can be conducted even directly on existing structures without the necessity of preparation of special samples.
 
