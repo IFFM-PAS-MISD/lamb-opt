@@ -223,11 +223,14 @@
 
 	Additionally, according to the concept proposed by Taupin et~al.~\cite{Taupin2011}, equations for dispersion curves are derived so that the solution can be obtained for an arbitrary angle of propagation $\beta$ shown in Fig.~\ref{fig:layered_composite_SASE}. The wave propagation direction corresponds to the wavevector $\vect{k}$ defined as:
 
-	\begin{equation}
-	  \vect{k} = k \cos (\beta)\DIFdelbegin \DIFdel{\vect{z} }\DIFdelend \DIFaddbegin \hat{ \vect{z}} \DIFaddend - k \sin (\beta) \DIFdelbegin \DIFdel{\vect{y}.
-		}\DIFdelend \DIFaddbegin \hat{\vect{y}}\DIFadd{,
-		}\DIFaddend \label{eq:wavevector}
-	\end{equation}
+	\DIFdelbegin %DIFDELCMD < \begin{equation}
+%DIFDELCMD < 	  \vect{k} = k \cos (\beta) \vect{z} - k \sin (\beta) \vect{y}.
+%DIFDELCMD < 		\label{eq:wavevector}
+%DIFDELCMD < 	\end{equation}%%%
+\DIFdelend \DIFaddbegin \begin{equation}
+	  \vect{k} = k \cos (\beta)\hat{ \vect{z}} - k \sin (\beta) \hat{\vect{y}},
+		\label{eq:wavevector}
+	\end{equation}\DIFaddend 
 	\DIFdelbegin %DIFDELCMD < 
 
 %DIFDELCMD <    %%%
@@ -949,9 +952,9 @@ Other }\DIFdelend \DIFaddbegin \DIFadd{Additionally, wavenumber values of SH0 mo
 
 \DIFadd{In order to alleviate the issue with the SH0 mode we modified the matrix $\matr{D}^{SASE}_{\beta} $  from Eq.~(\ref{eq:objective_fun}). For the dispersion curve $m=2$ corresponding to the SH0 mode, instead of value 1 we inserted the following angle-dependent values:
 }\begin{equation}
-\DIFadd{\left. \matr{D}^{SASE}_{0^{\circ}}\right\vert_{m=2} = 0.1, \, \left. \matr{D}^{SASE}_{15^{\circ}}\right\vert_{m=2} = 2.0, \, \left. \matr{D}^{SASE}_{30^{\circ}}\right\vert_{m=2} = 1.5
+\left. \matr{D}^{SASE}_{0^{\circ}}\right\vert_{m=2} = 0.1, \, \left. \matr{D}^{SASE}_{15^{\circ}}\right\vert_{m=2} = 2.0, \, \left. \matr{D}^{SASE}_{30^{\circ}}\right\vert_{m=2} = 1.5
 \label{eq:objective_fun_mod}
-}\end{equation}	
+\end{equation}	
 \DIFadd{and symmetrically for the remaining angles in respect to 45$^{\circ}$. Therefore the matrix $\matr{D}^{SASE}_{\beta} $ is no longer logical matrix but it is still functioning as a filter mask with tweaked weights.
 }
 

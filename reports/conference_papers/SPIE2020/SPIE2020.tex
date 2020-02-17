@@ -8,14 +8,18 @@
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 
-\title{SPIE Proceedings: Style template and guidelines for authors}
+\title{Parametric studies of composite material properties influence on dispersion 
+curves of Lamb waves}
 
-\author[a]{Anna A. Author}
-\author[b]{Barry B. Author}
-\affil[a]{Affiliation1, Address, City, Country}
-\affil[b]{Affiliation2, Address, City, Country}
+\author[a]{Pawel Kudela}
+\author[a]{Piotr Fiborek}
+\author[a]{Maciej Radzienski}
+\author[a]{Tomasz Wandowski}
+\affil[a]{Institute of Fluid-Flow Machinery, Polish Academy of Sciences, Fiszera 14St, 
+Gdansk, Poland}
 
-\authorinfo{Further author information: (Send correspondence to A.A.A.)\\A.A.A.: E-mail: aaa@tbk2.edu, Telephone: 1 505 123 1234\\  B.B.A.: E-mail: bba@cmp.com, Telephone: +33 (0)1 98 76 54 32}
+\authorinfo{Further author information: (Send correspondence to Pawel 
+Kudela)\\Pawel Kudela: E-mail: pk@imp.gda.pl, Telephone: +48 58 5225 251}
 
 % Option to view page numbers
 \pagestyle{empty} % change to \pagestyle{plain} for page numbers   
@@ -25,16 +29,47 @@
 \maketitle
 
 \begin{abstract}
-This document is prepared using LaTeX2e\cite{Lamport94} and shows the desired format and appearance of a manuscript prepared for the Proceedings of the SPIE.\footnote{The basic format was developed in 1995 by Rick Hermann (SPIE) and Ken Hanson (Los Alamos National Lab.).} It contains general formatting instructions and hints about how to use LaTeX.  The LaTeX source file that produced this document, {\ttfamily article.tex} (Version 3.4), provides a template, used in conjunction with {\ttfamily spie.cls} (Version 3.4). These files are available on the Internet at \url{https://www.overleaf.com}.  The font used throughout is the LaTeX default font, Computer Modern Roman, which is equivalent to the Times Roman font available on many systems.  
+Typically, material properties originate from destructive tensile tests and are used in 
+computational models in the design and analysis process of structures. 
+This approach is well-established in relation to isotropic homogeneous materials. 
+However, if this approach is used for composite laminates, inaccuracies can arise that 
+leads to vastly different stress distributions, strain rates, natural frequencies, and 
+velocities of propagating elastic waves. In order to account for this problem, the 
+alternative method is proposed, which utilizes Lamb wave propagation phenomenon 
+and optimization techniques. 
+Propagating Lamb waves are highly sensitive to changes in material parameters and 
+are often used for structural health monitoring of structures. In the proposed approach, 
+the elastic constants, which are utilized to determine dispersion curves of Lamb waves, 
+are optimized to achieve a good correlation between model predictions and 
+experimental observations. 
+In the first step of this concept, parametric studies have been carried out in which the 
+influence of mass density, Young’s modulus, Poisson’s ratio of reinforcing fibers as 
+well as a matrix of composite laminate and volume fraction of reinforcing fibers on 
+dispersion curves of Lamb waves was investigated. 
+The dispersion curves of Lamb waves were calculated by using the semi-analytical 
+spectral element method considering the variability of properties of composite 
+constituents. 
+The resulting dispersion curves were also compared with experimental measurements 
+of full wavefield data conducted by scanning laser Doppler vibrometer and processed 
+by 3D Fourier transform. It allowed formulating fitness function which will be next used 
+in genetic algorithm for optimization and identification of elastic constants.
 \end{abstract}
 
 % Include a list of keywords after the abstract 
-\keywords{Manuscript format, template, SPIE Proceedings, LaTeX}
+\keywords{Lamb waves, dispersion curves, semi-analytical spectral element method, 
+composite laminates, elastic constants }
 
 \section{INTRODUCTION}
 \label{sec:intro}  % \label{} allows reference to this section
 
-Begin the Introduction below the Keywords. The manuscript should not have headers, footers, or page numbers. It should be in a one-column format. References are often noted in the text and cited at the end of the paper.
+Elastic constant values are often difficult to obtain, especially for anisotropic media.
+These values are indispensable for the design of a structure which fulfills assumed 
+requirements (strength, stiffness, vibration characteristics). 
+Several methods for identification of elastic constants of isotropic materials have been 
+utilized over the years, namely: destructive testing and strain gauge or static 
+displacement recordings, methods based on natural frequencies, measurements of 
+velocities of bulk waves (longitudinal and shear).
+
 
 \begin{table}[ht]
 \caption{Fonts sizes to be used for various parts of the manuscript.  Table captions should be centered above the table.  When the caption is too long to fit on one line, it should be justified to the right and left margins of the body of the text.} 

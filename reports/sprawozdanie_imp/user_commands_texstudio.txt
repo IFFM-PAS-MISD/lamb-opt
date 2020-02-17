@@ -3,4 +3,5 @@ Options, Configure TeXstudio
 user1:multibib ?a)multibib.bat
 user2:multibiball txs:///pdflatex | txs:///user1 | txs:///pdflatex | txs:///pdflatex | txs:///view-pdf-internal
 
+Options, Configure TeXstudio, Shortcuts, Build and view, additional shortcut: remove F1
 Options, Configure TeXstudio, Shortcuts, User, 3:multbiblall, additional shortcut: F1
