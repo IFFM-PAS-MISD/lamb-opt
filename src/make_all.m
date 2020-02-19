@@ -258,3 +258,4 @@ plot_constants_histogram_50;
 
 % copy figs to paper folder
 copy_fig_Composite_Structures_GA;
+copy_fig_SPIE2020;
