@@ -62,7 +62,7 @@ composite laminates, elastic constants }
 \section{INTRODUCTION}
 \label{sec:intro}  % \label{} allows reference to this section
 
-\input{test}
+\input{test_R1}
 
 Elastic constant values are often difficult to obtain, especially for anisotropic media.
 These values are indispensable for the design of a structure which fulfills assumed 
@@ -76,28 +76,29 @@ way.
 However, identification of elastic constants in composite materials is more complex 
 than in case of isotropic materials and usually requires preparation of several 
 specimens (cube cutting).
+The elastic constants for composite materials along with material damping 
+characteristics can be obtained by using ultrasonic polar scan.
 Another alternative is a method which utilizes dispersion 
 curves of Lamb waves.
 
-\begin{enumerate}
+	\begin{enumerate}
 	\item \textbf{indirect} - by using composite constituents and homogenisation 
 	techniques;
 	The genetic algorithm was used for determination of the following properties:  matrix 
-	density $\rho_m$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, 
-	Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and 
-	volume fraction of reinforcing fibres $V$.  The fibre density was calculated based on 
-	the rule of mixture as:
+	density $\rho_m$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$ 
+	(along fibres), Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres 
+	$\nu_f$ and volume fraction of reinforcing fibres $V$.  The fibre density was 
+	calculated based on the rule of mixture as:
 	\begin{equation}
-	\rho_f = \frac{\rho - \rho_m (1-V)}{V},
+	\rho_f = \frac{\rho - \rho_m (1-V)}{V_1},
 	\end{equation}
 	where $V$ is the volume fraction of reinforcing fibres. Hence, only 6~variables needs 
-	to be optimised.
+	to be determined.
 	\item \textbf{direct} - determination of C-tensor components.
 	The genetic algorithm was used for determination of the following properties: 
 	$C_{11}$, $C_{12}$, $C_{13}$,  $C_{22}$, $C_{23}$, $C_{33}$, $C_{44}$, $C_{55}$ 
-	and $C_{66}$. Hence, 9 variables needs to be optimised.
+	and $C_{66}$. Hence, 9 variables needs to be determined.
 \end{enumerate}
-
 
 \begin{table}[ht]
 \caption{Margins and print area specifications.} 
@@ -119,9 +120,16 @@ curves of Lamb waves.
 \end{center}
 \end{table}
 
-LaTeX margins are related to the document's paper size. The paper size is by default set to USA letter paper. To format a document for A4 paper, the first line of this LaTeX source file should be changed to \verb|\documentclass[a4paper]{spie}|.   
+LaTeX margins are related to the document's paper size. To format a document for A4 
+paper, the first line of this LaTeX source file should be changed to 
+\verb|\documentclass[a4paper]{spie}|.   
 
-Authors are encouraged to follow the principles of sound technical writing, as described in Refs.~\citenum{Alred03} and \citenum{Perelman97}, for example.  Many aspects of technical writing are addressed in the {\em AIP Style Manual}, published by the American Institute of Physics.  It is available on line at \url{https://publishing.aip.org/authors}. A spelling checker is helpful for finding misspelled words. 
+Authors are encouraged to follow the principles of sound technical writing, as described 
+in Refs.~\citenum{Alred03}, for example.  Many aspects of 
+technical writing are addressed in the {\em AIP Style Manual}, published by the 
+American Institute of Physics  \citenum{Lees-Miller-LaTeX-course-1}.  It is available on 
+line at \url{https://publishing.aip.org/authors}. A spelling checker is helpful for finding 
+misspelled words. 
 
 An author may use this LaTeX source file as a template by substituting his/her own text in each field.  This document is not meant to be a complete guide on how to use LaTeX.  For that, please see the list of references at \url{http://latex-project.org/guides/} and for an online introduction to LaTeX please see \citenum{Lees-Miller-LaTeX-course-1}. 
 
@@ -191,13 +199,14 @@ Tables are handled identically to figures, except that their captions appear abo
    \begin{figure} [ht]
    \begin{center}
    \begin{tabular}{c} %% tabular useful for creating an array of images 
-   \includegraphics[height=5cm]{mcr3b.eps}
+   %\includegraphics[height=5cm]{mcr3b.eps}
+   \includegraphics{E:/work/projects/opus15/lamb-opt/reports/figures/SASE/SASE20_plain_weave_out/SASE20_plain_weave_angle_0_param_dispersion_curves_color.png}
    \end{tabular}
    \end{center}
    \caption[example] 
 %>>>> use \label inside caption to get Fig. number with \ref{}
-   { \label{fig:example} 
-Figure captions are used to describe the figure and help the reader understand it's significance.  The caption should be centered underneath the figure and set in 9-point font.  It is preferable for figures and tables to be placed at the top or bottom of the page. LaTeX tends to adhere to this standard.}
+   { \label{fig:C11} 
+Influence of $C_{11}$ elastic constant on the dispersion curves.}
    \end{figure} 
 
 \begin{figure} [ht]
@@ -212,6 +221,7 @@ Figure captions are used to describe the figure and help the reader understand i
 	{ \label{fig:C12} 
 		Influence of $C_{12}$ elastic constant on the dispersion curves.}
 \end{figure} 
+
 \section{MULTIMEDIA FIGURES - VIDEO AND AUDIO FILES}
 
 Video and audio files can be included for publication. See Tab.~\ref{tab:Multimedia-Specifications} for the specifications for the mulitimedia files. Use a screenshot or another .jpg illustration for placement in the text. Use the file name to begin the caption. The text of the caption must end with the text ``http://dx.doi.org/doi.number.goes.here'' which tells the SPIE editor where to insert the hyperlink in the digital version of the manuscript. 
@@ -257,10 +267,12 @@ A label of “Video/Audio 1, 2, …” should appear at the beginning of the cap
 It is often useful to refer back (or forward) to other sections in the article.  Such references are made by section number.  When a section reference starts a sentence, Section is spelled out; otherwise use its abbreviation, for example, ``In Sec.~2 we showed...'' or ``Section~2.1 contained a description...''.  References to figures, tables, and theorems are handled the same way.
 
 \subsection{Formatting Equations}
-Equations may appear in line with the text, if they are simple, short, and not of major importance; e.g., $\beta = b/r$.  Important equations appear on their own line.  Such equations are centered.  For example, ``The expression for the field of view is
+Equations may appear in line with the text, if they are simple, short, and not of major 
+importance; e.g., \(\beta = b/r\).  Important equations appear on their own line.  Such 
+equations are centered.  For example, ``The expression for the field of view is
 \begin{equation}
 \label{eq:fov}
-2 a = \frac{(b + 1)}{3c} \, ,
+2 a = \frac{(b + 1)}{3c+4} \, ,
 \end{equation}
 where $a$ is the ...'' Principal equations are numbered, with the equation number placed within parentheses and right justified.  
 

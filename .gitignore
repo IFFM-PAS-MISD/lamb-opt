@@ -104,7 +104,12 @@ target/
 *.nls
 *.out
 *.synctex.gz
-
+*.synctex(busy)
+# latexdiff
+*.cb
+*.cb2
+*.bcf
+*.run.xml
 # Matlab
 *.asv
 *.mlx

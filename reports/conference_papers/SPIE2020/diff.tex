@@ -1,4 +1,7 @@
 \documentclass[]{spie}  %>>> use for US letter paper
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL SPIE2020.tex      Wed Feb 19 08:17:15 2020
+%DIF ADD SPIE2020_R1.tex   Wed Feb 19 08:26:21 2020
 %\documentclass[a4paper]{spie}  %>>> use this instead for A4 paper
 %\documentclass[nocompress]{spie}  %>>> to avoid compression of citations
 
@@ -25,6 +28,92 @@ Kudela)\\Pawel Kudela: E-mail: pk@imp.gda.pl, Telephone: +48 58 5225 251}
 \pagestyle{empty} % change to \pagestyle{plain} for page numbers   
 \setcounter{page}{301} % Set start page numbering at e.g. 301
  
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF PREAMBLE EXTENSION ADDED BY USER
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{red}{rgb}{1,0,0}\definecolor{mygrey}{rgb}{0.464,0.531,0.598}\definecolor{blue}{rgb}{0,0,1} %DIF PREAMBLE
+ %DIF PREAMBLE
+\providecommand{\DIFaddtex}[1]{{\protect\color{red}#1}} %DIF PREAMBLE
+\providecommand{\DIFdeltex}[1]{{\protect\color{mygrey}\scriptsize{#1}}}                       %DIF PREAMBLE
+%DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY USER %DIF PREAMBLE
+%DIF HYPERREF PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF LISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
 \begin{document} 
 \maketitle
 
@@ -62,7 +151,8 @@ composite laminates, elastic constants }
 \section{INTRODUCTION}
 \label{sec:intro}  % \label{} allows reference to this section
 
-\input{test}
+test \DIFaddbegin \DIFadd{2
+}\DIFaddend 
 
 Elastic constant values are often difficult to obtain, especially for anisotropic media.
 These values are indispensable for the design of a structure which fulfills assumed 
@@ -76,28 +166,32 @@ way.
 However, identification of elastic constants in composite materials is more complex 
 than in case of isotropic materials and usually requires preparation of several 
 specimens (cube cutting).
-Another alternative is a method which utilizes dispersion 
+\DIFaddbegin \DIFadd{The elastic constants for composite materials along with material damping 
+characteristics can be obtained by using ultrasonic polar scan.
+}\DIFaddend Another alternative is a method which utilizes dispersion 
 curves of Lamb waves.
 
-\begin{enumerate}
+	\begin{enumerate}
 	\item \textbf{indirect} - by using composite constituents and homogenisation 
 	techniques;
 	The genetic algorithm was used for determination of the following properties:  matrix 
-	density $\rho_m$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, 
-	Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and 
-	volume fraction of reinforcing fibres $V$.  The fibre density was calculated based on 
-	the rule of mixture as:
-	\begin{equation}
-	\rho_f = \frac{\rho - \rho_m (1-V)}{V},
-	\end{equation}
+	density $\rho_m$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$ 
+	\DIFaddbegin \DIFadd{(along fibres)}\DIFaddend , Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres 
+	$\nu_f$ and volume fraction of reinforcing fibres $V$.  The fibre density was 
+	calculated based on the rule of mixture as:
+	\DIFdelbegin \begin{displaymath}
+	\DIFdel{\rho_f = \frac{\rho - \rho_m (1-V)}{V},
+	}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+	\DIFadd{\rho_f = \frac{\rho - \rho_m (1-V)}{V_1},
+	}\end{equation}\DIFaddend 
 	where $V$ is the volume fraction of reinforcing fibres. Hence, only 6~variables needs 
-	to be optimised.
+	to be \DIFdelbegin \DIFdel{optimised}\DIFdelend \DIFaddbegin \DIFadd{determined}\DIFaddend .
 	\item \textbf{direct} - determination of C-tensor components.
 	The genetic algorithm was used for determination of the following properties: 
 	$C_{11}$, $C_{12}$, $C_{13}$,  $C_{22}$, $C_{23}$, $C_{33}$, $C_{44}$, $C_{55}$ 
-	and $C_{66}$. Hence, 9 variables needs to be optimised.
+	and $C_{66}$. Hence, 9 variables needs to be \DIFdelbegin \DIFdel{optimised}\DIFdelend \DIFaddbegin \DIFadd{determined}\DIFaddend .
 \end{enumerate}
-
 
 \begin{table}[ht]
 \caption{Margins and print area specifications.} 
@@ -119,9 +213,17 @@ curves of Lamb waves.
 \end{center}
 \end{table}
 
-LaTeX margins are related to the document's paper size. The paper size is by default set to USA letter paper. To format a document for A4 paper, the first line of this LaTeX source file should be changed to \verb|\documentclass[a4paper]{spie}|.   
+LaTeX margins are related to the document's paper size. \DIFdelbegin \DIFdel{The paper size is by default set to USA letter paper. }\DIFdelend To format a document for A4 
+paper, the first line of this LaTeX source file should be changed to 
+\verb|\documentclass[a4paper]{spie}|.   
 
-Authors are encouraged to follow the principles of sound technical writing, as described in Refs.~\citenum{Alred03} and \citenum{Perelman97}, for example.  Many aspects of technical writing are addressed in the {\em AIP Style Manual}, published by the American Institute of Physics.  It is available on line at \url{https://publishing.aip.org/authors}. A spelling checker is helpful for finding misspelled words. 
+Authors are encouraged to follow the principles of sound technical writing, as described 
+in Refs.~\citenum{Alred03}\DIFdelbegin \DIFdel{and }%DIFDELCMD < \citenum{Perelman97}%%%
+\DIFdelend , for example.  Many aspects of 
+technical writing are addressed in the {\em AIP Style Manual}, published by the 
+American Institute of Physics  \DIFaddbegin \citenum{Lees-Miller-LaTeX-course-1}\DIFaddend .  It is available on 
+line at \url{https://publishing.aip.org/authors}. A spelling checker is helpful for finding 
+misspelled words. 
 
 An author may use this LaTeX source file as a template by substituting his/her own text in each field.  This document is not meant to be a complete guide on how to use LaTeX.  For that, please see the list of references at \url{http://latex-project.org/guides/} and for an online introduction to LaTeX please see \citenum{Lees-Miller-LaTeX-course-1}. 
 
@@ -172,7 +274,7 @@ Only nine footnote symbols are available in LaTeX. If you have more than nine fo
 Section headings are centered and formatted completely in uppercase 11-point bold font.  Sections should be numbered sequentially, starting with the first section after the Abstract.  The heading starts with the section number, followed by a period.  In LaTeX, a new section is created with the \verb|\section{}| command, which automatically numbers the sections.
 
 Paragraphs that immediately follow a section heading are leading paragraphs and should not be indented, according to standard publishing style\cite{Lamport94}.  The same goes for leading paragraphs of subsections and sub-subsections.  Subsequent paragraphs are standard paragraphs, with 14-pt.\ (5 mm) indentation.  An extra half-line space should be inserted between paragraphs.  In LaTeX, this spacing is specified by the parameter \verb|\parskip|, which is set in {\ttfamily spie.cls}.  Indentation of the first line of a paragraph may be avoided by starting it with \verb|\noindent|.
- 
+
 \subsection{Subsection Attributes}
 
 The subsection heading is left justified and set in 11-point, bold font.  Capitalization rules are the same as those for book titles.  The first word of a subsection heading is capitalized.  The remaining words are also capitalized, except for minor words with fewer than four letters, such as articles (a, an, and the), short prepositions (of, at, by, for, in, etc.), and short conjunctions (and, or, as, but, etc.).  Subsection numbers consist of the section number, followed by a period, and the subsection number within that section.  
@@ -191,13 +293,18 @@ Tables are handled identically to figures, except that their captions appear abo
    \begin{figure} [ht]
    \begin{center}
    \begin{tabular}{c} %% tabular useful for creating an array of images 
-   \includegraphics[height=5cm]{mcr3b.eps}
-   \end{tabular}
+   \DIFdelbeginFL %DIFDELCMD < \includegraphics[height=5cm]{mcr3b.eps}
+%DIFDELCMD <    %%%
+\DIFdelendFL %DIF > \includegraphics[height=5cm]{mcr3b.eps}
+   \DIFaddbeginFL \includegraphics{E:/work/projects/opus15/lamb-opt/reports/figures/SASE/SASE20_plain_weave_out/SASE20_plain_weave_angle_0_param_dispersion_curves_color.png}
+   \DIFaddendFL \end{tabular}
    \end{center}
    \caption[example] 
 %>>>> use \label inside caption to get Fig. number with \ref{}
-   { \label{fig:example} 
-Figure captions are used to describe the figure and help the reader understand it's significance.  The caption should be centered underneath the figure and set in 9-point font.  It is preferable for figures and tables to be placed at the top or bottom of the page. LaTeX tends to adhere to this standard.}
+   { \DIFdelbeginFL %DIFDELCMD < \label{fig:example} 
+%DIFDELCMD < %%%
+\DIFdelFL{Figure captions are used to describe the figure and help the reader understand it's significance.  The caption should be centered underneath the figure and set in 9-point font.  It is preferable for figures and tables to be placed at the top or bottom of the page.LaTeX tends to adhere to this standard.}\DIFdelendFL \DIFaddbeginFL \label{fig:C11} 
+\DIFaddFL{Influence of $C_{11}$ elastic constant on the dispersion curves.}\DIFaddendFL }
    \end{figure} 
 
 \begin{figure} [ht]
@@ -212,7 +319,9 @@ Figure captions are used to describe the figure and help the reader understand i
 	{ \label{fig:C12} 
 		Influence of $C_{12}$ elastic constant on the dispersion curves.}
 \end{figure} 
-\section{MULTIMEDIA FIGURES - VIDEO AND AUDIO FILES}
+\DIFaddbegin 
+
+\DIFaddend \section{MULTIMEDIA FIGURES - VIDEO AND AUDIO FILES}
 
 Video and audio files can be included for publication. See Tab.~\ref{tab:Multimedia-Specifications} for the specifications for the mulitimedia files. Use a screenshot or another .jpg illustration for placement in the text. Use the file name to begin the caption. The text of the caption must end with the text ``http://dx.doi.org/doi.number.goes.here'' which tells the SPIE editor where to insert the hyperlink in the digital version of the manuscript. 
 
@@ -228,7 +337,7 @@ Here is a sample illustration and caption for a multimedia file:
    { \label{fig:video-example} 
 A label of “Video/Audio 1, 2, …” should appear at the beginning of the caption to indicate to which multimedia file it is linked . Include this text at the end of the caption: \url{http://dx.doi.org/doi.number.goes.here}}
    \end{figure} 
-   
+
    \begin{table}[ht]
 \caption{Information on video and audio files that must accompany a manuscript submission.} 
 \label{tab:Multimedia-Specifications}
@@ -257,11 +366,17 @@ A label of “Video/Audio 1, 2, …” should appear at the beginning of the cap
 It is often useful to refer back (or forward) to other sections in the article.  Such references are made by section number.  When a section reference starts a sentence, Section is spelled out; otherwise use its abbreviation, for example, ``In Sec.~2 we showed...'' or ``Section~2.1 contained a description...''.  References to figures, tables, and theorems are handled the same way.
 
 \subsection{Formatting Equations}
-Equations may appear in line with the text, if they are simple, short, and not of major importance; e.g., $\beta = b/r$.  Important equations appear on their own line.  Such equations are centered.  For example, ``The expression for the field of view is
-\begin{equation}
-\label{eq:fov}
+Equations may appear in line with the text, if they are simple, short, and not of major 
+importance; e.g., \DIFdelbegin \DIFdel{$\beta = b/r$}\DIFdelend \DIFaddbegin \DIFadd{\(\beta = b/r\)}\DIFaddend .  Important equations appear on their own line.  Such 
+equations are centered.  For example, ``The expression for the field of view is
+\DIFdelbegin \begin{displaymath}
+\DIFdel{%DIFDELCMD < \label{eq:fov}%%%
 2 a = \frac{(b + 1)}{3c} \, ,
-\end{equation}
+}\end{displaymath}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{equation}
+\DIFadd{\label{eq:fov}
+2 a = \frac{(b + 1)}{3c+4} \, ,
+}\end{equation}\DIFaddend 
 where $a$ is the ...'' Principal equations are numbered, with the equation number placed within parentheses and right justified.  
 
 Equations are considered to be part of a sentence and should be punctuated accordingly. In the above example, a comma follows the equation because the next line is a subordinate clause.  If the equation ends the sentence, a period should follow the equation.  The line following an equation should not be indented unless it is meant to start a new paragraph.  Indentation after an equation is avoided in LaTeX by not leaving a blank line between the equation and the subsequent text.
@@ -277,7 +392,7 @@ To include theorems in a formal way, the theorem identification should appear in
 Formal statements of lemmas and algorithms receive a similar treatment.
 
 \acknowledgments % equivalent to \section*{ACKNOWLEDGMENTS}       
- 
+
 This unnumbered section is used to identify those who have aided the authors in understanding or accomplishing the work presented and to acknowledge sources of funding.  
 
 % References
