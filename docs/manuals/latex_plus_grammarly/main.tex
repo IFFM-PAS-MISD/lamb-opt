@@ -1,0 +1,135 @@
+\documentclass[]{spie}  %>>> use for US letter paper
+%\documentclass[a4paper]{spie}  %>>> use this instead for A4 paper
+%\documentclass[nocompress]{spie}  %>>> to avoid compression of citations
+
+\renewcommand{\baselinestretch}{1.0} % Change to 1.65 for double spacing
+ 
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+% my packages and commands
+\usepackage{booktabs} % for nice tables
+\usepackage{verbatim}
+\graphicspath{{figs/}}
+
+\title{How to: Grammarly integration with the TeXstudio}
+
+\author[a]{Pawel Kudela}
+
+\affil[a]{Institute of Fluid-Flow Machinery, Polish Academy of Sciences, Fiszera 14 St, 80-231 Gdansk, Poland}
+
+\authorinfo{Further author information: (Send correspondence to Pawel Kudela)\\Pawel Kudela: E-mail: pk@imp.gda.pl, Telephone: +48 58 5225 251}
+
+% Option to view page numbers
+\pagestyle{empty} % change to \pagestyle{plain} for page numbers   
+\setcounter{page}{301} % Set start page numbering at e.g. 301
+ 
+\begin{document} 
+\maketitle
+
+\begin{abstract}
+This is manual for making life easier in the Texstudio environment by the integration of Grammarly into the workflow. 
+It contains some hacks in order to display a web page with a file you are currently working on. 
+Grammarly will check the file for you on the web page. 
+\end{abstract}
+
+% Include a list of keywords after the abstract 
+\keywords{TeXstudio, LaTeX, Grammarly }
+
+\section{PROBLEM STATEMENT}
+\label{sec:intro}  % \label{} allows reference to this section
+Grammarly is a quite good piece of software for grammar checks and corrections. 
+It integrates well with Microsoft Word and Google Chrome. 
+However, such a tool cannot be used directly with TeXstudio or other text editors. Currently, there are no such solutions available. 
+There is an issue \# 528 on Github in relation to TeXstudio development as a feature-request for Grammarly integration: \url{https://github.com/texstudio-org/texstudio/issues/528}.
+However, developers don't see how it can be possible.
+
+\section{How does it work?}
+
+A custom command is added to be executed after the compilation of the LaTex file.
+This custom command runs a batch script that runs a program for stripping out LaTeX commands. A new file without LaTeX command is saved as \verb|detex-out.tex|. 
+The content of the file is loaded to the locally hosted web page. 
+Local hosting is done through \href{https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb}{Web server for Chrome}. Grammarly will check your text because it is placed in an editable field. 
+However, it is not designed in the editions in mind - Java script refreshes this web page every 2 seconds. 
+Once you see some mistakes in red on the web page in the Chrome browser you can immediately correct them in the TeXstudio editor and recompile the document. 
+
+\section{How to do it for my TeXstudio?}
+You need to take several steps to do it. You can do these steps in any order but this one is preferable. I assume that you have already installed \href{https://www.grammarly.com}{Grammarly}.
+\paragraph{Step 1} Copy  the \verb|make_detex.bat| batch file. 
+
+It should be copied to the folder in which you have your \verb|.tex| document that you are currently working on.
+The idea behind this batch file is to have multiple copies of it located in each folder containing the main LaTeX document, e.g.\ your conference paper, journal paper, report, etc.
+Therefore, it is possible to customised it separately for each document.
+
+\paragraph{Step 2} Setup paths in the \verb|make_detex.bat|. 
+
+Right-click on the file and click edit.
+The content of the file looks like this:
+ \begin{verbatim}
+ SETLOCAL
+ set original="main.tex"
+ set output="E:\work\Grammarly-LaTeX-man\grammarly_web\detex-out.txt"
+ ::set output="\\tsclient\E\grammarly_web\detex-out.txt"
+ set detex="E:\work\Grammarly-LaTeX-man\opendetex\detex.exe"
+ ::set detex=%~dp0\..\..\..\bin\external\opendetex\detex.exe
+ %detex% -l %original%>%output%
+ ENDLOCAL
+ \end{verbatim}
+If the file name you are working on is other than \verb|main.tex| you need to replace it after \verb|set original=|
+Caution is needed here: a complex path or file name containing white spaces should be given within quotation marks.
+
+The second path points out to the output file which will be displayed on the web page. The name of the file is fixed as \verb|detex-out.txt|
+It is already in the \verb|\grammarly_web| folder on a hard drive provided along with this manual so you only need to change the path accordingly.
+The next line is actually commented out by using a double colon and it is an example of a path to the remote location.
+
+The third path points out to the \verb|detex.exe| which is the program for stripping out LaTeX commands. This program resides in the \verb|opendetex| folder and you should also modify it accordingly. It is also within quotation marks.
+The next line is also commented line. 
+It is an example of a relative path. Hence, if you do not want to set up the relative path you can skip it.
+
+\paragraph{Step 3} Install \href{https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb}{Web server for Chrome}. 
+
+Once you have installed the Web Server it should be visible at \verb|chrome://apps/| in Chrome browser search bar. Click it and click the button "choose folder". It should point out to \verb|\grammarly_web| folder on a hard drive which is provided with this manual along with other files. 
+The path must be compatible with the output path provided in \verb|make_detex.bat| batch script. 
+
+Please make sure that the box "Automatically show index.html" is selected. 
+For security reasons I recommend to un-tick "Accessible on local network".  
+
+Click on the Web Server URL given below (it should be something like \verb|http://127.0.0.1:8887|). 
+The web page with the text "detex-out" should show up. 
+If not, just click "index.html".
+This is the web page where your LaTeX document with Grammarly corrections will appear.
+
+\paragraph{Step 4} Configure TeXstudio.
+
+Two options are possible here: manual or automatic. 
+The manual option is recommended if you want to keep you customized settings of TeXstudio. By using the automatic option you just load a pre-made profile with every setting including command highlights, editor fonts, etc.
+
+\clearpage
+\noindent \textbf{\textit{Manual option}}
+Go to TeXstudio Options \(\rightarrow\) Configure \(\rightarrow\)  Build
+
+Replace "Build and View" line by:
+\begin{verbatim}
+ txs:///pdflatex | txs:///view-pdf-internal --embedded| txs:///user3
+ \end{verbatim}
+ Add user command:
+ \begin{verbatim}
+ user3:detex  ?a)make_detex.bat
+ \end{verbatim}
+ 
+\noindent \textbf{\textit{Automatic option}}
+
+Go to TeXstudio Options \(\rightarrow\) Load profile
+Point out to the file \verb|detex.txsprofile| provided with this manual.
+
+\paragraph{Enjoy!} That is it! 
+
+After compiling your LaTeX document it should appear on the web page in the Chrome browser.
+
+\section{Conclusions}
+The presented approach enables the improvement of the workflow of writing documents in LaTeX. 
+Grammarly hacked integration works well in a concert with spell checking embedded to the TeXstudio in the form of Language Tool.
+
+\textbf{There are no more excuses to use other WYSIWYG text editor due to a lack of Grammarly integration!}
+
+\end{document} 
