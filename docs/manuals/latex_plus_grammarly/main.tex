@@ -79,10 +79,12 @@ If the file name you are working on is other than \verb|main.tex| you need to re
 Caution is needed here: a complex path or file name containing white spaces should be given within quotation marks.
 
 The second path points out to the output file which will be displayed on the web page. The name of the file is fixed as \verb|detex-out.txt|
-It is already in the \verb|\grammarly_web| folder on a hard drive provided along with this manual so you only need to change the path accordingly.
+It is already in the \verb|\grammarly_web| folder on a hard drive provided along with this manual so you only need to change the path accordingly. 
+Just check where you have copied and extracted provided rar file and replace \verb|"E:\work\Grammarly-LaTeX-man\grammarly_web\detex-out.txt"| by your path.
+
 The next line is actually commented out by using a double colon and it is an example of a path to the remote location.
 
-The third path points out to the \verb|detex.exe| which is the program for stripping out LaTeX commands. This program resides in the \verb|opendetex| folder and you should also modify it accordingly. It is also within quotation marks.
+The third path points out to the \verb|detex.exe| which is the program for stripping out LaTeX commands. This program resides in the \verb|opendetex| folder. Just check where you have copied and extracted provided rar file and replace \verb|"E:\work\Grammarly-LaTeX-man\opendetex\detex.exe"| by your path accordingly. It is also within quotation marks.
 The next line is also commented line. 
 It is an example of a relative path. Hence, if you do not want to set up the relative path you can skip it.
 
@@ -91,6 +93,8 @@ It is an example of a relative path. Hence, if you do not want to set up the rel
 Once you have installed the Web Server it should be visible at \verb|chrome://apps/| in Chrome browser search bar. Click it and click the button "choose folder". It should point out to \verb|\grammarly_web| folder on a hard drive which is provided with this manual along with other files. 
 The path must be compatible with the output path provided in \verb|make_detex.bat| batch script. 
 
+Web Server should be running in the background.
+
 Please make sure that the box "Automatically show index.html" is selected. 
 For security reasons I recommend to un-tick "Accessible on local network".  
 
@@ -98,6 +102,7 @@ Click on the Web Server URL given below (it should be something like \verb|http:
 The web page with the text "detex-out" should show up. 
 If not, just click "index.html".
 This is the web page where your LaTeX document with Grammarly corrections will appear.
+
 
 \paragraph{Step 4} Configure TeXstudio.
 
@@ -112,9 +117,15 @@ Replace "Build and View" line by:
 \begin{verbatim}
  txs:///pdflatex | txs:///view-pdf-internal --embedded| txs:///user3
  \end{verbatim}
- Add user command:
+ Just copy and paste the line above.
+ Add user command (if you do not have any user command there is a plus button).
+ Just copy and paste it - there are two fields there:
  \begin{verbatim}
- user3:detex  ?a)make_detex.bat
+ user3:detex
+ \end{verbatim}
+ and 
+ \begin{verbatim}
+ ?a)make_detex.bat
  \end{verbatim}
  
 \noindent \textbf{\textit{Automatic option}}
