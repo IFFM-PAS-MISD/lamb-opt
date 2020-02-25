@@ -101,11 +101,13 @@ end
 for frame=1:number_of_frequency_points
     [frame,number_of_frequency_points]
     ZI=Data(:,:,frame);
-    Z=reshape(ZI,[],1);
-    F = TriScatteredInterp(X,Y,Z,'linear');
+            %Z=reshape(ZI,[],1);
+            %F = TriScatteredInterp(X,Y,Z,'linear');
+            
+    Zpolar = interp2(XI,YI,ZI,x,y,'spline');
     %Evaluate the interpolant at the locations (x, y).
     %The corresponding value at these locations is Ztemp:
-    Zpolar = F(x,y);
+        %Zpolar = F(x,y);
     % store data
     Data_polar(:,:,frame)=Zpolar;
 end
