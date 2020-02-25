@@ -68,9 +68,9 @@ The content of the file looks like this:
  \begin{verbatim}
  SETLOCAL
  set original="main.tex"
- set output="E:\work\Grammarly-LaTeX-man\grammarly_web\detex-out.txt"
+ set output="C:\Grammarly-LaTeX-man\grammarly_web\detex-out.txt"
  ::set output="\\tsclient\E\grammarly_web\detex-out.txt"
- set detex="E:\work\Grammarly-LaTeX-man\opendetex\detex.exe"
+ set detex="C:\Grammarly-LaTeX-man\opendetex\detex.exe"
  ::set detex=%~dp0\..\..\..\bin\external\opendetex\detex.exe
  %detex% -l %original%>%output%
  ENDLOCAL
@@ -80,11 +80,13 @@ Caution is needed here: a complex path or file name containing white spaces shou
 
 The second path points out to the output file which will be displayed on the web page. The name of the file is fixed as \verb|detex-out.txt|
 It is already in the \verb|\grammarly_web| folder on a hard drive provided along with this manual so you only need to change the path accordingly. 
-Just check where you have copied and extracted provided rar file and replace \verb|"E:\work\Grammarly-LaTeX-man\grammarly_web\detex-out.txt"| by your path.
+Just check where you have copied and extracted provided rar archive and replace \verb|"C:\Grammarly-LaTeX-man\grammarly_web\detex-out.txt"| by your path. 
+If you have extracted the rar archive on C: you do not need to take any actions.
 
 The next line is actually commented out by using a double colon and it is an example of a path to the remote location.
 
-The third path points out to the \verb|detex.exe| which is the program for stripping out LaTeX commands. This program resides in the \verb|opendetex| folder. Just check where you have copied and extracted provided rar file and replace \verb|"E:\work\Grammarly-LaTeX-man\opendetex\detex.exe"| by your path accordingly. It is also within quotation marks.
+The third path points out to the \verb|detex.exe| which is the program for stripping out LaTeX commands and bibliography. This program resides in the \verb|opendetex| folder. Just check where you have copied and extracted provided rar archive and replace \verb|"C:\Grammarly-LaTeX-man\opendetex\detex.exe"| by your path accordingly. It is also within quotation marks.
+If you have extracted the rar archive on C: you do not need to take any actions.
 The next line is also commented line. 
 It is an example of a relative path. Hence, if you do not want to set up the relative path you can skip it.
 
