@@ -1,5 +1,5 @@
 SETLOCAL
-set original="EWSHM2020_Abstract.tex"
+set original="EWSHM2020_paper.tex"
 set output="l:\Praca\Grammarly-LaTeX-man\grammarly_web\detex-out.txt"
 ::set output="\\tsclient\E\grammarly_web\detex-out.txt"
 set detex="l:\Praca\Grammarly-LaTeX-man\opendetex\detex.exe"
