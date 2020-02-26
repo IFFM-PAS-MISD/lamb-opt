@@ -46,24 +46,42 @@ composite laminates, elastic constants }
 
 \section{INTRODUCTION}
 \label{sec:intro}  % \label{} allows reference to this section
-
+In the last decades, high-performance composite materials such as carbon fiber reinforced plastics (CFRP) have been extensively used in various branches of industry.
+It is because of great stiffness and strength to weight ratio in comparison to the metallic structure. 
+However, the lay-up and orientation of reinforcing fibers introduce anisotropy and complexity in inspection regarding the detection and localization of defects.
 Elastic constant values are often difficult to obtain, especially for anisotropic media.
 These values are indispensable for the design of a structure which fulfills assumed 
 requirements (strength, stiffness, vibration characteristics). 
-Several methods for identification of elastic constants of isotropic materials have been utilized over the years, namely: destructive testing and strain gauge or static displacement recordings. 
-Other methods such as methods based on natural frequencies and measurements of velocities of bulk waves (longitudinal and shear) can be implemented in a non-destructive way. 
-However, the identification of elastic constants in composite materials is more complex than in the case of isotropic materials and usually requires the preparation of several specimens (cube cutting).
-The elastic constants for composite materials along with material damping characteristics can be obtained by using an ultrasonic polar scan~\cite{Martens2019a}.
-Another alternative is a method that utilizes dispersion curves of Lamb waves.
-In conclusion, we are the best.
+Destructive methods have been utilized over the years for the characterization of isotropic materials. 
+In contrast, the methods based on natural frequencies and ultrasonic waves can be implemented in a non-destructive way. 
+However, the identification of elastic constants in composite materials is more complex than in the case of isotropic materials and usually requires the preparation of several specimens (cube cutting~\cite{Ditri1993}).
 
-References to equations include the equation number in parentheses, for example, Equation~(\ref{eq:rho}) shows ...''or `Combining Eqs.~(2) and (3), we obtain...
+Ultrasonic techniques usually are based on measurements of the time of flight and corresponding velocities of bulk waves (longitudinal and shear)~\cite{Castellano2014}.
+Bulk wave propagation is defined by the small wavelength compared to the thickness of the plate. 
+In turn, small wavelengths correspond to high-frequency components which usually are strongly attenuated. 
+Hence, there is an upper bound frequency limit.
+Another problem arises from the assumption of the infinite thickness of the plate in the approximation of bulk waves. 
+Neglecting the effect of plate boundaries causes errors in the time of flight estimation~\cite{Martens2017}. 
 
- Using a tilde in the LaTeX source file between two characters avoids unwanted line breaks.
+The above-mentioned limitations can be resolved by using an ultrasonic polar scan~\cite{Martens2019a}.
+It enables determination of the elastic constants of composite material along with material damping characteristics.
+Additionally, it has the potential for microscopic defects detection.
+The disadvantage of such an approach is the fact that an inspected specimen must be immersed in water as this reduces the acoustic impedance mismatch at the
+interfaces and allows sound to penetrate the sample more easily.
 
-Authors are encouraged to follow the principles of sound technical writing, as described 
-in Refs.~\citenum{Alred03} and \citenum{Perelman97}, for example.
-please see \citenum{Lees-Miller-LaTeX-course-1}. 
+Another alternative method explored among researchers is a method that utilizes dispersion curves of Lamb waves.
+It requires an excitation source in the form of a laser impulse or piezoelectric actuator permanently attached to the inspected specimen and a scanning laser Doppler measurement system.
+Ong et al.~\citenum{Ong2016} proposed a method in which experimental and numerical signals of Lamb waves acquired along lines corresponding to selected angles of propagation are used. 
+Measurements are taken on the upper and bottom surface of the plate so that symmetric and antisymmetric modes can be separated.
+Signals are processed by using a 2D Fourier transform in order to obtain dispersion curve patterns. 
+Correlation between numerical and experimental dispersion curve patterns is considered in the objective function.
+However, measurements are taken along a line which may cause a problem of the unwanted contribution of reflected waves from the boundaries of the plate.
+Another downside is that access to both sides of the investigated specimen is required.
+Therefore, to mitigate these downsides, we propose to utilize the full wavefield of propagating waves measured at only one side of the specimen.
+
+The aim of this paper is the investigation of various parameters influencing the dispersion curves of Lamb waves.
+This is a preliminary step that helps formulate objective function in the optimization problem leading to the determination of elastic constants of a composite laminate.
+
 
 \section{SEMI-ANALYTICAL SPECTRAL ELEMENT METHOD}
 \label{sec:sase}
@@ -83,6 +101,8 @@ please see \citenum{Lees-Miller-LaTeX-course-1}.
 
 \section{INDIRECT METHOD}
 \label{sec:indirect}
+
+References to equations include the equation number in parentheses, for example, Equation~(\ref{eq:rho}) shows ...''or `Combining Eqs.~(2) and (3), we obtain...
 
 The idea behind the indirect method is the determination of the following properties: matrix  density \(\rho_m\), fibers density \(\rho_f\), matrix Young's modulus \(E_m\), fibers Young's  modulus \(E_f\), Poisson's ratio of the matrix \(\nu_m\), Poisson's ratio of the fibers \(\nu_f\)  and  volume fraction of reinforcing fibers\(V\).  
 In reality, the fiber density can be calculated based on  the rule of mixture as:
