@@ -9,6 +9,16 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 % my packages and commands
 \usepackage{booktabs} % for nice tables
+% matrix command 
+\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+% vector command 
+\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+\newcommand{\ud}{\mathrm{d}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\veca}[2]{\mathbf{#1}{#2}}
+\newcommand{\bm}[1]{\mathbf{#1}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\newcommand{\myfigscale}{0.9}
 \graphicspath{{figs/}}
 
 \title{Parametric studies of composite material properties influence on dispersion curves of Lamb waves}
@@ -71,7 +81,7 @@ interfaces and allows sound to penetrate the sample more easily.
 
 Another alternative method explored among researchers is a method that utilizes dispersion curves of Lamb waves.
 It requires an excitation source in the form of a laser impulse or piezoelectric actuator permanently attached to the inspected specimen and a scanning laser Doppler measurement system.
-Ong et al.~\citenum{Ong2016} proposed a method in which experimental and numerical signals of Lamb waves acquired along lines corresponding to selected angles of propagation are used. 
+Ong et al.~\cite{Ong2016} proposed a method in which experimental and numerical signals of Lamb waves acquired along lines corresponding to selected angles of propagation are used. 
 Measurements are taken on the upper and bottom surface of the plate so that symmetric and antisymmetric modes can be separated.
 Signals are processed by using a 2D Fourier transform in order to obtain dispersion curve patterns. 
 Correlation between numerical and experimental dispersion curve patterns is considered in the objective function.
@@ -85,7 +95,16 @@ This is a preliminary step that helps formulate objective function in the optimi
 
 \section{SEMI-ANALYTICAL SPECTRAL ELEMENT METHOD}
 \label{sec:sase}
+Lamb wave dispersion phenomenon is related to wavenumber  \(k\) dependency on frequency \(f\). 
+Lamb wave dispersion curves depend on elasticity constants of the material in which Lamb waves propagate.
+The semi-analytical method was used for the calculation of dispersion curves.
 
+The physical model of a plate-like waveguide is shown in Fig.~\ref{fig:layered_composite_SASE}.  
+The waveguide is made of layered orthotropic material in which reinforcing fibers are at angle \(\theta\) in respect to \(z\) axis. 
+The current mathematical model is a modification of the semi-analytical finite element (SAFE) method proposed in Ref.~\citenum{Bartoli2006}. 
+The modification includes the application of spectral elements instead of finite elements through the thickness of a laminate, preserving wave equation in the propagation direction. 
+Four-node spectral element is shown in Fig.~\ref{fig:layered_composite_SASE}. 
+It has a non-uniform distribution of nodes and three degrees of freedom per node.
 
 \begin{figure} [ht]
 	\begin{center}
@@ -95,27 +114,47 @@ This is a preliminary step that helps formulate objective function in the optimi
 	\end{center}
 	\caption[] 
 	%>>>> use \label inside caption to get Fig. number with \ref{}
-	{ \label{fig:sase} 
+	{ \label{fig:layered_composite_SASE} 
 		SASE model representation.}
 \end{figure} 
+
+The general form of wave equation which is used for calculation of dispersion curves has a form of eigenvalue problem:
+
+\begin{equation}
+\left[\matr{A} - \omega^2\matr{M} \right] \vect{U} =0,
+\label{eq:eig_dispersion}
+\end{equation}
+where \(\omega\) is the angular frequency, \(\matr{M}\) is the mass matrix, \(\matr{U}\) is the nodal displacement vector, and the matrix \(\matr{A}\) can be defined as:
+\begin{equation}
+\begin{aligned}
+\matr{A} & =  k^2\left(s^2 \,\matr{K}_{22} + c^2\, \matr{K}_{33} - c s\, \matr{K}_{23} - c s\, \matr{K}_{32}\right) \\
+& + i k\, \matr{T}^T\left(-c\, \matr{K}_{13} - s\, \matr{K}_{21} + s\, \matr{K}_{12} + c\, \matr{K}_{31}\right) \matr{T} +\matr{K}_{11},
+\end{aligned}
+\label{eq:dispersion}
+\end{equation}
+where  \(s = \sin(\beta)\), \(c = \cos(\beta)\), \(i = \sqrt{-1}\), \(\beta\) is the angle 
+of guided wave propagation and \(\matr{K}_{ij}\) are appropriate stiffness matrices~\cite{Taupin2011}. 
+The transformation matrix \(\matr{T}\) is diagonal and it is introduced in order to eliminate imaginary elements from Eq.~(\ref{eq:dispersion}) (see Ref.~\citenum{Bartoli2006} for more details). 
+It should be noted that the system of Eqs.~(\ref{eq:eig_dispersion}) explicitly depends on the angle \(\beta\). 
+Predicting the anisotropic behavior of guided wave properties makes it necessary to loop over each direction considered.
 
 \section{INDIRECT METHOD}
 \label{sec:indirect}
 
-References to equations include the equation number in parentheses, for example, Equation~(\ref{eq:rho}) shows ...''or `Combining Eqs.~(2) and (3), we obtain...
+The idea behind the indirect method is the determination of the following properties: matrix density  \(\rho_m\), fibers density \(\rho_f\), matrix Young's modulus \(E_m\), fibers Young's modulus along fibers \(E_{11f}\) and perpendicular to fibers \(E_{22f}=E_{33f}\), Poisson's ratio of the matrix \(\nu_m\), Poisson's ratio of the fibers \(\nu_f\) and volume fraction of reinforcing fibers \(V\). 
+It was assumed that \(E_{22f} = 0.1\, E_{11f}\) thus the total number of independent parameters was reduced to~7. 
+One parameter can be further eliminated if the overall density \(\rho\) of the composite is known. 
+However, for the sake of completeness, the influence of all 7 parameters on dispersion curves was investigated here. 
+The main motivation here is the low number of parameters which must be determined by the optimization method. 
+Moreover, the material properties of composite constituents can be easily found in the literature. 
+Therefore, can be used as a starting point in the optimization. 
 
-The idea behind the indirect method is the determination of the following properties: matrix  density \(\rho_m\), fibers density \(\rho_f\), matrix Young's modulus \(E_m\), fibers Young's  modulus \(E_f\), Poisson's ratio of the matrix \(\nu_m\), Poisson's ratio of the fibers \(\nu_f\)  and  volume fraction of reinforcing fibers\(V\).  
-In reality, the fiber density can be calculated based on  the rule of mixture as:
-\begin{equation}
-\rho_f = \frac{\rho - \rho_m (1-V)}{V},
-\label{eq:rho}
-\end{equation}
-where $V$ is the volume fraction of reinforcing fibers. 
-Hence, only 6~variables need to be determined. 
-However, for the sake of completeness, the influence of all 7 parameters on dispersion curves was investigated here.
-
+It should be noted that the notation \(E_f = E_{11f}\) was used further in the text for simplicity. 
+The effective elastic constants were calculated by using the rule of mixtures and homogenization techniques~\cite{Barbero2006a,Adumitroaie2012}.
 
 \subsection{Material properties}
+The material under investigation is made out of 8 layers of plain-weave reinforced composite. 
+Initial values of constants characterizing the composite material constituents (epoxy resin and carbon fibers) are given in Tab.~\ref{tab:matprop}.
 \begin{table}[ht]
 	\renewcommand{\arraystretch}{1.3}
 	%\centering \footnotesize
@@ -137,14 +176,9 @@ However, for the sake of completeness, the influence of all 7 parameters on disp
 	\end{center}
 \end{table}
 
-\subsection{Homogenization}
-The assumed thickness of the composite laminate was 3.9~mm. 
-
-The total weight of the specimen was 8550 g, hence, based on the volume of the 
-specimen, the density is about~1522.4~kg/m\textsuperscript{3}.
-
-The parameters describing the geometry of a plain weave textile-reinforced composite 
-are given in Table~\ref{tab:weave_geo}. 
+The assumed thickness of the composite laminate was 3.9~mm and the mass density 1522.4~kg/m\textsuperscript{3}. 
+The~parameters describing the geometry of a plain weave textile-reinforced composite 
+are given in Tab.~\ref{tab:weave_geo}. 
 \begin{table}[ht]
 	\renewcommand{\arraystretch}{1.3}
 	%\centering \footnotesize
@@ -164,13 +198,25 @@ are given in Table~\ref{tab:weave_geo}.
 	\end{center}
 \end{table}
 
+\cleardoublepage
 \subsection{Results of parametric studies}
+The influence of each parameter on dispersion curves was studied separately. 
+The variability range of each parameter was assumed as \(\pm\)20\% with respect to initial values.
+The results of parametric studies are presented in Figs.~\ref{fig:rhom}--\ref{fig:vol}.
+The dispersion curves corresponding to four Lamb wave modes are in the form \(k(f)\) where \(f=\omega/(2 \pi)\) is the frequency measured in hertz. 
+Black curves are calculated for the initial values of material properties given in Tab.~\ref{tab:matprop}, red curves represent changes in dispersion curves caused by the increase of these parameters whereas blue curves represent changes in dispersion curves due to decreasing values of these parameters. 
+There are 11 solutions covering the range of \(\pm\)20\% for each investigated parameter (5 red curves, 5 blue curves and 1 black curve for each propagating Lamb wave mode).
+
+The influence of matrix density on dispersion curves for the selected angle \(\beta\) is shown in Fig.~\ref{fig:rhom}. 
+The parameter has a moderate influence on each mode of propagating waves.
+A similar trend can be observed in the case of fiber density as shown in Fig.~\ref{fig:rhof}.
+It should be noted that the increase of matrix density and fibers density causes an increase of wavenumber values across the whole frequency range.
 
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure2a.png}
-			\includegraphics{figure2b.png}
+			\includegraphics[scale=\myfigscale]{figure2a.png}
+			\includegraphics[scale=\myfigscale]{figure2b.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -182,8 +228,8 @@ are given in Table~\ref{tab:weave_geo}.
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure3a.png}
-			\includegraphics{figure3b.png}
+			\includegraphics[scale=\myfigscale]{figure3a.png}
+			\includegraphics[scale=\myfigscale]{figure3b.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -191,12 +237,21 @@ are given in Table~\ref{tab:weave_geo}.
 	{ \label{fig:rhof} 
 		The influence of fiber density on the dispersion curves.}
 \end{figure} 
+The influence of Young's modulus of the matrix on dispersion curves for the selected angle 
+\(\beta\) is shown in Fig.~\ref{fig:em}. 
+Large changes in most dispersion curves can be observed. 
+But, changes in certain dispersion curves at frequencies up to about 300~kHz are small (these dispersion curves correspond to S0 modes of Lamb waves).
+The influence of Young's modulus of fibers on dispersion curves for the selected angle 
+\(\beta\) is shown in Fig.~\ref{fig:ef}. 
+In this case small to moderate changes in dispersion curves depending on guided wave mode can be observed. 
 
+Moreover, it is worthy to notice, that the effect of Young's modulus on dispersion curves is opposite to the mass density. 
+Namely, an increase of  Young's modulus causes a decrease of wavenumber values.
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure4a.png}
-			\includegraphics{figure4b.png}
+			\includegraphics[scale=\myfigscale]{figure4a.png}
+			\includegraphics[scale=\myfigscale]{figure4b.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -208,8 +263,8 @@ are given in Table~\ref{tab:weave_geo}.
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure5a.png}
-			\includegraphics{figure5b.png}
+			\includegraphics[scale=\myfigscale]{figure5a.png}
+			\includegraphics[scale=\myfigscale]{figure5b.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -217,12 +272,17 @@ are given in Table~\ref{tab:weave_geo}.
 	{ \label{fig:ef} 
 		The influence of Young's modulus of fibers on dispersion curves.}
 \end{figure} 
-
+%\newpage
+\pagebreak
+The influence of  Poisson's ratio of the matrix on the dispersion curves for the selected angle \(\beta\) is shown in Fig.~\ref{fig:nim}. 
+Small changes in dispersion curves can be observed.
+Even smaller effects on dispersion curves can be observed for the case of Poisson's ratio of fibers (see Fig.~\ref{fig:nif}).
+Depending on the frequency the and propagating mode an increase of Poisson's ratio can increase or decease wavenumber values.
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure6a.png}
-			\includegraphics{figure6b.png}
+			\includegraphics[scale=\myfigscale]{figure6a.png}
+			\includegraphics[scale=\myfigscale]{figure6b.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -230,12 +290,11 @@ are given in Table~\ref{tab:weave_geo}.
 	{ \label{fig:nim} 
 		The influence of Poisson's ratio of matrix on dispersion curves.}
 \end{figure} 
-
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure7a.png}
-			\includegraphics{figure7b.png}
+			\includegraphics[scale=\myfigscale]{figure7a.png}
+			\includegraphics[scale=\myfigscale]{figure7b.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -244,11 +303,13 @@ are given in Table~\ref{tab:weave_geo}.
 		The influence of Poisson's ratio of fibers on dispersion curves.}
 \end{figure} 
 
+The influence of volume fraction of reinforcing fibers on dispersion curves for the selected angle \(\beta\) is shown in Fig.~\ref{fig:vol}. 
+It is the most essential parameter among analyzed properties because it has the greatest influence on dispersion curves of guided waves.
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure8a.png}
-			\includegraphics{figure8b.png}
+			\includegraphics[scale=\myfigscale]{figure8a.png}
+			\includegraphics[scale=\myfigscale]{figure8b.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -257,9 +318,13 @@ are given in Table~\ref{tab:weave_geo}.
 		The influence of volume fraction of reinforcing fibers on dispersion curves.}
 \end{figure} 
 
-\clearpage
+It should be underlined that in all cases considered the changes in dispersion curves are higher at higher frequencies. 
+Therefore, it is expected that a higher accuracy of elastic constants determination can be achieved if dispersion curves are captured experimentally at higher frequencies. Moreover, as expected, the dependence of dispersion curves on the angle of propagation is significant. 
+Hence, this fact should be considered during the construction of an objective function.
+
 \section{DIRECT METHOD}
 \label{sec:direct}
+
 The idea behind the indirect method is the determination of the following properties:
 \(C_{11}\), \(C_{12}\), \(C_{13}\) , \(C_{22}\), \(C_{23}\), \(C_{33}\), \(C_{44}\) , \(C_{55}\), 
 \(C_{66}\).
@@ -290,10 +355,10 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure9a.png}
-			\includegraphics{figure9b.png}\\
-			\includegraphics{figure9c.png}
-			\includegraphics{figure9d.png}
+			\includegraphics[scale=\myfigscale]{figure9a.png}
+			\includegraphics[scale=\myfigscale]{figure9b.png}\\
+			\includegraphics[scale=\myfigscale]{figure9c.png}
+			\includegraphics[scale=\myfigscale]{figure9d.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -305,10 +370,10 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure10a.png}
-			\includegraphics{figure10b.png}\\
-			\includegraphics{figure10c.png}
-			\includegraphics{figure10d.png}
+			\includegraphics[scale=\myfigscale]{figure10a.png}
+			\includegraphics[scale=\myfigscale]{figure10b.png}\\
+			\includegraphics[scale=\myfigscale]{figure10c.png}
+			\includegraphics[scale=\myfigscale]{figure10d.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -320,10 +385,10 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure11a.png}
-			\includegraphics{figure11b.png}\\
-			\includegraphics{figure11c.png}
-			\includegraphics{figure11d.png}
+			\includegraphics[scale=\myfigscale]{figure11a.png}
+			\includegraphics[scale=\myfigscale]{figure11b.png}\\
+			\includegraphics[scale=\myfigscale]{figure11c.png}
+			\includegraphics[scale=\myfigscale]{figure11d.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -335,10 +400,10 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure12a.png}
-			\includegraphics{figure12b.png}\\
-			\includegraphics{figure12c.png}
-			\includegraphics{figure12d.png}
+			\includegraphics[scale=\myfigscale]{figure12a.png}
+			\includegraphics[scale=\myfigscale]{figure12b.png}\\
+			\includegraphics[scale=\myfigscale]{figure12c.png}
+			\includegraphics[scale=\myfigscale]{figure12d.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -350,10 +415,10 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure13a.png}
-			\includegraphics{figure13b.png}\\
-			\includegraphics{figure13c.png}
-			\includegraphics{figure13d.png}
+			\includegraphics[scale=\myfigscale]{figure13a.png}
+			\includegraphics[scale=\myfigscale]{figure13b.png}\\
+			\includegraphics[scale=\myfigscale]{figure13c.png}
+			\includegraphics[scale=\myfigscale]{figure13d.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -365,10 +430,10 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure14a.png}
-			\includegraphics{figure14b.png}\\
-			\includegraphics{figure14c.png}
-			\includegraphics{figure14d.png}
+			\includegraphics[scale=\myfigscale]{figure14a.png}
+			\includegraphics[scale=\myfigscale]{figure14b.png}\\
+			\includegraphics[scale=\myfigscale]{figure14c.png}
+			\includegraphics[scale=\myfigscale]{figure14d.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -380,10 +445,10 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure15a.png}
-			\includegraphics{figure15b.png}\\
-			\includegraphics{figure15c.png}
-			\includegraphics{figure15d.png}
+			\includegraphics[scale=\myfigscale]{figure15a.png}
+			\includegraphics[scale=\myfigscale]{figure15b.png}\\
+			\includegraphics[scale=\myfigscale]{figure15c.png}
+			\includegraphics[scale=\myfigscale]{figure15d.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -395,10 +460,10 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure16a.png}
-			\includegraphics{figure16b.png}\\
-			\includegraphics{figure16c.png}
-			\includegraphics{figure16d.png}
+			\includegraphics[scale=\myfigscale]{figure16a.png}
+			\includegraphics[scale=\myfigscale]{figure16b.png}\\
+			\includegraphics[scale=\myfigscale]{figure16c.png}
+			\includegraphics[scale=\myfigscale]{figure16d.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -410,10 +475,10 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics{figure17a.png}
-			\includegraphics{figure17b.png}\\
-			\includegraphics{figure17c.png}
-			\includegraphics{figure17d.png}
+			\includegraphics[scale=\myfigscale]{figure17a.png}
+			\includegraphics[scale=\myfigscale]{figure17b.png}\\
+			\includegraphics[scale=\myfigscale]{figure17c.png}
+			\includegraphics[scale=\myfigscale]{figure17d.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -422,7 +487,7 @@ In the case of direct approach, upper and lower bounds of variables were set as
 		The influence of \(C_{66}\) elastic constant on the dispersion curves.}
 \end{figure} 
 \clearpage
-\section{DISCUSSION}
+\section{CONCLUSIONS}
 
   
 \appendix    %>>>> this command starts appendixes
