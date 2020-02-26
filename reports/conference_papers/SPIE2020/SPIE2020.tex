@@ -11,18 +11,15 @@
 \usepackage{booktabs} % for nice tables
 \graphicspath{{figs/}}
 
-\title{Parametric studies of composite material properties influence on dispersion 
-curves of Lamb waves}
+\title{Parametric studies of composite material properties influence on dispersion curves of Lamb waves}
 
 \author[a]{Pawel Kudela}
 \author[a]{Piotr Fiborek}
 \author[a]{Maciej Radzienski}
 \author[a]{Tomasz Wandowski}
-\affil[a]{Institute of Fluid-Flow Machinery, Polish Academy of Sciences, Fiszera 14 St, 
-80-231 Gdansk, Poland}
+\affil[a]{Institute of Fluid-Flow Machinery, Polish Academy of Sciences, Fiszera 14 St, 80-231 Gdansk, Poland}
 
-\authorinfo{Further author information: (Send correspondence to Pawel 
-Kudela)\\Pawel Kudela: E-mail: pk@imp.gda.pl, Telephone: +48 58 5225 251}
+\authorinfo{Further author information: (Send correspondence to Pawel Kudela)\\Pawel Kudela: E-mail: pk@imp.gda.pl, Telephone: +48 58 5225 251}
 
 % Option to view page numbers
 \pagestyle{empty} % change to \pagestyle{plain} for page numbers   
@@ -32,30 +29,15 @@ Kudela)\\Pawel Kudela: E-mail: pk@imp.gda.pl, Telephone: +48 58 5225 251}
 \maketitle
 
 \begin{abstract}
-Typically, material properties originate from destructive tensile tests and are used in 
-computational models in the design and analysis process of structures. 
+Typically, material properties originate from destructive tensile tests and are used in computational models in the design and analysis process of structures. 
 This approach is well-established in relation to isotropic homogeneous materials. 
-However, if this approach is used for composite laminates, inaccuracies can arise that 
-leads to vastly different stress distributions, strain rates, natural frequencies, and 
-velocities of propagating elastic waves. In order to account for this problem, the 
-alternative method is proposed, which utilizes Lamb wave propagation phenomenon 
-and optimization techniques. 
-Propagating Lamb waves are highly sensitive to changes in material parameters and 
-are often used for structural health monitoring of structures. In the proposed approach, 
-the elastic constants, which are utilized to determine dispersion curves of Lamb waves, 
-are optimized to achieve a good correlation between model predictions and 
-experimental observations. 
-In the first step of this concept, parametric studies have been carried out in which the 
-influence of mass density, Young’s modulus, Poisson’s ratio of reinforcing fibers as 
-well as a matrix of composite laminate and volume fraction of reinforcing fibers on 
-dispersion curves of Lamb waves was investigated. 
-The dispersion curves of Lamb waves were calculated by using the semi-analytical 
-spectral element method considering the variability of properties of composite 
-constituents. 
-The resulting dispersion curves were also compared with experimental measurements 
-of full wavefield data conducted by scanning laser Doppler vibrometer and processed 
-by 3D Fourier transform. It allowed formulating fitness function which will be next used 
-in genetic algorithm for optimization and identification of elastic constants.
+However, if this approach is used for composite laminates, inaccuracies can arise that lead to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. 
+In order to account for this problem, the alternative method is proposed, which utilizes Lamb wave propagation phenomenon and optimization techniques. 
+Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures.
+In the proposed approach, the elastic constants, which are utilized to determine dispersion curves of Lamb waves, are optimized to achieve a good correlation between model predictions and experimental observations. 
+In the first step of this concept, parametric studies have been carried out in which the influence of mass density, Young's modulus, Poisson's ratio of reinforcing fibers as well as a matrix of composite laminate and volume fraction of reinforcing fibers on dispersion curves of Lamb waves was investigated. 
+The dispersion curves of Lamb waves were calculated by using the semi-analytical spectral element method considering the variability of properties of composite constituents. 
+The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning laser Doppler vibrometer and processed by 3D Fourier transform. It allowed formulating fitness function which will be next used in genetic algorithm for optimization and identification of elastic constants.
 \end{abstract}
 
 % Include a list of keywords after the abstract 
@@ -68,22 +50,14 @@ composite laminates, elastic constants }
 Elastic constant values are often difficult to obtain, especially for anisotropic media.
 These values are indispensable for the design of a structure which fulfills assumed 
 requirements (strength, stiffness, vibration characteristics). 
-Several methods for identification of elastic constants of isotropic materials have been 
-utilized over the years, namely: destructive testing and strain gauge or static 
-displacement recordings. 
-Other methods such as methods based on natural frequencies and measurements of 
-velocities of bulk waves (longitudinal and shear) can be implemented in non-destructive 
-way. 
-However, identification of elastic constants in composite materials is more complex 
-than in case of isotropic materials and usually requires preparation of several 
-specimens (cube cutting).
-The elastic constants for composite materials along with material damping 
-characteristics can be obtained by using ultrasonic polar scan.
-Another alternative is a method which utilizes dispersion 
-curves of Lamb waves.
+Several methods for identification of elastic constants of isotropic materials have been utilized over the years, namely: destructive testing and strain gauge or static displacement recordings. 
+Other methods such as methods based on natural frequencies and measurements of velocities of bulk waves (longitudinal and shear) can be implemented in a non-destructive way. 
+However, the identification of elastic constants in composite materials is more complex than in the case of isotropic materials and usually requires the preparation of several specimens (cube cutting).
+The elastic constants for composite materials along with material damping characteristics can be obtained by using an ultrasonic polar scan~\cite{Martens2019a}.
+Another alternative is a method that utilizes dispersion curves of Lamb waves.
+In conclusion, we are the best.
 
-References to equations include the equation number in parentheses, for example, 
-Equation~(\ref{eq:rho}) shows ...''or `Combining Eqs.~(2) and (3), we obtain...
+References to equations include the equation number in parentheses, for example, Equation~(\ref{eq:rho}) shows ...''or `Combining Eqs.~(2) and (3), we obtain...
 
  Using a tilde in the LaTeX source file between two characters avoids unwanted line breaks.
 
@@ -93,6 +67,7 @@ please see \citenum{Lees-Miller-LaTeX-course-1}.
 
 \section{SEMI-ANALYTICAL SPECTRAL ELEMENT METHOD}
 \label{sec:sase}
+
 
 \begin{figure} [ht]
 	\begin{center}
@@ -109,19 +84,16 @@ please see \citenum{Lees-Miller-LaTeX-course-1}.
 \section{INDIRECT METHOD}
 \label{sec:indirect}
 
-The idea behind the indirect method is the determination of the following properties:  
-matrix  density \(\rho_m\), fibers density \(\rho_f\), matrix Young's modulus \(E_m\), fibers 
-Young's  modulus \(E_f\), Poisson's ratio of the matrix \(\nu_m\), Poisson's ratio of the 
-fibers\(\nu_f\)  and  volume fraction of reinforcing fibers\(V\).  
-In reality the fiber density can be calculated based on  the rule of mixture as:
+The idea behind the indirect method is the determination of the following properties: matrix  density \(\rho_m\), fibers density \(\rho_f\), matrix Young's modulus \(E_m\), fibers Young's  modulus \(E_f\), Poisson's ratio of the matrix \(\nu_m\), Poisson's ratio of the fibers \(\nu_f\)  and  volume fraction of reinforcing fibers\(V\).  
+In reality, the fiber density can be calculated based on  the rule of mixture as:
 \begin{equation}
 \rho_f = \frac{\rho - \rho_m (1-V)}{V},
 \label{eq:rho}
 \end{equation}
-where $V$ is the volume fraction of reinforcing fibers. Hence, only 6~variables needs to be 
-determined. 
-However, for the sake of completeness the influence of all 7 parameters on dispersion curves 
-was investigated.
+where $V$ is the volume fraction of reinforcing fibers. 
+Hence, only 6~variables need to be determined. 
+However, for the sake of completeness, the influence of all 7 parameters on dispersion curves was investigated here.
+
 
 \subsection{Material properties}
 \begin{table}[ht]
@@ -146,17 +118,17 @@ was investigated.
 \end{table}
 
 \subsection{Homogenization}
-The assumed thickness of composite laminate was 3.9~mm. 
+The assumed thickness of the composite laminate was 3.9~mm. 
 
 The total weight of the specimen was 8550 g, hence, based on the volume of the 
 specimen, the density is about~1522.4~kg/m\textsuperscript{3}.
 
-The parameters describing the geometry of a plain weave textile reinforced composite 
+The parameters describing the geometry of a plain weave textile-reinforced composite 
 are given in Table~\ref{tab:weave_geo}. 
 \begin{table}[ht]
 	\renewcommand{\arraystretch}{1.3}
 	%\centering \footnotesize
-	\caption{Geometry of a plain weave textile reinforced composite [mm].}
+	\caption{The geometry of a plain weave textile-reinforced composite [mm].}
 	\label{tab:weave_geo}
 	\begin{center}
 		\begin{tabular}{cccccc} 
@@ -272,7 +244,7 @@ The idea behind the indirect method is the determination of the following proper
 \(C_{11}\), \(C_{12}\), \(C_{13}\) , \(C_{22}\), \(C_{23}\), \(C_{33}\), \(C_{44}\) , \(C_{55}\), 
 \(C_{66}\).
 
-In case of direct approach, upper and lower bounds of variables were set as  
+In the case of direct approach, upper and lower bounds of variables were set as  
 \(\pm\)50\% in respect to initial values given in Table~\ref{tab:Ctensor_initial}.
 \begin{table}[h!]
 	\renewcommand{\arraystretch}{1.3}
@@ -443,6 +415,6 @@ no 2018/29/B/ST8/00045.
 
 % References
 \bibliographystyle{spiebib} % makes bibtex use spiebib.bst
-%\bibliography{report} % bibliography data in report.bib
+\bibliography{SPIE2020} % 
 
 \end{document} 
