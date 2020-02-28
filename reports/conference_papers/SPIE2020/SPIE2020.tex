@@ -92,7 +92,6 @@ Therefore, to mitigate these downsides, we propose to utilize the full wavefield
 The aim of this paper is the investigation of various parameters influencing the dispersion curves of Lamb waves.
 This is a preliminary step that helps formulate objective function in the optimization problem leading to the determination of elastic constants of a composite laminate.
 
-
 \section{SEMI-ANALYTICAL SPECTRAL ELEMENT METHOD}
 \label{sec:sase}
 Lamb wave dispersion phenomenon is related to wavenumber  \(k\) dependency on frequency \(f\). 
@@ -325,12 +324,14 @@ Hence, this fact should be considered during the construction of an objective fu
 \section{DIRECT METHOD}
 \label{sec:direct}
 
-The idea behind the indirect method is the determination of the following properties:
-\(C_{11}\), \(C_{12}\), \(C_{13}\) , \(C_{22}\), \(C_{23}\), \(C_{33}\), \(C_{44}\) , \(C_{55}\), 
-\(C_{66}\).
+The idea behind the direct method is the determination of the following properties:
+\(C_{11}\), \(C_{12}\), \(C_{13}\) , \(C_{22}\), \(C_{23}\), \(C_{33}\), \(C_{44}\) , \(C_{55}\), \(C_{66}\). These elastic constants are describing orthotropic elastic material and are used in stress-strain constitutive equations. 
+Therefore there are more constants characterizing material properties to be determined than in case of the indirect method (9 versus 6 if we assume that the mass density is known).
 
 In the case of direct approach, upper and lower bounds of variables were set as  
-\(\pm\)50\% in respect to initial values given in Table~\ref{tab:Ctensor_initial}.
+\(\pm\)20\% in respect to initial values given in Tab.~\ref{tab:Ctensor_initial}. 
+The initial values were selected so that to match behavior of plain-weave type composite as described in the indirect method.
+
 \begin{table}[h!]
 	\renewcommand{\arraystretch}{1.3}
 	%\centering \footnotesize
@@ -350,8 +351,21 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \end{table}
 
 \subsection{Results of parametric studies}
+As previously, the influence of each parameter on dispersion curves was studied separately. 
+The results of parametric studies are presented in a similar manner in Figs.~\ref{fig:C11}--\ref{fig:C66}.
+Immediately, it can be noticed that the behavior of dispersion curves is completely different than in the case of the indirect method. 
+The influence of \(C_{ij}\) elastic constants is more localized, meaning that certain elastic constants affect certain modes of Lamb waves. 
+In particular, for example \(C_{11}\) constant at the propagation angle 0\(^{\circ}\) affects most significantly the S0 mode of Lamb waves (Fig.~\ref{fig:C11} ) whereas \(C_{44}\) constant at propagation angle 0\(^{\circ}\) affects A1 Lamb wave mode (Fig.~\ref{fig:C44}).
 
+Moreover, the influence of elastic constants on dispersion curves is angle-dependent. 
+It means that  for example \(C_{11}\) constant at propagation angle 0\(^{\circ}\) affects dispersion curves more than in case of the propagation angle 90\(^{\circ}\). 
+An increase or decrease of  \(C_{11}\) constants has no effect on dispersion curves at  the propagation angle 90\(^{\circ}\). 
 
+Additionally, certain changes in dispersion curves are observed at a particular frequency range only. 
+For example in case of  \(C_{33}\) constant, S0 mode of Lamb waves is significantly affected in the frequency range 250--500 kHz (see Fig.~\ref{fig:C33}).
+
+It should be also underlined that the increase/decrease of elastic constant values represented by red/blue curves is specific to a particular elastic constant. 
+The increase of elastic constants casing decrease values of wavenumbers can be observed for the case of: \(C_{ij}, i=j\), whereas opposite behavior can be observed for the case of  \(C_{ij}, i\ne j\).      
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
@@ -367,6 +381,15 @@ In the case of direct approach, upper and lower bounds of variables were set as
 		The influence of \(C_{11}\) elastic constant on the dispersion curves.}
 \end{figure} 
 
+The influence of \(C_{12}\) elastic constant on the dispersion curves is least pronounced (see Fig.~\ref{fig:C12}). 
+It might lead to difficulty in the proper determination of this constant through optimization method based on dispersion curves.
+
+\(C_{13}\) constants affect dispersion curves at frequency range about 250--500 kHz (see Fig.~\ref{fig:C13}).
+Changes in dispersion curves at angle 90\(^{\circ}\) are not visible.
+
+In the case of \(C_{22}\) constants (Fig.~\ref{fig:C22}), the largest changes in dispersion curves are for the propagation angle  30\(^{\circ}\). 
+
+The reader can find other peculiarities in the remaining Figs.~\ref{fig:C23}--\ref{fig:C66}.
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
@@ -488,8 +511,28 @@ In the case of direct approach, upper and lower bounds of variables were set as
 \end{figure} 
 \clearpage
 \section{CONCLUSIONS}
+The influence of mechanical properties of materials on the dispersion curves of Lamb waves has been studied.
+The semi-analytical spectral element method was used for the calculation of dispersion curves. 
+It enabled us to discern the increase/decrease of wavenumber values of particular Lamb wave modes at selected frequencies.
+Two methods were investigated: indirect and direct.
+In the indirect method constituents of composite materials were treated as input variables which then were used for calculation of elastic constants.
+In the direct method, direct changes of elastic constants in the range of \(\pm\)20\% with respect to initial values were studied.
 
-  
+It might seem that from the perspective of an optimization problem, it is easier to solve it if there are fewer parameters for determination. 
+Thus, the indirect method is better in this regard.
+ However, it has been observed that parameters such as Young's modulus and volume fraction of reinforcing fibers compete with each other in the overlapping range of wavenumber values. 
+ Moreover, dispersion curves are affected in a similar way irrespective of the propagation angle.
+ This can lead to ambiguities of optimal solutions. Actually, it is highly likely that a completely different set of indirect parameters can lead to the same dispersion curves.
+ 
+ The parametric studies of the influence of elastic constants (\(C\) tensor) on the dispersion curves in the direct method show much more localized changes.
+ Namely, there is a strict correlation between elastic constant and changes in wavenumber values of particular Lamb wave mode, frequency range or angle of propagation. 
+ Therefore, it can be deduced that such an approach will lead to less ambiguous solutions in an optimization problem with a greater chance of finding a global minimum.
+ 
+ The next step of our research studies is formulation of the objective function which will be used in the optimization process by using a genetic algorithm. 
+ We are planning to transform calculated dispersion curves into an image.
+ Such an image will be used as a filtering mask on a dispersion curves obtained from the laser vibrometer experimental measurements.
+ The sum of filtered values will be a measure of the match between measured and calculated dispersion curves.
+ 
 \appendix    %>>>> this command starts appendixes
 
 
