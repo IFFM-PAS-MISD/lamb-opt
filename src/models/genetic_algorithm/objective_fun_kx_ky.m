@@ -40,24 +40,25 @@ end
 [number_of_angles,number_of_wavenumber_points,number_of_frequency_points] = size(Data_polar);
 kvec = linspace(0,wavenumber_max,number_of_wavenumber_points);
 obj_score=0;
-for j=1:number_of_angles % beta
+for j=1:1:number_of_frequency_points 
     %% Function to logical matrix
     % convert numerical dispersion curve into logical matrix (k-beta plane)
 
-    H=zeros(number_of_wavenumber_points,number_of_angles);
-    for i=1:number_of_frequency_points
+    H=zeros(number_of_angles,number_of_wavenumber_points);
+    for i=1:number_of_angles % beta
         for k =1:number_of_modes_considered
-            [~,I] = min(abs( wavenumber(k,i,j) - kvec )); % mode 1 : number_of_modes_considered (default=4)         
+            [~,I] = min(abs( wavenumber(k,j,i) - kvec )); % mode 1 : number_of_modes_considered (default=4)         
                 H(i,I) = 1;
         end
     end
     
-    start_idx1 = 3;
-    start_idx2 = 1;
-    end_idx1 = number_of_wavenumber_points;
-    end_idx2 = number_of_angles;
+    start_idx1 = 1;
+    start_idx2 = 3;
+    end_idx1 = number_of_angles;
+    end_idx2 = number_of_wavenumber_points;
+    
     % apply logical matrix to experimental dispersion curve matrix
-    dispersion = H(start_idx1:end_idx1,start_idx2:end_idx2).*squeeze(abs(Data_polar(j,start_idx1:end_idx1,start_idx2:end_idx2)));
+    dispersion = H(start_idx1:end_idx1,start_idx2:end_idx2).*squeeze(abs(Data_polar(start_idx1:end_idx1,start_idx2:end_idx2,j)));
     
     [I,J] = find(H(start_idx1:end_idx1,start_idx2:end_idx2)==true);
 
