@@ -59,10 +59,8 @@ function [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C
 nlayers = length(layup);
 rot_angles = layup - 90; % set x axis horizontal 
 number_of_angles = length(beta);
-frequency_step=zeros(number_of_angles,1);
-for j=1:number_of_angles
-    frequency_step(j)=(fmax(j)-fmin(j))/(number_of_frequency_points-1); % frequency step [Hz]
-end
+frequency_step=(fmax-fmin)/(number_of_frequency_points-1); % frequency step [Hz]
+
 %% Transform material properties
 C = cell(nlayers,1);
 C0r = zeros(6,6);

@@ -17,7 +17,7 @@ fig_width = 12; fig_height = 8;
 modelfolder = 'genetic_algorithm';
 modelname = 'ga_unidirectional_C_tensor_known_mass';
 radians = false;
-test_case=2; % numerical data
+test_case=25; % numerical data
 % create output path
 output_path = prepare_figure_paths(modelfolder,modelname);
 
@@ -81,7 +81,8 @@ for j=1:number_of_angles % beta
         imagesc(fvec(2:end)/1e3, wavenumber(2:end,j), squeeze(abs(Data_polar(j,2:end,2:end)))); 
         set(gca,'YDir','normal'); 
         %axis([0 350 0 min(wavenumber_max)]);
-        axis([0 450 0 min(wavenumber_max)]);
+        %axis([0 450 0 min(wavenumber_max)]);
+        axis([0 500 0 400]);
         set(gca,'Fontsize',10,'linewidth',1);
         xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
         if(radians)

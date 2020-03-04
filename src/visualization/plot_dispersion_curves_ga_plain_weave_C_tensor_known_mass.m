@@ -17,7 +17,7 @@ fig_width = 7; fig_height = 5;
 modelfolder = 'genetic_algorithm';
 modelname = 'ga_plain_weave_C_tensor_known_mass';
 radians = false;
-test_case=2; % numerical data
+test_case=25; % numerical data
 % create output path
 output_path = prepare_figure_paths(modelfolder,modelname);
 
