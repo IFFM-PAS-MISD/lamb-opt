@@ -137,9 +137,7 @@ for test_case = [1:1]
            SelCh = mut(SelCh); % Probability of mutation Pm=0.7/Lind where Lind is the length of chromosome structure
 
         % Evaluate offspring, call objective function
-            %tic;
-           [ObjVSel] = obj_ga_C_tensor_known_mass_unidirectiona_kx_kyl(bs2rv(SelCh,FieldD),Data_polar,layup,h,fmin,fmax,wavenumber_max,number_of_frequency_points,beta,stack_dir,np,nele_layer,number_of_modes_considered,rho);
-           %toc
+           [ObjVSel] = obj_ga_C_tensor_known_mass_unidirectional_kx_ky(bs2rv(SelCh,FieldD),Data_polar,layup,h,fmin,fmax,wavenumber_max,number_of_frequency_points,beta,stack_dir,np,nele_layer,number_of_modes_considered,rho);    
            % Reinsert offspring into current population
            [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);
 
