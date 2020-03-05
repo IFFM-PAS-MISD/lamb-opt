@@ -18,7 +18,7 @@ modelfolder = pathstr(idx(end)+1:end); % name of folder
 modelname = name; 
 % prepare model output path
 model_output_path = prepare_model_paths('raw','num',modelfolder,modelname);
-number_of_modes_considered = 4; % number of modes considered in calculation of objective function score
+number_of_modes_considered = 5; % number of modes considered in calculation of objective function score
 %% Load parameters which are used in experiment
 % create path to the experimental processed data folder
 data_path=fullfile( projectroot, 'data','processed','exp', filesep );
@@ -36,7 +36,6 @@ fmin = selected_frequencies(1);
 fmax = selected_frequencies(end);
 number_of_frequency_points = length(selected_frequencies);
 %% Input for SASE
-%beta = 0:15:90; % angles for dispersion curves in polar plot [deg]
 ht = 2.85/1000; % [m] laminate total thickness; unidirectional
 np = 3; % order of elements (3<=np<=5)
 nele_layer = 1; % no. of elements per ply

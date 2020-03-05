@@ -1,12 +1,12 @@
 function [ObjV] = obj_ga_C_tensor_known_mass_unidirectional_kx_ky(Phen,Data_polar,layup,h,fmin,fmax,wavenumber_max,number_of_frequency_points,beta,stack_dir,np,nele_layer,number_of_modes_considered,rho)
 % obj_ga_C_tensor_known_mass_unidirectional_kx_ky   Objective function value in kx-ky plane
 % 
-% Syntax: [output1,output2] = obj_ga_plain_weave(input1,input2,input3) 
+% Syntax: [ObjV] = obj_ga_C_tensor_known_mass_unidirectional_kx_ky(Phen,Data_polar,layup,h,fmin,fmax,wavenumber_max,number_of_frequency_points,beta,stack_dir,np,nele_layer,number_of_modes_considered,rho)
 % 
 % Inputs: 
-%    input1 - Description, string, dimensions [m, n], Units: ms 
-%    input2 - Description, logical, dimensions [m, n], Units: m 
-%    input3 - Description, double, dimensions [m, n], Units: N 
+%    wavenumber - wavenumber matrix computed by SASE model for frequencies selected from experimental data, double [rad/m]
+%    dimensions[number_of_modes,number_of_frequency_points,number_of_angles]
+%    number_of_modes_considered - number of modes considered in calculation of the score
 % 
 % Outputs: 
 %    output1 - Description, integer, dimensions [m, n], Units: - 

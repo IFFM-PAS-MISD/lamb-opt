@@ -48,10 +48,10 @@ for k = test_case
             % save data in polar coordinate system
             disp('Saving data...');
             % save processed data to processed data folder
-            save([processed_data_path,processed_filename],'Data_polar','wavenumber_max','wavenumber_max','selected_frequencies','beta','-v7.3');
+            save([processed_data_path,processed_filename],'Data_polar','wavenumber_max','wavenumber_max','selected_frequency_index','selected_frequencies','beta','-v7.3');
             [filepath,name,ext] = fileparts(filename);
             param_filename = ['polar_f_',name,'_param'];
-            save([processed_data_path,param_filename],'wavenumber_max','wavenumber_max','selected_frequencies','beta','number_of_wavenumber_points');
+            save([processed_data_path,param_filename],'wavenumber_max','wavenumber_max','selected_frequency_index','selected_frequencies','beta','number_of_wavenumber_points');
             fprintf('Successfully processed:\n%s\n', filename);% successfully processed
         catch
             fprintf('Failed: %s\n', filename);

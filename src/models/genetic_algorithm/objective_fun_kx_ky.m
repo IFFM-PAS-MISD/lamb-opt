@@ -6,18 +6,13 @@ function [obj_score] = objective_fun_kx_ky(Data_polar,wavenumber_max,wavenumber,
 % 
 % Inputs: 
 %    Data_polar - Experimental dispersion curves, complex double, dimensions [number_of_angles,number_of_wavenumber_points,number_of_frequency_points]  
-%    wavenumber - wavenumber matrix computed by SASE mode for frequencies selected from experimental data, double [rad/m]
+%    wavenumber - wavenumber matrix computed by SASE model for frequencies selected from experimental data, double [rad/m]
 %    dimensions[number_of_modes,number_of_frequency_points,number_of_angles]
-%    FREQ - Numerical frequency matrix, double, 
-%           dimensions [number_of_frequency_points,number_of_angles], Units: Hz 
 %    number_of_modes_considered - number of modes considered in calculation of the score
 % 
 % Outputs: 
 %    obj_score - Objective function score, double, dimensions [m, n], Units: - 
 % 
-% Example: 
-%    [obj_score] = objective_fun_kx_ky(Data_polar,fmax,FREQ,number_of_modes_considered)
-%    [obj_score] = objective_fun_kx_ky(Data_polar,fmax,FREQ) 
 % 
 % Other m-files required: none 
 % Subfunctions: none 
