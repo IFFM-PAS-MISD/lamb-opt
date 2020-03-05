@@ -102,16 +102,16 @@ for j=1:number_of_angles % beta
         kvec=squeeze(wavenumber(:,j)); % angle j
         %LW=0.5; % small figures
         LW=1; % large figures
-        plot(fvec1(2:end)/1e3,kvec(2:end),'y','linewidth',LW);
-        plot(fvec2(2:end)/1e3,kvec(2:end),'y','linewidth',LW);
-        plot(fvec3(2:end)/1e3,kvec(2:end),'y','linewidth',LW);
-        plot(fvec4(2:end)/1e3,kvec(2:end),'y','linewidth',LW);
+        plot(fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+        plot(fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+        plot(fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+        plot(fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
         % get(gca,'FontName'); % default 'Helvetica'
         %set(gca,'FontName','Arial');
         %set(gca,'FontName','Helvetica');
         set(gca,'FontName','Times');
         fig = gcf;
-        title({['$F=$ ',num2str(ObjVal),', ',num2str(beta(j)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+        title({['$F=$ ',num2str(ObjVal,'%5.2f'),', ',num2str(beta(j)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
         %set(gca, 'Position',[0 0 1.2 1.2]); % figure without axis and white border
         set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
         % remove unnecessary white space
