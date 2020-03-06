@@ -1,7 +1,7 @@
 \documentclass[]{spie}  %>>> use for US letter paper
 %\documentclass[a4paper]{spie}  %>>> use this instead for A4 paper
 %\documentclass[nocompress]{spie}  %>>> to avoid compression of citations
-
+\input{my_preamble}
 \renewcommand{\baselinestretch}{1.0} % Change to 1.65 for double spacing
  
 \usepackage{amsmath,amsfonts,amssymb}
@@ -63,8 +63,16 @@ composite laminates, elastic constants }
 
 \section{INTRODUCTION}
 \label{sec:intro}  % \label{} allows reference to this section
+\DIFadd{Added text}.
+\DIFdel{deleted text.}
+\emph{ Emphasize }
+\textbf{ Bold }
 
-\input{test_R1}
+\  \DIFdel{emph} \DIFadd{textbf} { Bold }
+\ some text \ some text some text
+
+\DIFadd{\textbf{}  Bold }
+
 
 Elastic constant values are often difficult to obtain, especially for anisotropic media.
 These values are indispensable for the design of a structure which fulfills assumed 
@@ -94,7 +102,7 @@ curves of Lamb waves.
 	\begin{equation}
 	\rho_f = \frac{\rho - \rho_m (1-V)}{V_1},
 	\end{equation}
-	where $V$ is the volume fraction of reinforcing fibres. Hence, only 6~variables needs 
+	where \DIFadd{ $V$} is the volume fraction of reinforcing fibres. Hence, only 6~variables needs 
 	to be determined.
 	\item \textbf{direct} - determination of C-tensor components.
 	The genetic algorithm was used for determination of the following properties: 
@@ -233,7 +241,7 @@ Here is a sample illustration and caption for a multimedia file:
    \begin{figure} [ht]
    \begin{center}
    \begin{tabular}{c} 
-   \includegraphics[height=5cm]{MultimediaFigure.jpg}
+%   \includegraphics[height=5cm]{MultimediaFigure.jpg}
 	\end{tabular}
 	\end{center}
    \caption[example] 

@@ -9,10 +9,10 @@ load project_paths projectroot src_path;
 overwrite = false; % allow overwriting existing results if true
 
 % figure parameters
-% size 12cm by 8cm (1-column text)
-fig_width = 12; fig_height = 12; 
-% size 7cm by 5cm (2-column text)
-%fig_width = 7; fig_height = 5; 
+% size 12cm by 12cm (1-column text)
+%fig_width = 12; fig_height = 12; 
+% size 7cm by 7cm (2-column text)
+fig_width = 7; fig_height = 7; 
 % create path to the numerical model data folder
 modelfolder = 'genetic_algorithm';
 modelname = 'ga_unidirectional_C_tensor_known_mass_kx_ky';
@@ -98,7 +98,7 @@ kvecx = linspace(0,wavenumber_max,number_of_wavenumber_points_x);
 kvecy = linspace(0,wavenumber_max,number_of_wavenumber_points_y);
 for j=1:number_of_frequency_points  % selected frequencies
     
-    figfilename = [modelname,'_','frequency_',num2str(j),'_dispersion_surf_test_case_',num2str(test_case),'_large'];
+    figfilename = [modelname,'_','frequency_',num2str(j),'_dispersion_surf_test_case_',num2str(test_case),'_small'];
     if(overwrite||(~overwrite && ~exist([output_path,figfilename,'.png'], 'file')))
         %% START PLOTTING
         fprintf('Making figure: [%d/%d]\n', j,number_of_frequency_points);
@@ -131,13 +131,14 @@ for j=1:number_of_frequency_points  % selected frequencies
         wy5 =  squeeze(wavenumber(5, j, :)).*sin(beta'*pi/180); %  mode 4, frequency j
         hold on;
     
-        %LW=0.5; % small figures
-        LW=1; % large figures
-        plot(wx1(2:end),wy1(2:end),'w.','linewidth',LW);
-        plot(wx2(2:end),wy2(2:end),'w.','linewidth',LW);
-        plot(wx3(2:end),wy3(2:end),'w.','linewidth',LW);
-        plot(wx4(2:end),wy4(2:end),'w.','linewidth',LW);
-        plot(wx5(2:end),wy5(2:end),'w.','linewidth',LW);
+        LW=0.1; % small figures
+        %LW=1; % large figures
+        dotsize = 3;
+        plot(wx1(2:end),wy1(2:end),'w.','MarkerSize',dotsize);
+        plot(wx2(2:end),wy2(2:end),'w.','MarkerSize',dotsize);
+        plot(wx3(2:end),wy3(2:end),'w.','MarkerSize',dotsize);
+        plot(wx4(2:end),wy4(2:end),'w.','MarkerSize',dotsize);
+        plot(wx5(2:end),wy5(2:end),'w.','MarkerSize',dotsize);
         % get(gca,'FontName'); % default 'Helvetica'
         %set(gca,'FontName','Arial');
         %set(gca,'FontName','Helvetica');

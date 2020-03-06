@@ -184,7 +184,7 @@ for test_case = [1:1]
         
          [C11,C12,C13,C22,C23,C33,C44,C55,C66]
 
-         save(output_name,'C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal');
+         save(output_name,'C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal','Best','Mean');
      else
          fprintf([modelname,' test case: %d already exist\n'], test_case);
      end

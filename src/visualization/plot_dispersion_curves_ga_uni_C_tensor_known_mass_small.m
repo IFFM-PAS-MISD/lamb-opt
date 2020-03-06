@@ -10,9 +10,9 @@ overwrite = false; % allow overwriting existing results if true
 
 % figure parameters
 % size 12cm by 8cm (1-column text)
-fig_width = 12; fig_height = 8; 
+%fig_width = 12; fig_height = 8; 
 % size 7cm by 5cm (2-column text)
-%fig_width = 7; fig_height = 5; 
+fig_width = 7; fig_height = 5; 
 % create path to the numerical model data folder
 modelfolder = 'genetic_algorithm';
 modelname = 'ga_unidirectional_C_tensor_known_mass';
@@ -71,7 +71,7 @@ if(~radians)
 end
 for j=1:number_of_angles % beta
     
-    figfilename = [modelname,'_','angle_',num2str(beta(j)),'_dispersion_curves_test_case_',num2str(test_case),'_large'];
+    figfilename = [modelname,'_','angle_',num2str(beta(j)),'_dispersion_curves_test_case_',num2str(test_case),'_small'];
     if(overwrite||(~overwrite && ~exist([output_path,figfilename,'.png'], 'file')))
         %% START PLOTTING
         fprintf('Making figure: [%d/%d]\n', j,number_of_angles);
@@ -100,8 +100,8 @@ for j=1:number_of_angles % beta
         fvec3=squeeze(FREQ(3,:,j)); % mode 3, angle j
         fvec4=squeeze(FREQ(4,:,j)); % mode 4, angle j
         kvec=squeeze(wavenumber(:,j)); % angle j
-        %LW=0.5; % small figures
-        LW=1; % large figures
+        LW=0.5; % small figures
+        %LW=1; % large figures
         plot(fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
         plot(fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
         plot(fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
