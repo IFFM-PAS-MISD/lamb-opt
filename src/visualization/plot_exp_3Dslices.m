@@ -1,146 +1,160 @@
 clc;clear;close all
 tic
-run d:\GIT\lamb-opt\config\config_matlab.m
+run h:\GIT\lamb-opt\config\config_matlab.m
 
 filename = '499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni.mat';
-WL = [0.455 0.455]; %lengh width
+
+WL = [0.455 0.455];             % lengh width inb [m]
+maxf = 500;                     % limit of the frequency in [kHz]
+maxkx = 400;                    % limit Kx in [1/m]
+maxky = 400;                    % limit Ky in [1/m]
 
 % create path to the experimental raw data folder
 raw_data_path = fullfile( projectroot, 'data','raw','exp', filesep );
 load([raw_data_path,filename]);
-
 fig_width = 12; fig_height = 8; 
-
 modelfolder = 'Experimental';
 modelname = '';
 % create output path
 output_path = prepare_figure_paths(modelfolder,modelname);
 
-%%
-[rows cols samples] = size(Data);
-x = linspace(0,WL(1),cols);
-y = linspace(0,WL(2),rows);
+%% x,y,t,kx,ky,f vectors and grids for plots
+[rows, cols, samples] = size(Data);
+x = linspace(0,WL(1),cols);     % [m]
+y = linspace(0,WL(2),rows);     % [m]
 [mx,my,mt] = meshgrid(x,y,time);
 
-
-%% X-Y-t slices
-xslice = WL(1)/2; yslice = WL(2)/2; zslice = [1*10^-4 7*10^-4];
-figure
-h = slice(mx,my,mt,Data,xslice,yslice,zslice);
-set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
-caxis([-5 5]*10^-3)
-xlabel('X (mm)')
-ylabel('Y (mm)')
-zlabel('Time (s)')
-lightangle(-45,45)
-lightangle(-45,45)
-colormap (jet(255))
-box on
-view(-38.5,16)
-axis tight
-
-xslice = [0.25]; yslice = [0.25]; zslice = [1*10^-4 7*10^-4];
-figure
-h = slice(mx,my,mt,abs(Data),xslice,yslice,zslice);
-set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
-caxis([0 5]*10^-3)
-xlabel('X (mm)')
-ylabel('Y (mm)')
-zlabel('Time (s)')
-lightangle(-45,45)
-lightangle(-45,45)
-colormap (jet(255))
-box on
-view(-38.5,16)
-axis tight
-%camzoom(1.1)
-%camproj perspective
-
-%% X-Y-t/2 slices
-
-[mx2,my2,mt2] = meshgrid(x,y,time(1:512));
-
-xslice = [0.25]; yslice = [0.25]; zslice = [1*10^-4];
-
-figure
-h = slice(mx2,my2,mt2,abs(Data(:,:,1:512)),xslice,yslice,zslice);
-set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
-caxis([0 20]*10^-3)
-xlabel('X (mm)')
-ylabel('Y (mm)')
-zlabel('Time (s)')
-lightangle(-45,45)
-lightangle(-45,45)
-colormap (jet(255))
-box on
-view(-38.5,35)
-axis tight
-
-
-%% kx-ky-f axis vectors
 deltaR =WL(1)/(rows-1);
 deltaC = WL(2)/(cols-1);
 
 KX1 = (0:cols-1)/(cols)/deltaC;  
-KX = (KX1-1/2*KX1(end)); % wavenumber centering [1/m]
+KX = (KX1-1/2*KX1(end));        % wavenumber centering [1/m]
 
 KY1 = (0:rows-1)/(rows)/deltaR;  
-KY = (KY1-1/2*KY1(end)); % wavenumber centering [1/m]
+KY = (KY1-1/2*KY1(end));        % wavenumber centering [1/m]
 
 T = time(2)-time(1);
 f = linspace(0,1/T/2,samples/2)*10^-3;
 
+[mkx,mky,mf] = meshgrid(KX,KY,f);
+
+%% X-Y-t slices
+fig1 = figure; 
+xslice = WL(1)/2; yslice = WL(2)/2;  zslice = [1*10^-4 7*10^-4];    %slices positions
+h = slice(mx,my,mt,Data,xslice,yslice,zslice);
+set(h,'FaceColor','interp','EdgeColor','none'); set(fig1,'Renderer','zbuffer');
+
+xlabel({'$x$ [m]'},'Fontsize',12,'interpreter','latex');
+ylabel({'$y$ [m]'},'Fontsize',12,'interpreter','latex');
+zlabel({'$t$ [s]'},'Fontsize',12,'interpreter','latex');
+
+lightangle(-45,45)
+lightangle(-45,45)
+colormap (jet(255))
+caxis([-5 5]*10^-3)
+box on; ax = gca; ax.BoxStyle = 'full';
+view(-38.5,16)
+axis tight
+
+set(fig1, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+% remove unnecessary white space
+set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+fig1.PaperPositionMode   = 'auto';
+figfilename = ['X_Y_t_slice_',filename(1:end-4)];
+print([output_path,figfilename],'-dpng', '-r600'); 
+
+
+fig2 = figure; 
+xslice = 0.25; yslice = 0.25; zslice = [1*10^-4 7*10^-4];
+h = slice(mx,my,mt,abs(Data),xslice,yslice,zslice);
+set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+
+xlabel({'$x$ [m]'},'Fontsize',12,'interpreter','latex');
+ylabel({'$y$ [m]'},'Fontsize',12,'interpreter','latex');
+zlabel({'$t$ [s]'},'Fontsize',12,'interpreter','latex');
+
+lightangle(-45,45)
+lightangle(-45,45)
+colormap (jet(255))
+caxis([0 5]*10^-3)
+box on; ax = gca; ax.BoxStyle = 'full';
+view(-38.5,16)
+axis tight
+
+set(fig2, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+% remove unnecessary white space
+set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+fig2.PaperPositionMode   = 'auto';
+figfilename = ['X_Y_t_slice2_',filename(1:end-4)];
+print([output_path,figfilename],'-dpng', '-r600'); 
+
+%% FFT3D
 KXKYF = fftshift(fftn(Data));
 
 %%  KX-KY-F slices
-[mkx,mky,mf] = meshgrid(KX,KY,f);
-
-xslice = [0]; yslice = []; zslice = [100 450];
-figure
+fig3 = figure;
+xslice = 0; yslice = []; zslice = [100 400];
 h = slice(mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice,yslice,zslice);
 set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
-caxis([0 20]*10)
-xlabel('k_x (1/m)')
-ylabel('k_y (1/m)')
-zlabel('Freqency (kHz)')
+
+ylabel({'$k_y$ [1/m]'},'Fontsize',12,'interpreter','latex');
+xlabel({'$k_x$ [1/m]'},'Fontsize',12,'interpreter','latex');
+zlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex')
+
 lightangle(-45,45)
 lightangle(-45,45)
 colormap (jet(255))
-box on
+caxis([0 20]*10)
+xlim([-maxkx maxkx])
+ylim([-maxky maxky])
+zlim([0 maxf])
+box on; ax = gca; ax.BoxStyle = 'full';
 view(-20,20)
-axis tight
 
-xslice = []; yslice = 0; zslice = [100 450];
-figure
-tic
+
+set(fig3, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+% remove unnecessary white space
+set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+fig3.PaperPositionMode   = 'auto';
+figfilename = ['kx-ky-f_slices__',filename(1:end-4)];
+print([output_path,figfilename],'-dpng', '-r600'); 
+
+
+fig4 = figure;
+xslice = []; yslice = 0; zslice = [100 400];
 h = slice(mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice,yslice,zslice);
 set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
-caxis([0 20]*10)
-xlabel('k_x (rad/mm)')
-ylabel('k_y (rad/mm)')
-zlabel('Freqency (kHz)')
+
+ylabel({'$k_y$ [1/m]'},'Fontsize',12,'interpreter','latex');
+xlabel({'$k_x$ [1/m]'},'Fontsize',12,'interpreter','latex');
+zlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex')
+
 lightangle(-45,45)
 lightangle(-45,45)
 colormap (jet(255))
-box on
+caxis([0 20]*10)
+box on; ax = gca; ax.BoxStyle = 'full';
 view(70,20)
-axis tight
+xlim([-maxkx maxkx])
+ylim([-maxky maxky])
+zlim([0 maxf])
 
-%%
-%datasmall = abs(KXKYF_(1:10:512,1:10:512,1:10:512));
+set(fig4, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+% remove unnecessary white space
+set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+fig3.PaperPositionMode   = 'auto';
+figfilename = ['kx-ky-f_slices2__',filename(1:end-4)];
+print([output_path,figfilename],'-dpng', '-r600'); 
 
-%%
-%slicing At Arbitrary Angles
+%% slicing At Arbitrary Angles
 %You can also create slices that are oriented in arbitrary planes. To do this, 
 %Create a slice surface in the domain of the volume (surf, linspace).
 %Orient this surface with respect to the axes (rotate).
 %Get the XData, YData, and ZData of the surface (get).
 %Use this data to draw the slice plane within the volume.
-%For example, these statements slice the volume in the first example with a rotated plane. Placing these commands within a for loop "passes" the plane through the volume along the z-axis.
 
-figure 
-npoints = 500;                             %number of points (in both direction) for slicing plane - almost not increasing calculation time
-maxf = 500; % limit of the frequency in kHz
+fig5 = figure; 
+npoints = 500;                             % number of points (in both direction) for slicing plane - almost not increasing calculation time
 meshh = meshgrid(0:maxf/(npoints-1):maxf);   
 
 hsp1 = surf(linspace(0,0,npoints),linspace(KY(1),KY(end),npoints),meshh);
@@ -163,6 +177,11 @@ rotate(hsp4,[0,0,1],45,[0,0,0])
  xd4 = get(hsp4,'XData');
  yd4 = get(hsp4,'YData');
  zd4 = get(hsp4,'ZData'); 
+hsp9 = surf(linspace(0,0,npoints),linspace(KY(1),KY(end),npoints),meshh);
+rotate(hsp9,[0,0,1],90,[0,0,0])
+ xd9 = get(hsp9,'XData');
+ yd9 = get(hsp9,'YData');
+ zd9 = get(hsp9,'ZData');  
  
 h1 = slice(mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xd1,yd1,zd1);
 set(h1,'FaceColor','interp','EdgeColor','none'); 
@@ -173,70 +192,111 @@ hold on
 %set(h3,'FaceColor','interp','EdgeColor','none'); 
 h4 = slice(mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xd4,yd4,zd4);
 set(h4,'FaceColor','interp','EdgeColor','none'); 
-h5 = slice(mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),[],[],[50]);
+%h9 = slice(mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xd9,yd9,zd9);
+%set(h9,'FaceColor','interp','EdgeColor','none');
+
+h5 = slice(mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),[],[],50);
 set(h5,'FaceColor','interp','EdgeColor','none');
 set(gcf,'Renderer','zbuffer');
-caxis([0 20]*10);
+
 xlabel({'$k_x$ [1/m]'},'Fontsize',12,'interpreter','latex');
 ylabel({'$k_y$ [1/m]'},'Fontsize',12,'interpreter','latex');
 zlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+
 %title({['what','ever']},'Fontsize',12,'interpreter','latex');
-lightangle(-45,45);
-lightangle(-45,45);
 colormap (jet(255));
-box on;
+caxis([0 20]*10);
+box on; ax = gca; ax.BoxStyle = 'full';
 view(-20,20);
 %view(-4,32);
-axis tight;
 set(gca,'Fontsize',10,'linewidth',1);
 set(gca,'FontName','Times');
+xlim([-maxkx maxkx])
+ylim([-maxky maxky])
 zlim([0 maxf])
+lightangle(45,45);
+lightangle(-20,45)
+lightangle(10,80);
 
-fig = gcf;
-set(fig, 'Units','centimeters', 'Position',[2 2 fig_width*3 fig_height*3]); % size 12cm by 8cm (1-column text)
+set(fig5, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
 % remove unnecessary white space
-set(gca,'LooseInset', max(get(gca,'TightInset'), 0.1));
-fig.PaperPositionMode   = 'auto';
-figfilename = ['KXKYF_angles_slice_2small',filename(1:end-4)];
+set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+fig5.PaperPositionMode   = 'auto';
+figfilename = ['KXKYF_slices_2',filename(1:end-4)];
 print([output_path,figfilename],'-dpng', '-r600'); 
 
 %%%%%
-figure
-imagesc(f,KX,squeeze(abs(KXKYF(:,(end+1)/2,end/2+1:end))))
+fig6 = figure;
+imagesc(f,KX,squeeze(abs(KXKYF(:,(end+1)/2+1,end/2+1:end))))
+ylabel({'$k_x$ [1/m]'},'Fontsize',12,'interpreter','latex');
+xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+axis tight;
+set(gca,'Fontsize',10,'linewidth',1);
+set(gca,'FontName','Times');
+caxis([10 500])
+xlim([0 maxf])
+ylim([0 400])
+colormap (jet(255));
+set(gca,'YDir','normal')
+set(fig6, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+% remove unnecessary white space
+fig6.PaperPositionMode   = 'auto';
+figfilename = ['KX-F_',filename(1:end-4)];
+print([output_path,figfilename],'-dpng', '-r600'); 
+
+
+fig7=figure;
+imagesc(f,KY,squeeze(abs(KXKYF((end+1)/2+1,:,end/2+1:end))))
+ylabel({'$k_y$ [1/m]'},'Fontsize',12,'interpreter','latex');
+xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+axis tight;
+set(gca,'Fontsize',10,'linewidth',1);
+set(gca,'FontName','Times');
+caxis([10 500])
+xlim([0 maxf])
+ylim([0 400])
+colormap (jet(255));
+set(gca,'YDir','normal')
+set(fig7, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+% remove unnecessary white space
+fig7.PaperPositionMode   = 'auto';
+figfilename = ['KY-F_',filename(1:end-4)];
+print([output_path,figfilename],'-dpng', '-r600'); 
+
+fig8=figure;
+quarter = squeeze(  abs(  KXKYF( floor(end/2):end, floor(end/2):end, 200  )  )  ) ;  %f(200) ~= 250kHz
+imagesc(KX(floor(end/2):end),KY(floor(end/2):end),quarter);
+ylabel({'$k_y$ [1/m]'},'Fontsize',12,'interpreter','latex');
 xlabel({'$k_x$ [1/m]'},'Fontsize',12,'interpreter','latex');
-ylabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
 axis tight;
+axis equal
 set(gca,'Fontsize',10,'linewidth',1);
 set(gca,'FontName','Times');
-caxis([0 500])
-xlim([0 500])
-ylim([0 300])
+caxis([10 100])
+xlim([0 maxkx])
+ylim([0 maxky])
+colormap (jet(255));
 set(gca,'YDir','normal')
-fig = gcf;
-set(fig, 'Units','centimeters', 'Position',[2 2 fig_width*3 fig_height*3]); % size 12cm by 8cm (1-column text)
+set(fig8, 'Units','centimeters', 'Position',[2 2 fig_height fig_height]); % size 12cm by 8cm (1-column text)
 % remove unnecessary white space
-fig.PaperPositionMode   = 'auto';
-figfilename = ['KYF',filename(1:end-4)];
+fig8.PaperPositionMode   = 'auto';
+figfilename = ['KX-KY_',filename(1:end-4)];
 print([output_path,figfilename],'-dpng', '-r600'); 
 
 
-figure
-imagesc(f,KY,squeeze(abs(KXKYF((end+1)/2,:,end/2+1:end))))
-xlabel({'$k_y$ [1/m]'},'Fontsize',12,'interpreter','latex');
-ylabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+fig9=figure;
+imagesc(x,y,abs(Data(:,:,150)));
+ylabel({'$y$ [m]'},'Fontsize',12,'interpreter','latex');
+xlabel({'$x$ [m]'},'Fontsize',12,'interpreter','latex');
+axis equal;
 axis tight;
 set(gca,'Fontsize',10,'linewidth',1);
 set(gca,'FontName','Times');
-caxis([0 500])
-xlim([0 500])
-ylim([0 300])
+caxis([0 0.02])
+colormap (jet(255));
 set(gca,'YDir','normal')
-fig = gcf;
-set(fig, 'Units','centimeters', 'Position',[2 2 fig_width*3 fig_height*3]); % size 12cm by 8cm (1-column text)
+set(fig9, 'Units','centimeters', 'Position',[2 2 fig_height fig_height]); % size 12cm by 8cm (1-column text)
 % remove unnecessary white space
-fig.PaperPositionMode   = 'auto';
-figfilename = ['KYF',filename(1:end-4)];
+fig9.PaperPositionMode   = 'auto';
+figfilename = ['x-y_',filename(1:end-4)];
 print([output_path,figfilename],'-dpng', '-r600'); 
-
-
-
