@@ -43,11 +43,11 @@ Typically, material properties originate from destructive tensile tests and are 
 This approach is well-established in relation to isotropic homogeneous materials. 
 However, if this approach is used for composite laminates, inaccuracies can arise that lead to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. 
 In order to account for this problem, the alternative method is proposed, which utilizes Lamb wave propagation phenomenon and optimization techniques. 
-Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures.
+Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring.
 In the proposed approach, the elastic constants, which are utilized to determine dispersion curves of Lamb waves, are optimized to achieve a good correlation between model predictions and experimental observations. 
 In the first step of this concept, parametric studies have been carried out in which the influence of mass density, Young's modulus, Poisson's ratio of reinforcing fibers as well as a matrix of composite laminate and volume fraction of reinforcing fibers on dispersion curves of Lamb waves was investigated. 
 The dispersion curves of Lamb waves were calculated by using the semi-analytical spectral element method considering the variability of properties of composite constituents. 
-The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning laser Doppler vibrometer and processed by 3D Fourier transform. It allowed formulating fitness function which will be next used in genetic algorithm for optimization and identification of elastic constants.
+The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning laser Doppler vibrometer and processed by 3D Fourier transform. It allowed formulating fitness function which will be next used in a genetic algorithm for optimization and identification of elastic constants.
 \end{abstract}
 
 % Include a list of keywords after the abstract 
@@ -87,7 +87,7 @@ Signals are processed by using a 2D Fourier transform in order to obtain dispers
 Correlation between numerical and experimental dispersion curve patterns is considered in the objective function.
 However, measurements are taken along a line which may cause a problem of the unwanted contribution of reflected waves from the boundaries of the plate.
 Another downside is that access to both sides of the investigated specimen is required.
-Therefore, to mitigate these downsides, we propose to utilize the full wavefield of propagating waves measured at only one side of the specimen.
+Therefore, to mitigate these downsides, the full wavefield of propagating waves measured at only one side of the specimen can be utilized.
 
 The aim of this paper is the investigation of various parameters influencing the dispersion curves of Lamb waves.
 This is a preliminary step that helps formulate objective function in the optimization problem leading to the determination of elastic constants of a composite laminate.
@@ -203,7 +203,7 @@ The influence of each parameter on dispersion curves was studied separately.
 The variability range of each parameter was assumed as \(\pm\)20\% with respect to initial values.
 The results of parametric studies are presented in Figs.~\ref{fig:rhom}--\ref{fig:vol}.
 The dispersion curves corresponding to four Lamb wave modes are in the form \(k(f)\) where \(f=\omega/(2 \pi)\) is the frequency measured in hertz. 
-Black curves are calculated for the initial values of material properties given in Tab.~\ref{tab:matprop}, red curves represent changes in dispersion curves caused by the increase of these parameters whereas blue curves represent changes in dispersion curves due to decreasing values of these parameters. 
+Black curves are calculated for the initial values of material properties given in Tab.~\ref{tab:matprop}, red curves represent changes in dispersion curves caused by the increase of these parameters, whereas blue curves represent changes in dispersion curves due to decreasing values of these parameters. 
 There are 11 solutions covering the range of \(\pm\)20\% for each investigated parameter (5 red curves, 5 blue curves and 1 black curve for each propagating Lamb wave mode).
 
 The influence of matrix density on dispersion curves for the selected angle \(\beta\) is shown in Fig.~\ref{fig:rhom}. 
@@ -242,7 +242,7 @@ Large changes in most dispersion curves can be observed.
 But, changes in certain dispersion curves at frequencies up to about 300~kHz are small (these dispersion curves correspond to S0 modes of Lamb waves).
 The influence of Young's modulus of fibers on dispersion curves for the selected angle 
 \(\beta\) is shown in Fig.~\ref{fig:ef}. 
-In this case small to moderate changes in dispersion curves depending on guided wave mode can be observed. 
+In this case, small to moderate changes in dispersion curves depending on guided wave mode can be observed. 
 
 Moreover, it is worthy to notice, that the effect of Young's modulus on dispersion curves is opposite to the mass density. 
 Namely, an increase of  Young's modulus causes a decrease of wavenumber values.
@@ -303,7 +303,7 @@ Depending on the frequency the and propagating mode an increase of Poisson's rat
 \end{figure} 
 
 The influence of volume fraction of reinforcing fibers on dispersion curves for the selected angle \(\beta\) is shown in Fig.~\ref{fig:vol}. 
-It is the most essential parameter among analyzed properties because it has the greatest influence on dispersion curves of guided waves.
+It is the essential parameter among analyzed properties because it has the most considerable influence on dispersion curves of guided waves.
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
@@ -352,7 +352,7 @@ The initial values were selected so that to match behavior of plain-weave type c
 
 \subsection{Results of parametric studies}
 As previously, the influence of each parameter on dispersion curves was studied separately. 
-The results of parametric studies are presented in a similar manner in Figs.~\ref{fig:C11}--\ref{fig:C66}.
+The results of parametric studies are presented similarly in Figs.~\ref{fig:C11}--\ref{fig:C66}.
 Immediately, it can be noticed that the behavior of dispersion curves is completely different than in the case of the indirect method. 
 The influence of \(C_{ij}\) elastic constants is more localized, meaning that certain elastic constants affect certain modes of Lamb waves. 
 In particular, for example \(C_{11}\) constant at the propagation angle 0\(^{\circ}\) affects most significantly the S0 mode of Lamb waves (Fig.~\ref{fig:C11} ) whereas \(C_{44}\) constant at propagation angle 0\(^{\circ}\) affects A1 Lamb wave mode (Fig.~\ref{fig:C44}).
@@ -528,7 +528,7 @@ Thus, the indirect method is better in this regard.
  Namely, there is a strict correlation between elastic constant and changes in wavenumber values of particular Lamb wave mode, frequency range or angle of propagation. 
  Therefore, it can be deduced that such an approach will lead to less ambiguous solutions in an optimization problem with a greater chance of finding a global minimum.
  
- The next step of our research studies is formulation of the objective function which will be used in the optimization process by using a genetic algorithm. 
+ The next step of our research studies is the formulation of the objective function which will be used in the optimization process by using a genetic algorithm. 
  We are planning to transform calculated dispersion curves into an image.
  Such an image will be used as a filtering mask on a dispersion curves obtained from the laser vibrometer experimental measurements.
  The sum of filtered values will be a measure of the match between measured and calculated dispersion curves.
