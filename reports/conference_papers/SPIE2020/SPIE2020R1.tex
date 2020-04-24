@@ -7,6 +7,8 @@
  
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{graphicx}
+\usepackage[many]{tcolorbox}
+\usepackage{tikz}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 % my packages and commands
 \usepackage{booktabs} % for nice tables
@@ -40,25 +42,43 @@
 \maketitle
 
 \begin{abstract}
-Typically, material properties originate from destructive tensile tests and are used in computational models in the design and analysis process of structures. 
+\DIFdel{Typically,} material properties originate from destructive tensile tests and are used in computational models in the design and analysis process of structures. 
 This approach is well-established in relation to isotropic homogeneous materials. 
 However, if this approach is used for composite laminates, inaccuracies can arise that lead to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. 
 In order to account for this problem, the alternative method is proposed, which utilizes Lamb wave propagation phenomenon and optimization techniques. 
-Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring.
+Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures.
 In the proposed approach, the elastic constants, which are utilized to determine dispersion curves of Lamb waves, are optimized to achieve a good correlation between model predictions and experimental observations. 
 In the first step of this concept, parametric studies have been carried out in which the influence of mass density, Young's modulus, Poisson's ratio of reinforcing fibers as well as a matrix of composite laminate and volume fraction of reinforcing fibers on dispersion curves of Lamb waves was investigated. 
 The dispersion curves of Lamb waves were calculated by using the semi-analytical spectral element method considering the variability of properties of composite constituents. 
-The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning laser Doppler vibrometer and processed by 3D Fourier transform. It allowed formulating fitness function which will be next used in a genetic algorithm for optimization and identification of elastic constants.
+The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning laser Doppler vibrometer and processed by 3D Fourier transform. It allowed formulating fitness function which will be next used in genetic algorithm for optimization and identification of elastic constants.
 \end{abstract}
 
 % Include a list of keywords after the abstract 
 \keywords{Lamb waves, dispersion curves, semi-analytical spectral element method, 
 composite laminates, elastic constants }
 
+\begin{equation}
+\begin{aligned}
+\begin{aligned}
+\DIFdelmath{
+c^2=a^2+b^2
+%\label{eq:pitagoras}
+}\\
+\DIFaddmath{
+c=\sqrt{a^2+b^2}
+\label{eq:pitagoras}
+}	
+\end{aligned}
+\end{aligned}
+\end{equation}
+
+\section{\DIFdel{Long title}}
+\section[\DIFadd{short title}]{\DIFadd{Long title}}
+
 \section{INTRODUCTION}
 \label{sec:intro}  % \label{} allows reference to this section
-\DIFdel{In the last decades}, high-performance composite materials such as carbon fiber reinforced plastics (CFRP) have been extensively used in various branches of industry.
-\DIFadd{It is because of great stiffness and strength to weight ratio in comparison to the metallic structure. }
+In the last decades, high-performance composite materials such as carbon fiber reinforced plastics (CFRP) have been extensively used in various branches of industry.
+It is because of great stiffness and strength to weight ratio in comparison to the metallic structure. 
 However, the lay-up and orientation of reinforcing fibers introduce anisotropy and complexity in inspection regarding the detection and localization of defects.
 Elastic constant values are often difficult to obtain, especially for anisotropic media.
 These values are indispensable for the design of a structure which fulfills assumed 
@@ -88,7 +108,7 @@ Signals are processed by using a 2D Fourier transform in order to obtain dispers
 Correlation between numerical and experimental dispersion curve patterns is considered in the objective function.
 However, measurements are taken along a line which may cause a problem of the unwanted contribution of reflected waves from the boundaries of the plate.
 Another downside is that access to both sides of the investigated specimen is required.
-Therefore, to mitigate these downsides, the full wavefield of propagating waves measured at only one side of the specimen can be utilized.
+Therefore, to mitigate these downsides, we propose to utilize the full wavefield of propagating waves measured at only one side of the specimen.
 
 The aim of this paper is the investigation of various parameters influencing the dispersion curves of Lamb waves.
 This is a preliminary step that helps formulate objective function in the optimization problem leading to the determination of elastic constants of a composite laminate.
@@ -109,7 +129,7 @@ It has a non-uniform distribution of nodes and three degrees of freedom per node
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{c} %% tabular useful for creating an array of images 
-			\DIFdelfig{\includegraphics{figure1.png}}
+			\includegraphics{figure1.png}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -155,26 +175,29 @@ The effective elastic constants were calculated by using the rule of mixtures an
 \subsection{Material properties}
 The material under investigation is made out of 8 layers of plain-weave reinforced composite. 
 Initial values of constants characterizing the composite material constituents (epoxy resin and carbon fibers) are given in Tab.~\ref{tab:matprop}.
+
 \begin{table}[ht]
-	\renewcommand{\arraystretch}{1.3}
-	%\centering \footnotesize
-	\caption{Initial values of constants characterizing the composite material 
-		constituents.}
-	\label{tab:matprop}
-	\begin{center}	
-		\begin{tabular}{ccccccc} 
-			\toprule
-			\multicolumn{3}{c}{\textbf{Matrix} }	& \multicolumn{3}{c}{\textbf{Fibres} } & 
-			\textbf{Volume fraction}	 \\ 
-			\midrule
-			\(\rho_m\) & \(E_m\) & \(\nu_m\)  & \(\rho_f\) & \(E_f\) & \(\nu_f\) & \(V\)\\
-			kg/m\textsuperscript{3} &GPa& --  & kg/m\textsuperscript{3}  & GPa& -- & \%\\ 
-			\cmidrule(lr){1-3} \cmidrule(lr){4-6} \cmidrule(lr){7-7}
-			1250 &3.43& 0.35& 1900 & 240 & 0.2 & 50\\
-			\bottomrule 
-		\end{tabular} 
-	\end{center}
+		\renewcommand{\arraystretch}{1.3}
+		%\centering \footnotesize
+		\caption{Initial values of constants characterizing the composite material 
+			constituents.}
+		
+		\label{tab:matprop}
+		\begin{center}	
+			\begin{tabular}{ccccccc} 
+				\toprule
+				\multicolumn{3}{c}{\textbf{Matrix} }	& \multicolumn{3}{c}{\textbf{Fibres} } & 
+				\textbf{Volume fraction}	 \\ 
+				\midrule
+				\(\rho_m\) & \(E_m\) & \(\nu_m\)  & \(\rho_f\) & \(E_f\) & \(\nu_f\) & \(V\)\\
+				kg/m\textsuperscript{3} &GPa& --  & kg/m\textsuperscript{3}  & GPa& -- & \%\\ 
+				\cmidrule(lr){1-3} \cmidrule(lr){4-6} \cmidrule(lr){7-7}
+				1250 &3.43& 0.35& 1900 & 240 & 0.2 & 50\\
+				\bottomrule 
+			\end{tabular} 
+		\end{center}
 \end{table}
+
 
 The assumed thickness of the composite laminate was 3.9~mm and the mass density 1522.4~kg/m\textsuperscript{3}. 
 The~parameters describing the geometry of a plain weave textile-reinforced composite 
@@ -204,7 +227,7 @@ The influence of each parameter on dispersion curves was studied separately.
 The variability range of each parameter was assumed as \(\pm\)20\% with respect to initial values.
 The results of parametric studies are presented in Figs.~\ref{fig:rhom}--\ref{fig:vol}.
 The dispersion curves corresponding to four Lamb wave modes are in the form \(k(f)\) where \(f=\omega/(2 \pi)\) is the frequency measured in hertz. 
-Black curves are calculated for the initial values of material properties given in Tab.~\ref{tab:matprop}, red curves represent changes in dispersion curves caused by the increase of these parameters, whereas blue curves represent changes in dispersion curves due to decreasing values of these parameters. 
+Black curves are calculated for the initial values of material properties given in Tab.~\ref{tab:matprop}, red curves represent changes in dispersion curves caused by the increase of these parameters whereas blue curves represent changes in dispersion curves due to decreasing values of these parameters. 
 There are 11 solutions covering the range of \(\pm\)20\% for each investigated parameter (5 red curves, 5 blue curves and 1 black curve for each propagating Lamb wave mode).
 
 The influence of matrix density on dispersion curves for the selected angle \(\beta\) is shown in Fig.~\ref{fig:rhom}. 
@@ -212,11 +235,41 @@ The parameter has a moderate influence on each mode of propagating waves.
 A similar trend can be observed in the case of fiber density as shown in Fig.~\ref{fig:rhof}.
 It should be noted that the increase of matrix density and fibers density causes an increase of wavenumber values across the whole frequency range.
 
+\newtcolorbox{mybox}{colback=red!5!white,
+	colframe=red!75!black}
+\begin{mybox}
+	This is my own box.
+\end{mybox}
+
+
+\begin{center}
+\begin{tikzpicture}
+\node[anchor=south west,inner sep=0] (image) at (0,0) {
+		\DIFdelfig{\includegraphics{figure2a.png}}
+};
+\begin{scope}[x={(image.south east)},y={(image.north west)}]
+\draw[mygrey,line width=1 mm] (0, 1)--(1, 0);
+\draw[mygrey,line width=1 mm] (0, 0)--(1, 1);
+\end{scope}
+\end{tikzpicture}
+\end{center}
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\DIFdelfig{\includegraphics[scale=\myfigscale]{figure2a.png}}
-			\DIFaddfig{\includegraphics[scale=\myfigscale]{figure2b.png}}
+		
+				\begin{tikzpicture}
+				\node[anchor=south west,inner sep=0] (image) at (0,0) {
+					\DIFdelfig{\includegraphics{figure2a.png}}
+				};
+				\begin{scope}[x={(image.south east)},y={(image.north west)}]
+				\draw[mygrey,line width=1 mm] (0, 1)--(1, 0);
+				\draw[mygrey,line width=1 mm] (0, 0)--(1, 1);
+				\end{scope}
+				\end{tikzpicture}
+			
+			\DIFaddfig{
+			\includegraphics[scale=\myfigscale]{figure2b.png}
+			}
 		\end{tabular}
 	\end{center}
 	\caption[] 
@@ -226,24 +279,28 @@ It should be noted that the increase of matrix density and fibers density causes
 \end{figure} 
 
 \begin{figure} [ht]
+	
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
-			\includegraphics[scale=\myfigscale]{figure3a.png}
-			\includegraphics[scale=\myfigscale]{figure3b.png}
+			\includegraphics[scale=\myfigscale,draft]{figure3a.png}
+			
+			\DIFaddfig{\includegraphics[scale=\myfigscale]{figure3b.png}}
 		\end{tabular}
 	\end{center}
+
 	\caption[] 
 	%>>>> use \label inside caption to get Fig. number with \ref{}
 	{ \label{fig:rhof} 
 		The influence of fiber density on the dispersion curves.}
 \end{figure} 
+
 The influence of Young's modulus of the matrix on dispersion curves for the selected angle 
 \(\beta\) is shown in Fig.~\ref{fig:em}. 
 Large changes in most dispersion curves can be observed. 
 But, changes in certain dispersion curves at frequencies up to about 300~kHz are small (these dispersion curves correspond to S0 modes of Lamb waves).
 The influence of Young's modulus of fibers on dispersion curves for the selected angle 
 \(\beta\) is shown in Fig.~\ref{fig:ef}. 
-In this case, small to moderate changes in dispersion curves depending on guided wave mode can be observed. 
+In this case small to moderate changes in dispersion curves depending on guided wave mode can be observed. 
 
 Moreover, it is worthy to notice, that the effect of Young's modulus on dispersion curves is opposite to the mass density. 
 Namely, an increase of  Young's modulus causes a decrease of wavenumber values.
@@ -256,8 +313,8 @@ Namely, an increase of  Young's modulus causes a decrease of wavenumber values.
 	\end{center}
 	\caption[] 
 	%>>>> use \label inside caption to get Fig. number with \ref{}
-	{ \label{fig:em} 
-		The influence of Young's modulus of matrix on dispersion curves.}
+	{\DIFdel{ \label{fig:em}} 
+		The influence of Young's modulus of matrix on dispersion curves. \label{fig:em2}}
 \end{figure} 
 
 \begin{figure} [ht]
@@ -304,7 +361,7 @@ Depending on the frequency the and propagating mode an increase of Poisson's rat
 \end{figure} 
 
 The influence of volume fraction of reinforcing fibers on dispersion curves for the selected angle \(\beta\) is shown in Fig.~\ref{fig:vol}. 
-It is the essential parameter among analyzed properties because it has the most considerable influence on dispersion curves of guided waves.
+It is the most essential parameter among analyzed properties because it has the greatest influence on dispersion curves of guided waves.
 \begin{figure} [ht]
 	\begin{center}
 		\begin{tabular}{cc} %% tabular useful for creating an array of images 
@@ -353,7 +410,7 @@ The initial values were selected so that to match behavior of plain-weave type c
 
 \subsection{Results of parametric studies}
 As previously, the influence of each parameter on dispersion curves was studied separately. 
-The results of parametric studies are presented similarly in Figs.~\ref{fig:C11}--\ref{fig:C66}.
+The results of parametric studies are presented in a similar manner in Figs.~\ref{fig:C11}--\ref{fig:C66}.
 Immediately, it can be noticed that the behavior of dispersion curves is completely different than in the case of the indirect method. 
 The influence of \(C_{ij}\) elastic constants is more localized, meaning that certain elastic constants affect certain modes of Lamb waves. 
 In particular, for example \(C_{11}\) constant at the propagation angle 0\(^{\circ}\) affects most significantly the S0 mode of Lamb waves (Fig.~\ref{fig:C11} ) whereas \(C_{44}\) constant at propagation angle 0\(^{\circ}\) affects A1 Lamb wave mode (Fig.~\ref{fig:C44}).
@@ -529,7 +586,7 @@ Thus, the indirect method is better in this regard.
  Namely, there is a strict correlation between elastic constant and changes in wavenumber values of particular Lamb wave mode, frequency range or angle of propagation. 
  Therefore, it can be deduced that such an approach will lead to less ambiguous solutions in an optimization problem with a greater chance of finding a global minimum.
  
- The next step of our research studies is the formulation of the objective function which will be used in the optimization process by using a genetic algorithm. 
+ The next step of our research studies is formulation of the objective function which will be used in the optimization process by using a genetic algorithm. 
  We are planning to transform calculated dispersion curves into an image.
  Such an image will be used as a filtering mask on a dispersion curves obtained from the laser vibrometer experimental measurements.
  The sum of filtered values will be a measure of the match between measured and calculated dispersion curves.
@@ -544,6 +601,6 @@ no 2018/29/B/ST8/00045.
 
 % References
 \bibliographystyle{spiebib} % makes bibtex use spiebib.bst
-\bibliography{SPIE2020_R1} % 
+\bibliography{SPIE2020} % 
 
 \end{document} 

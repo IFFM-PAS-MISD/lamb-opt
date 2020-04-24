@@ -1,5 +1,45 @@
-\RequirePackage{color}\definecolor{red}{rgb}{1,0,0}\definecolor{mygrey}{rgb}{0.464,0.531,0.598}\definecolor{blue}{rgb}{0,0,1} %DIF PREAMBLE
-\providecommand{\DIFaddtex}[1]{{\protect\color{red}#1}} %DIF PREAMBLE
-\providecommand{\DIFdeltex}[1]{{\protect\color{mygrey}\scriptsize{#1}}}   
+ %DIF PREAMBLE START
+\RequirePackage{xcolor}
+%\definecolor{red}{rgb}{1,0,0}
+%\definecolor{mydarkmagenta}{rgb}{0,0,0.55}
+%\definecolor{blue}{rgb}{0,0,1}
+%\definecolor{mycitecolor}{rgb}{0.6,0.2,0.8} %DIF PREAMBLE % dark orchid
+%\definecolor{mycitecolor}{rgb}{1,0.55,0} %DIF PREAMBLE % darkorange
+\definecolor{mydelcolor}{rgb}{0.464,0.531,0.598} % grey color for deleted text
+\definecolor{myaddedcolor}{rgb}{0.55, 0.0, 0.55} % magenta color for added text
+\RequirePackage{graphicx}%DIF PREAMBLE
+\RequirePackage{tikz} %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+
+\providecommand{\DIFaddtex}[1]{{\protect\color{myaddedcolor}#1}} %DIF PREAMBLE
+\providecommand{\DIFdeltex}[1]{{\protect\color{mydelcolor}\sout{#1}}}    %DIF 
+\providecommand{\DIFaddcite}[1]{{\protect\color{myaddedcolor}\hypersetup{citecolor = myaddedcolor}#1}} 
+\providecommand{\DIFdelcite}[1]{{\protect\color{mydelcolor}\hypersetup{citecolor = mydelcolor}#1}}    %DIF PREAMBLE
+\providecommand{\DIFdelmath}[1]{{\protect\color{mydelcolor}#1}}    %DIF PREAMBLE
+\providecommand{\DIFaddmath}[1]{{\protect\color{myaddedcolor}#1}}  %DIF PREAMBLE
+\providecommand{\DIFdeltab}[1]{{\protect\color{mydelcolor}#1}}    %DIF PREAMBLE
+\providecommand{\DIFaddtab}[1]{{\protect\color{myaddedcolor}#1}}  %DIF PREAMBLE
+
 \providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
 \providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
+ %DIF PREAMBLE
+\providecommand{\DIFdelfig}[1]{ \begin{tikzpicture}
+	\node[anchor=south west,inner sep=0] (image) at (0,0) {\protect\color{mydelcolor}
+		#1
+	};
+	\begin{scope}[x={(image.south east)},y={(image.north west)}]
+	\draw[mydelcolor,line width=1 mm] (0, 1)--(1, 0); % cross line 1
+	\draw[mydelcolor,line width=1 mm] (0, 0)--(1, 1); % cross line 2
+	\draw[mydelcolor,line width=1 mm] (0, 0)--(0, 1)--(1,1)--(1,0)--(0,0)--(0,1); % box
+	\end{scope}
+	\end{tikzpicture} }
+ %DIF PREAMBLE
+\providecommand{\DIFaddfig}[1]{ \begin{tikzpicture}
+	\node[anchor=south west,inner sep=0] (image) at (0,0) {\protect\color{blue}
+		#1
+	};
+	\begin{scope}[x={(image.south east)},y={(image.north west)}]
+	\draw[myaddedcolor,line width=1 mm] (0, 0)--(0, 1)--(1,1)--(1,0)--(0,0)--(0,1); % box
+	\end{scope}
+	\end{tikzpicture} }
+ %DIF PREAMBLE END

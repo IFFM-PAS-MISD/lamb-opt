@@ -1,0 +1,18 @@
+
+\RequirePackage{color}\definecolor{red}{rgb}{1,0,0}\definecolor{mygrey}{rgb}{0.464,0.531,0.598}\definecolor{myblue}{rgb}{0,0,0.55}\definecolor{blue}{rgb}{0,0,1}
+%\definecolor{mycitecolor}{rgb}{0.6,0.2,0.8} %DIF PREAMBLE % dark orchid
+%\definecolor{mycitecolor}{rgb}{1,0.55,0} %DIF PREAMBLE % darkorange
+\definecolor{mycitecolor}{rgb}{0.55, 0.0, 0.55} % darkmagenta
+\usepackage[normalem]{ulem} %DIF PREAMBLE
+\providecommand{\DIFaddtex}[1]{{\protect\color{blue}#1}} %DIF PREAMBLE
+\providecommand{\DIFdeltex}[1]{{\protect\color{mygrey}\sout{#1}}}    %DIF PREAMBLE
+\providecommand{\DIFaddcite}[1]{{\protect\color{mycitecolor}\hypersetup{citecolor = mycitecolor}\textcolor{mycitecolor}{#1}}} 
+\providecommand{\DIFdelcite}[1]{{\protect\color{mygrey}\hypersetup{citecolor = mygrey}#1}}    %DIF PREAMBLE
+\providecommand{\DIFdelmath}[1]{{\protect\color{mygrey}#1}}    %DIF PREAMBLE
+\providecommand{\DIFaddmath}[1]{{\protect\color{blue}#1}}  %DIF PREAMBLE
+\providecommand{\DIFdeltab}[1]{{\protect\color{mygrey}#1}}    %DIF PREAMBLE
+\providecommand{\DIFaddtab}[1]{{\protect\color{blue}#1}}  %DIF PREAMBLE
+\providecommand{\DIFdelfig}[1]{{\protect\color{mygrey}\fcolorbox{mygrey}{mygrey}{#1}}}    %DIF PREAMBLE
+\providecommand{\DIFaddfig}[1]{{\protect\color{blue} \fcolorbox{blue}{blue}{#1}}}
+\providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
