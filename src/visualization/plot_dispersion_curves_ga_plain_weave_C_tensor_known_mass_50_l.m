@@ -107,12 +107,12 @@ for j=1:number_of_angles % beta
         kvec=squeeze(wavenumber(:,j)); % angle j
         %LW=0.5; % small figures
         LW=1; % large figures
-        plot(fvec1(2:end)/1e3,kvec(2:end),'y','linewidth',LW);
-        plot(fvec2(2:end)/1e3,kvec(2:end),'y','linewidth',LW);
-        plot(fvec3(2:end)/1e3,kvec(2:end),'y','linewidth',LW);
-        plot(fvec4(2:end)/1e3,kvec(2:end),'y','linewidth',LW);
-        plot(fvec5(2:end)/1e3,kvec(2:end),'y','linewidth',LW);
-        plot(fvec6(2:end)/1e3,kvec(2:end),'y','linewidth',LW);
+        plot(fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+        plot(fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+        plot(fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+        plot(fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+        plot(fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+        plot(fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
         % get(gca,'FontName'); % default 'Helvetica'
         %set(gca,'FontName','Arial');
         %set(gca,'FontName','Helvetica');
