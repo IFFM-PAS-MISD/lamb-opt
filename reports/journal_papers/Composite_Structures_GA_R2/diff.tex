@@ -1,149 +1,188 @@
+%DIF PREAMBLE START
+\RequirePackage{xcolor}
+\definecolor{MYDELCOLOR}{rgb}{0.464,0.531,0.598} % grey color for deleted text
+\definecolor{MYADDCOLOR}{rgb}{0.55, 0.0, 0.55} % magenta color for added text
+\RequirePackage{graphicx}%DIF PREAMBLE
+\RequirePackage{tikz} %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{MYADDCOLOR}#1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{MYDELCOLOR}\sout{#1}}}    %DIF PREAMBLE
+\providecommand{\DIFaddcite}[1]{{\protect\color{MYADDCOLOR}\hypersetup{citecolor = MYADDCOLOR}#1}} 
+\providecommand{\DIFdelcite}[1]{{\protect\color{MYDELCOLOR}\hypersetup{citecolor = MYDELCOLOR}#1}}    %DIF PREAMBLE
+\providecommand{\DIFdelmath}[1]{{\protect\color{MYDELCOLOR}#1}}    %DIF PREAMBLE
+\providecommand{\DIFaddmath}[1]{{\protect\color{MYADDCOLOR}#1}}  %DIF PREAMBLE
+\providecommand{\DIFdelenv}[1]{{\protect\color{MYDELCOLOR}#1}}    %DIF PREAMBLE
+\providecommand{\DIFaddenv}[1]{{\protect\color{MYADDCOLOR}#1}}  %DIF PREAMBLE
+\providecommand{\DIFdeltab}[1]{{\protect\color{MYDELCOLOR}#1}}    %DIF PREAMBLE
+\providecommand{\DIFaddtab}[1]{{\protect\color{MYADDCOLOR}#1}}  %DIF PREAMBLE
+ %DIF PREAMBLE
+\providecommand{\DIFdelfig}[1]{ \begin{tikzpicture}
+	\node[anchor=south west,inner sep=0] (image) at (0,0) {\protect\color{MYDELCOLOR}
+		#1
+	};
+	\begin{scope}[x={(image.south east)},y={(image.north west)}]
+	\draw[MYDELCOLOR,line width=1 mm] (0, 1)--(1, 0); % cross line 1
+	\draw[MYDELCOLOR,line width=1 mm] (0, 0)--(1, 1); % cross line 2
+	\draw[MYDELCOLOR,line width=1 mm] (0, 0)--(0, 1)--(1,1)--(1,0)--(0,0)--(0,1); % box
+	\end{scope}
+	\end{tikzpicture} }
+ %DIF PREAMBLE
+\providecommand{\DIFaddfig}[1]{ \begin{tikzpicture}
+	\node[anchor=south west,inner sep=0] (image) at (0,0) {\protect\color{MYADDCOLOR}
+		#1
+	};
+	\begin{scope}[x={(image.south east)},y={(image.north west)}]
+	\draw[MYADDCOLOR,line width=1 mm] (0, 0)--(0, 1)--(1,1)--(1,0)--(0,0)--(0,1); % box
+	\end{scope}
+	\end{tikzpicture} }
+%DIF PREAMBLE END
 
-%% 
-%% Copyright 2007, 2008, 2009 Elsevier Ltd
-%% 
-%% This file is part of the 'Elsarticle Bundle'.
-%% ---------------------------------------------
-%% 
-%% It may be distributed under the conditions of the LaTeX Project Public
-%% License, either version 1.2 of this license or (at your option) any
-%% later version.  The latest version of this license is in
-%%    http://www.latex-project.org/lppl.txt
-%% and version 1.2 or later is part of all distributions of LaTeX
-%% version 1999/12/01 or later.
-%% 
-%% The list of all files belonging to the 'Elsarticle Bundle' is
-%% given in the file `manifest.txt'.
-%% 
-%% Template article for Elsevier's document class `elsarticle'
-%% with harvard style bibliographic references
-%% SP 2008/03/01
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \documentclass[preprint,12pt]{elsarticle}
 
-%% Use the option review to obtain double line spacing
-%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
 
-%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
-%% for a journal layout:
-%% \documentclass[final,1p,times,authoryear]{elsarticle}
-%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
-%% \documentclass[final,3p,times,authoryear]{elsarticle}
-%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
-%% \documentclass[final,5p,times,authoryear]{elsarticle}
-%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
 
-%% For including figures, graphicx.sty has been loaded in
-%% elsarticle.cls. If you prefer to use the old commands
-%% please give \usepackage{epsfig}
 
-%% The amssymb package provides various useful mathematical symbols
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \usepackage{amsmath,amssymb,bm}
-%\usepackage[dvips,colorlinks=true,citecolor=green]{hyperref}
+
 \usepackage[colorlinks=true,citecolor=green]{hyperref}
-%% my added packages
+
 \usepackage{verbatim}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{booktabs} % for nice tables
-\usepackage{csvsimple} % for csv read
+\usepackage{booktabs} 
+\usepackage{csvsimple} 
 
-%\usepackage{breqn}
-% matrix command 
-\newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
-% vector command 
-\newcommand{\vect}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
+
+
+\newcommand{\matr}[1]{\mathbf{#1}} 
+
+\newcommand{\vect}[1]{\mathbf{#1}} 
 \newcommand{\ud}{\mathrm{d}}
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\veca}[2]{\mathbf{#1}{#2}}
 \renewcommand{\bm}[1]{\mathbf{#1}}
 \newcommand{\bs}[1]{\boldsymbol{#1}}
 \graphicspath{{figs/}{../../figures/}}
-%% The amsthm package provides extended theorem environments
-%% \usepackage{amsthm}
-%% The lineno packages adds line numbers. Start line numbering with
-%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
-%% for the whole article with \linenumbers.
-%% \usepackage{lineno}
+
+
+
+
+
+
 \journal{Composite Structures}
 \begin{document}
 	\begin{frontmatter}
-		%% Title, authors and addresses
-		%% use the tnoteref command within \title for footnotes;
-		%% use the tnotetext command for theassociated footnote;
-		%% use the fnref command within \author or \address for footnotes;
-		%% use the fntext command for theassociated footnote;
-		%% use the corref command within \author for corresponding author footnotes;
-		%% use the cortext command for theassociated footnote;
-		%% use the ead command for the email address,
-		%% and the form \ead[url] for the home page:
-		%% \title{Title\tnoteref{label1}}
-		%% \tnotetext[label1]{}
-		%% \author{Name\corref{cor1}\fnref{label2}}
-		%% \ead{email address}
-		%% \ead[url]{home page}
-		%% \fntext[label2]{}
-		%% \cortext[cor1]{}
-		%% \address{Address\fnref{label3}}
-		%% \fntext[label3]{}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		\title{Elastic constants identification of woven fabric reinforced composites by using guided wave dispersion curves and genetic algorithm}
 		
-		%% use optional labels to link authors explicitly to addresses:
-		%% \author[label1,label2]{}
+		
+		
 		\address[IFFM]{Institute of Fluid Flow Machinery, Polish Academy of Sciences, Poland}
 		
 		\author{Pawel Kudela\corref{cor1}\fnref{IFFM}}
 		\ead{pk@imp.gda.pl}
 		\author{Maciej Radzienski\fnref{IFFM}}
 		\author{Piotr Fiborek \fnref{IFFM}}
-		%\ead{pfiborek@imp.gda.pl}
+		
 		\author{Tomasz Wandowski \fnref{IFFM}}	
 		
 		\cortext[cor1]{Corresponding author}
 		
 		\begin{abstract}
-			%% Text of abstract
-		Typically, material properties are estimated by destructive tests and used in computational models in the design and analysis of structures. This approach is well-established in relation to isotropic homogenous materials. However, if this approach is used for composite laminates, inaccuracies can arise that lead to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. In order to account for this problem, the alternative method is proposed, which utilise Lamb wave propagation phenomenon and optimisation technique. Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures. In the proposed approach, the elastic constants, which are utilised to determine dispersion curves of Lamb waves, are optimised to achieve a good correlation between model predictions and experimental observations. The dispersion curves of Lamb waves were calculated by using the semi-analytical spectral element method. The resulting dispersion curves were compared with experimental measurements of full wavefield data conducted by scanning laser Doppler vibrometer and processed by 3D Fourier transform. Next, elastic constants were determined by using a genetic algorithm which resulted in a good correlation between numerical and experimental dispersion curves.
+			
+		Typically, material properties are estimated by destructive tests and used in computational models in the design and analysis of structures. This approach is well-established in relation to isotropic homogenous materials. However, if this approach is used for composite laminates, inaccuracies can arise that lead to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. In order to account for this problem, the alternative method is proposed, which utilise Lamb wave propagation phenomenon and optimisation technique. Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures. In the proposed approach, the elastic constants, which are utilised to determine dispersion curves of Lamb waves, are optimised to achieve a good correlation between model predictions and experimental observations. The dispersion curves of Lamb waves were calculated by using the semi-analytical spectral element method. The resulting dispersion curves were compared with experimental measurements of full wavefield data conducted by scanning laser Doppler vibrometer and processed by 3D Fourier transform. Next, elastic constants were \DIFdel{optimised} \DIFadd{determined} by using a genetic algorithm which resulted in a good correlation between numerical and experimental dispersion curves.
 		\end{abstract}
 		
 		\begin{keyword}
-			%% keywords here, in the form: keyword \sep keyword
-			Lamb waves \sep dispersion curves \sep semi-analytical spectral element method \sep composite laminates \sep elastic constants.
-			%% PACS codes here, in the form: \PACS code \sep code
 			
-			%% MSC codes here, in the form: \MSC code \sep code
-			%% or \MSC[2008] code \sep code (2000 is the default)
+			Lamb waves \sep dispersion curves \sep semi-analytical spectral element method \sep composite laminates \sep elastic constants.
+			
+			
+			
+			
 			
 		\end{keyword}
 		
 	\end{frontmatter}
 	
-	%% \linenumbers
 	
-	%% main text
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Introduction}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	
+	
+	
+\section{Introduction}
+	
 	Elastic constant values are often difficult to obtain, especially for anisotropic media. These values are indispensable for the design of a structure which fulfils assumed requirements (strength, stiffness, vibration characteristics). For years elastic constants of isotropic materials have been estimated during destructive testing and strain gauge or static displacement recordings~\cite{Wang2000}. Similar results can be achieved by dynamic tests which rely on natural frequencies~\cite{Wang2000a, Wesolowski2009,Beluch2014}. Measurements of velocities of bulk waves (longitudinal and shear) can also be used for the determination of elastic constants~\cite{Rose1999}.
 	
 	For anisotropic media, the determination of elastic constants is more complex. Destructive testing can still be used to determine some of the constants. Additional constants can be obtained by special cube-cutting procedures followed by destructive testing~\cite{Rose1991} or by using bulk wave measurement protocol for orthotropic media~\cite{Rose1999}. However, such experiments are cumbersome and expensive. 
 	
-	Ultrasonic techniques usually are based on measurements of the time of flight and corresponding velocities of bulk waves (longitudinal and shear)~\cite{Castellano2014}.
+	\DIFadd{Ultrasonic techniques usually are based on measurements of the time of flight and corresponding velocities of bulk waves (longitudinal and shear)~\cite{Castellano2014}.
 	Bulk wave propagation is defined by the small wavelength compared to the thickness of the plate. 
 	In turn, small wavelengths correspond to high-frequency components which usually are strongly attenuated. 
 	Hence, there is an upper bound frequency limit.
 	Another problem arises from the assumption of the infinite thickness of the plate in the approximation of bulk waves. 
-	Neglecting the effect of plate boundaries causes errors in the time of flight estimation~\cite{Martens2017}. 
+	Neglecting the effect of plate boundaries causes errors in the time of flight estimation~\cite{Martens2017}.} 
 	
-	 It should be noted that other ultrasonic methods exist such as the leaky Lamb wave technique~\cite{Karim1990,Karim1990a}. In this technique, a specimen is immersed in a liquid tank and insonified with an acoustic beam at various incident angles and frequencies. The obtained pattern provides a unique fingerprint of the underlying mechanical elasticity tensor at the insonified material spot. The method has been improved over the years by using the pulsed ultrasonic polar scan and inverse methods~\cite{Martens2017,Kersemans2014,Martens2019a}. 
+	 It should be noted that other ultrasonic methods exist such as the leaky Lamb wave technique~\cite{Karim1990,Karim1990a}. In this technique, a specimen is immersed in a liquid tank and insonified with an acoustic beam at various incident angles and frequencies. The obtained pattern provides a unique fingerprint of the underlying mechanical elasticity tensor at the insonified material spot. The method has been improved over the years by using the pulsed ultrasonic polar scan and inverse \DIFdelcite{methods~\cite{Kersemans2014,Martens2017}.} \DIFaddcite{methods~\cite{Martens2017,Kersemans2014,Martens2019a}.} 
 	 
 	 Due to simplicity, non-destructive methods based on one-sided Lamb wave propagation measurements have been evolving over the years.
-	Lamb waves were named after their discoverer, Horace Lamb, who developed the theory of their propagation in 1917~\cite{Lamb1917}. Interestingly, Lamb was not able to physically generate the waves he discovered. This was achieved by Worlton~\cite{Worlton1961} in 1961, who also noticed their potential usefulness for damage detection. Lamb waves are defined as a type of elastic waves that propagate in infinite media bounded by two surfaces and arise as a result of the superposition of multiple reflections of longitudinal waves and shear vertical waves from the bounding surfaces. In the case of these waves, medium particle oscillations are very complex in character. Depending on the distribution of displacements on the top and bottom bounding surface, two modes of Lamb waves appear: symmetric, denoted as S0, S1, S2, …, and antisymmetric, denoted as A0, A1, A2, … One should note that the number of these modes is infinite.
+	Lamb waves were named after their discoverer, Horace Lamb, who developed the theory of their propagation in 1917~\cite{Lamb1917}. Interestingly, Lamb was not able to physically generate the waves he discovered. This was achieved by Worlton~\cite{Worlton1961} in 1961, who also noticed their potential usefulness for damage detection. Lamb waves are defined as a type of elastic waves that propagate in infinite media bounded by two surfaces and arise as a result of the superposition of multiple reflections of longitudinal waves and shear vertical waves from the bounding surfaces. In the case of these waves, medium particle oscillations are very complex in character. Depending on the distribution of displacements on the top and bottom bounding surface, two modes of Lamb waves appear: symmetric, denoted as S0, S1, S2, , and antisymmetric, denoted as A0, A1, A2,  One should note that the number of these modes is infinite.
 	
 	The analytic solution proposed by Lamb is limited to isotropic materials and infinite, unbounded media. The solution has a highly nonlinear character, and numerical methods must be used to obtain dispersion curves. The numerical approach, based on Lamb solution, for calculation of dispersion curves for isotropic materials, can be found in a book by Rose~\cite{Rose1999}.
 	
-	Many studies have been devoted to the calculation of dispersion curves of Lamb waves propagating in composite laminates but only a few are related to the identification of elastic constants. Rose et al.~\cite{Rose1987} investigated Lamb wave propagation in unidirectional, two-directional, and quasi-isotropic graphite-epoxy composite panels. They derived polar characteristics of phase and group velocities of the low-frequency S0 Lamb mode. Mal et al.~\cite{Mal1993} and Karim et al.~\cite{Karim1990} determined the dynamic elastic moduli of the fibre-reinforced composite. The elastic constants were derived by inversion of a set of data measured by the leaky Lamb wave technique. In 1995 Rogers~\cite{Rogers1995} proposed a technique to measure the isotropic elastic constants of plate materials using Rayleigh-Lamb waves. In his paper, he presents the effect of an increase in longitudinal wave velocities or changes in Young’s modulus or Poisson’s ratio on the dispersion curves.
+	Many studies have been devoted to the calculation of dispersion curves of Lamb waves propagating in composite laminates but only a few are related to the identification of elastic constants. Rose et al.~\cite{Rose1987} investigated Lamb wave propagation in unidirectional, two-directional, and quasi-isotropic graphite-epoxy composite panels. They derived polar characteristics of phase and group velocities of the low-frequency S0 Lamb mode. Mal et al.~\cite{Mal1993} and Karim et al.~\cite{Karim1990} determined the dynamic elastic moduli of the fibre-reinforced composite. The elastic constants were derived by inversion of a set of data measured by the leaky Lamb wave technique. In 1995 Rogers~\cite{Rogers1995} proposed a technique to measure the isotropic elastic constants of plate materials using Rayleigh-Lamb waves. In his paper, he presents the effect of an increase in longitudinal wave velocities or changes in Youngs modulus or Poissons ratio on the dispersion curves.
 	
 	Dean et al.~\cite{Dean2008} determined elastic constants and thickness of the aluminium by minimising the error function comprised of the theoretical dispersion curves of Lamb waves and experimental data. They utilised full-field wavelength measurements of single-mode narrowband Lamb waves. Grinberg et al.~\cite{Grimberg2010} determined in-plane material parameters of composite fibre reinforced polymer (CFRP) from the equations for phase velocity of S0 and A0 modes at low-frequency range. 
 	
@@ -153,7 +192,7 @@
 	
 	Pol and Banerjee~\cite{Pol2013} derived a simplified 2D semi-analytical model based on a global matrix method to investigate the dispersion characteristics of propagating guided wave modes in multilayered composite laminates due to transient surface excitations. A relatively thin symmetric eight layered cross-ply composite laminate subjected to both narrowband and broadband surface excitations was considered. Comparison of group velocity curves obtained from the developed model and LS-DYNA has shown good agreement.
 	
-	The paper by Beluch and Burczyński~\cite{Beluch2014} deals with the two-scale approach to the identification of material constants in composite materials. Structures made of unidirectional fibre-reinforced composites were examined. However, instead of Lamb wave data for optimisation of elastic constants, static displacements and eigenfrequencies were used. Additionally, a plane strain state was assumed in the model.
+	The paper by Beluch and Burczyski~\cite{Beluch2014} deals with the two-scale approach to the identification of material constants in composite materials. Structures made of unidirectional fibre-reinforced composites were examined. However, instead of Lamb wave data for optimisation of elastic constants, static displacements and eigenfrequencies were used. Additionally, a plane strain state was assumed in the model.
 	
 	In 2016 Ong et al.~\cite{Ong2016} proposed a technique for determination of elastic properties of the woven composite panel using the Lamb wave dispersion characteristics. The investigated CFRP panel comprised of 16 plies with such a sequence so that it could be treated as quasi-isotropic material. A simple 2D plane strain model was assumed in the numerical simulations. The material properties were found by fitting dispersion curves from a numerical simulation with experimental data by the particle swarm optimisation method. 
 	
@@ -161,8 +200,8 @@
 	
 	The subject of this study focuses exclusively on an approach in which access to only one side of the specimen is required. In the proposed approach, dispersion curves of Lamb waves are utilised for determination of elastic constants in composite laminates. The paper is organized as follows: section~\ref{sec:dispersion_curves} describes a numerical method for calculation of dispersion curves of laminated composites, section~\ref{sec:experiment} is related to extraction of dispersion curves from full wavefield measurements, section~\ref{sec:optimization} describes the optimisation of elastic constants by using a genetic algorithm (GA) followed by conclusions.
 	
-	
 \section{Dispersion curves of guided waves \label{sec:dispersion_curves}}
+
 \subsection{Semi-analytical model}
 Lamb wave dispersion phenomenon is related to wavenumber \(k\) dependency on frequency \(f\). 
 Lamb wave dispersion curves depend on elasticity constants of the material in which Lamb waves propagate. 
@@ -171,15 +210,16 @@ Parameters, such as wave attenuation, phase velocity, and group velocity, which 
 Therefore, for proper material characterization, it is necessary to consider dispersion curves of Lamb waves at various angles of propagation.
 	
 The physical model of a plate-like waveguide is shown in Fig.~\ref{fig:layered_composite_SASE}.  
-The waveguide can generally be composed of anisotropic viscoelastic materials but for simplicity, only orthotropic material is shown in Fig.~\ref{fig:layered_composite_SASE} in which reinforcing fibres are at angle \(\theta\) with respect to \(z\) axis. 
+The waveguide can generally be composed of anisotropic viscoelastic materials but for \DIFdel{simplicity} \DIFadd{simplicity,} only orthotropic material is shown in Fig.~\ref{fig:layered_composite_SASE} in which reinforcing fibres are at angle \(\theta\) \DIFdel{in} \DIFadd{with} respect to \(z\) axis. 
 The current mathematical model is a modification of the semi-analytical finite element (SAFE) method proposed in~\cite{Bartoli2006}. 
 The modification includes the application of spectral elements instead of classic finite elements through the thickness of a laminate, preserving wave equation in the propagation direction. 
 Hence, we propose to name it the semi-analytical spectral element (SASE) method. Moreover, instead of two-dimensional approximation of cross-section of the laminate, one-dimensional spectral elements were applied. Four-node spectral element is shown in Fig.~\ref{fig:layered_composite_SASE}. It has a non-uniform distribution of nodes and three degrees of freedom per node.
 	
-		\begin{figure} [h!]
+		
+\begin{figure} [h!]
 		\centering
-		\includegraphics[width=\textwidth]{figure1.png}
-		\caption{SASE model of wave propagation along with degrees of freedom of a mono-dimensional four-node spectral element.}
+	\includegraphics[width=\textwidth]{figure1.png}		
+\caption{SASE model of wave propagation along with degrees of freedom of a mono-dimensional four-node spectral element.}
 		\label{fig:layered_composite_SASE}
 	\end{figure}
 	
@@ -187,28 +227,26 @@ Additionally, according to the concept proposed by Taupin et~al.~\cite{Taupin201
 an arbitrary angle of propagation \(\beta\) shown in Fig.~\ref{fig:layered_composite_SASE}. 
 The wave propagation direction corresponds to the wavevector \(\vect{k}\) defined as:
 	
-	\begin{equation}
+\begin{equation}
 	  \vect{k} = k \cos (\beta)\hat{ \vect{z}} - k \sin (\beta) \hat{\vect{y}},
-		\label{eq:wavevector}
-	\end{equation}
+	\label{eq:wavevector}\end{equation}
 where \(\hat{ \vect{z}}\) and \(\hat{\vect{y}}\) are unit vectors. 
 The general wave equation has a form of eigenvalue problem:
-
-	\begin{equation}
+	
+\begin{equation}
 	\left[\matr{A} - \omega^2\matr{M} \right] \vect{U} =0,
-	\label{eq:eig_dispersion}
-	\end{equation}
+\label{eq:eig_dispersion}\end{equation}
 	where \(\omega\) is the angular frequency, \(\matr{M}\) is the mass matrix, 
 	\(\matr{U}\) is the nodal displacement vector, and the matrix \(\matr{A}\) can be 
 	defined as:
-	% A = wavenumber^2*(sb^2*K22 + cb^2*K33 - cb*sb*K23 - cb*sb*K32)+1i*wavenumber*T'*(-cb*K13 - sb*K21 + sb*K12 + cb*K31)*T + K11;
-	\begin{equation}
+
+	
+\begin{equation}
 	\begin{aligned}
 	\matr{A} & =  k^2\left(s^2 \,\matr{K}_{22} + c^2\, \matr{K}_{33} - c s \, \matr{K}_{23} - c s\, \matr{K}_{32}\right) \\
 	& + i k\, \matr{T}^T\left(-c\, \matr{K}_{13} - s \, \matr{K}_{21} + s \, \matr{K}_{12} + c \, \matr{K}_{31}\right) \matr{T} +\matr{K}_{11},
 	\end{aligned}
-	\label{eq:dispersion}
-	\end{equation}
+\label{eq:dispersion}\end{equation}
 where  \(s = \sin(\beta)\), \(c = \cos(\beta)\), \(i = \sqrt{-1}\), and \(\beta\) is the angle of guided wave propagation. 
 The transformation matrix \(\matr{T}\) is diagonal and it is introduced in order to eliminate imaginary elements from Eq.~(\ref{eq:dispersion}) (see~\cite{Bartoli2006} for more details). 
 It should be noted that the system of equations~(\ref{eq:eig_dispersion}) explicitly depends on the angle \(\beta\). 
@@ -216,68 +254,88 @@ Predicting the anisotropic behaviour of guided wave properties makes it necessar
 	
 Stiffness matrices \(\matr{K}_{mn}\) from Eq.~(\ref{eq:dispersion}) depend on elastic constants of composite laminate and relations between displacements and strains (more detailed derivation can be found in Appendix). 
 The definitions of these matrices on an elemental level are:
-	\begin{equation}
-	\matr{k}_{mn}^e= \int \limits_{(e)} \matr{B}_m^{T} \matr{C}_{\theta}^e \, \matr{B}_n\, \ud x, 
-	\label{eq:stiffness_matrix_e}
-	\end{equation}
-where \(\matr{C}_{\theta}\) is the elastic tensor and \(\matr{B}\) is the matrix relating displacements and strains.
 	
-Equation~(\ref{eq:eig_dispersion}) can be solved numerically in two ways:
+\begin{equation}
+	\matr{k}_{mn}^e= \int \limits_{(e)} \matr{B}_m^{T} \matr{C}_{\theta}^e \, \matr{B}_n\, \ud x, 
+\label{eq:stiffness_matrix_e}\end{equation}
+\DIFdel{where \(\matr{C}_{\theta}\) is the elastic tensor and \(\matr{B}\) is the matrix relating 
+	displacements and strains.
+	
+	Equation~(\ref{eq:eig_dispersion}) can} be \DIFdel{solved numerically} in \DIFdelcite{two ways:
+	\begin{itemize}
+		\item as a standard eigenvalue problem \(\omega (k)\) (assuming given real values 
+		of wavenumbers \(k\))
+		\item as a second-order polynomial eigenvalue problem \(k(\omega)\) for given 
+		frequencies \(\omega\).
+	\end{itemize}
+	In the later case,} \DIFdel{the solution consists of recasting Eq.~(\ref{eq:eig_dispersion}) to a 
+	first-order eigensystem by doubling its algebraic size.  The obtained wavenumbers are 
+	then of a complex character. This provides information about both the wave dispersion 
+	(real part of the wavenumbers) and the attenuation of the waves (imaginary part of the	wavenumbers).  However, due to the fact that the priority is the computation time and 
+	that the information about the wave attenuation is not necessary, it is preferable to 
+	solve the standard eigenvalue problem \(\omega (k)\).} 
+\DIFadd{where \(\matr{C}_{\theta}\) is the elastic tensor and \(\matr{B}\) is the matrix relating displacements and strains.
+	
+	Equation~(\ref{eq:eig_dispersion}) can be solved numerically in two ways:
 	\begin{itemize}
 		\item as a standard eigenvalue problem \(\omega (k)\) (assuming given real values of wavenumbers \(k\))
 		\item as a second-order polynomial eigenvalue problem \(k(\omega)\) for given frequencies \(\omega\).
 	\end{itemize}
-In the latter case, the solution consists of recasting Eq.~(\ref{eq:eig_dispersion}) to a first-order eigensystem by doubling its algebraic size~\cite{Bartoli2006}. 
-The obtained wavenumbers are then of a complex character. 
-This provides information about both the wave dispersion (real part of the wavenumbers) and the attenuation of the waves (imaginary part of the wavenumbers).  
-However, in the proposed approach the priority is the computation time.
-Therefore, the attenuation effect is neglected and the standard eigenvalue problem \(\omega (k)\) is solved.
+	In the latter case, the solution consists of recasting Eq.~(\ref{eq:eig_dispersion}) to a first-order eigensystem by doubling its algebraic size~\cite{Bartoli2006}. 
+	The obtained wavenumbers are then of a complex character. 
+	This provides information about both the wave dispersion (real part of the wavenumbers) and the attenuation of the waves (imaginary part of the wavenumbers).  
+	However, in the proposed approach the priority is the computation time.
+	Therefore, the attenuation effect is neglected and the standard eigenvalue problem \(\omega (k)\) is solved.
+	
+	Stiffness matrix components \(\matr{k}_{mn}^e\) from Eq.~(\ref{eq:stiffness_matrix_e}) depend on an angle \(\theta\) related to the layer orientation in the stacking sequence of a composite laminate. 
+	Hence, the stiffness matrix of material \(\tilde{\matr{C}}\) corresponding to composite lamina is rotated by an angle \(\theta\) using a standard calculation~\cite{Bartoli2006,Taupin2011}:
+}
+\begin{equation}
+\tilde{ \matr{C}_{\theta}}= \matr{R}_1(\theta) \,\tilde{\matr{C}} \,\matr{R}_2^{-1}(\theta).
+\label{eq:elasticity_tensor}\end{equation}
 
-Stiffness matrix components \(\matr{k}_{mn}^e\) from Eq.~(\ref{eq:stiffness_matrix_e}) depend on an angle \(\theta\) related to the layer orientation in the stacking sequence of a composite laminate. 
-Hence, the stiffness matrix of material \(\tilde{\matr{C}}\) corresponding to composite lamina is rotated by an angle \(\theta\) using a standard calculation~\cite{Bartoli2006,Taupin2011}:
- \begin{equation}
-	\tilde{ \matr{C}_{\theta}}= \matr{R}_1(\theta) \,\tilde{\matr{C}} \,\matr{R}_2^{-1}(\theta).
-	 \label{eq:elasticity_tensor}
- \end{equation}
- It should be noted that in general, the stiffness matrix of material can be complex:
- \begin{equation}
- \tilde{\matr{C}}= \matr{C} - i \bs{\eta},
- \label{eq:complex_elasticity_tensor}
- \end{equation}
+It should be noted that in general, the stiffness matrix of material can be complex:
+\begin{equation}
+\tilde{\matr{C}}= \matr{C} - i \bs{\eta},
+\label{eq:complex_elasticity_tensor}\end{equation}
  where \(\matr{C} \) is the elastic stiffness tensor (matrix of elastic constants) and \(\bs{\eta}\) is the viscosity tensor. 
- However, viscosity is not considered here. 
-The matrix of elastic constants of an orthotropic linear elastic material can be written as:
- \begin{equation}
- \matr{C} = \left[\begin{array}{cccccc} C_{11} & C_{12}& C_{13} & 0&0&0\\[2pt]
- C_{12}& C_{22} & C_{23}& 0&0&0\\[2pt]
- C_{13}&C_{23}&C_{33}&0&0&0\\[2pt]
- 0& 0 &0&C_{44}& 0&0\\[2pt]
- 0&0&0&0&C_{55}&0\\[2pt]
-  0&0&0&0&0&C_{66}
-  \end{array}\right]. 
-  \label{eq:elastic_constatns}
- \end{equation} 
- It means that there are 9 independent coefficients which should be determined by using an optimisation technique. 
- But this is only applicable for the case in which the same material is used in each lamina and the layer orientation is known so that the Eq.~(\ref{eq:elasticity_tensor}) can be used. 
- However, if the stacking sequence is unknown or there is a misalignment in the layer orientation, the more general case should be considered in which the matrix of elastic constants is more populated:
- \begin{equation}
- \matr{C}_{\theta} = \left[\begin{array}{cccccc} C_{\theta 11} & C_{\theta 12}& C_{\theta 13} & 0&0&C_{\theta 16}\\[2pt]
- C_{\theta 12}& C_{\theta 22} & C_{\theta 23}& 0 &0&C_{\theta 26}\\[2pt]
- C_{\theta 13}&C_{\theta 23}&C_{\theta 33}&0&0&C_{\theta 36}\\[2pt]
- 0& 0&0&C_{\theta 44}& C_{\theta 45}&0\\[2pt]
- 0&0&0&C_{\theta 45}&C_{\theta 55}&0\\[2pt]
- C_{\theta 16}&C_{\theta 26} &C_{\theta 36}&0&0&C_{\theta 66}
- \end{array}\right], 
- \label{eq:elastic_constatns_theta}
- \end{equation} 
- which gives 13 independent elastic constants per lamina. 
- Of course, the determination of such a large number of elastic constants by optimisation methods is prohibitive due to high computation cost. 
- 
- In the proposed approach it is assumed that the stacking sequence is known and the same type of prepreg is used in each layer.
- Therefore, only 9 independent coefficients must be determined.
+	However, viscosity is not considered here. 
+	The matrix of elastic constants of an orthotropic linear elastic material can be written as:
+\begin{equation}
+\matr{C} = \left[\begin{array}{cccccc} C_{11} & C_{12}& C_{13} & 0&0&0\\[2pt]
+C_{12}& C_{22} & C_{23}& 0&0&0\\[2pt]
+C_{13}&C_{23}&C_{33}&0&0&0\\[2pt]
+0& 0 &0&C_{44}& 0&0\\[2pt]
+0&0&0&0&C_{55}&0\\[2pt]
+0&0&0&0&0&C_{66}
+\end{array}\right]. 
+\label{eq:elastic_constatns}\end{equation}
+	It means that there are 9 independent coefficients which should be determined by using an optimisation technique. 
+	But this is only applicable for the case in which the same material is used in each lamina and the layer orientation is known so that the Eq.~(\ref{eq:elasticity_tensor}) can be used. 
+	However, if the stacking sequence is unknown or there is a misalignment in the layer orientation, the more general case should be considered in which the matrix of elastic constants is more populated:
+\begin{equation}
+\matr{C}_{\theta} = \left[\begin{array}{cccccc} C_{\theta 11} & C_{\theta 12}& C_{\theta 13} & 0&0&C_{\theta 16}\\[2pt]
+C_{\theta 12}& C_{\theta 22} & C_{\theta 23}& 0 &0&C_{\theta 26}\\[2pt]
+C_{\theta 13}&C_{\theta 23}&C_{\theta 33}&0&0&C_{\theta 36}\\[2pt]
+0& 0&0&C_{\theta 44}& C_{\theta 45}&0\\[2pt]
+0&0&0&C_{\theta 45}&C_{\theta 55}&0\\[2pt]
+C_{\theta 16}&C_{\theta 26} &C_{\theta 36}&0&0&C_{\theta 66}
+\end{array}\right], 
+\label{eq:elastic_constatns_theta}\end{equation}
+
+	which gives 13 independent elastic constants per lamina. 
+	Of course, the determination of such a large number of elastic constants by optimisation methods is prohibitive due to high computation cost. 
+	
+\DIFadd{	
+	In the proposed approach it is assumed that the stacking sequence is known and the same type of prepreg is used in each layer.
+	Therefore, only 9 independent coefficients must be determined.
+	
+}
+
+\subsection{\DIFdel{Reduction of the number of variables for optimisation}}
+\subsection{Parametric studies of dispersion curves \label{sec:parametric}}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \subsection{Parametric studies of dispersion curves \label{sec:parametric}}
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \DIFadd{
  The SASE model was used for parametric studies of dispersion curves. The influence 
  of plain-weave textile-reinforced composite material properties on dispersion curves 
  was analysed.
@@ -303,18 +361,18 @@ The matrix of elastic constants of an orthotropic linear elastic material can be
  			\bottomrule 
  		\end{tabular} 
  	\end{center}
-  	\label{tab:matprop}
+ 	\label{tab:matprop}
  \end{table}
  
-The dispersion curves shown in all figures presented here are in the form \(k(f)\) where \(f=\omega/(2 \pi)\) is the frequency measured in hertz. 
-Black curves are calculated for initial values of material properties given in Table~\ref{tab:matprop}, red curves represent changes in dispersion curves caused by the increase of these parameters whereas blue curves represent changes in dispersion curves due to decreasing values of these parameters. 
-There are 11 solutions covering the range of \(\pm\)30\% for each investigated parameter which are presented in Figs.~\ref{fig:C11}--\ref{fig:C66}.
-
-The influence of \(C_{11}\) elastic constant on the dispersion curves is shown in Fig.~\ref{fig:C11}. 
-Looking at the greatest wavenumber values at frequency 300 kHz in Fig.~\ref{fig:C11_0}, the following propagation modes occur in order: A0, symmetric SH0, A1 and S0. 
-\(C_{11}\) elastic constant at angle 0\(^{\circ}\) affects two modes, namely A0 and S0 mode. 
-The influence on the latter one is greater.
-It should be noted that an increase of  \(C_{11}\) elastic constant causes decrease of wavenumber values.
+ The dispersion curves shown in all figures presented here are in the form \(k(f)\) where \(f=\omega/(2 \pi)\) is the frequency measured in hertz. 
+ Black curves are calculated for initial values of material properties given in Table~\ref{tab:matprop}, red curves represent changes in dispersion curves caused by the increase of these parameters whereas blue curves represent changes in dispersion curves due to decreasing values of these parameters. 
+ There are 11 solutions covering the range of \(\pm\)30\% for each investigated parameter which are presented in Figs.~\ref{fig:C11}--\ref{fig:C66}.
+ 
+ The influence of \(C_{11}\) elastic constant on the dispersion curves is shown in Fig.~\ref{fig:C11}. 
+ Looking at the greatest wavenumber values at frequency 300 kHz in Fig.~\ref{fig:C11_0}, the following propagation modes occur in order: A0, symmetric SH0, A1 and S0. 
+ \(C_{11}\) elastic constant at angle 0\(^{\circ}\) affects two modes, namely A0 and S0 mode. 
+ The influence on the latter one is greater.
+ It should be noted that an increase of  \(C_{11}\) elastic constant causes decrease of wavenumber values.
  Looking at the greatest wavenumber values at frequency 300 kHz in Fig.~\ref{fig:C11_45}, the following propagation modes occur in order: A0, S0, symmetric SH0 and A1. 
  All modes are affected at angle 45\(^{\circ}\).
  
@@ -334,206 +392,205 @@ It should be noted that an increase of  \(C_{11}\) elastic constant causes decre
  	\caption{The influence of \(C_{11}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
  	\label{fig:C11}
  \end{figure}
-
+ 
  The influence of \(C_{12}\) elastic constant on the dispersion curves is shown in Fig.~\ref{fig:C12}.
  It has the least influence on dispersion curves.
  Small changes can be observed at angle 45\(^{\circ}\).
-
-\begin{figure} [h!]
-	\centering
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure3a.png}
-		\caption{}
-		\label{fig:C12_0}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure3b.png}
-		\caption{}
-		\label{fig:C12_45}
-	\end{subfigure}
+ 
+ \begin{figure} [h!]
+ 	\centering
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure3a.png}
+ 		\caption{}
+ 		\label{fig:C12_0}
+ 	\end{subfigure}
+ 	\hfill
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure3b.png}
+ 		\caption{}
+ 		\label{fig:C12_45}
+ 	\end{subfigure}
  	\caption{The influence of \(C_{12}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
-	\label{fig:C12}
-\end{figure}
-
+ 	\label{fig:C12}
+ \end{figure}
+ 
  The influence of \(C_{13}\) elastic constant on the dispersion curves is shown in Fig.~\ref{fig:C13}.
  Only S0 mode is affected at angle 0\(^{\circ}\) (Fig.~\ref{fig:C13_0}).
  It should be noted that an increase of  \(C_{13}\) elastic constant causes an increase of wavenumber values which is opposite behaviour with respect to \(C_{11}\) elastic constant (Fig.~\ref{fig:C11}).
  Apart from the influence on S0 mode, additional influence is observed around 500 kHz at angle 45\(^{\circ}\) (Fig.~\ref{fig:C13_45}).
  
-\begin{figure} [h!]
-	\centering
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure4a.png}
-		\caption{}
-		\label{fig:C13_0}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure4b.png}
-		\caption{}
-		\label{fig:C13_45}
-	\end{subfigure}
+ \begin{figure} [h!]
+ 	\centering
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure4a.png}
+ 		\caption{}
+ 		\label{fig:C13_0}
+ 	\end{subfigure}
+ 	\hfill
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure4b.png}
+ 		\caption{}
+ 		\label{fig:C13_45}
+ 	\end{subfigure}
  	\caption{The influence of \(C_{13}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
-	\label{fig:C13}
-\end{figure}
-
+ 	\label{fig:C13}
+ \end{figure}
+ 
  The influence of \(C_{22}\) elastic constant on the dispersion curves is shown in Fig.~\ref{fig:C22}.
  It can be seen that the dispersion curves at angle 0\(^{\circ}\) are not affected whereas the influence on dispersion curves at  angle 45\(^{\circ}\) is the same as in case of  \(C_{11}\) elastic constant (compare Fig.~\ref{fig:C11_45}). 
  Such behaviour is expected because \(C_{11}\) elastic constant corresponds to the principal direction at angle 0\(^{\circ}\) whereas \(C_{22}\) elastic constant corresponds to the principal direction at angle 90\(^{\circ}\).
  
-\begin{figure} [h!]
-	\centering
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure5a.png}
-		\caption{}
-		\label{fig:C22_0}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure5b.png}
-		\caption{}
-		\label{fig:C22_45}
-	\end{subfigure}
+ \begin{figure} [h!]
+ 	\centering
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure5a.png}
+ 		\caption{}
+ 		\label{fig:C22_0}
+ 	\end{subfigure}
+ 	\hfill
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure5b.png}
+ 		\caption{}
+ 		\label{fig:C22_45}
+ 	\end{subfigure}
  	\caption{The influence of \(C_{22}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
-	\label{fig:C22}
-\end{figure}
-
+ 	\label{fig:C22}
+ \end{figure}
+ 
  The influence of \(C_{23}\) elastic constant on the dispersion curves is shown in Fig.~\ref{fig:C23}.
  It has no effect on dispersion curves at angle 0\(^{\circ}\).
  The behaviour at at angle 45\(^{\circ}\) is the same as in case of \(C_{13}\) elastic constant (compare Fig.~\ref{fig:C23_45} with Fig.~\ref{fig:C13_45}).
  
-\begin{figure} [h!]
-	\centering
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure6a.png}
-		\caption{}
-		\label{fig:C23_0}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure6b.png}
-		\caption{}
-		\label{fig:C23_45}
-	\end{subfigure}
+ \begin{figure} [h!]
+ 	\centering
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure6a.png}
+ 		\caption{}
+ 		\label{fig:C23_0}
+ 	\end{subfigure}
+ 	\hfill
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure6b.png}
+ 		\caption{}
+ 		\label{fig:C23_45}
+ 	\end{subfigure}
  	\caption{The influence of \(C_{23}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
-	\label{fig:C23}
-\end{figure}
-
+ 	\label{fig:C23}
+ \end{figure}
+ 
  The influence of \(C_{33}\) elastic constant on the dispersion curves is shown in Fig.~\ref{fig:C33}.
  The influence of \(C_{33}\) elastic constant is highly localised because it substantially affects S0 mode in frequency range about 250--500 kHz.
  Other wave modes are unaffected except A1 mode at angle  45\(^{\circ}\) and frequency  range about 400--500 kHz.
  
-\begin{figure} [h!]
-	\centering
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure7a.png}
-		\caption{}
-		\label{fig:C33_0}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure7b.png}
-		\caption{}
-		\label{fig:C33_45}
-	\end{subfigure}
+ \begin{figure} [h!]
+ 	\centering
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure7a.png}
+ 		\caption{}
+ 		\label{fig:C33_0}
+ 	\end{subfigure}
+ 	\hfill
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure7b.png}
+ 		\caption{}
+ 		\label{fig:C33_45}
+ 	\end{subfigure}
  	\caption{The influence of \(C_{33}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
-	\label{fig:C33}
-\end{figure}
-
+ 	\label{fig:C33}
+ \end{figure}
+ 
  The influence of \(C_{44}\) elastic constant on the dispersion curves is shown in Fig.~\ref{fig:C44}.
  It influences A1 mode at at angle  0\(^{\circ}\) in a greatest extent.
  A0 mode, A1 mode and S0 mode are affected at angle 45\(^{\circ}\) but S0 mode is affected only at frequencies above about 300 kHz.
  It should be noted that the influence of \(C_{44}\) elastic constant on A0 and S0 mode increases with increasing frequencies whereas the influence on A1 mode is opposite.
  
-\begin{figure} [h!]
-	\centering
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure8a.png}
-		\caption{}
-		\label{fig:C44_0}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure8b.png}
-		\caption{}
-		\label{fig:C44_45}
-	\end{subfigure}
+ \begin{figure} [h!]
+ 	\centering
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure8a.png}
+ 		\caption{}
+ 		\label{fig:C44_0}
+ 	\end{subfigure}
+ 	\hfill
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure8b.png}
+ 		\caption{}
+ 		\label{fig:C44_45}
+ 	\end{subfigure}
  	\caption{The influence of \(C_{44}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
-	\label{fig:C44}
-\end{figure}
-
+ 	\label{fig:C44}
+ \end{figure}
+ 
  The influence of \(C_{55}\) elastic constant on the dispersion curves is shown in Fig.~\ref{fig:C55}.
  It can be noticed that at angle 0\(^{\circ}\), A0 mode is strongly affected as well as S0 mode at frequencies above about 300 kHz.
  The influence of \(C_{55}\) elastic constant on the dispersion curves at angle 45\(^{\circ}\) is the same as in case of  \(C_{44}\) elastic constant (compare Fig.~\ref{fig:C55_45} with Fig.~\ref{fig:C44_45}).
  
-\begin{figure} [h!]
-	\centering
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure14a.png}
-		\caption{}
-		\label{fig:C55_0}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure14b.png}
-		\caption{}
-		\label{fig:C55_45}
-	\end{subfigure}
-	\caption{The influence of \(C_{55}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
-	\label{fig:C55}
-\end{figure}
-
+ \begin{figure} [h!]
+ 	\centering
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure14a.png}
+ 		\caption{}
+ 		\label{fig:C55_0}
+ 	\end{subfigure}
+ 	\hfill
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure14b.png}
+ 		\caption{}
+ 		\label{fig:C55_45}
+ 	\end{subfigure}
+ 	\caption{The influence of \(C_{55}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
+ 	\label{fig:C55}
+ \end{figure}
+ 
  The influence of \(C_{66}\) elastic constant on the dispersion curves is shown in Fig.~\ref{fig:C66}.
  The changes of \(C_{66}\) elastic constant affects in greatest extent the symmetric SH mode and A1 mode at angle 0\(^{\circ}\).
  Only a slight influence on S0 mode is observed at angle 45\(^{\circ}\).
  
-\begin{figure} [h!]
-	\centering
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure15a.png}
-		\caption{}
-		\label{fig:C66_0}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.47\textwidth}
-		\centering
-		\includegraphics[]{figure15b.png}
-		\caption{}
-		\label{fig:C66_45}
-	\end{subfigure}
-	\caption{The influence of \(C_{66}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
-	\label{fig:C66}
-\end{figure}
-
-It should be underlined that in most cases the influence of  particular \(C_{ij}\) elastic constant on the dispersion curves is unique.
-The influence on specific modes is different.
-Even certain modes are only affected at a specific frequency range.
-These findings give the basis to state that the dispersion curves can be used for identification of elastic constants.
-It is expected, that better accuracy can be obtained by considering more modes and wider frequency range.
-Moreover, the dependence of dispersion curves on the angle of propagation is significant. 
-Hence, it should be considered during the construction of an objective function used for the determination of elastic constants.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{figure} [h!]
+ 	\centering
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure15a.png}
+ 		\caption{}
+ 		\label{fig:C66_0}
+ 	\end{subfigure}
+ 	\hfill
+ 	\begin{subfigure}[b]{0.47\textwidth}
+ 		\centering
+ 		\includegraphics[]{figure15b.png}
+ 		\caption{}
+ 		\label{fig:C66_45}
+ 	\end{subfigure}
+ 	\caption{The influence of \(C_{66}\) elastic constant on the dispersion curves for selected angle \(\beta\): (a) 0\(^{\circ}\) and (b) 45\(^{\circ}\).} 
+ 	\label{fig:C66}
+ \end{figure}
+ 
+ It should be underlined that in most cases the influence of  particular \(C_{ij}\) elastic constant on the dispersion curves is unique.
+ The influence on specific modes is different.
+ Even certain modes are only affected at a specific frequency range.
+ These findings give the basis to state that the dispersion curves can be used for identification of elastic constants.
+ It is expected, that better accuracy can be obtained by considering more modes and wider frequency range.
+ Moreover, the dependence of dispersion curves on the angle of propagation is significant. 
+ Hence, it should be considered during the construction of an objective function used for the determination of elastic constants.
+}
 \section{Experimental measurements \label{sec:experiment}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% plain wave composite; constants provided by manufacturer
-Guided wave propagation was analysed in carbon/epoxy laminate reinforced 
+
+
+Guided wave propagation was analysed in carbon/epoxy laminate \DIFdel{composed} reinforced 
 by 16 layers of plain weave fabric. The prepregs GG 205  P (fibres Toray FT 300 - 3K 
 200 tex) by G. Angeloni and epoxy resin IMP503Z-HT by Impregnatex Compositi were 
 used for fabrication of the specimen in the autoclave. The composite laminate 
@@ -541,8 +598,9 @@ dimensions were 1200\(\times\)1200~mm. The average thickness was 3.9\(\pm\)0.1
 mm. 
 
 The total weight of the specimen was 8550 g, hence, based on the volume of the specimen, the density is about~1522.4~kg/m\textsuperscript{3}.
-% geometry of plain weave
-The parameters describing the geometry of a plain weave textile-reinforced composite are given in Table~\ref{tab:weave_geo}. 
+
+The parameters describing the geometry of a plain weave \DIFdel{textile reinforced} \DIFadd{textile-reinforced} composite are given in Table~\ref{tab:weave_geo}. 
+
  \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
@@ -553,7 +611,7 @@ The parameters describing the geometry of a plain weave textile-reinforced compo
 		\toprule
 		\multicolumn{4}{c}{\textbf{width} }	& \multicolumn{2}{c}{\textbf{thickness} }  \\ 
 		%	\hline \hline
-	    \cmidrule(lr){1-4} \cmidrule(lr){5-6} 
+		\cmidrule(lr){1-4} \cmidrule(lr){5-6} 
 		fill & warp & fill gap& warp gap& fill & warp\\
 		%\hline
 		\(a_f\) &\(a_w\)& \(g_f\)  & \(g_w\)  & \(h_f\)& \(h_w\) \\ 
@@ -567,21 +625,23 @@ The parameters describing the geometry of a plain weave textile-reinforced compo
 	\label{tab:weave_geo}
 \end{table}
 
-The experimental setup is shown in Fig.~\ref{fig:setup}. 
-It consists of a waveform generator, signal amplifier, piezoelectric actuator, specimen, scanning laser Doppler vibrometer (SLDV) head operated by controller and software.
+\DIFadd{The experimental setup is shown in Fig.~\ref{fig:setup}. 
+It consists of a waveform generator, signal amplifier, piezoelectric actuator, specimen, scanning laser Doppler vibrometer (SLDV) head operated by controller and software.}
 
-	\begin{figure} [h!]
+\begin{figure} [h!]
 	\centering
-	\includegraphics[width=\textwidth]{figure16.png}
-	\caption{Experimental setup.}
+	\DIFaddfig{\includegraphics[width=\textwidth]{figure16.png}}
+	\caption{\DIFadd{Experimental setup.}}
 	\label{fig:setup}
 \end{figure}
-% laser vibrometer mesurements - add chirp signal parameters
+
 The piezoelectric transducer disc of 10 mm diameter was bonded to the surface of the specimen at their centre. 
 A chirp signal in the frequency range of 0-500 kHz lasting 200~\(\mu\)s was applied to the piezoelectric transducer. 
-Sampling frequency was 1.28~MHz. Full wavefield measurements of guided waves were conducted by using SLDV (Polytec PSV-400) on the central area of width 0.726 m and length 0.726 m. 
-A grid of 499\(\times\)499 measurement points covering the surface of the specimen was used. 
-The retro-reflective tape was applied to the measurement area for improving the quality of laser signal. 
+Sampling frequency was 1.28~MHz. Full wavefield measurements of guided waves were conducted by using 
+\DIFdel{scanning laser Doppler vibrometer} \DIFadd{SLDV} (Polytec PSV-400) on the central area of width 0.726 m and length 0.726 m. 
+A grid of 499\(\times\)499 measurement points covering the surface of the specimen  was used. 
+\DIFdel{Retro-reflective} 
+\DIFadd{The retro-reflective} tape was applied to the measurement area for improving \DIFdel{a} \DIFadd{the} quality of laser signal. 
 Measurements were taken 40 times at each grid point and averaged in order to increase the signal to noise ratio.
 
 3D Fourier transform was applied to the full wavefield data in the space-time domain 
@@ -590,131 +650,130 @@ Measurements were taken 40 times at each grid point and averaged in order to inc
 Interpolation was employed to obtain 2D images (\(k\), \(f\)) representing dispersion curves \(k(f)\) at selected angles \(\beta = 0^{\circ} \ldots 90^{\circ}\) with the step of \(15^{\circ}\), resulting in nine 2D matrices. 
 Let's denote these matrices representing dispersion curves by \(\matr{D}_{\beta}\). The size of the matrix  \(\matr{D}_{\beta}\) in the current approach was \(n_k=512 \times n_f= 512\), where \(n_k\) is the number of wavenumber points 
 and \(n_f\) is the number of frequency points.  
-An example of such a matrix at an angle \(60^{\circ}\) is presented in Fig.~\ref{fig:initial_optimized}. 
-The dispersion curves presented in Fig.~\ref{fig:dispersion60deg_initial} are calculated by using the SASE model and material properties which are given in Table~\ref{tab:matprop}.
-They are in the form of white curves overlayed on the image for reference. 
-It can be seen that there is a high discrepancy between semi-analytic dispersion curves and the experimental one. 
-% overlayed = superimposed
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Optimisation \label{sec:optimization}}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	The Sheffield Genetic Algorithm Toolbox for Matlab developed at the Department of Automatic Control and Systems Engineering at The University of Sheffield was used for the optimisation~\cite{Chipperfield1994}.
-	The aim was the determination of C-tensor components, namely: \(C_{11}\), \(C_{12}\), \(C_{13}\),  \(C_{22}\), \(C_{23}\), \(C_{33}\), \(C_{44}\), \(C_{55}\) and \(C_{66}\).
-
-	\subsection{Genetic algorithm parameters}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+An example of such a matrix at \DIFadd{an} angle \(60^{\circ}\) is presented in Fig.~\ref{fig:initial_optimized}. 
+The dispersion curves presented in Fig.~\ref{fig:dispersion60deg_initial} \DIFadd{are} calculated by using \DIFadd{the} SASE model and material properties \DIFadd{which are} given in Table~\ref{tab:matprop}.
+\DIFadd{They are} in the form of \DIFdel{yellow} \DIFadd{white} curves \DIFdel{are} overlayed on the image for reference. 
+It can be seen that there is a high discrepancy between semi-analytic dispersion curves and \DIFadd{the} experimental one. 
+	
+\section{Optimisation \label{sec:optimization}}
+ 
+\subsection{Genetic algorithm parameters}
+	
 	The following GA parameters were used for optimisation:
 	\begin{itemize}
 		\item Number of individuals per subpopulation: 100
 		\item Maximum number of generations: 70
 		\item Generation gap: 0.9
-		\item Number of variables in objective function: 9
+		\item Number of variables in objective function: \DIFdel{6 (indirect approach), 9 (direct approach)} \DIFadd{9}
 		\item Precision of binary representation of variables: 12-bit.
    \end{itemize}
-    Generation gap of 0.9 means that 90\% chromosomes from the old population are replaced by 90\% best-found chromosomes from new population while preserving 10\% best-found chromosomes from the old population.
+    Generation gap of 0.9 means that 90\% chromosomes from the old population are replaced by 90\% \DIFdel{best found} \DIFadd{best-found} chromosomes from new population while preserving 10\% \DIFdel{best found} \DIFadd{best-found} chromosomes from \DIFadd{the} old population.
     
     The probability of mutation \(P_m\) is calculated as follows~\cite{Chipperfield1994}:
-    \begin{equation}
+    
+\begin{equation}
     	P_m = 0.7/L,
     \end{equation}
-    where \(L\) is the length of the chromosome structure.
-    
-	The upper and lower bounds of variables were set as \(\pm\)50\% with respect to initial values given in Table~\ref{tab:matprop}.
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\subsection{Objective function}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ where \(L\) is the length of the chromosome structure.
+
+The upper and lower bounds of variables were set as \(\pm\)50\% with respect to initial values given in Table~\ref{tab:matprop}.
+
+\subsection{Objective function}
+	
 	The optimisation problem can be described as a minimization of an objective function:
-	\begin{equation}
+	
+\begin{equation}
 	\min_j \sum_{\beta}\sum_{m} \| k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)}) -k^{EXP}_{m}(\beta,\omega) \|,
-	\label{eq:error_fun}
-	\end{equation}
+\label{eq:error_fun}\end{equation}
 where \(m\) denotes the mode of propagating wave.
-The objective function is the norm of a difference between dispersion curves calculated by using the SASE model \(k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)})\) and dispersion curves from experiment \(k^{EXP}_{m}(\beta,\omega)\). 
-However, in the model, we have actual curves for each propagation mode \(m\) depending on the matrix of elastic constants \(\matr{C}^{(j)}\) and propagation angle \(\beta\) but the data from the experiment have a form of a matrix (image) \(\matr{D}^{EXP}_{\beta}\) at each angle \(\beta\) (see Fig.~\ref{fig:initial_optimized}).
+The objective function is the norm of a difference between dispersion curves calculated by using \DIFadd{the} SASE model \(k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)})\) and dispersion curves from experiment \(k^{EXP}_{m}(\beta,\omega)\). 
+However, in the 
+	\DIFdel{model} \DIFadd{model,} we have actual curves for each propagation mode \(m\) depending on the matrix of elastic constants \(\matr{C}^{(j)}\) and propagation angle \(\beta\) but the data from the experiment have a form of a matrix (image) \(\matr{D}^{EXP}_{\beta}\) at each angle \(\beta\) (see Fig.~\ref{fig:initial_optimized}).
 Extraction of dispersion curves \(k^{EXP}_{m}(\beta,\omega)\) from images \(\matr{D}^{EXP}_{\beta}\) is cumbersome and could lead to inherent errors. 
-Moreover, in order to minimise the error function in Eq.~(\ref{eq:error_fun}), dispersion curves in the SASE model must be sorted (which increases computation costs). 
-Therefore, dispersion curves corresponding to all modes in the investigated frequency range, i.e. \(m=1,\ldots, 6\) calculated by using the SASE model were converted to an image \(\matr{D}^{SASE}_{\beta}\) in which dimensions are the same as in the experiment (\(n_k=512 \times n_f= 512\)). 
+Moreover, in order to minimise the error function in \DIFdel{Eq.~\ref{eq:error_fun},} \DIFadd{Eq.~(\ref{eq:error_fun}),} dispersion curves in \DIFadd{the} SASE model must be sorted (which increases computation costs). 
+Therefore, dispersion curves corresponding to all modes in the investigated frequency range, i.e. \(m=1,\ldots, 6\) calculated by using \DIFadd{the} SASE model were converted to an image \(\matr{D}^{SASE}_{\beta}\) in which dimensions are the same as in the experiment (\(n_k=512 \times n_f= 512\)). 
 Pixels of the image \(\matr{D}^{SASE}_{\beta}\) which corresponds to dispersion curves are assigned value 1 whereas the remaining pixels have value 0. 
 It leads to logic matrix or mask which can be applied for filtering experimental images: 
-	\begin{equation}
+	
+\begin{equation}
 		\tilde{\matr{D}}^{\beta} =  \matr{D}^{SASE}_{\beta}  .*    \matr{D}^{EXP}_{\beta} ,
-		\label{eq:objective_fun}
-   \end{equation}	
-where \(.*\) is the element-wise multiplication. 
-If dispersion curves from the SASE model align well with high values of experimental images, it leads to high values in the filtered image and vice versa.
+	\label{eq:objective_fun}
+\end{equation}
+where \(.*\) is the \DIFdel{element wise multiplication (such notation is used in Matlab).} \DIFadd{element-wise multiplication.} 
+If dispersion curves from \DIFadd{the} SASE model align well with high values of experimental images, it leads to high values in \DIFadd{the} filtered image and vice versa.
 The objective function value can be finally calculated as: 
-	\begin{equation}
+	
+\begin{equation}
 	\tilde{F} = \frac{(-1)}{n_k \, n_f}  \cdot \sum_{\beta}  \sum_{i=1}^{n_k} \sum_{j=1}^{n_f}	\tilde{D}_{ij}^{\beta}. 
-	\label{eq:objective_fun_val}
-	\end{equation}
-In this way, rich experimental data is fully used and roots sorting of the SASE dispersion curves is not necessary. 
+\label{eq:objective_fun_val}\end{equation}
+In this \DIFdel{way} \DIFadd{way,} rich experimental data is fully used and roots sorting of \DIFadd{the} SASE dispersion curves is not necessary. 
 Additionally, for convenience, the objective function scaling can be applied in the form:
-	\begin{equation}
+	
+\begin{equation}
 	F = a \,  \tilde{F} + b,
 	\end{equation}
-where \(a\) and \(b\) are scaling parameters. The parameters can be selected so that the values of the objective function are positive (\(a=100\), \(b=360\) were assumed in the current studies).
+where \(a\) and \(b\) are scaling parameters. The parameters can be selected so that the values of \DIFadd{the} objective function are positive (\(a=100\), \(b=360\) were assumed in the current studies).
 	
 It should be added that the calculation of the objective function is quite computationally intensive. 
 It takes about 5 minutes on Intel Xeon X5660 2.8~GHz to compute 100 evaluations of the objective function. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+
 \subsection{GA convergence}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 The proposed objective function enables quite fast convergence of GA. 
 An exemplary convergence of objective function with increasing generation number is shown in Fig.~\ref{fig:GAconvergence}. 
 Objective function values were calculated for the best chromosome and also for the mean value of all chromosomes in a generation. 
 Objective function stabilises in both cases after about 40 generations.
-	\begin{figure} [h!]
+	
+\begin{figure} [h!]
 		\centering
-		\includegraphics[]{figure9.png}
-		\caption{GA convergence in the proposed approach.}
+	\includegraphics{figure9.png}	
+\caption{GA convergence in \DIFdel{direct} \DIFadd{the proposed} approach.}
 		\label{fig:GAconvergence}
 	\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-	\subsection{Results and discussion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	
+\subsection{Results and discussion}
+\DIFadd{
  It has been shown in Fig.~\ref{fig:dispersion60deg_initial} that even for deliberately assumed values of constants characterising the composite material (Table~\ref{tab:matprop}) there is a huge discrepancy between the model and experimental data. The best way to improve the model is by an identification of all necessary parameters by using optimisation methods.
  
  The application of objective function given by Eq.~(\ref{eq:objective_fun_val}) leads to excellent agreement between numerical and experimental dispersion curves at angle \(60^{\circ}\) as it is shown in Fig.~\ref{fig:dispersion60deg}.
  
  It should be added that a linear colour scale is applied for all experimental images.
-	\begin{figure} [h!]
+	}
+\begin{figure} [h!]
 		\centering
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			% size fitted
-			%\includegraphics[width=\textwidth]{dispersion60deg_initial.png}
-			% size 100%
-			%\includegraphics[]{dispersion60deg_initial.png}
-		   \includegraphics[]{figure10a.png}
-			\caption{initial parameters}
+		  \includegraphics{figure10a.png}	
+\caption{initial parameters}
 			\label{fig:dispersion60deg_initial}
 		\end{subfigure}
 	\hfill
 		\begin{subfigure}[b]{0.47\textwidth}
 			\centering
-			% size fitted
-			%\includegraphics[width=\textwidth]{dispersion60deg.png}
-			% size 100%
-			%\includegraphics[]{dispersion60deg}
-			\includegraphics[]{figure10b.png}
-			\caption{optimised}
+			\includegraphics{figure10b.png}	
+\caption{optimised}
 			\label{fig:dispersion60deg}
 		\end{subfigure}
-	\caption{Dispersion curves at angle \(\beta = 60^{\circ}\); white curves: SASE 
+\caption{Dispersion curves at angle \(\beta = 60^{\circ}\); \DIFdel{yellow} \DIFadd{white} curves: SASE 
 	model; 
 	image: experiment. }
+
 	\label{fig:initial_optimized}
 	\end{figure}
 
+\DIFadd{
  However, at angles \(0^{\circ}\) (Fig.~\ref{fig:dispersion0deg_direct_SH0}) and \(15^{\circ}\) (Fig.~\ref{fig:dispersion15deg_direct_SH0}) some discrepancies related to the behaviour of shear horizontal wave mode is observed. Dispersion curve corresponding to SH0 mode (red curve) tends to overlap with another dispersion curve (A0 mode) contributing significantly to the objective function value. Additionally, wavenumber values of SH0 mode are overestimated (see Fig.~\ref{fig:dispersion15deg_direct_SH0}). In other words, the velocity of the modelled SH0 mode is lower than in the experiment.
 
 In order to alleviate the issue with the SH0 mode, we modified the matrix 
 \(\matr{D}^{SASE}_{\beta} \)  from Eq.~(\ref{eq:objective_fun}). 
 For the dispersion curve \(m=2\) corresponding to the SH0 mode, instead of value 1, we inserted the following angle-dependent values:
+}
 \begin{equation}
-\left. \matr{D}^{SASE}_{0^{\circ}}\right\vert_{m=2} = 0.1, \, \left. \matr{D}^{SASE}_{15^{\circ}}\right\vert_{m=2} = 2.0, \, \left. \matr{D}^{SASE}_{30^{\circ}}\right\vert_{m=2} = 1.5
-\label{eq:objective_fun_mod}
-\end{equation}	
+\left. \matr{D}^{SASE}_{0^{\circ}}\right\vert_{m=2} = 0.1, \, \left. \matr{D}^{SASE}_{15^{\circ}}\right\vert_{m=2} = 2.0, \, \left. \matr{D}^{SASE}_{30^{\circ}}\right\vert_{m=2} = 1.5\label{eq:objective_fun_mod}
+\end{equation}
+\DIFadd{
 and symmetrically for the remaining angles with respect to 45\(^{\circ}\). 
 Therefore the matrix \(\matr{D}^{SASE}_{\beta} \) is no longer a logical matrix but it is still functioning as a filter mask with tweaked weights.
 It should be noted that the amplitudes of SH0 mode are much lower than other modes (see images e.g. in Fig.~\ref{fig:dispersion15deg_direct_SH0}). 
@@ -722,23 +781,26 @@ The goal of the application of these weights is to increase the importance of SH
 
 The dispersion curves calculated by using modified objective function fit well the experimental data as it is shown in Fig.~\ref{fig:optimized_direct} for each considered angle. 
 Also, the SH0 mode is properly aligned with experimental data.
+}
 
 \begin{figure} [h!]
 	\centering
 	\begin{subfigure}[b]{\textwidth}
 		\centering
-		\includegraphics[]{figure12a.png}
+	\includegraphics{figure12a.png}
 		\caption{}
 		\label{fig:dispersion0deg_direct_SH0}
 	\end{subfigure}
 	\begin{subfigure}[b]{\textwidth}
 		\centering
-		\includegraphics[]{figure12b.png}
+		\includegraphics{figure12b.png}
 		\caption{}
 		\label{fig:dispersion15deg_direct_SH0}
 	\end{subfigure}
-	\caption{Dispersion curves for optimised elastic constants at angles \(\beta\): (a) 0\(^{\circ}\), (b) 15\(^{\circ}\); yellow curves: SASE model; red 
+	
+\caption{Dispersion curves for optimised elastic constants \DIFdel{in \textbf{direct method}} at angles \(\beta\): (a) 0\(^{\circ}\), (b) 15\(^{\circ}\); yellow curves: SASE model; red 
 	curve: SH0 mode; image: experiment. }
+
 	\label{fig:SH0_problem}
 \end{figure}
 
@@ -746,77 +808,111 @@ Also, the SH0 mode is properly aligned with experimental data.
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[]{figure13a.png}
+	\includegraphics{figure13a.png}
 		\caption{}
 		\label{fig:dispersion0deg_direct}
 	\end{subfigure}
 \hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[]{figure13b.png}
+		\includegraphics{figure13b.png}
 		\caption{}
 		\label{fig:dispersion15deg_direct}
 	\end{subfigure}
 \hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[]{figure13c.png}
+		\includegraphics{figure13c.png}
 		\caption{}
 		\label{fig:dispersion30deg_direct}
 	\end{subfigure}
 \hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[]{figure13d.png}
+		\includegraphics{figure13d.png}
 		\caption{}
 		\label{fig:dispersion45deg_direct}
 	\end{subfigure}
 \hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[]{figure13e.png}
+		\includegraphics{figure13e.png}
 		\caption{}
 		\label{fig:dispersion75deg_direct}
 	\end{subfigure}
 \hfill
 	\begin{subfigure}[b]{0.47\textwidth}
 		\centering
-		\includegraphics[]{figure13f.png}
+		\includegraphics{figure13f.png}
 		\caption{}
 		\label{fig:dispersion90deg_direct}
 	\end{subfigure}
-	\caption{Dispersion curves for optimised elastic constants at angles \(\beta\): (a) 0\(^{\circ}\), (b) 15\(^{\circ}\), (c) 30\(^{\circ}\), (d) 
+	
+\caption{Dispersion curves for optimised elastic constants \DIFdel{in \textbf{direct method}} at angles \(\beta\): (a) 0\(^{\circ}\), (b) 15\(^{\circ}\), (c) 30\(^{\circ}\), (d) 
 	45\(^{\circ}\), 
-	(e) 75\(^{\circ}\), (f) 90\(^{\circ}\); white curves: SASE model; image: experiment. }
+	(e) 75\(^{\circ}\), (f) 90\(^{\circ}\); \DIFdel{yellow} \DIFadd{white} curves: SASE model; image: experiment. }
+
 	\label{fig:optimized_direct}
 \end{figure}
 
-The GA algorithm was run 15 times. 
-The optimisation results are given in Table~\ref{tab:csv_results}.  
-They have a relatively small spread as evidenced by the quite low values of the standard deviation. 
+\DIFdel{It seems that from the perspective of wave propagation modelling in composite laminates, it is easier to select properties of composite material constituents than composite ply. It is because data related to the mechanical properties of the fibres and epoxy matrix is widely available. However, it has been shown in Fig.~\ref{fig:dispersion60deg_initial} that even for deliberately assumed values of constants characterising the composite material constituents (Table~\ref{tab:matprop}) there is a huge discrepancy between the model and experimental data.}
+The \DIFdel{easiest way to improve the model is by tweaking the volume fraction of reinforcing fibres (grid search approach). But this method does not guarantee a good match between numerical and experimental dispersion curves.} \DIFadd{GA algorithm was run 15 times.} 
+The \DIFdel{best option is an identification of all necessary parameters by using} optimisation \DIFdel{methods which leads to excellent agreement between numerical and experimental dispersion curves as it is shown} \DIFadd{results are given} in \DIFdel{Fig.~\ref{fig:dispersion60deg}. It should be added that} \DIFadd{Table~\ref{tab:csv_results}.  
+They have} a \DIFdel{linear colour scale is applied for all experimental images.} \DIFadd{relatively small spread as evidenced by the quite low values of the standard deviation.} 
+
 \begin{table}[h!]
+\caption{GA optimisation results \DIFdel{for the indirect approach} based on statistics (mean \(\mu\) and standard 
+		deviation \(\sigma\)) of 15 GA \DIFdel{runs.} \DIFadd{runs; Units of  elastic constants: [GPa].}}
+\DIFdeltab{
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
-	\caption{GA optimisation results based on statistics (mean \(\mu\) and standard 
-		deviation \(\sigma\)) of 15 GA runs; Units of  elastic constants: [GPa].}	
+		
+	\begin{tabular}{lrrr} \toprule
+		&\multicolumn{3}{c}{\textbf{indirect method}} \\	
+		\cmidrule(lr){2-4} 
+		&Best & \(\mu\) & \(\sigma\)\\
+		\cmidrule(lr){2-4}
+		\csvreader[table head=\toprule ,
+		late after line=\\ ]
+		{results_indirect_50.csv}{Row=\constantst,Tbest=\tbest,Tmean=\tmean,Tstd=\tstd}
+		{\constantst & \tbest & \tmean & \tstd}
+		\bottomrule
+	\end{tabular}	
+	\label{tab:csv_indirect_results}
+}
+\DIFaddtab{
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
 	\begin{tabular}{crrr} \toprule
 		&Best & \(\mu\) & \(\sigma\)\\
 		\cmidrule{1-4} 
 		\csvreader[table head=\toprule ,
-		late after line=\\ ]%
-		{results_indirect_direct_50.csv}{Row=\constants,Cbest=\cbest,Cmean=\cmean,Cstd=\cstd,Cdbest=\cdbest,Cdmean=\cdmean,Cdstd=\cdstd}%
-		{\constants & \cdbest & \cdmean & \cdstd}%	
+		late after line=\\ ]
+		{results_indirect_direct_50.csv}{Row=\constants,Cbest=\cbest,Cmean=\cmean,Cstd=\cstd,Cdbest=\cdbest,Cdmean=\cdmean,Cdstd=\cdstd}
+		{\constants & \cdbest & \cdmean & \cdstd}
 		\bottomrule
 	\end{tabular}	
 	\label{tab:csv_results}
+}
 \end{table}
 
+\DIFadd{
 In our opinion, further reduction of standard deviation is possible by taking into account larger frequency range and in turn, more modes of propagating waves. However, the limitation here is the SLDV. Probably, higher frequency range can be considered by using newest lasers. 
-\clearpage	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage	
+}
 \section{Conclusions}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-This work has demonstrated that the proposed method based on guided wave dispersion curves combined with the genetic algorithm is well suited for identification of elastic constants of woven fabric reinforced composites.
-Satisfactory results have been obtained by the proposed method. 
+
+This work has demonstrated that the proposed method based on guided wave dispersion curves combined with the genetic algorithm is well suited for identification of elastic constants of woven fabric reinforced composites. \DIFdel{Two approaches have 
+	been investigated: indirect and direct.  In the indirect approach, material properties of 
+	composite constituents are selected as optimisation variables which are next used 
+	for calculation of elastic constants of lamina by using micromechanics and 
+	homogenisation techniques. On the other hand, in the direct approach, the elastic 
+	constants of the composite laminate are selected as optimisation variables. The 
+	motivation behind the indirect approach is the fact that fewer variables are involved in 
+	the optimisation process. However, it has been found that for parameter space 
+	bounds  \(\pm\)50\% in respect to the initial values, in spite of low value of the 
+	objective function, the indirect method leads to ambiguous results.  Much better}
+\DIFadd{Satisfactory} results have been obtained by the \DIFdel{direct} \DIFadd{proposed} method. 
 This fact is demonstrated by the dispersion curves calculated by the SASE model which matches very well the experimental data coming from the SLDV measurements. 
 	
 The advantage of the proposed methodology is one-sided non-contact measurements with contact excitation which can be conducted even directly on existing structures without the necessity of preparation of special samples.
@@ -827,45 +923,49 @@ The most important source of errors lies in the variability of the thickness of 
 There is an inherent deviation in the thickness of a composite occurred during manufacturing. 
 The thickness variability cannot be taken into account in the SASE model -- averaged thickness must be assumed in the model instead. 
 Another important issue is the temperature influence on propagating guided waves.
-Since SLDV measurements can take even a few hours, temperature variation during the measurement period can affect the material properties of the investigated specimen. 
+Since SLDV measurements can take even a few hours, temperature variation during the measurement period can affect the material properties of the investigated specimen. \DIFdel{A less important source of errors comes from the measurements of the length and width of the scanned area.} 
 
 It should be added that the accuracy of the proposed methodology depends on the frequency range and the respective number of modes which can be captured experimentally.
 	
 It should be underlined, that the devised methodology can be applied to composite laminates of higher anisotropy level. Further studies on composite laminates reinforced by unidirectional fibres are ongoing.
 
-\newpage	 
-	%% The Appendices part is started with the command \appendix;
-	%% appendix sections are then done as normal sections
-	\appendix
-	 \section{Derivation of stiffness and mass matrices}
+\appendix
+	 
+\section{Derivation of stiffness and mass matrices}
 	 Taking into account the wavevector given in Eq.~\ref{eq:wavevector}, the 
 	 displacement field can be expressed in terms of the wavenumber \(k\) and 
 	 propagation angle \(\beta\) as~\cite{Taupin2011}:
-	  \begin{equation}
+	  
+\begin{equation}
 	 \vect{u}(x,y,z,t) = \matr{U}(x) \exp \left[ i (\omega t + k \sin (\beta) y - k \cos (\beta) z)\right].
 	 \end{equation}
 	 The discretisation is done only through the thickness of the plate (along \(x\) axis), 
 	 while the propagation kernel depends on the two other space variables \(y\) and \(z\). 
 	 The displacement at an arbitrary point in the plate can be written in terms of shape 
 	 functions \( \matr{N}\), nodal displacements \( \vect{d}\), and the propagation term:
-	 \begin{equation}
+	 
+\begin{equation}
 	 \vect{u}^{(e)}(x,y,z,t) = \matr{N} \vect{d}^{(e)} \exp \left[ i (\omega t + k \sin (\beta) y - k \cos (\beta) z)\right],
 	 \end{equation}
 	 where
-	 \begin{equation}
+	 
+\begin{equation}
 	 \vect{d}^{(e)} =  \left[ u_{x,1} \, u_{y,1} \, u_{z,1} \ldots  \, u_{x,n} \, u_{y,n} \, u_{z,n} \right]^T,
 	 \end{equation}
 	 and \(u_{x,j}\) denotes the nodal \(x\) displacement component at the \(j\)-th node of 
 	 element and \(n\) denotes the number of nodes per element.
 	 The strain vector \(\bs{\varepsilon}\) for the element is given by:
-	  \begin{equation}
+	  
+\begin{equation}
 	 \bs{\varepsilon}= \left[ \matr{B}_1 -i k_y \matr{B}_2 -i k_z \matr{B}_3 \right] \vect{d}^{(e)} \exp \left[ i (\omega t + k \sin (\beta) y - k \cos (\beta) z)\right]
 	 \end{equation}
-	  \begin{equation}
+	  
+\begin{equation}
 	 \matr{B}_1= \matr{L}_x \matr{N}_{,x},\; \matr{B}_2= \matr{L}_y \matr{N},\; \matr{B}_3= \matr{L}_z \matr{N}.
 	 \end{equation}
 	 The matrices \( \matr{L}_x \),  \( \matr{L}_y \) and  \( \matr{L}_z \) are defined as:
-	 \begin{equation}
+	 
+\begin{equation}
 	 \begin{split}
 		 & \matr{L}_x = \left[\begin{array}{ccc} 
 		 1 & 0 & 0  \\[4pt]
@@ -896,10 +996,11 @@ It should be underlined, that the devised methodology can be applied to composit
 	0&0&0 
 	\end{array} \right],
 	\end{split}
-	 \label{eq:selectors}
-	 \end{equation} 
+	\label{eq:selectors}\end{equation}
+
 	 and \(\matr{N}\) is the matrix of shape functions:
-	  \begin{equation}
+	  
+\begin{equation}
 	 \begin{split}
 	 & \matr{N} = \left[\begin{array}{cccccccccc} 
 	 \varphi_1 & 0 & 0  & \varphi_2 & 0 & 0& \ldots & \varphi_n & 0 & 0\\[4pt]
@@ -909,42 +1010,38 @@ It should be underlined, that the devised methodology can be applied to composit
 	 \end{split}
 	 \end{equation}
 The shape functions are Lagrange polynomials spanned over Gauss-Lobatto-Legendre points (see~\cite{Kudela2007} for more details). 
-In the practical application of the SASE method, the order of Lagrange polynomials is usually 3-5.
+In \DIFadd{the} practical application of the SASE \DIFdel{method} \DIFadd{method,} the order of Lagrange polynomials is usually 3-5.
 	 
 The standard steps of the variational formulation and its discretization leads to the elemental stiffness and mass matrices which can be defined as:
-	 \begin{equation}
+	 
+\begin{equation}
 	 \matr{k}_{mn}^e= \int \limits_{(e)} \matr{B}_m^{T} \matr{C}_{\theta}^e \, \matr{B}_n\, \ud x ,
-	 \label{eq:stiffness_matrix}
-	 \end{equation}
-	 \begin{equation}
+	\label{eq:stiffness_matrix}\end{equation}
+	 
+\begin{equation}
 	 \matr{m}^e= \int \limits_{(e)}\rho \matr{N}^{T} \, \matr{N}\, \ud x .
  	\end{equation}
  It should be noted that it is assumed that at least one spectral element is used per layer of composite laminate.
  The global matrices are obtained by standard assembly procedures:
- 	\begin{equation}
+ 	
+\begin{equation}
  	\matr{K}_{mn}= \bigcup_{e=1}^{n_e} \matr{k}_{mn}^{e} \; \textrm{and} \; \matr{M}= \bigcup_{e=1}^{n_e} \matr{m}^{e}. 
  	\end{equation}
-	%% \label{}
-	\section*{Funding}
+	
+	
+\section*{Funding}
  The research was funded by the Polish National Science Center under grant agreement no 2018/29/B/ST8/00045. 
 	
+
 \section*{Declaration of interest}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 	
+
 \section*{Data availability}
 The raw/processed data required to reproduce these findings cannot be shared at this time as they are being used in an ongoing study.
-	%% If you have bibdatabase file and want bibtex to generate the
-	%% bibitems, please use
-	%%
-	%%  \bibliographystyle{elsarticle-harv} 
-	%%  \bibliography{<your bibdatabase>}
 	
-	%% else use the following coding to input the bibitems directly in the
-	%% TeX file.
-	%\section*{Reference}
     \bibliographystyle{num_order}
 	\bibliography{Identification_GA_R2}
 
+
 \end{document}
-
-
