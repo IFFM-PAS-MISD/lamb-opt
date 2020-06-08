@@ -7,6 +7,12 @@
 \usepackage[top=5cm, bottom=5.6cm, left=4.5cm, right=4.2cm]{geometry}
 \usepackage{graphicx}
 \usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}  % fpr multiple figure
+\usepackage{gensymb}     % for degree symbole
+\usepackage{booktabs}    % for nice tables
+\usepackage{csvsimple}   % for csv read
+
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
@@ -72,6 +78,163 @@ Signals are processed by using 2D Fourier transform in order to obtain dispersio
 Correlation between numerical and experimental dispersion curve patterns is considered in the objective function.
 However, measurements taken along a line my cause a problems of contribution of reflected waves from boundaries of the plate.
 Therefore, we propose to utilize full wavefield of propagating waves in construction of the objective function.
+
+\section{Semi-analitycal Finite Element Model}
+\section{Experimental set-up}
+
+Lamb waves were excited by 10 mm round piezoelectric disk (PZT) attached to the specimens back surface.  Chirp signal with the frequency range 0-500 kHz lasting 200 $\mu$s was generated every 10 ms and applied to PZT element throught signal amplifier. 
+
+Speciment central area of 455 x 455 mm was measured in 499 x 499 points using Scanning Laser Vibrometer. In every measurment point 1024 time samples were registered with sampling frequency 1.28 MHz. The response in every point was repeated 20 times and avaraged. 
+
+\begin{figure}
+	\begin{center}
+	\includegraphics{figs/Setup.png}
+	\end{center}
+	\caption{Experimental set-up.}
+	\label{fig1}
+\end{figure}
+
+
+\section{Results}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics{figs/X_Y_t_slice_499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni.png}
+	\end{center}
+	\caption{Space-space-time data.}
+	\label{fig2}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics{figs/kx-ky-f_slices2__499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni.png}
+	\end{center}
+	\caption{Wavenumber-Wavenumber-Frequency data sliced at 100 and 400 kHz.}
+	\label{fig3}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics{figs/KXKYF_slices_2499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni.png}
+	\end{center}
+	\caption{Wavenumber-Wavenumber-Frequency data sliced at 45 and 90 degrees of wave propagation angle.}
+	\label{fig4}
+\end{figure}
+
+\subsection{Wavenumber-Frequency for 7 wave propagation angles}
+
+\begin{figure}[ht]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include first image
+		\includegraphics[width=.8\linewidth]{figs/ga_unidirectional_C_tensor_known_mass_angle_0_dispersion_curves_test_case_25_small.png}  
+	%\caption{}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=.8\linewidth]{figs/ga_unidirectional_C_tensor_known_mass_angle_15_dispersion_curves_test_case_25_small.png}  
+	%\caption{}
+	\end{subfigure}
+	\newline
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include first image
+		\includegraphics[width=.8\linewidth]{figs/ga_unidirectional_C_tensor_known_mass_angle_30_dispersion_curves_test_case_25_small.png}  
+	%\caption{}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=.8\linewidth]{figs/ga_unidirectional_C_tensor_known_mass_angle_45_dispersion_curves_test_case_25_small.png}  
+	%\caption{}
+	\end{subfigure}
+	\caption{Fitted dispertion curve on experimental data for chosen wave propagation angles}
+	\label{fig7}
+\end{figure}
+
+ \begin{table}[h]
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
+	\caption{Initial values of constants characterising the composite material constituents.}
+	%\begin{tabular}{@{}ccccccc@{}} % remove spaces from vertical lines
+	\begin{tabular}{ccccccc} 
+		%\hline
+		\toprule
+		\multicolumn{3}{c}{\textbf{Matrix} }	& \multicolumn{3}{c}{\textbf{Fibres} } & \textbf{Volume fraction}	 \\ 
+		%	\hline \hline
+		\midrule
+		$\rho_m$ & $E_m$ & $\nu_m$  & $\rho_f$ & $E_f$ & $\nu_f$ & $V$\\
+		% \cmidrule(lr){1-3} \cmidrule(lr){4-6} \cmidrule(lr){7-7}
+		%\hline
+		kg/m\textsuperscript{3} &GPa& --  & kg/m\textsuperscript{3}  & GPa& -- & \%\\ 
+		%\hline
+		%\midrule
+		\cmidrule(lr){1-3} \cmidrule(lr){4-6} \cmidrule(lr){7-7}
+		1250 &3.43& 0.35& 1900 & 240 & 0.2 & 50\\
+		%\hline 
+		\bottomrule 
+	\end{tabular} 
+	\label{tab:matprop}
+\end{table}
+
+
+\begin{table}[h]
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
+	\caption{GA optimisation results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 50 GA runs; Units of  elastic constants: [GPa].}	
+	\begin{tabular}{crrrrrr} \toprule
+		&\multicolumn{3}{c}{\textbf{indirect method}} \\
+		%\midrule
+		\cmidrule(lr){2-4} 
+		&Best & $\mu$ & $\sigma$ \\
+		\cmidrule(lr){2-4} 
+		\csvreader[table head=\toprule ,
+		late after line=\\ ]%
+		{results_direct_50.csv}{Row=\constants,Cdbest=\cdbest,Cdmean=\cdmean,Cdstd=\cdstd}%
+		{\constants & \cdbest & \cdmean & \cdstd}%	
+		\bottomrule
+	\end{tabular}	
+	\label{tab:csv_results}
+\end{table}
+
+\subsection{Wavenumber-Wavenumber for 7 frequencies}
+
+test
+
+\begin{figure}[ht]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include first image
+		\includegraphics[width=.8\linewidth]{figs/ga_unidirectional_C_tensor_known_mass_kx_ky_frequency_2_dispersion_surf_test_case_1_small.png}  
+		\label{fig:sub-first}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=.8\linewidth]{figs/ga_unidirectional_C_tensor_known_mass_kx_ky_frequency_3_dispersion_surf_test_case_1_small.png}  
+		\label{fig:sub-second}
+	\end{subfigure}
+	\newline
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include first image
+		\includegraphics[width=.8\linewidth]{figs/ga_unidirectional_C_tensor_known_mass_kx_ky_frequency_4_dispersion_surf_test_case_1_small.png}  
+		\label{fig:sub-first}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=.8\linewidth]{figs/ga_unidirectional_C_tensor_known_mass_kx_ky_frequency_5_dispersion_surf_test_case_1_small.png}  
+		\label{fig:sub-second}
+	\end{subfigure}
+	\caption{Fitted dispertion curve on experimental data for chosen frequencies}
+	\label{fig7}
+\end{figure}
+
+\section{Conclutions}
+
+
 %
 % ---- Bibliography ----
 %
