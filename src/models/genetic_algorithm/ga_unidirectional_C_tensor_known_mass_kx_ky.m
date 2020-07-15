@@ -54,7 +54,7 @@ V=1.2*1.2*ht; % specimen volume [m^3]
 rho = m/V;
 %% input for optimization
 % lower and upper bounds of variables
-Q11_0 = 100e9;
+Q11_0 = 120e9; % it wass 100 before
 Q12_0 = 5.7e9;
 Q13_0 = 5.7e9;
 Q22_0 = 12e9;
@@ -64,7 +64,7 @@ Q44_0 = 3.3e9;
 Q55_0 = 4.6e9;
 Q66_0 = 4.6e9;
 
-variation = 0.2;
+variation = 0.5; % 20% is too small - change to 50%
 Q11_lb = (1-variation)*Q11_0; 
 Q11_ub = (1+variation)*Q11_0; 
 Q12_lb = (1-variation)*Q12_0; 
@@ -99,7 +99,7 @@ ubin= [1,1,1,1,1,1,1,1,1];%include upper bound of variable range
 %%
 %% tests loop
 %%
-for test_case = [1:1]
+for test_case = [2]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))

@@ -85,6 +85,7 @@ SASE10;
 % plain weave fabric composite
 SASE11;
 
+% (variability range 20%)
 % semi analytical spectral element (SASE) model dispersion curves 
 % parametric search over C66
 SASE12_plain_weave;
@@ -120,6 +121,100 @@ SASE19_plain_weave;
 % semi analytical spectral element (SASE) model dispersion curves 
 % parametric search over C11
 SASE20_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C11 (variability range 30%)
+SASE21_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C12 (variability range 30%)
+SASE22_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C13 (variability range 30%)
+SASE23_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C22 (variability range 30%)
+SASE24_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C23 (variability range 30%)
+SASE25_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C33 (variability range 30%)
+SASE26_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C44 (variability range 30%)
+SASE27_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C55 (variability range 30%)
+SASE28_plain_weave;
+
+% semi analytical spectral element (SASE) model dispersion curves 
+% parametric search over C66 (variability range 30%)
+SASE29_plain_weave;
+
+%% UNIDIRECTIONAL
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C11 (variability range 30%)
+SASE30_uni;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C12 (variability range 30%)
+SASE31_uni;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C13 (variability range 30%)
+SASE32_uni;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C22 (variability range 30%)
+SASE33_uni;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C23 (variability range 30%)
+SASE34_uni;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C33 (variability range 30%)
+SASE35_uni;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C44 (variability range 30%)
+SASE36_uni;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C55 (variability range 30%)
+SASE37_uni;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C66 (variability range 30%)
+SASE38_uni;
+
+% surface dispersion (kx-ky)
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C11 (variability range 30%)
+SASE30_uni_surf;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C12 (variability range 30%)
+SASE31_uni_surf;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C13 (variability range 30%)
+SASE32_uni_surf;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C22 (variability range 30%)
+SASE33_uni_surf;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C23 (variability range 30%)
+SASE34_uni_surf;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C33 (variability range 30%)
+SASE35_uni_surf;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C44 (variability range 30%)
+SASE36_uni_surf;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C55 (variability range 30%)
+SASE37_uni_surf;
+% semi analytical spectral element (SASE) model dispersion curves
+% parametric search over C66 (variability range 30%)
+SASE38_uni_surf;
 
 % objective functions for full wavefield laser measurements
 % call objective_fun for test cases calculated in SASE1,SASE2,SASE9,SASE10, SASE11
@@ -182,6 +277,7 @@ plot_param_dispersion_curves_SASE8;
 plot_param_dispersion_curves_SASE8_color;
 plot_param_dispersion_curves_SASE8_plain_weave_color;
 
+% (variability range 20%)
 % plot and make figures for dispersion curves variability depending on C66
 plot_param_dispersion_curves_SASE12_plain_weave_color;
 
@@ -209,7 +305,74 @@ plot_param_dispersion_curves_SASE19_plain_weave_color;
 % plot and make figures for dispersion curves variability depending on C11
 plot_param_dispersion_curves_SASE20_plain_weave_color;
 
+% (variability range 30%)
+% plot and make figures for dispersion curves variability depending on C11 (variability range 30%)
+plot_param_dispersion_curves_SASE21_plain_weave_color;
 
+% plot and make figures for dispersion curves variability depending on C12 (variability range 30%)
+plot_param_dispersion_curves_SASE22_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C13 (variability range 30%)
+plot_param_dispersion_curves_SASE23_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C22 (variability range 30%)
+plot_param_dispersion_curves_SASE24_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C23 (variability range 30%)
+plot_param_dispersion_curves_SASE25_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C33 (variability range 30%)
+plot_param_dispersion_curves_SASE26_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C44 (variability range 30%)
+plot_param_dispersion_curves_SASE27_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C55 (variability range 30%)
+plot_param_dispersion_curves_SASE28_plain_weave_color;
+
+% plot and make figures for dispersion curves variability depending on C66 (variability range 30%)
+plot_param_dispersion_curves_SASE29_plain_weave_color;
+
+% UNIDIRECTIONAL
+% plot and make figures for dispersion curves variability depending on C11 (variability range 30%)
+plot_param_dispersion_curves_SASE30_uni_color;
+% plot and make figures for dispersion curves variability depending on C12 (variability range 30%)
+plot_param_dispersion_curves_SASE31_uni_color;
+% plot and make figures for dispersion curves variability depending on C13 (variability range 30%)
+plot_param_dispersion_curves_SASE32_uni_color;
+% plot and make figures for dispersion curves variability depending on C22 (variability range 30%)
+plot_param_dispersion_curves_SASE33_uni_color;
+% plot and make figures for dispersion curves variability depending on C23 (variability range 30%)
+plot_param_dispersion_curves_SASE34_uni_color;
+% plot and make figures for dispersion curves variability depending on C33 (variability range 30%)
+plot_param_dispersion_curves_SASE35_uni_color;
+% plot and make figures for dispersion curves variability depending on C44 (variability range 30%)
+plot_param_dispersion_curves_SASE36_uni_color;
+% plot and make figures for dispersion curves variability depending on C55 (variability range 30%)
+plot_param_dispersion_curves_SASE37_uni_color;
+% plot and make figures for dispersion curves variability depending on C66 (variability range 30%)
+plot_param_dispersion_curves_SASE38_uni_color;
+% surface dispersion (kx-ky)
+% plot and make figures for dispersion curves variability depending on C11 (variability range 30%)
+plot_param_dispersion_surf_SASE30_uni_color;
+% plot and make figures for dispersion curves variability depending on C12 (variability range 30%)
+plot_param_dispersion_surf_SASE31_uni_color;
+% plot and make figures for dispersion curves variability depending on C13 (variability range 30%)
+plot_param_dispersion_surf_SASE32_uni_color;
+% plot and make figures for dispersion curves variability depending on C22 (variability range 30%)
+plot_param_dispersion_surf_SASE33_uni_color;
+% plot and make figures for dispersion curves variability depending on C23 (variability range 30%)
+plot_param_dispersion_surf_SASE34_uni_color;
+% plot and make figures for dispersion curves variability depending on C33 (variability range 30%)
+plot_param_dispersion_surf_SASE35_uni_color;
+% plot and make figures for dispersion curves variability depending on C44 (variability range 30%)
+plot_param_dispersion_surf_SASE36_uni_color;
+% plot and make figures for dispersion curves variability depending on C55 (variability range 30%)
+plot_param_dispersion_surf_SASE37_uni_color;
+% plot and make figures for dispersion curves variability depending on C66 (variability range 30%)
+plot_param_dispersion_surf_SASE38_uni_color;
+% 
+%
 % plot and make figure for num dispersion curves on top of experimental results
 % for simulated pzt distrubution (9x9 points)
 plot_num_exp_dispersion_SASE9;
@@ -230,6 +393,13 @@ plot_dispersion_curves_ga_plain_weave_C_tensor_known_mass_50_l;
 % SH0 mode problem
 %plot_dispersion_curves_ga_plain_weave_C_tensor_known_mass_SH0
 plot_dispersion_curves_ga_plain_weave_C_tensor_known_mass_SH0_l;
+
+% unidirectional
+plot_dispersion_curves_ga_uni_C_tensor_known_mass_large;
+plot_dispersion_curves_ga_uni_C_tensor_known_mass_small
+% surface plot
+plot_dispersion_surf_ga_uni_C_tensor_known_mass_large;
+plot_dispersion_surf_ga_uni_C_tensor_known_mass_small;
 
 % plot and make figure for initial num dispersion curves on top of experimental results (plain weave)
 plot_dispersion_curves_ga_plain_weave_known_mass_initial;

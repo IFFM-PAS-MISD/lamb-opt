@@ -1,4 +1,4 @@
-% plot numerical dispersion curves
+% plot numerical dispersion curves (kx-ky surface plot)
 
 clear all; close all;
 
@@ -74,17 +74,7 @@ fprintf('Making figures: %s\n', modelname);
 %% load optimized constants
 output_name = [model_input_path,filesep,num2str(test_case),'output'];
 load(output_name); % 'C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal'
-% initial parameters
-% C11 = 100e9;
-% C12 = 5.7e9;
-% C13 = 5.7e9;
-% C22 = 12e9;
-% C23 = 5.5e9;
-% C33 = 12e9;
-% C44 = 3.3e9;
-% C55 = 4.6e9;
-% C66 = 4.6e9;
-% ObjVal = 1;
+
 %% compute dispersion curves
 [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,fmin,fmax,number_of_frequency_points,beta,stack_dir,np,nele_layer);
 % save file - it needs tweaking - add checking if C tensor was already computed 
@@ -127,8 +117,8 @@ for j=1:number_of_frequency_points  % selected frequencies
         wy3 =  squeeze(wavenumber(3, j, :)).*sin(beta'*pi/180); %  mode 3, frequency j
         wx4 = squeeze(wavenumber(4 , j, :)).*cos(beta'*pi/180); % mode 4, frequency j
         wy4 =  squeeze(wavenumber(4, j, :)).*sin(beta'*pi/180); %  mode 4, frequency j
-        wx5 = squeeze(wavenumber(5 , j, :)).*cos(beta'*pi/180); % mode 4, frequency j
-        wy5 =  squeeze(wavenumber(5, j, :)).*sin(beta'*pi/180); %  mode 4, frequency j
+        wx5 = squeeze(wavenumber(5 , j, :)).*cos(beta'*pi/180); % mode 5, frequency j
+        wy5 =  squeeze(wavenumber(5, j, :)).*sin(beta'*pi/180); %  mode 5, frequency j
         hold on;
     
         LW=0.1; % small figures
