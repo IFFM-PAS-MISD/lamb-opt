@@ -35,6 +35,7 @@ load([data_path,exp_filename{input_file}]); % Data_polar wavenumber_max fmax bet
 fmin = selected_frequencies(1);
 fmax = selected_frequencies(end);
 number_of_frequency_points = length(selected_frequencies);
+%return;
 %% Input for SASE
 ht = 2.85/1000; % [m] laminate total thickness; unidirectional
 np = 3; % order of elements (3<=np<=5)
@@ -85,7 +86,7 @@ Q66_lb = (1-variation)*Q66_0;
 Q66_ub = (1+variation)*Q66_0; 
 %% genetic algorithm parameters
 NIND = 100;           % Number of individuals per subpopulations
-MAXGEN = 70;        % maximum Number of generations
+MAXGEN = 120;        % maximum Number of generations
 GGAP = 0.9;           % Generation gap, how many new individuals are created
 NVAR = 9;           %number of variables in objective function
 PRECI = 12;          % Precision of binary representation of variables
@@ -99,7 +100,7 @@ ubin= [1,1,1,1,1,1,1,1,1];%include upper bound of variable range
 %%
 %% tests loop
 %%
-for test_case = [2]
+for test_case = [29:30]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
@@ -151,8 +152,33 @@ for test_case = [2]
             P=bs2rv(Chrom,FieldD);
             PBest(gen,:) = P(I,:);
             figure(1);
+            subplot(3,3,1);
             plot(PBest(:,1),'o-');
             title('C11');
+            subplot(3,3,2);
+            plot(PBest(:,2),'o-');
+            title('C12');
+            subplot(3,3,3);
+            plot(PBest(:,3),'o-');
+            title('C13');
+            subplot(3,3,4);
+            plot(PBest(:,4),'o-');
+            title('C22');
+            subplot(3,3,5);
+            plot(PBest(:,5),'o-');
+            title('C23');
+            subplot(3,3,6);
+            plot(PBest(:,6),'o-');
+            title('C33');
+            subplot(3,3,7);
+            plot(PBest(:,7),'o-');
+            title('C44');
+            subplot(3,3,8);
+            plot(PBest(:,8),'o-');
+            title('C55');
+            subplot(3,3,9);
+            plot(PBest(:,9),'o-');
+            title('C66');
             figure(2);
             plot(Best,'bo-');hold on;
             plot(Mean,'rd-');
@@ -160,12 +186,12 @@ for test_case = [2]
             title(['Objective fun value, generation: ',num2str(gen)])
             drawnow;
             toc
-            if(Best(gen) < ObjV_limit && gen >= 50) 
-                break; 
-            end
+%             if(Best(gen) < ObjV_limit && gen >= 50) 
+%                 break; 
+%             end
        end 
 
-         %% Plot best case
+         %% Save best case from last generation
         radians = false;
         % size 12cm by 8cm (1-column text)
         fig_width = 12; fig_height = 8; 

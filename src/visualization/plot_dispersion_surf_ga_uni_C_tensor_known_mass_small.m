@@ -17,7 +17,7 @@ fig_width = 7; fig_height = 7;
 modelfolder = 'genetic_algorithm';
 modelname = 'ga_unidirectional_C_tensor_known_mass_kx_ky';
 radians = false;
-test_case=1; % numerical data
+test_case=2; % numerical data
 % create output path
 output_path = prepare_figure_paths(modelfolder,modelname);
 

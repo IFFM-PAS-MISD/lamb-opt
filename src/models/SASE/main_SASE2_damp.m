@@ -78,7 +78,8 @@ for ii=1:nlayers
         C0i(1,1) = C11i(ii); C0i(1,2)=C12i(ii); C0i(2,1)=C12i(ii);C0i(1,3)=C13i(ii);C0i(3,1)=C13i(ii);C0i(2,2)=C22i(ii);C0i(2,3)=C23i(ii);C0i(3,2)=C23i(ii);C0i(3,3)=C33i(ii);C0ri(4,4)=C44i(ii);C0i(5,5)=C55i(ii);C0r(6,6)=C66(ii);
     end
     %C_tmp = transform_prop_3D(C0r,stack_dir,theta); % no damping, real elastic constants
-    C_tmp = transform_prop_3D(C0r+1i*C0i,stack_dir,theta); % damping, complex elastic constants
+    %C_tmp = transform_prop_3D(C0r+1i*C0i,stack_dir,theta); % damping, complex elastic constants
+    C_tmp = transform_prop_3D(C0r-1i*C0i,stack_dir,theta); % damping, complex elastic constants
     C{ii} = C_tmp;
 end
 
