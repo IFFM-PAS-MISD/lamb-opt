@@ -17,6 +17,12 @@ spatial_to_wavenumber_wavefield_selected_script_plain_weave;
 % '499x499p_chp200_x40_6Vpp_250Hz_uni'
 spatial_to_wavenumber_wavefield_selected_script_unidirectional;
 
+% 3D FFT of full wavefield data (Jochen's specimen with omega stringer) 
+% transformation from 2D-space-time to wavenumber-frequency
+% of selected files '483x483p_CHIRP_20-500kHz_125us_6Vpp_x3_stringer_intact'
+% lower left quarter
+spatial_to_wavenumber_wavefield_selected_script_stringer;
+
 % transformation of wavenumber field
 % from cartesian to polar coordinates at selected angles
 % processing of all files in interm exp folder
@@ -232,7 +238,11 @@ objective_fun_pzt_nmodes_1_script;
 % Composite_Structures_GA paper
 ga_plain_weave_known_mass_50;
 ga_plain_weave_C_tensor_known_mass_50;
-
+%% for second paper 
+ga_unidirectonal_C_tensor_known_mass_kx_ky;
+ga_unidirectional_C_tensor_known_mass;
+%% plate with stringer
+ga_stringer_C_tensor_known_mass;
 %% visualisation
 % plot and make figure for num dispersion curves on top of experimental results
 plot_num_exp_dispersion_SASE1;
