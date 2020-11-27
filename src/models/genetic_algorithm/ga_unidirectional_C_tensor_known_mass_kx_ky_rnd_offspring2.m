@@ -24,25 +24,28 @@ number_of_modes_considered = 5; % number of modes considered in calculation of o
 data_path=fullfile( projectroot, 'data','processed','exp', filesep );
 input_file = 1;
 % filename of parameter data
- filename = {'polar_interim_499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni_KXKYF_param',...
-                    'polar_interim_499x499p_chp200_x40_6Vpp_250Hz_uni_KXKYF_param'}; 
+ filename = {'polar_f_interim_499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni_KXKYF_param',...
+                    'polar_f_interim_499x499p_chp200_x40_6Vpp_250Hz_uni_KXKYF_param'};        
  load([data_path,filename{input_file}]); % wavenumber_max fmax beta number_of_wavenumber_points
 % load experimental data file
-exp_filename = {'polar_interim_499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni_KXKYF',... % 1 small area unidirectional
-                            'polar_interim_499x499p_chp200_x40_6Vpp_250Hz_uni_KXKYF'};         % 2 large area unidirectional
+exp_filename = {'polar_f_interim_499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni_KXKYF',... % 1 small area unidirectional
+                            'polar_f_interim_499x499p_chp200_x40_6Vpp_250Hz_uni_KXKYF'};         % 2 large area unidirectional
 load([data_path,exp_filename{input_file}]); % Data_polar wavenumber_max fmax beta number_of_wavenumber_points  
+
+fmin = selected_frequencies(1);
+fmax = selected_frequencies(end);
+number_of_frequency_points = length(selected_frequencies);
 %return;
 %% Input for SASE
-%beta = 0:15:90; % angles for dispersion curves in polar plot [deg]
 ht = 2.85/1000; % [m] laminate total thickness; unidirectional
 np = 3; % order of elements (3<=np<=5)
 nele_layer = 1; % no. of elements per ply
 wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
-layup = [90 90 90 90];
+layup = [90 90];
 
 nlayers = length(layup);
 
-h = [zeros(nlayers,1)+1]* ht/nlayers; % thickness of layers; new plain weave
+h = [zeros(nlayers,1)+1]* ht/nlayers; % thickness of layers; 
 % Stacking direction
 stack_dir = 1;
 %%
@@ -83,12 +86,16 @@ Q66_lb = (1-variation)*Q66_0;
 Q66_ub = (1+variation)*Q66_0; 
 %% genetic algorithm parameters
 NIND = 100;           % Number of individuals per subpopulations
-MAXGEN = 150;        % maximum Number of generations
-GGAP = 0.8;           % Generation gap, how many new individuals are created
+MAXGEN = 400;        % maximum Number of generations
+GGAP = 0.6;           % Generation gap, how many new individuals are created
 NVAR = 9;           %number of variables in objective function
-PRECI = 12;          % Precision of binary representation of variables
+PRECI = 11;          % Precision of binary representation of variables
 XOV = 0.7;          % crossover rate
 MUTR = 0.1;         % Mutation rate
+
+% param for my rog function
+ROGR = 0.05; % random offspring generation rate
+ROGSTEP = 10;% step of random offspring generation (eg. every 10 generations)
 
 lb=[Q11_lb,Q12_lb,Q13_lb,Q22_lb,Q23_lb,Q33_lb,Q44_lb,Q55_lb,Q66_lb]; % lower bound for variables
 ub=[Q11_ub,Q12_ub,Q13_ub,Q22_ub,Q23_ub,Q33_ub,Q44_ub,Q55_ub,Q66_ub]; % upper bound for variables
@@ -97,9 +104,24 @@ scale=[0,0,0,0,0,0,0,0,0]; %arithmetic scale
 lbin=  [1,1,1,1,1,1,1,1,1];%include lower bound of variable range
 ubin= [1,1,1,1,1,1,1,1,1];%include upper bound of variable range
 %%
+% create structure to pass it to the function instead of passing all arguments
+ObjfunArg.Data_polar = Data_polar;
+ObjfunArg.layup = layup;
+ObjfunArg.h=h;
+ObjfunArg.wavenumber_max=wavenumber_max;
+ObjfunArg.fmax=fmax;
+ObjfunArg.fmin=fmin;
+ObjfunArg.number_of_frequency_points=number_of_frequency_points;
+ObjfunArg.beta=beta;
+ObjfunArg.stack_dir=stack_dir;
+ObjfunArg.np=np;
+ObjfunArg.nele_layer=nele_layer;
+ObjfunArg.fmax=fmax;
+ObjfunArg.number_of_modes_considered=number_of_modes_considered;
+ObjfunArg.rho=rho;
 %% tests loop
 %%
-for test_case = [2:5]
+for test_case = [1:5]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
@@ -118,37 +140,28 @@ for test_case = [2:5]
        gen = 0;			% generational counter
 
         % Evaluate initial population
-        [ObjV] = obj_ga_C_tensor_known_mass_unidirectional(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho);
+        [ObjV] = obj_ga_C_tensor_known_mass_unidirectional_kx_ky(Phen,Data_polar,layup,h,fmin,fmax,wavenumber_max,number_of_frequency_points,beta,stack_dir,np,nele_layer,number_of_modes_considered,rho);
+       
         % Generational loop
        while gen < MAXGEN
             tic;
-            
-            if(mod(gen,10)==0) % random offspring generation
-                RandChrom = crtbp(1, NVAR*PRECI); % one random individual
-                % evaluate random individual
-                [ObjVRand] = obj_ga_C_tensor_known_mass_unidirectional(bs2rv(RandChrom,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho);
-                [A,I]=max(ObjV);
-                % replace weakest individual
-                Chrom(I,:) =  RandChrom;
-                % update ObjV
-                ObjV(I)=ObjVRand;
+             if(mod(gen,ROGSTEP)==0) % random offspring generation
+                [Chrom,ObjV] = rog_kx_ky(ROGR,NIND,NVAR,PRECI,ObjV,FieldD,Chrom,ObjfunArg);
             end
         % Assign fitness-value to entire population
            FitnV = ranking(ObjV);
-          
-            % Select individuals for breeding
+
+        % Select individuals for breeding
            SelCh = select('sus', Chrom, FitnV, GGAP); % stochastic universal sampling
            %SelCh = select('rws', Chrom, FitnV, GGAP); % stochastic sampling with replacement
         % Recombine selected individuals (crossover)
-           SelCh = recombin('xovsp',SelCh,XOV);
+           SelCh = recombin('xovsp',SelCh,0.7);
 
         % Perform mutation on offspring
-           SelCh = mut(SelCh,MUTR); % Probability of mutation MUTR
+           SelCh = mut(SelCh); % Probability of mutation Pm=0.7/Lind where Lind is the length of chromosome structure
 
         % Evaluate offspring, call objective function
-            %tic;
-           [ObjVSel] = obj_ga_C_tensor_known_mass_unidirectional(bs2rv(SelCh,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho);
-           %toc
+           [ObjVSel] = obj_ga_C_tensor_known_mass_unidirectional_kx_ky(bs2rv(SelCh,FieldD),Data_polar,layup,h,fmin,fmax,wavenumber_max,number_of_frequency_points,beta,stack_dir,np,nele_layer,number_of_modes_considered,rho);    
            % Reinsert offspring into current population
            [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);
 
@@ -202,7 +215,7 @@ for test_case = [2:5]
 %             end
        end 
 
-        %% Save best case from last generation
+         %% Save best case from last generation
         radians = false;
         % size 12cm by 8cm (1-column text)
         fig_width = 12; fig_height = 8; 
@@ -221,7 +234,7 @@ for test_case = [2:5]
         
          [C11,C12,C13,C22,C23,C33,C44,C55,C66]
 
-         save(output_name,'C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal');
+         save(output_name,'C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal','Best','Mean');
      else
          fprintf([modelname,' test case: %d already exist\n'], test_case);
      end

@@ -83,12 +83,16 @@ Q66_lb = (1-variation)*Q66_0;
 Q66_ub = (1+variation)*Q66_0; 
 %% genetic algorithm parameters
 NIND = 100;           % Number of individuals per subpopulations
-MAXGEN = 150;        % maximum Number of generations
+MAXGEN = 400;        % maximum Number of generations
 GGAP = 0.8;           % Generation gap, how many new individuals are created
 NVAR = 9;           %number of variables in objective function
 PRECI = 12;          % Precision of binary representation of variables
 XOV = 0.7;          % crossover rate
 MUTR = 0.1;         % Mutation rate
+
+% param for my rog function
+ROGR = 0.01; % random offspring generation rate
+ROGSTEP = 10;% step of random offspring generation (eg. every 10 generations)
 
 lb=[Q11_lb,Q12_lb,Q13_lb,Q22_lb,Q23_lb,Q33_lb,Q44_lb,Q55_lb,Q66_lb]; % lower bound for variables
 ub=[Q11_ub,Q12_ub,Q13_ub,Q22_ub,Q23_ub,Q33_ub,Q44_ub,Q55_ub,Q66_ub]; % upper bound for variables
@@ -97,9 +101,23 @@ scale=[0,0,0,0,0,0,0,0,0]; %arithmetic scale
 lbin=  [1,1,1,1,1,1,1,1,1];%include lower bound of variable range
 ubin= [1,1,1,1,1,1,1,1,1];%include upper bound of variable range
 %%
-%% tests loop
+% create structure to pass it to the function instead of passing all arguments
+ObjfunArg.Data_polar = Data_polar;
+ObjfunArg.layup = layup;
+ObjfunArg.h=h;
+ObjfunArg.wavenumber_min=wavenumber_min;
+ObjfunArg.wavenumber_max=wavenumber_max;
+ObjfunArg.number_of_wavenumber_points=number_of_wavenumber_points;
+ObjfunArg.beta=beta;
+ObjfunArg.stack_dir=stack_dir;
+ObjfunArg.np=np;
+ObjfunArg.nele_layer=nele_layer;
+ObjfunArg.fmax=fmax;
+ObjfunArg.number_of_modes_considered=number_of_modes_considered;
+ObjfunArg.rho=rho;
+% tests loop
 %%
-for test_case = [2:5]
+for test_case = [1:5]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
@@ -116,22 +134,15 @@ for test_case = [2:5]
        PBest = NaN*ones(MAXGEN,NVAR);	% best in current population
        ObjV_limit = 8.0; % stopping criteria
        gen = 0;			% generational counter
-
+       
         % Evaluate initial population
         [ObjV] = obj_ga_C_tensor_known_mass_unidirectional(Phen,Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho);
         % Generational loop
        while gen < MAXGEN
             tic;
             
-            if(mod(gen,10)==0) % random offspring generation
-                RandChrom = crtbp(1, NVAR*PRECI); % one random individual
-                % evaluate random individual
-                [ObjVRand] = obj_ga_C_tensor_known_mass_unidirectional(bs2rv(RandChrom,FieldD),Data_polar,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,fmax,number_of_modes_considered,rho);
-                [A,I]=max(ObjV);
-                % replace weakest individual
-                Chrom(I,:) =  RandChrom;
-                % update ObjV
-                ObjV(I)=ObjVRand;
+            if(mod(gen,ROGSTEP)==0) % random offspring generation
+                [Chrom,ObjV] = rog(ROGR,NIND,NVAR,PRECI,ObjV,FieldD,Chrom,ObjfunArg);
             end
         % Assign fitness-value to entire population
            FitnV = ranking(ObjV);
