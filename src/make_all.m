@@ -23,10 +23,20 @@ spatial_to_wavenumber_wavefield_selected_script_unidirectional;
 % lower left quarter
 spatial_to_wavenumber_wavefield_selected_script_stringer;
 
+% 3D FFT of full wavefield data (unidirectional composite) 
+% transformation from 2D-space-time to wavenumber-frequency
+% from numerical simulations
+spatial_to_wavenumber_wavefield_selected_script_uni_num;
+
 % transformation of wavenumber field
 % from cartesian to polar coordinates at selected angles
 % processing of all files in interm exp folder
 cartesian_to_polar_wavenumber_wavefield_script;
+
+% transformation of wavenumber field
+% from cartesian to polar coordinates at selected angles
+% processing of all files in interm num folder
+cartesian_to_polar_wavenumber_wavefield_script_num;
 
 % transformation of wavefield
 % from cartesian to polar

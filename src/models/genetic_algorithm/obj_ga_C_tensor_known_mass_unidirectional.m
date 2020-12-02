@@ -57,7 +57,8 @@ parfor k=1:size(Phen,1)
     %% SASE
     [wavenumber,CG,FREQ] = main_SASE(rho,Q11,Q12,Q13,Q22,Q23,Q33,Q44,Q55,Q66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
 
-    [score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered);
+    %[score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered);
+    [score] = objective_fun_mod(Data_polar,fmax,FREQ,number_of_modes_considered)
     %ObjV(k)=1-score;
     %ObjV(k)=0.5-score;
     ObjV(k)=a*(-1)*score+b;
