@@ -10,10 +10,12 @@ clc;close all;clear all;
 load project_paths projectroot src_path;
 % input
 overwrite = false; % allow overwriting existing results if true
+%overwrite = true;
 % length and width of full wavefield area
 Length = 1.2;    
 Width =  1.2; 
-test_case=[16:21]; % select file numbers for processing
+%test_case=[16:18]; % select file numbers for processing
+test_case=[16:24]; % select file numbers for processing
 
 % create path to the experimental raw data folder
 raw_data_path = 'E:\work\projects\nawa-bekker\ma-shm\data\interim\num\flat_shell\flat_shell_SHMII2021_out\';

@@ -6,8 +6,8 @@ clear all; close all;
 
 % load projectroot path
 load project_paths projectroot src_path;
-overwrite = true; % allow overwriting existing results if true
-%overwrite = true;
+%overwrite = false; % allow overwriting existing results if true
+overwrite = true;
 % figure parameters
 % size 12cm by 8cm (1-column text)
 %fig_width = 12; fig_height = 8; 
@@ -16,7 +16,8 @@ fig_width = 7; fig_height = 5;
 % create path to the numerical model data folder
 modelfolder = 'genetic_algorithm';
 modelname = 'ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_2lay';
-modelname2= 'ga_uni_SHMII_2021_optimized_num';
+%modelname2= 'ga_uni_SHMII_2021_optimized_num';
+modelname2= 'ga_uni_SHMII_2021_optimized_num2';
 radians = false;
 test_case=5; % numerical data
 % create output path
@@ -34,12 +35,18 @@ num_input_data_path=fullfile( projectroot, 'data','processed','num', filesep );
 % filename of parameter data
 filename = {'polar_interim_flat_shell_Vz_16_982x982bottom_KXKYF_param',...
                 'polar_interim_flat_shell_Vz_17_982x982bottom_KXKYF_param',...
-                'polar_interim_flat_shell_Vz_18_982x982bottom_KXKYF_param'}; 
+                'polar_interim_flat_shell_Vz_18_982x982bottom_KXKYF_param',...
+                'polar_interim_flat_shell_Vz_22_982x982bottom_KXKYF_param',...
+                'polar_interim_flat_shell_Vz_23_982x982bottom_KXKYF_param',...
+                'polar_interim_flat_shell_Vz_24_982x982bottom_KXKYF_param'}; 
 
 % load numerical data file
 num_filename = {'polar_interim_flat_shell_Vz_16_982x982bottom_KXKYF',...
                 'polar_interim_flat_shell_Vz_17_982x982bottom_KXKYF',...
-                'polar_interim_flat_shell_Vz_18_982x982bottom_KXKYF'}; 
+                'polar_interim_flat_shell_Vz_18_982x982bottom_KXKYF',...
+                'polar_interim_flat_shell_Vz_22_982x982bottom_KXKYF',...
+                'polar_interim_flat_shell_Vz_23_982x982bottom_KXKYF',...
+                'polar_interim_flat_shell_Vz_24_982x982bottom_KXKYF'}; 
 
 input_file=1;
 load([num_input_data_path,filename{input_file}]); % wavenumber_max fmax beta number_of_wavenumber_points           
@@ -62,6 +69,29 @@ load([num_input_data_path,filename{input_file}]); % wavenumber_max fmax beta num
 load([num_input_data_path,num_filename{input_file}]); % Data_polar wavenumber_max fmax beta number_of_wavenumber_points
 wavenumber_max3 = wavenumber_max;
 fmax3 =fmax;
+
+% input_file=4;
+% load([num_input_data_path,filename{input_file}]); % wavenumber_max fmax beta number_of_wavenumber_points           
+% load([num_input_data_path,num_filename{input_file}]); % Data_polar wavenumber_max fmax beta number_of_wavenumber_points
+% wavenumber_max1 = wavenumber_max;
+% fmax1 =fmax;
+% 
+% Data_polar1=Data_polar;
+% 
+% input_file=5;
+% load([num_input_data_path,filename{input_file}]); % wavenumber_max fmax beta number_of_wavenumber_points           
+% load([num_input_data_path,num_filename{input_file}]); % Data_polar wavenumber_max fmax beta number_of_wavenumber_points
+% wavenumber_max2 = wavenumber_max;
+% fmax2 =fmax;
+% 
+% Data_polar2=Data_polar;
+% 
+% input_file=6;
+% load([num_input_data_path,filename{input_file}]); % wavenumber_max fmax beta number_of_wavenumber_points           
+% load([num_input_data_path,num_filename{input_file}]); % Data_polar wavenumber_max fmax beta number_of_wavenumber_points
+% wavenumber_max3 = wavenumber_max;
+% fmax3 =fmax;
+
 
 Data_polar3=Data_polar;
 

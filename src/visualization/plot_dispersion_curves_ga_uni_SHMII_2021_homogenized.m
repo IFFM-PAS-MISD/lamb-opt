@@ -58,7 +58,7 @@ fvec = linspace(0,fmax,number_of_frequency_points);
 %    wavenumber_max = wavenumber_max/(2*pi); % linear scale [1/m]
 % end
 fprintf('Making figures: %s\n', modelname);
-%% homogenized constants from script Homogenized_C_matrix.m (3D solid)
+%% homogenized constants from script Homogenized_Cmatrix.m (3D solid)
 rho=1531.2;
 % Voigt notation
 C11=130.06e9;
