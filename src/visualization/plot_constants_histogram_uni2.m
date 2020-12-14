@@ -14,7 +14,8 @@ modelfolder = 'genetic_algorithm';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  %% direct method   k-f
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- modelname1 = 'ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_400_10';
+%  modelname1 = 'ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_400_10';
+ modelname1 = 'ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_2lay6';
 % create path to the numerical raw data folder
 model_input_path = fullfile( projectroot, 'data','raw','num',modelfolder,[modelname1,'_out'], filesep );
 

@@ -15,10 +15,10 @@ overwrite = false; % allow overwriting existing results if true
 fig_width = 7; fig_height = 5; 
 % create path to the numerical model data folder
 modelfolder = 'genetic_algorithm';
-modelname = 'ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_2lay';
+modelname = 'ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_2lay6';
 modelname2= 'ga_uni_SHMII_2021_optimized';
 radians = false;
-test_case=5; % numerical data
+test_case=1; % numerical data
 % create output path
 output_path = prepare_figure_paths(modelfolder,modelname2);
 

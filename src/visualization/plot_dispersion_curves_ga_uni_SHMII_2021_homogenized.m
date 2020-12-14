@@ -61,19 +61,32 @@ fprintf('Making figures: %s\n', modelname);
 %% homogenized constants from script Homogenized_Cmatrix.m (3D solid)
 rho=1531.2;
 % Voigt notation
-C11=130.06e9;
-C12=3.45e9;
-C13=3.45e9;
-C22=11.95e9;
-C23=3.26e9;
-C33=11.95e9;
-C44=4.51e9;
+% for vol_bundle = 0.6
+% C11=130.06e9;
+% C12=3.45e9;
+% C13=3.45e9;
+% C22=11.95e9;
+% C23=3.26e9;
+% C33=11.95e9;
+% C44=4.35e9;
+% C55=4.51e9;
+% C66=4.51e9;
+% Voigt notation
+% for vol_bundle = 1
+C11=130.11e9;
+C12=3.56e9;
+C13=3.56e9;
+C22=12.31e9;
+C23=3.36e9;
+C33=12.31e9;
+C44=4.48e9;
 C55=4.51e9;
-C66=4.35e9;
+C66=4.51e9;
+
 %% compute dispersion curves
 number_of_modes_considered=5;
 [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
-[score] = objective_fun(Data_polar,fmax,FREQ,number_of_modes_considered);
+[score] = objective_fun_mod(Data_polar,fmax,FREQ,number_of_modes_considered);
 a=100;
 b=250;
 ObjVal=a*(-1)*score+b;
