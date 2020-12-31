@@ -10,6 +10,7 @@ spatial_to_wavenumber_wavefield_selected_script;
 % transformation from 2D-space-time to wavenumber-frequency
 % of selected file '499x499p_chp200_x40_18Vpp_250Hz'
 spatial_to_wavenumber_wavefield_selected_script_plain_weave;
+spatial_to_wavenumber_wavefield_selected_script_CFRP_Fiborek;
 
 % 3D FFT of full wavefield data (unidirectional specimen) 
 % transformation from 2D-space-time to wavenumber-frequency
