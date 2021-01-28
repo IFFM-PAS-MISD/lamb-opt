@@ -286,27 +286,27 @@ Three strategies can be applied:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Selected angle slices}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The slices of wavenumber-wavenumber-frequency data at selected wave propagation angles ($\beta=30^{\circ}$, $\beta=90^{\circ}$) are presented in Figure 2. 
+The slices of wavenumber-wavenumber-frequency data at selected wave propagation angles ($\beta=30^{\circ}$, $\beta=90^{\circ}$) are presented in Fig.~\ref{fig:angle_slice}. 
 The slices reveal patterns which represent characteristic dispersion curves. 
 Corresponding numerical dispersion curves can be computed quite fast by the semi-analytic method by swept over real wavenumber range.
 Equation~(\ref{eq:eig_standard}) is used in this strategy.
 The following wave propagation angles were considered in this paper: 0$^{\circ}$, 15$^{\circ}$, 30$^{\circ}$, 45$^{\circ}$, 60$^{\circ}$, 75$^{\circ}$ and 90$^{\circ}$.
 \begin{figure} [h!]
 	\centering
-	\includegraphics{angle_slice2.png}	
+	\includegraphics{figure2.png}	
 	\caption{Experimental wavenumber-wavenumber-frequency data sliced at chosen angles ($\beta=30^{\circ}$ and $\beta=90^{\circ}$).}
 	\label{fig:angle_slice}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Selected frequency slices}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The data slices at frequencies 100 kHz and 350 kHz are shown in Figure 3. 
+The data slices at frequencies 100 kHz and 350 kHz are shown in Fig.~\ref{fig:freq_slice}. 
 The elliptic-like pattern of wavenumbers is visible (wavenumber surface).
 In this case Eq.~(\ref{eq:eig_poly}) is more appropriate for calculation of equivalent numerical wavenumber profiles but it requires longer computation time as mentioned before.
-The following frequency slices were considered in this paper: 40, 80, 120, 160, 200, 240 and 280~kHz giving the same number of slices as in the case of angle slices.
+The following frequency slices were considered in this paper: 48.85, 98.94, 149.04, 199.14, 249.24, 299.33 and 349.43~kHz giving the same number of slices as in the case of angle slices.
 \begin{figure} [h!]
 	\centering
-	\includegraphics{freq_slice2.png}	
+	\includegraphics{figure3.png}	
 	\caption{Experimental wavenumber-wavenumber-frequency data sliced at chosen frequencies (100 kHz and 350 kHz).}
 	\label{fig:freq_slice}
 \end{figure}
@@ -441,6 +441,100 @@ The results of inversion by using $\beta$-slicing method and $f$-slicing method 
 	\end{tabular} 
 	\label{tab:mat_prop_identified}
 \end{table}
+It can be noticed that optimised elastic properties given in Table~\ref{tab:mat_prop_identified} are significantly different than elastic constants estimated through homogenisation. 
+The differences are as large as around 6\% for $C_{11}$ and up to 45\% for $C_{13}$ elastic constant.
+These differences also contribute to differences in dispersion curves. 
+Comparison of dispersion curves calculated by SASE method for homogenised material properties with dispersion curves calculated for optimised material properties is given in Figure 3. 
+White dispersion curves are overlaid on experimental images. 
+Red and yellow colours on experimental images resemble dispersion curves where on the horizontal axis is the frequency $f$ and on the vertical axis is the wavenumber $k$. 
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure4a.png}
+		\caption{SASE (homogenised) vs experimental; $\beta=0^{\circ}$}
+		\label{fig:dispersion0deg_homog}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure4b.png}
+		\caption{SASE (optimised) vs experimental; $\beta=0^{\circ}$}
+		\label{fig:dispersion0deg_opt}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure4c.png}
+		\caption{SASE (homogenised) vs experimental; $\beta=45^{\circ}$}
+		\label{fig:dispersion45deg_homog}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure4d.png}
+		\caption{SASE (optimised) vs experimental; $\beta=45^{\circ}$}
+		\label{fig:dispersion45deg_opt}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure4e.png}
+		\caption{SASE (homogenised) vs experimental; $\beta=60^{\circ}$}
+		\label{fig:dispersion60deg_homog}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure4f.png}
+		\caption{SASE (optimised) vs experimental; $\beta=60^{\circ}$}
+		\label{fig:dispersion60deg_opt}
+	\end{subfigure}
+	\caption{Comparison of dispersion curves calculated by SASE method for homogenised material properties (left) with dispersion curves calculated for optimised material properties (right). White dispersion curves are overlaid on experimental images.}
+	\label{fig:homog_opt}
+\end{figure}
+
+
+
+SASE curves calculated for the homogenised material properties are significantly overestimated at angle 0\(^{\circ}\) (in this case perpendicular to fibres) and slightly underestimated at angle 90° (parallel to fibres). 
+The best fit is at about 45\(^{\circ}\). 
+In contrast, SASE curves calculated for optimised material properties almost perfectly matches the red and yellow spots on experimental images. 
+The objective function value $F$ is 97.11 for a homogenised case and 16.78 for the optimised case, respectively. 
+In other words, the fitness of dispersion curves calculated by SASE model to experimental one is much better for the latter case (the lower $F$ means better fitness).
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure5a.png}
+		%\caption{}
+		\label{fig:freq3_slice_opt}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure5b.png}
+		%\caption{}
+		\label{fig:freq4_slice_opt}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure5c.png}
+		%\caption{}
+		\label{fig:freq5_slice_opt}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure5d.png}
+		%\caption{}
+		\label{fig:freq7_slice_opt}
+	\end{subfigure}
+	\caption{Comparison of wavenumber profiles calculated by SASE method for optimised material properties (white curves) with experimental images.}
+	\label{fig:freq_slice_opt}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{SEM model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -472,6 +566,53 @@ In particular, transverse displacements are extracted from the SEM model and int
 Numerical full wavefield data sets calculated for the carrier frequencies 16.5~kHz, 50~kHz and 100~kHz were processed by the 3D Fourier transform and next combined. 
 Due to the fact, that Hann windowed signal with 5 cycles has some frequency bandwidth, the combined image gives a good representation of A0 mode dispersion curve as presented in Figure 4. 
 
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure6a.png}
+		\caption{SASE (optim.) vs SEM (homog.); $\beta=0^{\circ}$}
+		\label{fig:dispersion0deg_homog_num}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure6b.png}
+		\caption{SASE (optim.) vs SEM (optim.); $\beta=0^{\circ}$}
+		\label{fig:dispersion0deg_opt_num}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure6c.png}
+		\caption{SASE (optim.) vs SEM (homog.); $\beta=45^{\circ}$}
+		\label{fig:dispersion45deg_homog_num}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure6d.png}
+		\caption{SASE (optim.) vs SEM (optim.); $\beta=45^{\circ}$}
+		\label{fig:dispersion45deg_opt_num}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure6e.png}
+		\caption{SASE (optimised) vs SEM (homog.); $\beta=60^{\circ}$}
+		\label{fig:dispersion60deg_homog_num}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure6f.png}
+		\caption{SASE (optim.) vs SEM (optim.); $\beta=60^{\circ}$}
+		\label{fig:dispersion60deg_opt_num}
+	\end{subfigure}
+	\caption{Comparison of A0 mode dispersion images calculated by the SEM model for the homogenised material properties (left) and optimised material properties (right). White A0 mode dispersion curves calculated by SASE model for optimised material properties are given as a reference. }
+	\label{fig:homog_opt_num}
+\end{figure}
+
 Figure 4 shows the comparison of A0 mode dispersion images calculated by the SEM model for the homogenised material properties and optimised material properties obtained by $\beta$-slicing method as given in Table~\ref{tab:mat_prop_identified}. 
 White A0 mode dispersion curves calculated by SASE model for optimised material properties obtained by $\beta$-slicing method are given as a reference. 
 It is confirmed that homogenised material properties lead to significant error in dispersion curves which directly translate to errors in phase velocities given by relationship $c_p= f/k$.
@@ -498,8 +639,9 @@ OGW is an extendable online platform where high-quality and well-documented data
 \subsection{Specimen}
 The benchmark structure used for validation was quasi-isotropic carbon-fibre-reinforced polymer (CFRP) plate with embedded piezoelectric transducers. 
 The layup was [45/0/-45/90/-45/0/45/90]\textsubscript{S}. 
-CFRP plate had the dimensions of 500 mm \(\times\) 500 mm and a thickness of 2 mm provided by manufacturer. 
-The measured average thickness was 2.086 mm. 
+CFRP plate had the dimensions of 500 mm \(\times\) 500 mm and a thickness of 2 mm 
+(values provided by manufacturer). 
+The actual measured average thickness was 2.086 mm. 
 The diameter of the piezoelectric transducers was 10 mm and the thickness 0.2 mm. 
 The specimen was made of prepreg material Hexply\textsuperscript{\textregistered} M21/34\%/UD134/T700/300. 
 The established material properties by various test standards for unidirectional Hexply material are given in Table~\ref{tab:mat_prop_Moll}. 

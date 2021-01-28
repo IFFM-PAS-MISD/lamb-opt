@@ -51,92 +51,92 @@ f = linspace(0,1/T/2,samples/2)*10^-3;
 [mkx,mky,mf] = meshgrid(KX,KY,f);
 
 %% X-Y-t slices
-fig1 = figure; 
-xslice = WL(1)/2; yslice = WL(2)/2;  zslice = [1*10^-4 7*10^-4];    %slices positions
-h = slice(mx,my,mt,Data,xslice,yslice,zslice);
-set(h,'FaceColor','interp','EdgeColor','none'); set(fig1,'Renderer','zbuffer');
-
-xlabel({'$x$ [m]'},'Fontsize',12,'interpreter','latex');
-ylabel({'$y$ [m]'},'Fontsize',12,'interpreter','latex');
-zlabel({'$t$ [s]'},'Fontsize',12,'interpreter','latex');
-
-lightangle(-45,45)
-lightangle(-45,45)
-colormap (jet(255))
-caxis([-5 5]*10^-3)
-box on; ax = gca; ax.BoxStyle = 'full';
-view(-38.5,16)
-axis tight
-
-set(fig1, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
-% remove unnecessary white space
-set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-fig1.PaperPositionMode   = 'auto';
-set(gca,'Fontsize',10,'linewidth',1);
-set(gca,'FontName','Times');
-figfilename = ['X_Y_t_slice_',filename(1:end-4)];
-%print([output_path,figfilename],'-dpng', '-r600'); 
-
-
-fig2 = figure; 
-xslice = 0.25; yslice = 0.25; zslice = [1*10^-4 7*10^-4];
-h = slice(mx,my,mt,abs(Data),xslice,yslice,zslice);
-set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
-
-xlabel({'$x$ [m]'},'Fontsize',12,'interpreter','latex');
-ylabel({'$y$ [m]'},'Fontsize',12,'interpreter','latex');
-zlabel({'$t$ [s]'},'Fontsize',12,'interpreter','latex');
-set(gca,'Fontsize',10,'linewidth',1);
-set(gca,'FontName','Times');
-
-lightangle(-45,45)
-lightangle(-45,45)
-colormap (jet(255))
-caxis([0 5]*10^-3)
-box on; ax = gca; ax.BoxStyle = 'full';
-view(-38.5,16)
-axis tight
-
-set(fig2, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
-% remove unnecessary white space
-set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-fig2.PaperPositionMode   = 'auto';
-figfilename = ['X_Y_t_slice2_',filename(1:end-4)];
+% fig1 = figure; 
+% xslice = WL(1)/2; yslice = WL(2)/2;  zslice = [1*10^-4 7*10^-4];    %slices positions
+% h = slice(mx,my,mt,Data,xslice,yslice,zslice);
+% set(h,'FaceColor','interp','EdgeColor','none'); set(fig1,'Renderer','zbuffer');
+% 
+% xlabel({'$x$ [m]'},'Fontsize',12,'interpreter','latex');
+% ylabel({'$y$ [m]'},'Fontsize',12,'interpreter','latex');
+% zlabel({'$t$ [s]'},'Fontsize',12,'interpreter','latex');
+% 
+% lightangle(-45,45)
+% lightangle(-45,45)
+% colormap (jet(255))
+% caxis([-5 5]*10^-3)
+% box on; ax = gca; ax.BoxStyle = 'full';
+% view(-38.5,16)
+% axis tight
+% 
+% set(fig1, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+% % remove unnecessary white space
+% set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+% fig1.PaperPositionMode   = 'auto';
+% set(gca,'Fontsize',10,'linewidth',1);
+% set(gca,'FontName','Times');
+% figfilename = ['X_Y_t_slice_',filename(1:end-4)];
+% %print([output_path,figfilename],'-dpng', '-r600'); 
+% 
+% 
+% fig2 = figure; 
+% xslice = 0.25; yslice = 0.25; zslice = [1*10^-4 7*10^-4];
+% h = slice(mx,my,mt,abs(Data),xslice,yslice,zslice);
+% set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+% 
+% xlabel({'$x$ [m]'},'Fontsize',12,'interpreter','latex');
+% ylabel({'$y$ [m]'},'Fontsize',12,'interpreter','latex');
+% zlabel({'$t$ [s]'},'Fontsize',12,'interpreter','latex');
+% set(gca,'Fontsize',10,'linewidth',1);
+% set(gca,'FontName','Times');
+% 
+% lightangle(-45,45)
+% lightangle(-45,45)
+% colormap (jet(255))
+% caxis([0 5]*10^-3)
+% box on; ax = gca; ax.BoxStyle = 'full';
+% view(-38.5,16)
+% axis tight
+% 
+% set(fig2, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+% % remove unnecessary white space
+% set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+% fig2.PaperPositionMode   = 'auto';
+% figfilename = ['X_Y_t_slice2_',filename(1:end-4)];
 %print([output_path,figfilename],'-dpng', '-r600'); 
 
 %% FFT3D
 KXKYF = fftshift(fftn(Data));
 
 %%  KX-KY-F slices
-fig3 = figure;
-
-xslice = []; yslice = []; zslice = freq_slice_list;
-h = slice(mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice,yslice,zslice);
-set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
-
-ylabel({'$k_y$ [1/m]'},'Fontsize',12,'interpreter','latex');
-xlabel({'$k_x$ [1/m]'},'Fontsize',12,'interpreter','latex');
-zlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex')
-set(gca,'Fontsize',10,'linewidth',1);
-set(gca,'FontName','Times');
-
-lightangle(-45,45)
-lightangle(-45,45)
-colormap (jet(255))
-caxis([0 20]*10)
-xlim([-maxkx maxkx])
-ylim([-maxky maxky])
-zlim([0 maxf])
-box on; ax = gca; ax.BoxStyle = 'full';
-view(-20,20)
-
-
-set(fig3, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
-% remove unnecessary white space
-set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-fig3.PaperPositionMode   = 'auto';
-figfilename = ['kx-ky-f_slices__',filename(1:end-4)];
-print([output_path,figfilename],'-dpng', '-r600'); 
+% fig3 = figure;
+% 
+% xslice = []; yslice = []; zslice = freq_slice_list;
+% h = slice(mkx,mky,mf,abs(KXKYF(:,:,end/2+1:end)),xslice,yslice,zslice);
+% set(h,'FaceColor','interp','EdgeColor','none'); set(gcf,'Renderer','zbuffer');
+% 
+% ylabel({'$k_y$ [1/m]'},'Fontsize',12,'interpreter','latex');
+% xlabel({'$k_x$ [1/m]'},'Fontsize',12,'interpreter','latex');
+% zlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex')
+% set(gca,'Fontsize',10,'linewidth',1);
+% set(gca,'FontName','Times');
+% 
+% lightangle(-45,45)
+% lightangle(-45,45)
+% colormap (jet(255))
+% caxis([0 20]*10)
+% xlim([-maxkx maxkx])
+% ylim([-maxky maxky])
+% zlim([0 maxf])
+% box on; ax = gca; ax.BoxStyle = 'full';
+% view(-20,20)
+% 
+% 
+% set(fig3, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
+% % remove unnecessary white space
+% set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+% fig3.PaperPositionMode   = 'auto';
+% figfilename = ['kx-ky-f_slices__',filename(1:end-4)];
+%print([output_path,figfilename],'-dpng', '-r600'); 
 
 
 fig4 = figure;
@@ -164,8 +164,9 @@ zlim([0 maxf])
 set(fig4, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 12cm by 8cm (1-column text)
 % remove unnecessary white space
 set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-fig3.PaperPositionMode   = 'auto';
-figfilename = ['kx-ky-f_slices2__',filename(1:end-4)];
+fig4.PaperPositionMode   = 'auto';
+%figfilename = ['kx-ky-f_slices2__',filename(1:end-4)];
+figfilename = 'freq_slice2.png'; 
 print([output_path,figfilename],'-dpng', '-r600'); 
 
 %% slicing At Arbitrary Angles
@@ -256,7 +257,7 @@ xlim([-maxkx maxkx])
 ylim([-maxky maxky])
 zlim([0 maxf])
 lightangle(45,45);
-lightangle(-20,45)
+lightangle(-20,45);
 lightangle(10,80);
 lightangle(-20,20);
 
@@ -264,7 +265,8 @@ set(fig5, 'Units','centimeters', 'Position',[2 2 fig_width fig_height]); % size 
 % remove unnecessary white space
 set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
 fig5.PaperPositionMode   = 'auto';
-figfilename = ['KXKYF_slices_2',filename(1:end-4)];
+%figfilename = ['KXKYF_slices_2',filename(1:end-4)];
+figfilename = 'angle_slice2.png';
 print([output_path,figfilename],'-dpng', '-r600'); 
 
 return;
