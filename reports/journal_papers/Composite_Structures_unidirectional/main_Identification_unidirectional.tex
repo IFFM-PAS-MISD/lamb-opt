@@ -46,6 +46,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{booktabs} % for nice tables
+\usepackage{multirow} % for multirows in tables
 %\usepackage{breqn}
 % matrix command 
 \newcommand{\matr}[1]{\mathbf{#1}} % bold upright (Elsevier, Springer)
@@ -267,13 +268,13 @@ Unfortunately, solving a second‐order polynomial eigenvalue problem is about 1
 
 Linear frequencies $f=\omega/(2 \pi)$ will be used in next sections instead of angular frequencies $\omega$ for easier interpretation of figures.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Strategies for determination of material properties}
+\section{Strategies for determination of material properties \label{sec:strategies}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Dispersion curves calculated numerically must be accompanied by experimental counterpart to build appropriate objective function. 
 In this paper we consider guided waves acquired at dense grid of points on the surface of a plate which forms full wavefield data set. 
 
 Full wavefield data set can be acquired by scanning laser Doppler vibrometer (SLDV).
-It is a 3D matrix representing spatial dimensions $x$, $y$ and the time $t$. 
+The data set is a 3D matrix representing spatial dimensions $x$, $y$ and the time $t$. 
 3D Fourier transform leads to wavenumber-wavenumber-frequency representation  in the Cartesian coordinate system ($k_x$, $k_y$, $f$) or wavenumber-angle-frequency representation  in the cylindrical coordinate system ($k$, $\beta$, $f$).
 
 Three strategies can be applied:
@@ -282,31 +283,72 @@ Three strategies can be applied:
 	\item utilise data set at selected frequency slices,
 	\item use mixed approach (not considered here).
 \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Selected angle slices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The slices of wavenumber-wavenumber-frequency data at selected wave propagation angles ($\beta=30^{\circ}$, $\beta=90^{\circ}$) are presented in Figure 2. 
 The slices reveal patterns which represent characteristic dispersion curves. 
 Corresponding numerical dispersion curves can be computed quite fast by the semi-analytic method by swept over real wavenumber range.
 Equation~(\ref{eq:eig_standard}) is used in this strategy.
-
-The data slices at frequencies 100 kHz and 350 kHz are shown in Figure 3. 
-The elliptic-like pattern of wavenumbers is visible (wavenumber surface).
-In this case Eq.~(\ref{eq:eig_poly}) is more appropriate for calculation of equivalent numerical wavenumber curves but it requires longer computation time as mentioned before.
-
+The following wave propagation angles were considered in this paper: 0$^{\circ}$, 15$^{\circ}$, 30$^{\circ}$, 45$^{\circ}$, 60$^{\circ}$, 75$^{\circ}$ and 90$^{\circ}$.
 \begin{figure} [h!]
 	\centering
-	\includegraphics{angle_slice.png}	
+	\includegraphics{angle_slice2.png}	
 	\caption{Experimental wavenumber-wavenumber-frequency data sliced at chosen angles ($\beta=30^{\circ}$ and $\beta=90^{\circ}$).}
 	\label{fig:angle_slice}
 \end{figure}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Selected frequency slices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The data slices at frequencies 100 kHz and 350 kHz are shown in Figure 3. 
+The elliptic-like pattern of wavenumbers is visible (wavenumber surface).
+In this case Eq.~(\ref{eq:eig_poly}) is more appropriate for calculation of equivalent numerical wavenumber profiles but it requires longer computation time as mentioned before.
+The following frequency slices were considered in this paper: 40, 80, 120, 160, 200, 240 and 280~kHz giving the same number of slices as in the case of angle slices.
 \begin{figure} [h!]
 	\centering
-	\includegraphics{freq_slice.png}	
+	\includegraphics{freq_slice2.png}	
 	\caption{Experimental wavenumber-wavenumber-frequency data sliced at chosen frequencies (100 kHz and 350 kHz).}
 	\label{fig:freq_slice}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Objective function}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The objective function consists of two parts: experimental which is in the form of an image and semi-analytical which is in the form of points which forms dispersion curves (or wavenumber profiles) calculated for the given elastic constants $C_{11}$, $C_{12}$, $C_{13}$, $C_{22}$, $C_{23}$, $C_{33}$, $C_{44}$, $C_{55}$ and $C_{66}$.
+The semi-analytical dispersion characteristics (dispersion curves or wavenumber profiles) are converted to a binary image of the same resolution as in the experiment. 
+In this way, we have experimental images and semi-analytical images of dispersion characteristics at selected angles of propagation. 
+Semi-analytical images are used as filter masks for experimental images.
+If dispersion curves from the SASE model align well with high values of experimental images, it leads to high values in the filtered image and vice versa.
+Sum over pixel values of resultant image is used as an objective function (see \cite{Kudela2020} for more details).
+The objective function depending on optimisation strategy can be written as:
+\begin{itemize}
+	\item angle slice
+\begin{equation}
+	F=\min \frac{(-1)}{n_k \, n_f} \cdot \sum_{\beta} \sum_{i=1}^{n_k} \sum_{j=1}^{n_f} (D_{\beta}^{SASE})_{ij} \, \cdot (D_{\beta}^{EXP})_{ij},
+	\label{eq:obj_fun_beta}
+\end{equation}
+where \(n_k\) is the number of wavenumber points and \(n_f\) is the number of frequency points, $\matr{D}_{\beta}^{SASE}$ is the binary image of dispersion curves calculated by the SASE model for the angle $\beta$ and $\matr{D}_{\beta}^{EXP}$ is the experimental image of wavenumber-wavenumber-frequency data sliced at angle $\beta$.
 
+\item frequency slice
+
+\begin{equation}
+	F=\min \frac{(-1)}{n_k \, n_{\beta}} \cdot \sum_{f} \sum_{i=1}^{n_k} \sum_{j=1}^{n_{\beta}} (D_{f}^{SASE})_{ij} \, \cdot (D_{f}^{EXP})_{ij},
+	\label{eq:obj_fun_freq}
+\end{equation}
+where \(n_k\) is the number of wavenumber points and \(n_{\beta}\) is the number of angles, $\matr{D}_{f}^{SASE}$ is the binary image of wavenumber profiles calculated by the SASE model for the selected frequency $f$ and $\matr{D}_{f}^{EXP}$ is the experimental image of wavenumber-wavenumber-frequency data sliced at frequency $f$.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Genetic algorithm parameters}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The Sheffield Genetic Algorithm Toolbox for Matlab developed at the Department of Automatic Control and Systems Engineering at The University of Sheffield was used for the optimisation~\cite{Chipperfield1994}.
+The genetic algorithm was used as an optimisation procedure due to the complex nature of the problem and form of the objective function. 
+The objective function is non differentiable, hence gradient methods cannot be applied. 
+
+It should be noted that the genetic algorithm can stuck in local minima causing unwanted premature convergence. 
+The mutation rate of 0.05 along with random offspring generation every 100-th generation was employed to alleviate the problem.
+
+The remaining genetic algorithm parameters were as follows: the number of individuals 100, the maximum number of generations 800, generation gap 0.7, precision 9 bits, crossover rate 0.7,  random offspring generation rate 0.1.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\section{Guided wave modelling improvement through identification of elastic constants of unidirectional CFRP} 
+\section{Guided wave modelling improvement through identification of elastic constants of unidirectional CFRP \label{sec:modelling_improvement}} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Specimen}
 The investigated specimen had dimensions 1200 $\times$ 1200 mm and was made out of carbon fibre-reinforced polymer (CFRP). 
@@ -314,155 +356,231 @@ The average thickness was 2.85 mm.
 The total weight of the specimen was 6460 g, hence, based on the volume of the specimen, the density is about~1574.1~kg/m\textsuperscript{3}.
 The specimen was composed of 40 layers of unidirectional prepregs stacked in one direction (90 degrees). 
 NTPT thin prepregs 736LT 75~g/m$^2$ by North Thin Ply Technology and epoxy resin MP503Z-HT by Impregnatex Compositi were used for fabrication of the specimen.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Experimental setup}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% laser vibrometer mesurements
-Piezoelectric transducer disc of 10 mm diameter  was bonded to the surface of the specimen at their centre. 
-A chirp signal was applied to piezoelectric transducer. 
-Full wavefield measurements of guided waves were conducted by using scanning laser Doppler vibrometer (Polytec PSV-400) on the central area of width 0.726 m and length 0.726 m. 
-A grid of 499 $\times$ 499 measurement point covering surface of the specimen opposite to the piezoelectric transducer was used. 
-40 measurements were taken for each grid point and averaged.
 
-3D Fourier Transform was applied to the full wavefield data in the space-time domain ($x$, $y$, $t$). 
-Next 3D matrix was transformed from ($k_x$, $k_y$, $\omega$) coordinates to cylindrical coordinates ($\beta$,$k$,$f$). 
-Interpolation was employed to obtain 2D images ($k$,$f$) representing dispersion curves $k(f)$ at selected angles $\beta = 0^{\circ} \ldots 90^{\circ}$ with the step of $15^{\circ}$, resulting in 9 2D matrices. 
-Let's denote these matrices representing dispersion curves by $\matr{D}_{\beta}$. 
-The size of the matrix  $\matr{D}_{\beta}$ in the current approach was $n_k=512$ $\times$$n_f= 512$, where $n_k$ is the number of wavenumber points and $n_f$ is the number of frequency points.  
-An example of such matrix at angle $ 60^{\circ}$ is presented in Fig.~\ref{fig:initial_optimized}. 
-Dispersion curves in Fig.~\ref{fig:dispersion60deg_initial} calculated by using SASE model and material properties given in Table~\ref{tab:matprop} in the form of yellow curves are overlayed on the image for reference. 
-It can be seen that there is high discrepancy between semi-analytic dispersion curves and experimental one. 
-% overlayed = superimposed
-\subsection{SEM model}
-\subsection{Determination of elastic constants}
-\subsection{SEM model accuracy analysis}
-\subsection{Full wavefield comparison}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Validation on quasi-isotropic CFRP}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Specimen}
-\subsection{Experimental setup}
-\subsection{Determination of elastic constants}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experimental measurements \label{sec:experiment}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The material properties of the specimen are given in Table~\ref{tab:mat_prop_uni}. 
+It should be noted that only a few parameters are available in the specification delivered by the manufacturer. 
+Other parameters were assumed as indicated in Table~\ref{tab:mat_prop_uni}.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Optimization \label{sec:optimization}}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	The Sheffield Genetic Algorithm Toolbox for Matlab developed at Department of Automatic Control and Systems Engineering at The University of Sheffield was used for the optimization~\cite{Chipperfield1994}.
-	\subsection{Genetic algorithm parameters}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	Two approaches were considered:
-	\begin{enumerate}
-	\item indirect - by using composite constituents and homogenisation techniques;
-	The genetic algorithm was used for determination of the following properties:  matrix density $\rho_m$, fibres density $\rho_f$, matrix Young's modulus $E_m$, fibres Young's modulus $E_f$, Poisson's ratio of the matrix $\nu_m$, Poisson's ratio of the fibres $\nu_f$ and volume fraction of reinforcing fibres $V$. 
-	\item direct - determination of C-tensor components and mass density.
-	The genetic algorithm was used for determination of the following properties: $C_{11}$, $C_{12}$, $C_{13}$,  $C_{22}$, $C_{23}$, $C_{33}$, $C_{44}$, $C_{55}$, $C_{66}$ and $\rho$.
-	\end{enumerate}
-	The overall density of composite specimen $\rho$ was not evaluated experimentally and that is why it is included in the list of optimization variables.
-	The following GA parameters were used for optimization:
-	\begin{itemize}
-		\item Number of individuals per subpopulation: 40
-		\item Maximum number of generations: 40
-		\item Generation gap: 0.9
-		\item Number of variables in objective function: 7 (approach~1), 10 (approach~2)
-		\item Precision of binary representation of variables: 12 bit
-		\item Gray coding was used for representation of each variable.
-   \end{itemize}
-    Generation gap of 0.9 means that 90\% chromosomes from old population is replaced by 90\% best found chromosomes from new population while preserving 10\% best found chromosomes from old population into new population.
-    
-    It should be noted that 12 bits precision was used for each variable. However, according to parametric studies in section~\ref{sec:parametric} certain material properties such as Poisson's ratio of reinforcing fibres have less influence on dispersion curves, hence the precision for their representation can be decreased. In contrast, volume fraction of reinforcing fibres has greatest influence on dispersion curves, hence the precision of representation of this variable can be increased.
-  
-	Upper and lower bounds of variables were set as  $\pm$20\% in respect to initial values given in Table~\ref{tab:matprop}.
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\subsection{Objective function}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	The optimization problem can be described as a minimization of objective function as follows:
-	\begin{equation}
-	\min_j \sum_{\beta}\sum_{m} \| k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)}) -k^{exp}_{m}(\beta,\omega) \|
-	\end{equation}
-	where $m$ denotes the mode of propagating wave.
-	The objective function is correlation between dispersion curves calculated by using SASE model $k^{SASE}_{m}(\beta, \omega,\matr{C}^{(j)})$ and dispersion curves from experiment $k^{exp}_{m}(\beta,\omega)$. However, in the model we have actual curves for each propagation mode $m$ depending on the matrix of elastic constants $\matr{C}^{(j)}$ and propagation angle $\beta$ but the data from the experiment have a form of a matrix (image) $\matr{D}^{exp}_{\beta}$ at each angle $\beta$ (see Fig.~\ref{fig:initial_optimized}). Extraction of dispersion curves $k^{exp}_{m}(\beta,\omega)$ from images $\matr{D}^{exp}_{\beta}$ is cumbersome and could lead to inherent errors. Moreover, in order to formulate correlation coefficient, dispersion curves in SASE model must be sorted (which increases computation costs). Therefore, dispersion curves corresponding to modes $m=1,\ldots, 4$ calculated by using SASE model were converted to image $\matr{D}^{SASE}_{\beta} $ in which dimensions are the same as in experiment ($n_k=512$ $\times$$n_f= 512$). Pixels of image $\matr{D}^{SASE}_{\beta} $ which corresponds to dispersion curves are assigned value 1 whereas the remaining pixels have value 0. It leads to logic matrix or mask which can be applied for filtering experimental images: 
-	\begin{equation}
-		\tilde{\matr{D}}^{\beta} =  \matr{D}^{SASE}_{\beta}  .*    \matr{D}^{exp}_{\beta} ,
-   \end{equation}	
-    where $.*$ is the element wise multiplication (such notation is used in Matlab). If dispersion curves from SASE model align well with high values of experimental images, it leads to high values in filtered image and vice versa.
-	The objective function value can be finally calculated as: 
-	\begin{equation}
-	\tilde{F} = \frac{(-1)}{n_k \, n_f}  \cdot \sum_{\beta}  \sum_{i=1}^{n_k} \sum_{j=1}^{n_f}	\tilde{D}_{ij}^{\beta} 
-	\end{equation}
-	In this way rich experimental data is fully used and roots sorting of SASE dispersion curves is not necessary. Additionally, objective function scaling can be applied in the form:
-	\begin{equation}
-	F = a \,  \tilde{F} + b,
-	\end{equation}
-	where $a$ and $b$ are scaling parameters ($a=100$, $b=310$ were assumed in the current studies).
-		% rich data
-	% logical matrix
-	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-	\subsection{Results}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\begin{figure} [h!]
-		\centering
-		\begin{subfigure}[b]{\textwidth}
-			\centering
-			% size fitted
-			%\includegraphics[width=\textwidth]{dispersion60deg_initia.png}
-			% size 100%
-			\includegraphics[]{dispersion60deg_initial.png}
-			\caption{initial parameters}
-			\label{fig:dispersion60deg_initial}
-		\end{subfigure}
-		\begin{subfigure}[b]{\textwidth}
-			\centering
-			% size fitted
-			%\includegraphics[width=\textwidth]{dispersion60deg.png}
-			% size 100%
-			\includegraphics[]{dispersion60deg}
-			\caption{optimized}
-			\label{fig:dispersion60deg}
-		\end{subfigure}
-	\caption{Dispersion curves at angle $\beta = 60^{\circ}$; yellow curves: SASE model; image: experiment }
-	\label{fig:initial_optimized}
-	\end{figure}
-\clearpage
-
- \begin{table}[h]
+\begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
-	\caption{GA optimization results based on statistics (mean $\mu$ and standard deviation $\sigma$) of 100 GA runs; Elasticity constants [GPa].}
-	%\begin{tabular}{@{}ccccccc@{}} % remove spaces from vertical lines
-	\begin{tabular}{crrrrrr} 
-		%\hline
+	\caption{Material properties of unidirectional CFRP.}
+	\begin{tabular}{lc} 
 		\toprule
-		&\multicolumn{3}{c}{\textbf{indirect method} }	& \multicolumn{3}{c}{\textbf{direct method} }  \\ 
-		%	\hline \hline
+		Property & Value \\
 		\midrule
-		&Best & $\mu$ & $\sigma$& Best& $\mu$ & $\sigma$\\
-		\cmidrule(lr){2-4} \cmidrule(lr){5-7} 
-		%\hline
-		$C_{11}$&50.19&1.10& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{12}$&4.88&0.97& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{13}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{22}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{23}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{33}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{44}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{55}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$C_{66}$&1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		$F$          &1.0&1.0& 1.0  & 1.0  & 1.0 & 1.0 \\ 
-		%\hline 
+		Epoxy density [kg/m\textsuperscript{3}]& 1150-1250\textsuperscript{1,3} \\ 
+		Fibres density [kg/m\textsuperscript{3}]& 1800\textsuperscript{1}\\ 
+		Young’s modulus of epoxy resin [GPa] & 3.43\textsuperscript{2}\\
+		Young’s modulus of carbon fibres [GPa] & 230\textsuperscript{1}\\
+		Poisson’s ratio of epoxy resin & 0.26\textsuperscript{2}\\
+		Poisson’s ratio of carbon fibres & 0.20\textsuperscript{2} \\
+		Volume fraction of reinforcing fibres & 0.552\textsuperscript{1}\\
 		\bottomrule 
+		\textsuperscript{1}Provided by manufacturer &\\
+		\textsuperscript{2}Assumed &\\
+		\textsuperscript{3}Assumed 1200 [kg/m\textsuperscript{3}]&\\
 	\end{tabular} 
-	\label{tab:results}
+	\label{tab:mat_prop_uni}
 \end{table}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Conclusions}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experimental measurements \label{sec:SLDV}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% laser vibrometer mesurements
+Lamb waves were excited by a piezoelectric disk (PZT) of diameter 10 mm attached to the back surface of the specimen. 
+Chirp signal with the frequency range 0-500 kHz lasting 200 µs was generated every 10 ms and applied to the PZT element through the signal amplifier.
+The specimen central area of 455 $\times$ 455 mm was measured in 499 $\times$ 499 points using SLDV (Polytec PSV-400). 
+In every measurement point, 2048 time samples were registered with a sampling frequency of 1.28 MHz. The measurements were taken 20 times in every grid point and averaged to improve the signal to noise ratio.
+The measurement results were stored as a 3D matrix of size 499 $\times$ 499 $\times$ 2048 points. 
+Median filtering was applied to remove noise in spatial images. Next 3D Fourier transform was applied. 
+The resulting matrix was used for the determination of elastic constants.
+
+Additional measurements were taken to validate the SEM model. 
+The same setup was used but instead of a chirp signal, Hann windowed signal was applied for excitation at carrier frequencies 16.5 kHz, 50 kHz and 100 kHz. 
+Five cycles in signals were used for each case. 
+Moreover, measurements were taken only in one-quarter of the specimen at a grid of 491 $\times$ 491 points.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Data processing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+3D Fourier Transform was applied to the full wavefield data in the space-time domain ($x$, $y$, $t$). 
+Next 3D matrix was transformed from ($k_x$, $k_y$, $\omega$) coordinates to cylindrical coordinates ($k$, $\beta$, $f$). 
+Interpolation was employed to obtain images $\matr{D}_{\beta}^{EXP}$ representing dispersion curves at selected angles $\beta = 0^{\circ} \ldots 90^{\circ}$ with the step of $15^{\circ}$. 
+The size of the interpolated matrix $\matr{D}_{\beta}^{EXP}$ in the current approach was $n_k=512$ $\times$ $n_f= 512$. 
+The result of this operation for selected angle slices is presented in Fig.~\ref{fig:angle_slice}. 
+
+Similarly, interpolation was employed to obtain images $\matr{D}_{f}^{EXP}$ representing wavenumber surfaces at frequencies 40, 80, 120, 160, 200, 240 and 280~kHz.
+The size of the interpolated matrix $\matr{D}_{f}^{EXP}$ in the current approach was $n_k=512$ $\times$ $n_{\beta}= 512$.
+The result of this operation for selected frequency slices is presented in Fig.~\ref{fig:freq_slice}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Determination of elastic constants}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Two approaches were investigated: (i) rule of mixture followed by homogenisation based on material properties given in Table~\ref{tab:mat_prop_uni}, (ii) determination of elastic constants through the optimisation process described in section~\ref{sec:strategies}. 
+The results of rule of mixture followed by homogenisation process is given in the second column of Table~\ref{tab:mat_prop_identified}.
+The results of inversion by using $\beta$-slicing method and $f$-slicing method are given in third and fourth column of Table~\ref{tab:mat_prop_identified}, respectively.
+\begin{table}[h]
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
+	\caption{Elastic material properties (Voigt notation).}
+	\begin{tabular}{crrr} 
+		\toprule
+		Property & \multirow{2}{*}{Homogenised} & \multicolumn{2}{c}{Optimised}\\
+		\cmidrule(lr){3-4}
+		$\left[\textrm{GPa}\right]$ &  & $\beta$-slicing & $f$-slicing \\ 
+		\midrule 
+		$C_{11}$ & 130.11 & 138.67 & 138.24 \\ 
+		$C_{12}$ & 3.56   & 5.72   & 7.65\\ 
+		$C_{13}$ & 3.56   & 6.53   & 7.85\\
+		$C_{22}$ & 12.31  & 12.36  & 13.84\\
+		$C_{23}$ & 3.36   & 5.99  & 8.00\\
+		$C_{33}$ & 12.31  & 11.80 & 14.38\\
+		$C_{44}$ & 4.48   & 3.12  & 3.07\\
+		$C_{55}$ & 4.51   & 5.11  & 5.11\\
+		$C_{66}$ & 4.51   & 4.89  & 4.99 \\
+		\bottomrule
+	\end{tabular} 
+	\label{tab:mat_prop_identified}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{SEM model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The goal was to model as accurately as possible full wavefield of guided waves which were acquired by the experimental setup at frequencies 16.5 kHz, 50 kHz and 100 kHz. 
+The time-domain spectral element method was used in which a shell model based on the first-order shear deformation theory is implemented~\cite{Kudela2020a}. 
+In this model, the composite laminate is represented only by a mid-surface. Therefore, equivalent elastic properties must be calculated. 
+
+Elastic constants estimated by both methods are given in Table~\ref{tab:mat_prop_identified}. 
+It should be noted that in the shell model, the assumption is made that the strain in the thickness direction is zero. 
+Therefore only 6 of 9 constants given in Table~\ref{tab:mat_prop_identified} are required in the SEM model.
+
+It should be added that the unstructured mesh of the SEM model was generated by using gmsh software~\cite{Geuzaine2009} rendering pzt disc at the centre where equivalent piezoelectric forces were applied. 
+The mesh was tailored to the highest investigated carrier frequency to ensure at least 8 nodes per wavelength.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{SEM model accuracy analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+It should be underlined that the SASE model is used in the optimisation algorithm. 
+It enables to use one element per composite layer giving very accurate dispersion characteristics. The purpose of SEM model is different. 
+It is used for full wavefield analysis and often analysis of the interaction of Lamb waves with defects. 
+It requires a dense mesh of nodes. 
+Since the representation of each layer of a composite laminate is prohibitive due to high computation cost, approximate theories are used. 
+In the present approach, first-order shear deformation theory was applied. 
+However, higher-order theories can be used as well (see~\cite{Ostachowicz2012}).
+
+Since guided wave damage detection methods usually rely on fundamental Lamb wave modes, i.e. S0 and A0, accurate representation of these modes by the model is crucial.
+We focus here on A0 mode analysis. 
+In particular, transverse displacements are extracted from the SEM model and interpolated at the uniform grid of points so that the Fourier transform can be applied. 
+Numerical full wavefield data sets calculated for the carrier frequencies 16.5~kHz, 50~kHz and 100~kHz were processed by the 3D Fourier transform and next combined. 
+Due to the fact, that Hann windowed signal with 5 cycles has some frequency bandwidth, the combined image gives a good representation of A0 mode dispersion curve as presented in Figure 4. 
+
+Figure 4 shows the comparison of A0 mode dispersion images calculated by the SEM model for the homogenised material properties and optimised material properties obtained by $\beta$-slicing method as given in Table~\ref{tab:mat_prop_identified}. 
+White A0 mode dispersion curves calculated by SASE model for optimised material properties obtained by $\beta$-slicing method are given as a reference. 
+It is confirmed that homogenised material properties lead to significant error in dispersion curves which directly translate to errors in phase velocities given by relationship $c_p= f/k$.
+
+It is important to note that despite low-order approximation of shell SEM, dispersion images match very well SASE dispersion curves (right column of Figure 4). 
+Only slight discrepancies at higher frequencies (100~kHz) are visible. 
+These discrepancies are consistent for each investigated angle of propagation – wavenumbers are underestimated, therefore phase velocities from SEM model are too high by about 0.7\%.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Full wavefield comparison}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Another visualisation is shown in Figure 5 to underlined the importance of accurate modelling of guided waves velocity. 
+A frame of propagating waves is selected at the time instance 0.5~ms. 
+Reinforcing fibres are located vertically, hence wavefront is elongated in the vertical direction.
+The first image in Figure 5 shows that the application of homogenised material properties causes that the A0 mode reaches the left edge too fast. 
+In contrast, the application of optimised material properties results in a wave pattern which is very similar to the experimental one except for wave crest amplitudes. 
+The A0 mode calculated numerically based on elastic constants obtained by $\beta$-slicing method reaches the left edge at the same time as in the experiment.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Validation on quasi-isotropic CFRP plate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+It should be noted that despite excellent agreement between numerical and experimental dispersion curves reported in section~\ref{sec:modelling_improvement}, the correctness of elastic tensor $\matr{C}$ is not entirely proven.
+Therefore, additional effort was made to validate its correctness.
+The validation was conducted based on Open Guided Waves (OGW) data set which is accompanied by material properties obtained by various test standards~\cite{Moll2019}.
+OGW is an extendable online platform where high-quality and well-documented datasets for guided wave-based inspections are provided.
+\subsection{Specimen}
+The benchmark structure used for validation was quasi-isotropic carbon-fibre-reinforced polymer (CFRP) plate with embedded piezoelectric transducers. 
+The layup was [45/0/-45/90/-45/0/45/90]\textsubscript{S}. 
+CFRP plate had the dimensions of 500 mm \(\times\) 500 mm and a thickness of 2 mm provided by manufacturer. 
+The measured average thickness was 2.086 mm. 
+The diameter of the piezoelectric transducers was 10 mm and the thickness 0.2 mm. 
+The specimen was made of prepreg material Hexply\textsuperscript{\textregistered} M21/34\%/UD134/T700/300. 
+The established material properties by various test standards for unidirectional Hexply material are given in Table~\ref{tab:mat_prop_Moll}. 
+
+\begin{table}
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
+	\caption{Material properties of unidirectional Hexply M21/34\%/UD134/T700/300.}
+		\begin{tabular}{crclc} 
+			\toprule
+			Property &  \multicolumn{1}{c}{Value}  & Units & \multicolumn{1}{c}{Test standard} & Source \\
+			\midrule
+			$E_{11}$ & 125.5$\pm$ 2.4   & GPa & DIN EN ISO 527-5 & \cite{Moll2019} \\
+			$E_{22}$ & 8.7$\pm$ 0.1     & GPa & DIN EN ISO 527-5 & \cite{Moll2019} \\
+			$G_{12}$ & 4.135 $\pm$ 0.07 & GPa & EN ISO 14129 & \cite{Petersen2016} \\
+			$\nu_{12}$ & 0.37$\pm$ 0.08 & -   & DIN EN ISO 527-5 & \cite{Moll2019} \\
+			$\nu_{23}$ & 0.45$\pm$ 0.02 & -   & DIN EN ISO 527-5 & \cite{Moll2019} \\
+			$\rho$ & 1571$\pm$ 2 & kg/m\textsuperscript{3}   & - & \cite{Moll2019} \\
+			\bottomrule 
+		\end{tabular} 
+		\label{tab:mat_prop_Moll}
+\end{table}
+The matrix of elastic constants $\matr{C}$ was calculated based on the material properties given in Table~\ref{tab:mat_prop_Moll} and the formulas:
+\begin{equation}
+	\frac{\nu_{ij}}{E_{ii}}=\frac{\nu_{ji}}{E_{jj}},\quad i,j=1,2,3\quad i\ne j
+	\label{eq:recalc}
+\end{equation}
+and 
+\begin{equation}
+	G_{23} = \frac{E_{22}}{2(1+\nu_{23})}
+	\label{eq:recalc2}
+\end{equation}
+Also propagation of uncertainties was taken into account.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experimental measurements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Experimental full wavefield measurements by using SLDV were conducted in similar manner as it was described in section~\ref{sec:SLDV}. 
+However, only quarter of the plate was considered for 3D Fourier transform.
+It should be added that 0\(^{\circ}\) fibre orientation was along the vertical edge of the specimen.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Determination of elastic constants}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h]
+	\renewcommand{\arraystretch}{1.3}
+	\centering \footnotesize
+	\caption{Elastic material properties (Voigt notation).}
+	\begin{tabular}{crrr} 
+		\toprule
+		Property & \multicolumn{1}{c}{Reference} & \multicolumn{2}{c}{Optimised}\\
+		\cmidrule(lr){3-4}
+		$\left[\textrm{GPa}\right]$ & \multicolumn{1}{c}{\cite{Moll2019}} & $\beta$-slicing & $f$-slicing \\ 
+		\midrule 
+		$C_{11}$ & 129.99$\pm$12.22  & 138.67 & 138.24 \\ 
+		$C_{12}$ &   6.06$\pm$ 1.08  & 5.72   & 7.65\\ 
+		$C_{13}$ &   6.06$\pm$ 1.08  & 6.53   & 7.85\\
+		$C_{22}$ &  11.19$\pm$ 3.51  & 12.36  & 13.84\\
+		$C_{23}$ &   5.19$\pm$ 0.42  & 5.99  & 8.00\\
+		$C_{33}$ &  11.19$\pm$ 3.51  & 11.80 & 14.38\\
+		$C_{44}$ &   3.00$\pm$ 0.14  & 3.12  & 3.07\\
+		$C_{55}$ &   4.13$\pm$ 0.07  & 5.11  & 5.11\\
+		$C_{66}$ &   4.13$\pm$ 0.07  & 4.89  & 4.99 \\
+		\bottomrule
+	\end{tabular} 
+	\label{tab:mat_prop_identified_Moll}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We presented the guided wave propagation framework which consists of two steps. 
+In the first step, 9 elastic constants of the carbon-fibre-reinforced composite are determined through the optimisation process. 
+Genetic algorithm is employed for optimisation of difference between dispersion curves obtained experimentally and dispersion curves calculated numerically by SASE method.
+In the second step, full wavefield simulations were performed by using the time domain SEM. 
+It has been shown that very good agreement can be obtained between SEM and experiment if optimised elastic constants are used. 
+Such an approach is much preferred in comparison to homogenisation techniques because it leads to much lower errors in guided wave velocities.
+
+Analysis of improvement in wave attenuation modelling and wave crest amplitude distribution through optimisation is a task which is planned in the future.
+
+Furthermore, validation of correctness of the optimisation method was performed based on OGW data set.
+
+ 
+	impose constraints on optimisation process so that obtain elastic constants of better physical meaning.
 	In summary, the current implementation is very well suited for 
 	 
 	%% The Appendices part is started with the command \appendix;
