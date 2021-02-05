@@ -11,14 +11,15 @@ load project_paths projectroot src_path;
 overwrite = false; % allow overwriting existing results if true
 beta = 0:90/511:90;
 selected_frequency_index = [40:40:300]; 
-test_case=[1];
+test_case=[1,3];
 % create path to the experimental interim data folder
 interim_data_path = fullfile( projectroot, 'data','interim','exp', filesep );
 
 % filenames of data to be processed
 % full field measurements after 3D FFT transform (positive quarter)
 list = {'interim_499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni_KXKYF', ...          % 1  Length = 0.455;Width = 0.455;           
-        'interim_499x499p_chp200_x40_6Vpp_250Hz_uni_KXKYF' };                % 2 Length = 0.724;Width = 0.727;    
+        'interim_499x499p_chp200_x40_6Vpp_250Hz_uni_KXKYF',... % 2 Length = 0.724;Width = 0.727;    
+        'interim_483x483p_CHIRP_20-500kHz_125us_6Vpp_x3_stringer_intact_KXKYF'};                
 % create path to the experimental processed data folder
 processed_data_path = fullfile( projectroot, 'data','processed','exp', filesep );
 disp('Cartesian to polar transform ');

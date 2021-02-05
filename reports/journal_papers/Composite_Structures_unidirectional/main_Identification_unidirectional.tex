@@ -444,7 +444,7 @@ The results of inversion by using $\beta$-slicing method and $f$-slicing method 
 It can be noticed that optimised elastic properties given in Table~\ref{tab:mat_prop_identified} are significantly different than elastic constants estimated through homogenisation. 
 The differences are as large as around 6\% for $C_{11}$ and up to 45\% for $C_{13}$ elastic constant.
 These differences also contribute to differences in dispersion curves. 
-Comparison of dispersion curves calculated by SASE method for homogenised material properties with dispersion curves calculated for optimised material properties is given in Figure 3. 
+Comparison of dispersion curves calculated by SASE method for homogenised material properties with dispersion curves calculated for optimised material properties is given in Fig.~\ref{fig:homog_opt}. 
 White dispersion curves are overlaid on experimental images. 
 Red and yellow colours on experimental images resemble dispersion curves where on the horizontal axis is the frequency $f$ and on the vertical axis is the wavenumber $k$. 
 
@@ -495,13 +495,23 @@ Red and yellow colours on experimental images resemble dispersion curves where o
 	\label{fig:homog_opt}
 \end{figure}
 
-
-
 SASE curves calculated for the homogenised material properties are significantly overestimated at angle 0\(^{\circ}\) (in this case perpendicular to fibres) and slightly underestimated at angle 90° (parallel to fibres). 
 The best fit is at about 45\(^{\circ}\). 
 In contrast, SASE curves calculated for optimised material properties almost perfectly matches the red and yellow spots on experimental images. 
 The objective function value $F$ is 97.11 for a homogenised case and 16.78 for the optimised case, respectively. 
-In other words, the fitness of dispersion curves calculated by SASE model to experimental one is much better for the latter case (the lower $F$ means better fitness).
+In other words, the fitness of dispersion curves is much better for the latter case (the lower $F$ means better fitness).
+
+It is worthy to note, that $f$-slicing method slightly better resembles some properties of unidirectionally reinforced composite.
+In such material it is expected that shear related constants $C_{55}=C_{66}$ and extension-extension coupling constants related to the Poisson effect $C_{12}=C_{13}$.
+It could be attributed to the larger number of angle points $n_{\beta}=512$ contributing to the objective function given by Eq.~{\ref{eq:obj_fun_freq}} in comparison to $\beta=7$ in Eq.~(\ref{eq:obj_fun_beta}).
+
+Again, excellent agreement is obtained between optimised SASE wavenumber profiles and experimental images. 
+Such comparison is presented in Fig.~\ref{fig:freq_slice_opt}.
+It can be seen that the higher the frequency, the more Lamb wave modes are propagating simultaneously.
+At the frequency 349.43~kHz five modes contribute to the objective function through five wavenumber profile curves.
+
+Moreover, $k_y$ wavenumbers have lower values than $k_x$ wavenumbers.
+Therefore, it can be deduced from the relationship $c_p= f / k$ that elastic waves propagate faster in vertical direction, as expected because of vertical orientation of fibres.
 
 \begin{figure} [h!]
 	\centering
@@ -542,7 +552,7 @@ The goal was to model as accurately as possible full wavefield of guided waves w
 The time-domain spectral element method was used in which a shell model based on the first-order shear deformation theory is implemented~\cite{Kudela2020a}. 
 In this model, the composite laminate is represented only by a mid-surface. Therefore, equivalent elastic properties must be calculated. 
 
-Elastic constants estimated by both methods are given in Table~\ref{tab:mat_prop_identified}. 
+Elastic constants estimated by both homogenisation as well as optimisation methods are given in Table~\ref{tab:mat_prop_identified}. 
 It should be noted that in the shell model, the assumption is made that the strain in the thickness direction is zero. 
 Therefore only 6 of 9 constants given in Table~\ref{tab:mat_prop_identified} are required in the SEM model.
 
@@ -564,7 +574,7 @@ Since guided wave damage detection methods usually rely on fundamental Lamb wave
 We focus here on A0 mode analysis. 
 In particular, transverse displacements are extracted from the SEM model and interpolated at the uniform grid of points so that the Fourier transform can be applied. 
 Numerical full wavefield data sets calculated for the carrier frequencies 16.5~kHz, 50~kHz and 100~kHz were processed by the 3D Fourier transform and next combined. 
-Due to the fact, that Hann windowed signal with 5 cycles has some frequency bandwidth, the combined image gives a good representation of A0 mode dispersion curve as presented in Figure 4. 
+Due to the fact, that Hann windowed signal with 5 cycles has some frequency bandwidth, the combined image gives a good representation of A0 mode dispersion curve as presented in Fig.~\ref{fig:homog_opt_num}. 
 
 \begin{figure} [h!]
 	\centering
@@ -613,11 +623,11 @@ Due to the fact, that Hann windowed signal with 5 cycles has some frequency band
 	\label{fig:homog_opt_num}
 \end{figure}
 
-Figure 4 shows the comparison of A0 mode dispersion images calculated by the SEM model for the homogenised material properties and optimised material properties obtained by $\beta$-slicing method as given in Table~\ref{tab:mat_prop_identified}. 
+Figure~\ref{fig:homog_opt_num} shows the comparison of A0 mode dispersion images calculated by the SEM model for the homogenised material properties and optimised material properties obtained by $\beta$-slicing method as given in Table~\ref{tab:mat_prop_identified}. 
 White A0 mode dispersion curves calculated by SASE model for optimised material properties obtained by $\beta$-slicing method are given as a reference. 
 It is confirmed that homogenised material properties lead to significant error in dispersion curves which directly translate to errors in phase velocities given by relationship $c_p= f/k$.
 
-It is important to note that despite low-order approximation of shell SEM, dispersion images match very well SASE dispersion curves (right column of Figure 4). 
+It is important to note that despite low-order approximation of shell SEM, dispersion images match very well SASE dispersion curves (right column of Fig.~\ref{fig:homog_opt_num}). 
 Only slight discrepancies at higher frequencies (100~kHz) are visible. 
 These discrepancies are consistent for each investigated angle of propagation – wavenumbers are underestimated, therefore phase velocities from SEM model are too high by about 0.7\%.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -687,22 +697,22 @@ It should be added that 0\(^{\circ}\) fibre orientation was along the vertical e
 \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
-	\caption{Elastic material properties (Voigt notation).}
+	\caption{Elastic material properties of Hexply M21/34\%/UD134/T700/300 CFRP (Voigt notation).}
 	\begin{tabular}{crrr} 
 		\toprule
 		Property & \multicolumn{1}{c}{Reference} & \multicolumn{2}{c}{Optimised}\\
 		\cmidrule(lr){3-4}
 		$\left[\textrm{GPa}\right]$ & \multicolumn{1}{c}{\cite{Moll2019}} & $\beta$-slicing & $f$-slicing \\ 
 		\midrule 
-		$C_{11}$ & 129.99$\pm$12.22  & 138.67 & 138.24 \\ 
-		$C_{12}$ &   6.06$\pm$ 1.08  & 5.72   & 7.65\\ 
-		$C_{13}$ &   6.06$\pm$ 1.08  & 6.53   & 7.85\\
-		$C_{22}$ &  11.19$\pm$ 3.51  & 12.36  & 13.84\\
-		$C_{23}$ &   5.19$\pm$ 0.42  & 5.99  & 8.00\\
-		$C_{33}$ &  11.19$\pm$ 3.51  & 11.80 & 14.38\\
-		$C_{44}$ &   3.00$\pm$ 0.14  & 3.12  & 3.07\\
-		$C_{55}$ &   4.13$\pm$ 0.07  & 5.11  & 5.11\\
-		$C_{66}$ &   4.13$\pm$ 0.07  & 4.89  & 4.99 \\
+		$C_{11}$ & 129.99$\pm$12.22  & 119.59$\pm$5.12 & 115.63 \\ 
+		$C_{12}$ &   6.06$\pm$ 1.08  &   8.87$\pm$0.09 &   6.78\\ 
+		$C_{13}$ &   6.06$\pm$ 1.08  &   7.47$\pm$1.39 &   6.22\\
+		$C_{22}$ &  11.19$\pm$ 3.51  &  16.47$\pm$0.04 &  16.41\\
+		$C_{23}$ &   5.19$\pm$ 0.42  &   2.51$\pm$0.02 &   2.63\\
+		$C_{33}$ &  11.19$\pm$ 3.51  &   5.74$\pm$0.19 &   6.51\\
+		$C_{44}$ &   3.00$\pm$ 0.14  &   2.95$\pm$0.12 &   3.60\\
+		$C_{55}$ &   4.13$\pm$ 0.07  &   5.85$\pm$0.49 &   5.84\\
+		$C_{66}$ &   4.13$\pm$ 0.07  &   4.46$\pm$0.95 &   4.68 \\
 		\bottomrule
 	\end{tabular} 
 	\label{tab:mat_prop_identified_Moll}
