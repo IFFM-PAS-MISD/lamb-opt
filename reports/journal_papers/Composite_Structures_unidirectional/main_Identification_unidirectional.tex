@@ -101,10 +101,28 @@
 		
 		\cortext[cor1]{Corresponding author}
 		
-		\begin{abstract}
+\begin{abstract}
 			%% Text of abstract
-		Typically, material properties originate from destructive tests and are used in computational models in the design and analysis process of structures. This approach is well-established in relation to isotropic homogenous materials. However, if this approach is used for composite laminates, inaccuracies can arise that leads to vastly different stress distributions, strain rates, natural frequencies, and velocities of propagating elastic waves. In order to account for this problem, the alternative method is proposed, which utilizes Lamb wave propagation phenomenon and optimization technique. Propagating Lamb waves are highly sensitive to changes in material parameters and are often used for structural health monitoring of structures. In the proposed approach, the elastic constants, which are utilized to determine dispersion curves of Lamb waves, are optimized to achieve a good correlation between model predictions and experimental observations. In the first step of this concept, parametric studies have been carried out in which the influence of mass density, Young's modulus, Poisson's ratio of reinforcing fibres as well as matrix of composite laminate and volume fraction of reinforcing fibres on dispersion curves of Lamb waves was investigated. The effective elasticity constants were calculated by using micromechanics and homogenization techniques considering variability of properties of composite constituents. The dispersion curves of Lamb wave were calculated by using semi-analytical spectral element method. The resulting dispersion curves were also compared with experimental measurements of full wavefield data conducted by scanning Doppler laser vibrometer and processed by 3D Fourier transform. Elastic constants were further optimized by using genetic algorithm which resulted in good correlation between numerical and experimental dispersion curves.
-		\end{abstract}
+There is a great potential for model-based approaches in which guided waves are utilised for damage detection,localisation and size estimation. 
+However, to be effective, the model must accurately represent guided wave propagation behaviour, especially wave velocity dependence on the angle of propagation. 
+Unfortunately, improperly assumed or derived through homogenisation elastic material properties can lead to larger wave velocity changes than caused by damage. 
+In order to account for this problem, the elastic constants are estimated based on experimental measurements of Lamb waves and optimisation techniques. 
+
+In the proposed approach, experimental measurements of full wavefield data of propagating Lamb
+waves are conducted by scanning laser Doppler vibrometer. 
+The obtained wavefield data is processed by using the 3D Fourier transform. 
+Slicing the data at selected frequencies enables to get wavenumber profiles. 
+These profiles can be directly translated to wave propagation velocity dependence on the angle of propagation. 
+Data can also be sliced at selected angles giving dispersion curve images. 
+At the same time, wavenumber profiles or dispersion curves can be calculated by using a semi-analytical model for the range of material properties. 
+Genetic algorithm is used in which the best fit between experimental data and the semi-analytical model is optimised.
+
+Experiments were conducted on a unidirectional CFRP panel and the above-mentioned procedure was applied. 
+Identified material properties were used in the in-house code of the time domain spectral element method for simulations of the propagating waves. 
+Finally, numerical results were compared to the experimental full wavefield data showing much better accuracy than in case of application of homogenisation techniques.
+
+Furthermore, the correctness of elastic constants determined by the proposed method was validated against the elastic constants obtained through static test standards.
+\end{abstract}
 		
 		\begin{keyword}
 			%% keywords here, in the form: keyword \sep keyword
@@ -121,33 +139,67 @@
 	%% \linenumbers
 	
 	%% main text
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\section{Introduction}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	Elastic constant values are often difficult to obtain, especially for anisotropic media. These values are indispensable for the design of a structure which fulfils assumed requirements (strength, stiffness, vibration characteristics). For years elastic constants of isotropic materials have been estimated during destructive testing and strain gauge or static displacement recordings~\cite{Wang2000}. Similar results can be achieved by dynamic tests which rely on natural frequencies~\cite{Wang2000a, Wesolowski2009,Beluch2014}. Measurements of velocities of bulk waves (longitudinal and shear) can also be used for determination of elastic constants~\cite{Rose1999}.
-	
-	For anisotropic media, determining the elastic constants is more complex. Destructive testing can still be used to determine some of the constants. Additional constants can be obtained by special cube-cutting procedures followed by destructive testing~\cite{Rose1991} or by using bulk wave measurement protocol for orthotropic media~\cite{Rose1999}. However, such experiments are cumbersome and expensive.  It should be noted that other ultrasonic methods exist such as leaky Lamb wave technique. In this technique, a specimen is immersed in a liquid tank and insonified with an acoustic beam at various incident angles and frequencies. The obtained pattern provides unique fingerprint of the underlying mechanical elasticity tensor at the insonified material spot.The method has been improved over the years by using the pulsed ultrasonic polar scan and inverse methods~\cite{Kersemans2014}. Due to simplicity, non-destructive methods based on one-sided Lamb wave propagation measurements have been evolving over the years.
-	
-	Lamb waves were named after their discoverer, Horace Lamb, who developed the theory of their propagation in 1917~\cite{Lamb1917}. Interestingly, Lamb was not able to physically generate the waves he discovered. This was achieved by Worlton~\cite{Worlton1961} in 1961, who also noticed their potential usefulness for damage detection. Lamb waves are defined as a type of elastic waves that propagate in infinite media bounded by two surfaces and arise as a result of the superposition of multiple reflections of longitudinal waves and shear vertical waves from the bounding surfaces. In the case of these waves, medium particle oscillations are very complex in character. Depending on the distribution of displacements on the top and bottom bounding surface, two modes of Lamb waves appear: symmetric, denoted as S0, S1, S2, …, and antisymmetric, denoted as A0, A1, A2, … One should note that the number of these modes is infinite.
-	
-	The analytic solution proposed by Lamb is limited to isotropic materials and infinite, unbounded media. The solution has highly nonlinear character, and numerical methods must be used to obtain dispersion curves. The numerical approach, based on Lamb solution, for calculation of dispersion curves for isotropic materials, can be found in a book by Rose~\cite{Rose1999}.
-	
-	Many studies have been devoted to the calculation of dispersion curves of Lamb waves propagating in composite laminates but only a few are related to the identification of elastic constants. Rose et al.~\cite{Rose1987} investigated Lamb wave propagation in unidirectional, two-directional, and quasi-isotropic graphite-epoxy composite panels. They derived polar characteristics of phase and group velocities of the low-frequency S0 Lamb mode. Mal et al.~\cite{Mal1993} and Karim et al.~\cite{Karim1990} determined dynamic elastic moduli of the fibre-reinforced composite. The elastic constants were derived by inversion of a set of data measured by the leaky Lamb wave technique. In 1995 Rogers~\cite{Rogers1995} proposed a technique to measure the isotropic elastic constants of plate materials using Rayleigh-Lamb waves. In his paper, he presents the effect of an increase in longitudinal wave velocities or changes in Young’s modulus or Poisson’s ratio on the dispersion curves.
-	
-	De\`an et al.~\cite{Dean2008} determined elastic constants and thickness of the aluminium by minimizing the error function comprised by the theoretical dispersion curves of Lamb waves and experimental data. They utilized full-field wavelength measurements of single-mode narrowband Lamb waves. Grinberg et al.~\cite{Grimberg2010} determined in-plane material parameters of CFRP from the equations for phase velocity of S0 and A0 modes at low-frequency range. 
-	The paper by Bartoli et al.~\cite{Bartoli2006} deals with a semi-analytical finite element (SAFE) method for modelling wave propagation in waveguides of arbitrary cross-section. The method simply requires the finite element discretization of the cross-section of the waveguide and assumes harmonic motion along the wave propagation direction. The general SAFE technique is extended to account for viscoelastic material damping by allowing for complex stiffness matrices for the material. The dispersive solutions are obtained in terms of phase velocity, group velocity (for undamped media), energy velocity (for damped media), attenuation, and cross-sectional mode shapes. Taupin et al.~\cite{Taupin2011} applied the SAFE method to analyse composite laminate of various stacking sequences.
-	
-	A new semi-analytical method using 3-D elasticity theory was derived by Wang and Juan~\cite{Wang2007}. In comparison with the results of the theory and experiment, it was confirmed that multiple higher-order Lamb waves could be excited from piezoelectric actuators and the measured group velocities agree well with those from 3-D elasticity theory. The thin quasi-isotropic laminate was investigated only.
-	
-	Pol and Banerjee~\cite{Pol2013} derived a simplified 2D semi-analytical model based on a global matrix method to investigate the dispersion characteristics of propagating guided wave modes in multilayered composite laminates due to transient surface excitations. A relatively thin symmetric eight layered cross-ply composite laminate subjected to both narrowband and broadband surface excitations was considered. Comparison of group velocity curves obtained from developed model and LS-DYNA has shown good agreement.
-	
-	The paper by Beluch and Burczyński~\cite{Beluch2014} deals with the two-scale approach to the identification of material constants in composite materials. Structures made of unidirectionally fibre-reinforced composites are examined. However, for optimization of elastic constants, static displacements and eigenfrequencies are used, not Lamb wave data. Additionally, plane strain state was assumed in the model.
-	
-	In 2016 Ong et al.~\cite{Ong2016} proposed a technique for determination of elastic properties of the woven composite panel using the Lamb wave dispersion characteristics. The investigated CFRP panel comprised of 16 plies with such a sequence so that it could be treated as quasi-isotropic material. Simple 2D plane strain model was assumed in the numerical simulations. The material properties were found by fitting dispersion curves from a numerical simulation with experimental data by the particle swarm optimisation method. 
-	
-	From the review of the literature, no research evidence was found to date which deals with the rapid and robust identification of elastic material properties of highly anisotropic composite structures. Therefore, it is essential to develop a robust material identification methodology for the inspection of a wide range of composite structures. Moreover, there is no method which enables online tracking of changes in elastic material properties.
-	
-	The subject of this study focuses exclusively on an approach in which access to only one side of the specimen is required. In the proposed approach, dispersion curves of Lamb waves are utilized for determination of elastic constants in composite laminates. The paper is organized as follows: section~\ref{sec:dispersion_curves} describe numerical method for calculation of dispersion curves in laminated composites, section~\ref{sec:experiment} is related to extraction of dispersion curves from full wavefield measurements, section~\ref{sec:optimization} describes optimization of elastic constants by using genetic algorithm (GA) followed by conclusions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Composite laminates such as carbon fibre-reinforced polymers (CFRP) have found a wide range of applications in the aerospace, automotive and energy industries as well as in everyday products. The knowledge about their mechanical properties is indispensable for the modelling and design purposes.
+However, elastic constants representing material properties used in computational models provided by manufacturers are often incomplete. 
+In such a case, often some assumptions and simplifications are made including homogenisation of material properties. 
+These assumptions can lead to significant discrepancy between modelled phenomenon and phenomenon observed experimentally.
+Moreover, the error caused by improperly assumed elastic constants can be larger than the error related to the applied modelling technique.	
+
+This issue is especially significant for the guided wave propagation phenomenon which is often used in the field of structural health monitoring. 
+Guided wave mode velocities directly depend on elastic constants of the medium in which they propagate.
+Therefore, wrongly assumed elastic constants lead to underestimated or overestimated velocities of propagating waves. 
+Hence, if the signal-to-signal comparison is performed errors increases with the signal duration.
+
+Alternatively, experimental methods can be applied in order to obtain mechanical properties of the investigated material before modelling. 
+Fo example destructive testing can be performed for estimation of elastic constants based on static strain and displacement recordings~\cite{Wang2000,Petersen2016}.
+However, due to anisotropy of composite materials, special cube-cutting procedures followed by destructive testing must be employed~\cite{Rose1991}.
+Such experiments are complex and expensive.
+
+Therefore, researchers have developed non-destructive methods based on ultrasonic waves and Lamb waves.
+
+Ultrasonic bulk wave measurements in orthotropic media were conducted by Rose~\cite{Rose1999}.
+Dreumel and Speijer introduced ultrasonic polar scan method which can be helpful in the non-destructive determination of layer orientation in composite laminate~\cite{VanDreumel1982}. 
+It is based on ultrasound refraction.
+More recently, the pulsed ultrasonic polar scan (P-UPS) and inverse methods were rediscovered and improved~\cite{Kersemans2014,Martens2017}. 
+In this technique, a specimen is immersed in a liquid tank and insonified with an acoustic beam at various incident angles and frequencies. The obtained pattern provides unique fingerprint of the underlying mechanical elasticity tensor at the insonified material spot.
+The advantage of the P-UPS is that the inversion method does not require a priori knowledge about the symmetry class of the material, nor about the orientation of the main axes of symmetry.
+Moreover, it can be used for estimation of not only elastic tensor but also for viscoelastic characterisation~\cite{Martens2019}.	
+On the other hand, the investigated specimen must be immersed in a liquid which is not always possible.
+
+Lamb waves are defined as a type of elastic waves that propagate in infinite media bounded by two surfaces~\cite{Rose1999}. 
+Lamb waves result from the superposition of multiple reflections of longitudinal waves and shear vertical waves from the bounding surfaces.
+Dispersion curves or wavenumber profiles of Lamb waves can serve as a unique fingerprint of the underlying mechanical elasticity tensor (similarly to the P-UPS method).
+
+The minimisation of the objective function which is constructed based on the difference between experimental and modelled dispersion curves can be used for determination of elastic constants.
+Such approach was used for determination of elastic constants and thickness of the aluminium~\cite{Dean2008}.
+The authors utilized full-field wavelength measurements of single-mode narrowband Lamb waves. Grinberg et al.~\cite{Grimberg2010} determined in-plane material parameters of CFRP from the equations for phase velocity of S0 and A0 modes at low-frequency range.
+
+A supervised regression-based 1D-Convolutional Neural Network (CNN) was used in~\cite{Rautela2020} as a core of an inverse procedure.
+A transversely isotropic lamina was considered. 
+But instead of dispersion curves, direct signals were employed.
+The authors used only A0 and S0 time histories as inputs and five properties as outputs for the CNN training.
+Because of limited frequency range and small data set, it was not possible to estimate the shear modulus. 
+Other parameters were mostly predicted properly except some cases of Young's modulus in direction perpendicular to fibres.
+
+It has been shown that using inverted elastic constants leads to improvement of the accuracy of guided wave propagation model~\cite{Ong2016}.
+But previous work has been limited to the modelling of the cross-section of the composite reinforced by woven fabric.
+Simple 2D plane strain model was assumed in the numerical simulations.
+The authors utilised measurements along the line on the top and bottom surface instead of full wavefield measurements.
+The material properties were found by using dispersion curves and the particle swarm optimisation method.
+
+The aim of this research work is to provide a strategy for improved modelling of guided wave propagation phenomenon so that the model-based approaches can be successfully implemented in structural health monitoring algorithms.
+The first step of the proposed strategy is non-destructive determination of mechanical properties of investigated CFRP laminate.
+The method applied for elastic constant determination is extension of our previous research work~\cite{Kudela2020}.	
+It requires access to only one surface of CFRP laminate on which full wavefield measurements of Lamb waves are conducted.
+Previously, only dispersion curves were utilised, whereas currently wavenumber profiles can be used as well.
+Both dispersion curves as well as wavenumber profiles can be obtained by using semi-analytical methods~\cite{Bartoli2006,Marzani2008} as it is described in section~\ref{sec:dispersion_curves}.
+The method for determination of elastic constants is described in section~\ref{sec:strategies}.
+Once elastic constants are determined, the time domain spectral element method (SEM) is employed for guided wave propagation modelling~\cite{Kudela2020a}.
+The modelling results are shown in section~\ref{sec:modelling_improvement}.
+Finally the method for determination of elastic constants is validated in section~\ref{sec:validation} by using Open Guided Waves dataset~\cite{Moll2019} accompanied by material properties obtained from various test standards.
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 \section{Dispersion curves of guided waves \label{sec:dispersion_curves}}
@@ -161,7 +213,7 @@ However, efficient model is needed for calculation of dispersion curves for a gi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Semi-analytical model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Since the time-domain spectral element method (SEM) model~\cite{Kudela2020a} usually contains a large number of degrees of freedom, it is difficult to incorporate it into optimisation process – computation of dispersion curves, which are a part of an objective function, would take too long. 
+Since the SEM model~\cite{Kudela2020a} usually contains a large number of degrees of freedom, it is difficult to incorporate it into optimisation process – computation of dispersion curves, which are a part of an objective function, would take too long. 
 Therefore, Lamb wave dispersion characteristics are computed using a modified semi-analytical finite element method~\cite{Bartoli2006,Marzani2008}. 
 The modification consists of the replacement of uniformly distributed nodes across the thickness by Gauss-Lobatto-Legendre (GLL) spectral nodes. 
 Hence, we refer to the modified semi-analytical model as semi-analytical spectral element (SASE) model.
@@ -640,7 +692,7 @@ The first image in Figure 5 shows that the application of homogenised material p
 In contrast, the application of optimised material properties results in a wave pattern which is very similar to the experimental one except for wave crest amplitudes. 
 The A0 mode calculated numerically based on elastic constants obtained by $\beta$-slicing method reaches the left edge at the same time as in the experiment.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Validation on quasi-isotropic CFRP plate}
+\section{Validation on quasi-isotropic CFRP plate\label{sec:validation}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 It should be noted that despite excellent agreement between numerical and experimental dispersion curves reported in section~\ref{sec:modelling_improvement}, the correctness of elastic tensor $\matr{C}$ is not entirely proven.
 Therefore, additional effort was made to validate its correctness.

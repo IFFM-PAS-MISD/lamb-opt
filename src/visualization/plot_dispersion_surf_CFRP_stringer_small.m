@@ -48,9 +48,9 @@ np = 3; % order of elements (3<=np<=5)
 nele_layer = 1; % no. of elements per ply
 wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
 %layup = [45,0,-45,90,90,-45,0,45]-90; ht = 2.086/1000; % [m] laminate total thickness;% 1
-layup = [45,0,-45,90,-45,0,45,90,90,45,0,-45,90,-45,0,45]-90; ht = 2.086/1000; % [m] laminate total thickness;% 2
-%layup = [45,0,-45,90,90,-45,0,45]; % 3
-%layup = [45,0,-45,90,-45,0,45,90,90,45,0,-45,90,-45,0,45]; ht = 2.0/1000; % [m] laminate total thickness;% 4
+%layup = [45,0,-45,90,-45,0,45,90,90,45,0,-45,90,-45,0,45]-90; ht = 2.086/1000; % [m] laminate total thickness;% 2
+%layup = [45,0,-45,90,90,-45,0,45]; ht = 2.086/1000; % 3
+layup = [45,0,-45,90,-45,0,45,90,90,45,0,-45,90,-45,0,45]; ht = 2.0/1000; % [m] laminate total thickness;% 4
 
 nlayers = length(layup);
 
@@ -95,7 +95,7 @@ kvecx = linspace(0,wavenumber_max,number_of_wavenumber_points_x);
 kvecy = linspace(0,wavenumber_max,number_of_wavenumber_points_y);
 for j=1:number_of_frequency_points  % selected frequencies
     
-    figfilename = [modelname,'_','frequency_',num2str(j),'_dispersion_surf_test_case_',num2str(test_case),'_small2'];
+    figfilename = [modelname,'_','frequency_',num2str(j),'_dispersion_surf_test_case_',num2str(test_case),'_small4'];
     if(overwrite||(~overwrite && ~exist([output_path,figfilename,'.png'], 'file')))
         %% START PLOTTING
         fprintf('Making figure: [%d/%d]\n', j,number_of_frequency_points);
