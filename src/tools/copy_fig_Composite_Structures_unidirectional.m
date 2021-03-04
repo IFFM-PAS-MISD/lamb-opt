@@ -132,3 +132,50 @@ figname=[foldername,'_angle_60_dispersion_curves_test_case_1_small.png'];
 fig_source=[figs_source_folder,modelfolder,filesep,foldername,'_out',filesep,figname];
 copyfile(fig_source,fig_destination);
 movefile([fig_destination,figname],[fig_destination,'figure6f.png'],'f');
+
+% figure 7a
+% ma-shm project
+figname='Vz_20_frame129_bottom_500.00.png';
+fig_source=['/home/pkudela/work/projects/nawa-bekker/ma-shm/reports/figures/flat_shell/flat_shell_SHMII2021_out/20_output/',figname];
+copyfile(fig_source,fig_destination);
+movefile([fig_destination,figname],[fig_destination,'figure7a.png'],'f');
+
+% figure 7b
+% ma-shm project
+figname='Vz_17_frame129_bottom_500.00.png';
+fig_source=['/home/pkudela/work/projects/nawa-bekker/ma-shm/reports/figures/flat_shell/flat_shell_SHMII2021_out/17_output/',figname];
+copyfile(fig_source,fig_destination);
+movefile([fig_destination,figname],[fig_destination,'figure7b.png'],'f');
+
+% figure 7c
+% ma-shm project
+figname='492x492p_50kHz_5HC_x20_15Vpp_frame257_500.00.png';
+fig_source=['/home/pkudela/work/projects/nawa-bekker/ma-shm/reports/figures/EWSHM2020_exp_wavefield_out/2_output/',figname];
+copyfile(fig_source,fig_destination);
+movefile([fig_destination,figname],[fig_destination,'figure7c.png'],'f');
+
+%% f-slice comparison with Moll OGW
+% optimised
+modelfolder='genetic_algorithm';
+foldername='ga_stringer_C_tensor_known_mass_kx_ky_2'; 
+% figure 8a
+figname=[foldername,'_frequency_3_dispersion_surf_test_case_1_small2.png'];
+fig_source=[figs_source_folder,modelfolder,filesep,foldername,'_out',filesep,figname];
+copyfile(fig_source,fig_destination);
+movefile([fig_destination,figname],[fig_destination,'figure8a.png'],'f');
+% figure 8b
+figname=[foldername,'_frequency_4_dispersion_surf_test_case_1_small2.png'];
+fig_source=[figs_source_folder,modelfolder,filesep,foldername,'_out',filesep,figname];
+copyfile(fig_source,fig_destination);
+movefile([fig_destination,figname],[fig_destination,'figure8b.png'],'f');
+% figure 8c
+figname=[foldername,'_frequency_5_dispersion_surf_test_case_1_small2.png'];
+fig_source=[figs_source_folder,modelfolder,filesep,foldername,'_out',filesep,figname];
+copyfile(fig_source,fig_destination);
+movefile([fig_destination,figname],[fig_destination,'figure8c.png'],'f');
+% figure 8d
+figname=[foldername,'_frequency_7_dispersion_surf_test_case_1_small2.png'];
+fig_source=[figs_source_folder,modelfolder,filesep,foldername,'_out',filesep,figname];
+copyfile(fig_source,fig_destination);
+movefile([fig_destination,figname],[fig_destination,'figure8d.png'],'f');
+

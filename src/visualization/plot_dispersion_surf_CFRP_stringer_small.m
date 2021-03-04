@@ -15,7 +15,7 @@ overwrite = true; % allow overwriting existing results if true
 fig_width = 7; fig_height = 7; 
 % create path to the numerical model data folder
 modelfolder = 'genetic_algorithm';
-modelname = 'ga_unidirectional_C_tensor_known_mass_kx_ky_stringer';
+modelname = 'ga_stringer_C_tensor_known_mass_kx_ky_2';
 radians = false;
 test_case=1; % numerical data
 % create output path
@@ -48,9 +48,9 @@ np = 3; % order of elements (3<=np<=5)
 nele_layer = 1; % no. of elements per ply
 wavenumber_min = zeros(length(beta),1); % minimal wavenumbers [1/m]
 %layup = [45,0,-45,90,90,-45,0,45]-90; ht = 2.086/1000; % [m] laminate total thickness;% 1
-%layup = [45,0,-45,90,-45,0,45,90,90,45,0,-45,90,-45,0,45]-90; ht = 2.086/1000; % [m] laminate total thickness;% 2
+layup = [45,0,-45,90,-45,0,45,90,90,45,0,-45,90,-45,0,45]-90; ht = 2.086/1000; % [m] laminate total thickness;% 2
 %layup = [45,0,-45,90,90,-45,0,45]; ht = 2.086/1000; % 3
-layup = [45,0,-45,90,-45,0,45,90,90,45,0,-45,90,-45,0,45]; ht = 2.0/1000; % [m] laminate total thickness;% 4
+%layup = [45,0,-45,90,-45,0,45,90,90,45,0,-45,90,-45,0,45]; ht = 2.0/1000; % [m] laminate total thickness;% 4
 
 nlayers = length(layup);
 
@@ -95,7 +95,7 @@ kvecx = linspace(0,wavenumber_max,number_of_wavenumber_points_x);
 kvecy = linspace(0,wavenumber_max,number_of_wavenumber_points_y);
 for j=1:number_of_frequency_points  % selected frequencies
     
-    figfilename = [modelname,'_','frequency_',num2str(j),'_dispersion_surf_test_case_',num2str(test_case),'_small4'];
+    figfilename = [modelname,'_','frequency_',num2str(j),'_dispersion_surf_test_case_',num2str(test_case),'_small2'];
     if(overwrite||(~overwrite && ~exist([output_path,figfilename,'.png'], 'file')))
         %% START PLOTTING
         fprintf('Making figure: [%d/%d]\n', j,number_of_frequency_points);
@@ -158,7 +158,8 @@ for j=1:number_of_frequency_points  % selected frequencies
         %set(gca,'FontName','Helvetica');
         set(gca,'FontName','Times');
         fig = gcf;
-        title({['$F=$ ',num2str(ObjVal,'%5.2f'),', ',num2str(selected_frequencies(j)/1000,'%5.2f'),' [kHz]']},'Fontsize',12,'interpreter','latex');
+        title({[num2str(selected_frequencies(j)/1000,'%5.2f'),' [kHz]']},'Fontsize',12,'interpreter','latex');
+        %title({['$F=$ ',num2str(ObjVal,'%5.2f'),', ',num2str(selected_frequencies(j)/1000,'%5.2f'),' [kHz]']},'Fontsize',12,'interpreter','latex');
         %set(gca, 'Position',[0 0 1.2 1.2]); % figure without axis and white border
         set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
         % remove unnecessary white space

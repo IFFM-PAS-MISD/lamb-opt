@@ -103,7 +103,7 @@
 		
 \begin{abstract}
 			%% Text of abstract
-There is a great potential for model-based approaches in which guided waves are utilised for damage detection,localisation and size estimation. 
+There is a great potential for model-based approaches in which guided waves are utilised for damage detection, localisation and size estimation. 
 However, to be effective, the model must accurately represent guided wave propagation behaviour, especially wave velocity dependence on the angle of propagation. 
 Unfortunately, improperly assumed or derived through homogenisation elastic material properties can lead to larger wave velocity changes than caused by damage. 
 In order to account for this problem, the elastic constants are estimated based on experimental measurements of Lamb waves and optimisation techniques. 
@@ -145,7 +145,7 @@ Furthermore, the correctness of elastic constants determined by the proposed met
 Composite laminates such as carbon fibre-reinforced polymers (CFRP) have found a wide range of applications in the aerospace, automotive and energy industries as well as in everyday products. The knowledge about their mechanical properties is indispensable for the modelling and design purposes.
 However, elastic constants representing material properties used in computational models provided by manufacturers are often incomplete. 
 In such a case, often some assumptions and simplifications are made including homogenisation of material properties. 
-These assumptions can lead to significant discrepancy between modelled phenomenon and phenomenon observed experimentally.
+These assumptions can lead to a significant discrepancy between the modelled phenomenon and the phenomenon observed experimentally.
 Moreover, the error caused by improperly assumed elastic constants can be larger than the error related to the applied modelling technique.	
 
 This issue is especially significant for the guided wave propagation phenomenon which is often used in the field of structural health monitoring. 
@@ -153,20 +153,21 @@ Guided wave mode velocities directly depend on elastic constants of the medium i
 Therefore, wrongly assumed elastic constants lead to underestimated or overestimated velocities of propagating waves. 
 Hence, if the signal-to-signal comparison is performed errors increases with the signal duration.
 
-Alternatively, experimental methods can be applied in order to obtain mechanical properties of the investigated material before modelling. 
-Fo example destructive testing can be performed for estimation of elastic constants based on static strain and displacement recordings~\cite{Wang2000,Petersen2016}.
-However, due to anisotropy of composite materials, special cube-cutting procedures followed by destructive testing must be employed~\cite{Rose1991}.
+Alternatively, experimental methods can be applied in order to obtain the mechanical properties of the investigated material before modelling. 
+For example, destructive testing can be performed for estimation of elastic constants based on static strain and displacement recordings~\cite{Wang2000,Petersen2016}.
+However, due to the anisotropy of composite materials, special cube-cutting procedures followed by destructive testing must be employed~\cite{Rose1991}.
 Such experiments are complex and expensive.
 
 Therefore, researchers have developed non-destructive methods based on ultrasonic waves and Lamb waves.
 
 Ultrasonic bulk wave measurements in orthotropic media were conducted by Rose~\cite{Rose1999}.
-Dreumel and Speijer introduced ultrasonic polar scan method which can be helpful in the non-destructive determination of layer orientation in composite laminate~\cite{VanDreumel1982}. 
+Dreumel and Speijer introduced ultrasonic polar scan method which can be helpful in the non-destructive determination of layer orientation in a composite laminate~\cite{VanDreumel1982}. 
 It is based on ultrasound refraction.
 More recently, the pulsed ultrasonic polar scan (P-UPS) and inverse methods were rediscovered and improved~\cite{Kersemans2014,Martens2017}. 
-In this technique, a specimen is immersed in a liquid tank and insonified with an acoustic beam at various incident angles and frequencies. The obtained pattern provides unique fingerprint of the underlying mechanical elasticity tensor at the insonified material spot.
+In this technique, a specimen is immersed in a liquid tank and insonified with an acoustic beam at various incident angles and frequencies. 
+The obtained pattern provides a unique fingerprint of the underlying mechanical elasticity tensor at the insonified material spot.
 The advantage of the P-UPS is that the inversion method does not require a priori knowledge about the symmetry class of the material, nor about the orientation of the main axes of symmetry.
-Moreover, it can be used for estimation of not only elastic tensor but also for viscoelastic characterisation~\cite{Martens2019}.	
+Moreover, it can be used for the estimation of not only elastic tensor but also for viscoelastic characterisation~\cite{Martens2019}.	
 On the other hand, the investigated specimen must be immersed in a liquid which is not always possible.
 
 Lamb waves are defined as a type of elastic waves that propagate in infinite media bounded by two surfaces~\cite{Rose1999}. 
@@ -174,15 +175,15 @@ Lamb waves result from the superposition of multiple reflections of longitudinal
 Dispersion curves or wavenumber profiles of Lamb waves can serve as a unique fingerprint of the underlying mechanical elasticity tensor (similarly to the P-UPS method).
 
 The minimisation of the objective function which is constructed based on the difference between experimental and modelled dispersion curves can be used for determination of elastic constants.
-Such approach was used for determination of elastic constants and thickness of the aluminium~\cite{Dean2008}.
+Such an approach was used for the determination of elastic constants and thickness of the aluminium~\cite{Dean2008}.
 The authors utilized full-field wavelength measurements of single-mode narrowband Lamb waves. Grinberg et al.~\cite{Grimberg2010} determined in-plane material parameters of CFRP from the equations for phase velocity of S0 and A0 modes at low-frequency range.
 
 A supervised regression-based 1D-Convolutional Neural Network (CNN) was used in~\cite{Rautela2020} as a core of an inverse procedure.
 A transversely isotropic lamina was considered. 
 But instead of dispersion curves, direct signals were employed.
 The authors used only A0 and S0 time histories as inputs and five properties as outputs for the CNN training.
-Because of limited frequency range and small data set, it was not possible to estimate the shear modulus. 
-Other parameters were mostly predicted properly except some cases of Young's modulus in direction perpendicular to fibres.
+Because of the limited frequency range and small data set, it was not possible to estimate the shear modulus. 
+Other parameters were mostly predicted properly except in some cases of Young's modulus in the direction perpendicular to fibres.
 
 It has been shown that using inverted elastic constants leads to improvement of the accuracy of guided wave propagation model~\cite{Ong2016}.
 But previous work has been limited to the modelling of the cross-section of the composite reinforced by woven fabric.
@@ -191,24 +192,24 @@ The authors utilised measurements along the line on the top and bottom surface i
 The material properties were found by using dispersion curves and the particle swarm optimisation method.
 
 The aim of this research work is to provide a strategy for improved modelling of guided wave propagation phenomenon so that the model-based approaches can be successfully implemented in structural health monitoring algorithms.
-The first step of the proposed strategy is non-destructive determination of mechanical properties of investigated CFRP laminate.
-The method applied for elastic constant determination is extension of our previous research work~\cite{Kudela2020}.	
+The first step of the proposed strategy is a non-destructive determination of mechanical properties of investigated CFRP laminate.
+The method applied for elastic constant determination is an extension of our previous research work~\cite{Kudela2020}.	
 It requires access to only one surface of CFRP laminate on which full wavefield measurements of Lamb waves are conducted.
 Previously, only dispersion curves were utilised, whereas currently wavenumber profiles can be used as well.
 Both dispersion curves as well as wavenumber profiles can be obtained by using semi-analytical methods~\cite{Bartoli2006,Marzani2008} as it is described in section~\ref{sec:dispersion_curves}.
 The method for determination of elastic constants is described in section~\ref{sec:strategies}.
 Once elastic constants are determined, the time domain spectral element method (SEM) is employed for guided wave propagation modelling~\cite{Kudela2020a}.
 The modelling results are shown in section~\ref{sec:modelling_improvement}.
-Finally the method for determination of elastic constants is validated in section~\ref{sec:validation} by using Open Guided Waves dataset~\cite{Moll2019} accompanied by material properties obtained from various test standards.
+Finally, the method for determination of elastic constants is validated in section~\ref{sec:validation} by using Open Guided Waves dataset~\cite{Moll2019} accompanied by material properties obtained from various test standards.
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 \section{Dispersion curves of guided waves \label{sec:dispersion_curves}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Lamb wave dispersion phenomenon is related to wavenumber $k$ dependency on frequency $f$. 
 Lamb wave dispersion curves depend on elasticity constants of the material in which Lamb waves propagate. 
-Moreover, in composite laminates, dispersion curves depend the angle of propagation~\cite{Rose1999}. 
-Therefore, these dependencies can be used for determination of elastic constants of composite laminates~\cite{Kudela2020}.
-However, efficient model is needed for calculation of dispersion curves for a given material properties.
+Moreover, in composite laminates, dispersion curves depend on the angle of propagation~\cite{Rose1999}. 
+Therefore, these dependencies can be used for the determination of elastic constants of composite laminates~\cite{Kudela2020}.
+However, efficient model is needed for calculation of dispersion curves for given material properties.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Semi-analytical model}
@@ -218,11 +219,11 @@ Therefore, Lamb wave dispersion characteristics are computed using a modified se
 The modification consists of the replacement of uniformly distributed nodes across the thickness by Gauss-Lobatto-Legendre (GLL) spectral nodes. 
 Hence, we refer to the modified semi-analytical model as semi-analytical spectral element (SASE) model.
 	
-The mathematical model is presented here for the case of a plate-like waveguide as shown in Fig.~\ref{fig:layered_composite_SASE}.  
-The waveguide made of orthotropic material is shown in Fig.~\ref{fig:layered_composite_SASE} in which reinforcing fibres are at angle $\theta$ in respect to $z$ axis.
+The mathematical model is presented in Fig.~\ref{fig:layered_composite_SASE} for the case of a plate-like waveguide.  
+The waveguide is made of orthotropic material in which reinforcing fibres are at angle $\theta$ in respect to $x$ axis.
 One-dimensional spectral elements are applied through the thickness of a laminate, preserving wave equation in the propagation direction.  
 Four-node spectral element is shown in Fig.~\ref{fig:layered_composite_SASE}. 
-It has non-uniform distribution of nodes which coincide with GLL points and three degrees of freedom per node.
+It has a non-uniform distribution of nodes which coincide with GLL points and three degrees of freedom per node.
 	
 \begin{figure} [h!]
 	\centering
@@ -232,7 +233,7 @@ It has non-uniform distribution of nodes which coincide with GLL points and thre
 	\label{fig:layered_composite_SASE}
 \end{figure}
 	
-Additionally, according to the concept proposed by Taupin et~al.~\cite{Taupin2011}, equations for dispersion curves are derived so that the solution can be obtained for arbitrary angle of propagation $\beta$ shown in Fig.~\ref{fig:layered_composite_SASE}. 
+Additionally, according to the concept proposed by Taupin et~al.~\cite{Taupin2011}, equations for dispersion curves are derived so that the solution can be obtained for an arbitrary angle of propagation $\beta$ shown in Fig.~\ref{fig:layered_composite_SASE}. 
 The wave propagation direction corresponds to the wavevector $\vect{k}$ defined as:
 	
 \begin{equation}
@@ -292,7 +293,7 @@ In the former case, the standard eigenvalue problem has a form:
 	\label{eq:eig_standard}
 \end{equation}
 in which the number of equations is $m$.
-In the later case, the solution consist of recasting Eq.~(\ref{eq:eig_standard}) to a first-order eigensystem by doubling its algebraic size:
+In the later case, the solution consists of recasting Eq.~(\ref{eq:eig_standard}) to a first-order eigensystem by doubling its algebraic size:
 \begin{equation}
 	\left[\hat{\matr{A}} - k \hat{\matr{D}} \right]_{2m} \hat{\vect{Q}} =0,
 	\label{eq:eig_poly}
@@ -318,12 +319,12 @@ The obtained wavenumbers are then of a complex character.
 It provides information about both the wave dispersion (real part of the wavenumbers) and the attenuation of the waves (imaginary part of the wave numbers). 
 Unfortunately, solving a second‐order polynomial eigenvalue problem is about 10 times more costly than solving a standard eigenvalue problem. 
 
-Linear frequencies $f=\omega/(2 \pi)$ will be used in next sections instead of angular frequencies $\omega$ for easier interpretation of figures.
+Linear frequencies $f=\omega/(2 \pi)$ will be used in the next sections instead of angular frequencies $\omega$ for easier interpretation of figures.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Strategies for determination of material properties \label{sec:strategies}}
+\section{Strategies for the determination of material properties \label{sec:strategies}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Dispersion curves calculated numerically must be accompanied by experimental counterpart to build appropriate objective function. 
-In this paper we consider guided waves acquired at dense grid of points on the surface of a plate which forms full wavefield data set. 
+Dispersion curves calculated numerically must be accompanied by an experimental counterpart to build appropriate objective function. 
+In this paper, we consider guided waves acquired at a dense grid of points on the surface of a plate which forms full wavefield data set. 
 
 Full wavefield data set can be acquired by scanning laser Doppler vibrometer (SLDV).
 The data set is a 3D matrix representing spatial dimensions $x$, $y$ and the time $t$. 
@@ -333,7 +334,7 @@ Three strategies can be applied:
 \begin{itemize}
 	\item utilise data set at selected angle slices,
 	\item utilise data set at selected frequency slices,
-	\item use mixed approach (not considered here).
+	\item use a mixed approach (not considered here).
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Selected angle slices}
@@ -370,7 +371,7 @@ The semi-analytical dispersion characteristics (dispersion curves or wavenumber 
 In this way, we have experimental images and semi-analytical images of dispersion characteristics at selected angles of propagation. 
 Semi-analytical images are used as filter masks for experimental images.
 If dispersion curves from the SASE model align well with high values of experimental images, it leads to high values in the filtered image and vice versa.
-Sum over pixel values of resultant image is used as an objective function (see \cite{Kudela2020} for more details).
+Sum over pixel values of the resultant image is used as an objective function (see \cite{Kudela2020} for more details).
 The objective function depending on optimisation strategy can be written as:
 \begin{itemize}
 	\item angle slice
@@ -393,7 +394,7 @@ where \(n_k\) is the number of wavenumber points and \(n_{\beta}\) is the number
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The Sheffield Genetic Algorithm Toolbox for Matlab developed at the Department of Automatic Control and Systems Engineering at The University of Sheffield was used for the optimisation~\cite{Chipperfield1994}.
 The genetic algorithm was used as an optimisation procedure due to the complex nature of the problem and form of the objective function. 
-The objective function is non differentiable, hence gradient methods cannot be applied. 
+The objective function is non-differentiable, hence gradient methods cannot be applied. 
 
 It should be noted that the genetic algorithm can stuck in local minima causing unwanted premature convergence. 
 The mutation rate of 0.05 along with random offspring generation every 100-th generation was employed to alleviate the problem.
@@ -441,7 +442,7 @@ Other parameters were assumed as indicated in Table~\ref{tab:mat_prop_uni}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % laser vibrometer mesurements
 Lamb waves were excited by a piezoelectric disk (PZT) of diameter 10 mm attached to the back surface of the specimen. 
-Chirp signal with the frequency range 0-500 kHz lasting 200 µs was generated every 10 ms and applied to the PZT element through the signal amplifier.
+Chirp signal with the frequency range 0-500 kHz lasting 200 $\mu$s was generated every 10 ms and applied to the PZT element through the signal amplifier.
 The specimen central area of 455 $\times$ 455 mm was measured in 499 $\times$ 499 points using SLDV (Polytec PSV-400). 
 In every measurement point, 2048 time samples were registered with a sampling frequency of 1.28 MHz. The measurements were taken 20 times in every grid point and averaged to improve the signal to noise ratio.
 The measurement results were stored as a 3D matrix of size 499 $\times$ 499 $\times$ 2048 points. 
@@ -461,15 +462,15 @@ Interpolation was employed to obtain images $\matr{D}_{\beta}^{EXP}$ representin
 The size of the interpolated matrix $\matr{D}_{\beta}^{EXP}$ in the current approach was $n_k=512$ $\times$ $n_f= 512$. 
 The result of this operation for selected angle slices is presented in Fig.~\ref{fig:angle_slice}. 
 
-Similarly, interpolation was employed to obtain images $\matr{D}_{f}^{EXP}$ representing wavenumber surfaces at frequencies 40, 80, 120, 160, 200, 240 and 280~kHz.
+Similarly, interpolation was employed to obtain images $\matr{D}_{f}^{EXP}$ representing wavenumber surfaces at frequencies 48.85, 98.94, 149.04, 199.14, 249.24, 299.33 and 349.43~kHz.
 The size of the interpolated matrix $\matr{D}_{f}^{EXP}$ in the current approach was $n_k=512$ $\times$ $n_{\beta}= 512$.
 The result of this operation for selected frequency slices is presented in Fig.~\ref{fig:freq_slice}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Determination of elastic constants}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Two approaches were investigated: (i) rule of mixture followed by homogenisation based on material properties given in Table~\ref{tab:mat_prop_uni}, (ii) determination of elastic constants through the optimisation process described in section~\ref{sec:strategies}. 
-The results of rule of mixture followed by homogenisation process is given in the second column of Table~\ref{tab:mat_prop_identified}.
-The results of inversion by using $\beta$-slicing method and $f$-slicing method are given in third and fourth column of Table~\ref{tab:mat_prop_identified}, respectively.
+Two approaches were investigated: (i) the rule of mixtures followed by homogenisation based on material properties given in Table~\ref{tab:mat_prop_uni}, (ii) determination of elastic constants through the optimisation process described in section~\ref{sec:strategies}. 
+The results of the rule of mixtures followed by homogenisation process are given in the second column of Table~\ref{tab:mat_prop_identified}.
+The results of inversion by using $\beta$-slicing method and $f$-slicing method are given in the third and fourth column of Table~\ref{tab:mat_prop_identified}, respectively.
 \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
@@ -553,17 +554,17 @@ In contrast, SASE curves calculated for optimised material properties almost per
 The objective function value $F$ is 97.11 for a homogenised case and 16.78 for the optimised case, respectively. 
 In other words, the fitness of dispersion curves is much better for the latter case (the lower $F$ means better fitness).
 
-It is worthy to note, that $f$-slicing method slightly better resembles some properties of unidirectionally reinforced composite.
-In such material it is expected that shear related constants $C_{55}=C_{66}$ and extension-extension coupling constants related to the Poisson effect $C_{12}=C_{13}$.
+It is worthy to note, that $f$-slicing method slightly better resembles some properties of the unidirectionally reinforced composite.
+In such material, it is expected that shear related constants $C_{55}=C_{66}$ and extension-extension coupling constants related to the Poisson effect $C_{12}=C_{13}$.
 It could be attributed to the larger number of angle points $n_{\beta}=512$ contributing to the objective function given by Eq.~{\ref{eq:obj_fun_freq}} in comparison to $\beta=7$ in Eq.~(\ref{eq:obj_fun_beta}).
 
 Again, excellent agreement is obtained between optimised SASE wavenumber profiles and experimental images. 
-Such comparison is presented in Fig.~\ref{fig:freq_slice_opt}.
+Such a comparison is presented in Fig.~\ref{fig:freq_slice_opt}.
 It can be seen that the higher the frequency, the more Lamb wave modes are propagating simultaneously.
 At the frequency 349.43~kHz five modes contribute to the objective function through five wavenumber profile curves.
 
 Moreover, $k_y$ wavenumbers have lower values than $k_x$ wavenumbers.
-Therefore, it can be deduced from the relationship $c_p= f / k$ that elastic waves propagate faster in vertical direction, as expected because of vertical orientation of fibres.
+Therefore, it can be deduced from the relationship $c_p= f / k$ that elastic waves propagate faster in the vertical direction, as expected, because of the vertical orientation of fibres.
 
 \begin{figure} [h!]
 	\centering
@@ -600,7 +601,8 @@ Therefore, it can be deduced from the relationship $c_p= f / k$ that elastic wav
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{SEM model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The goal was to model as accurately as possible full wavefield of guided waves which were acquired by the experimental setup at frequencies 16.5 kHz, 50 kHz and 100 kHz. 
+The goal was to model as accurately as possible full wavefield of guided waves for the case of piezoelectric excitation at the centre of the plate. 
+The same excitation frequencies, namely 16.5 kHz, 50 kHz and 100 kHz were considered as in the experiment. 
 The time-domain spectral element method was used in which a shell model based on the first-order shear deformation theory is implemented~\cite{Kudela2020a}. 
 In this model, the composite laminate is represented only by a mid-surface. Therefore, equivalent elastic properties must be calculated. 
 
@@ -615,7 +617,7 @@ The mesh was tailored to the highest investigated carrier frequency to ensure at
 \subsection{SEM model accuracy analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 It should be underlined that the SASE model is used in the optimisation algorithm. 
-It enables to use one element per composite layer giving very accurate dispersion characteristics. The purpose of SEM model is different. 
+It enables to use of one element per composite layer giving very accurate dispersion characteristics. The purpose of SEM model is different. 
 It is used for full wavefield analysis and often analysis of the interaction of Lamb waves with defects. 
 It requires a dense mesh of nodes. 
 Since the representation of each layer of a composite laminate is prohibitive due to high computation cost, approximate theories are used. 
@@ -625,9 +627,8 @@ However, higher-order theories can be used as well (see~\cite{Ostachowicz2012}).
 Since guided wave damage detection methods usually rely on fundamental Lamb wave modes, i.e. S0 and A0, accurate representation of these modes by the model is crucial.
 We focus here on A0 mode analysis. 
 In particular, transverse displacements are extracted from the SEM model and interpolated at the uniform grid of points so that the Fourier transform can be applied. 
-Numerical full wavefield data sets calculated for the carrier frequencies 16.5~kHz, 50~kHz and 100~kHz were processed by the 3D Fourier transform and next combined. 
-Due to the fact, that Hann windowed signal with 5 cycles has some frequency bandwidth, the combined image gives a good representation of A0 mode dispersion curve as presented in Fig.~\ref{fig:homog_opt_num}. 
-
+Numerical full wavefield data sets calculated for the investigated carrier frequencies were processed by the 3D Fourier transform and next combined. 
+Due to the fact, that Hann windowed signal with 5 cycles has some frequency bandwidth, the combined image gives a good representation of A0 mode dispersion curve as shown in Fig.~\ref{fig:homog_opt_num}. 
 \begin{figure} [h!]
 	\centering
 	\begin{subfigure}[b]{0.47\textwidth}
@@ -675,8 +676,8 @@ Due to the fact, that Hann windowed signal with 5 cycles has some frequency band
 	\label{fig:homog_opt_num}
 \end{figure}
 
-Figure~\ref{fig:homog_opt_num} shows the comparison of A0 mode dispersion images calculated by the SEM model for the homogenised material properties and optimised material properties obtained by $\beta$-slicing method as given in Table~\ref{tab:mat_prop_identified}. 
-White A0 mode dispersion curves calculated by SASE model for optimised material properties obtained by $\beta$-slicing method are given as a reference. 
+Figure~\ref{fig:homog_opt_num} shows the comparison of A0 mode dispersion images calculated by the SEM model for the homogenised material properties and optimised material properties obtained by the $\beta$-slicing method as given in Table~\ref{tab:mat_prop_identified}. 
+White A0 mode dispersion curves calculated by the SASE model for optimised material properties obtained by the $\beta$-slicing method are given as a reference. 
 It is confirmed that homogenised material properties lead to significant error in dispersion curves which directly translate to errors in phase velocities given by relationship $c_p= f/k$.
 
 It is important to note that despite low-order approximation of shell SEM, dispersion images match very well SASE dispersion curves (right column of Fig.~\ref{fig:homog_opt_num}). 
@@ -685,27 +686,57 @@ These discrepancies are consistent for each investigated angle of propagation �
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Full wavefield comparison}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Another visualisation is shown in Figure 5 to underlined the importance of accurate modelling of guided waves velocity. 
+Another visualisation is shown in Fig.~\ref{fig:wavefield_comparison} to underline the importance of accurate modelling of guided waves velocity. 
 A frame of propagating waves is selected at the time instance 0.5~ms. 
+
 Reinforcing fibres are located vertically, hence wavefront is elongated in the vertical direction.
-The first image in Figure 5 shows that the application of homogenised material properties causes that the A0 mode reaches the left edge too fast. 
-In contrast, the application of optimised material properties results in a wave pattern which is very similar to the experimental one except for wave crest amplitudes. 
-The A0 mode calculated numerically based on elastic constants obtained by $\beta$-slicing method reaches the left edge at the same time as in the experiment.
+The image in Fig.~\ref{fig:wavefield_sem_homog} shows that the application of homogenised material properties causes that the A0 mode reaches the left edge too fast. 
+In contrast, the application of optimised material properties results in a wave pattern (Fig.~\ref{fig:wavefield_sem_opt}) which is very similar to the experimental one (Fig.~\ref{fig:wavefield_exp}) except for wave crest amplitudes. 
+The A0 mode calculated numerically based on elastic constants obtained by angle-slicing method reaches the left edge at the same time as in the experiment.
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figure7a.png}
+		\caption{Numerical SEM (homog.)}
+		\label{fig:wavefield_sem_homog}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figure7b.png}
+		\caption{Numerical SEM (optim.)}
+		\label{fig:wavefield_sem_opt}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figure7c.png}
+		\caption{Experimental}
+		\label{fig:wavefield_exp}
+	\end{subfigure}
+	\caption{Comparison of wavefields of propagating guided waves for the excitation frequency 50~kHz at the time instance 0.5 ms.}
+	\label{fig:wavefield_comparison}
+\end{figure}
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Validation on quasi-isotropic CFRP plate\label{sec:validation}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-It should be noted that despite excellent agreement between numerical and experimental dispersion curves reported in section~\ref{sec:modelling_improvement}, the correctness of elastic tensor $\matr{C}$ is not entirely proven.
+It should be noted that despite an excellent agreement between numerical and experimental dispersion curves reported in section~\ref{sec:modelling_improvement}, the correctness of elastic tensor $\matr{C}$ is not entirely proven.
 Therefore, additional effort was made to validate its correctness.
 The validation was conducted based on Open Guided Waves (OGW) data set which is accompanied by material properties obtained by various test standards~\cite{Moll2019}.
 OGW is an extendable online platform where high-quality and well-documented datasets for guided wave-based inspections are provided.
-\subsection{Specimen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Specimen and material properties \label{sec:spec}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The benchmark structure used for validation was quasi-isotropic carbon-fibre-reinforced polymer (CFRP) plate with embedded piezoelectric transducers. 
+The specimen was made of prepreg material Hexply\textsuperscript{\textregistered} M21/34\%/\-UD134/\-T700/\-300.
 The layup was [45/0/-45/90/-45/0/45/90]\textsubscript{S}. 
 CFRP plate had the dimensions of 500 mm \(\times\) 500 mm and a thickness of 2 mm 
-(values provided by manufacturer). 
+(values provided by the manufacturer). 
 The actual measured average thickness was 2.086 mm. 
 The diameter of the piezoelectric transducers was 10 mm and the thickness 0.2 mm. 
-The specimen was made of prepreg material Hexply\textsuperscript{\textregistered} M21/34\%/UD134/T700/300. 
+
 The established material properties by various test standards for unidirectional Hexply material are given in Table~\ref{tab:mat_prop_Moll}. 
 
 \begin{table}
@@ -733,19 +764,39 @@ The matrix of elastic constants $\matr{C}$ was calculated based on the material 
 \end{equation}
 and 
 \begin{equation}
-	G_{23} = \frac{E_{22}}{2(1+\nu_{23})}
+	G_{23} = \frac{E_{22}}{2\,(1+\nu_{23})}
 	\label{eq:recalc2}
 \end{equation}
-Also propagation of uncertainties was taken into account.
+Also, the aspect of propagation of uncertainties was taken into account.
+The results are given in Table~\ref{tab:mat_prop_identified_Moll} and are labelled as "Reference".
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experimental measurements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Experimental full wavefield measurements by using SLDV were conducted in similar manner as it was described in section~\ref{sec:SLDV}. 
-However, only quarter of the plate was considered for 3D Fourier transform.
+Experimental full wavefield measurements by using SLDV were conducted in a similar manner as it was described in section~\ref{sec:SLDV}. 
+However, only a quarter of the plate was considered for 3D Fourier transform.
 It should be added that 0\(^{\circ}\) fibre orientation was along the vertical edge of the specimen.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Determination of elastic constants}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The determined elastic constants are gathered in Table~\ref{tab:mat_prop_identified_Moll}.
+The reference values are calculated based on OGW data as it was explained in section~\ref{sec:spec}.
+It should be noted that reference elastic constants are characterised by high variability expressed by high values of standard deviation.
+In the next column results obtained by $\beta$-slicing method are presented followed by standard deviations calculated based on 10 genetic algorithm runs.
+Due to long computation time, only one genetic algorithm run was used to determine elastic constants by using $f$-slicing method.
+
+The optimised $C_{11}$ elastic constants are slightly lower than reference values.
+The optimised $C_{12}$ and $C_{13}$ elastic constants are up to 46\% greater than the reference values.
+Similarly $C_{22}$ constant seems to be overestimated by about 32\% in comparison to the reference values.
+Overall, it seems that the optimised elastic constants differs quite substantially from the reference values.
+Nevertheless, the wavenumber profiles calculated by using optimised elastic constants better fit to the experimental data than the wavenumber profiles calculated by using reference elastic constants (see Fig.~\ref{fig:freq_slice_opt_Moll}).
+This is especially visible at higher frequencies for larger values of wavenumbers.
+The most outward white curve (corresponding to A0 Lamb wave mode) in Fig.~\ref{fig:freq_slice_opt_Moll} better fit to experimental wavenumber map than magenta curve.
+%However, neither of these curves fit perfectly to the experimental wavenumber map.
+On the other hand, wavenumber profiles corresponding to SH0 mode and S0 mode calculated for reference elastic constants and optimised elastic constants overlap.
+
+It might mean that static test standards (see Table~\ref{tab:mat_prop_Moll}) along with formulas given by Eqs.~(\ref{eq:recalc})-(\ref{eq:recalc2}) are appropriate for lower frequency ranges and longer wavelengths.
+But for high frequency problems such as Lamb wave propagation phenomenon, the alternative method for determination of elastic constants should be applied.
+In this context, optimised elastic constants obtained by the proposed methods should be considered valid.
 \begin{table}[h]
 	\renewcommand{\arraystretch}{1.3}
 	\centering \footnotesize
@@ -756,19 +807,53 @@ It should be added that 0\(^{\circ}\) fibre orientation was along the vertical e
 		\cmidrule(lr){3-4}
 		$\left[\textrm{GPa}\right]$ & \multicolumn{1}{c}{\cite{Moll2019}} & $\beta$-slicing & $f$-slicing \\ 
 		\midrule 
-		$C_{11}$ & 129.99$\pm$12.22  & 119.59$\pm$5.12 & 115.63 \\ 
-		$C_{12}$ &   6.06$\pm$ 1.08  &   8.87$\pm$0.09 &   6.78\\ 
-		$C_{13}$ &   6.06$\pm$ 1.08  &   7.47$\pm$1.39 &   6.22\\
-		$C_{22}$ &  11.19$\pm$ 3.51  &  16.47$\pm$0.04 &  16.41\\
-		$C_{23}$ &   5.19$\pm$ 0.42  &   2.51$\pm$0.02 &   2.63\\
-		$C_{33}$ &  11.19$\pm$ 3.51  &   5.74$\pm$0.19 &   6.51\\
-		$C_{44}$ &   3.00$\pm$ 0.14  &   2.95$\pm$0.12 &   3.60\\
-		$C_{55}$ &   4.13$\pm$ 0.07  &   5.85$\pm$0.49 &   5.84\\
-		$C_{66}$ &   4.13$\pm$ 0.07  &   4.46$\pm$0.95 &   4.68 \\
+		$C_{11}$ & 129.99$\pm$12.22  & 119.59$\pm$5.12 & 119.19 \\ 
+		$C_{12}$ &   6.06$\pm$ 1.08  &   8.87$\pm$0.09 &   8.91\\ 
+		$C_{13}$ &   6.06$\pm$ 1.08  &   7.47$\pm$1.39 &   8.59\\
+		$C_{22}$ &  11.19$\pm$ 3.51  &  16.47$\pm$0.04 &  14.78\\
+		$C_{23}$ &   5.19$\pm$ 0.42  &   2.51$\pm$0.02 &   5.27\\
+		$C_{33}$ &  11.19$\pm$ 3.51  &   5.74$\pm$0.19 &   9.03\\
+		$C_{44}$ &   3.00$\pm$ 0.14  &   2.95$\pm$0.12 &   3.45\\
+		$C_{55}$ &   4.13$\pm$ 0.07  &   5.85$\pm$0.49 &   5.44\\
+		$C_{66}$ &   4.13$\pm$ 0.07  &   4.46$\pm$0.95 &   5.37 \\
 		\bottomrule
 	\end{tabular} 
 	\label{tab:mat_prop_identified_Moll}
 \end{table}
+
+\begin{figure} [h!]
+	\centering
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure8a.png}
+		\caption{}
+		\label{fig:freq3_opt_Moll}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure8b.png}
+		%\caption{}
+		\label{fig:freq4_opt_Moll}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure8c.png}
+		%\caption{}
+		\label{fig:freq5_opt_Moll}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.47\textwidth}
+		\centering
+		\includegraphics[]{figure8d.png}
+		%\caption{}
+		\label{fig:freq7_opt_Moll}
+	\end{subfigure}
+	\caption{Comparison of wavenumber profiles calculated by SASE method for optimised material properties (white curves) and reference case based on OGW (magenta curves) with experimental images.}
+	\label{fig:freq_slice_opt_Moll}
+\end{figure}
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -779,23 +864,21 @@ In the second step, full wavefield simulations were performed by using the time 
 It has been shown that very good agreement can be obtained between SEM and experiment if optimised elastic constants are used. 
 Such an approach is much preferred in comparison to homogenisation techniques because it leads to much lower errors in guided wave velocities.
 
-Analysis of improvement in wave attenuation modelling and wave crest amplitude distribution through optimisation is a task which is planned in the future.
+The validation of the correctness of the proposed optimisation method was performed based on the OGW data set.
+It has been found that the optimised elastic constants differs quite substantially from the reference values. 
+But the wavenumber profiles calculated by using optimised elastic constants fit better the experimental data than the wavenumber profiles calculated by using reference elastic constants.
+It might be attributed to the fact that the proposed approach of elastic constant determination is more suitable for high-frequency problems such as Lamb wave propagation phenomenon than static test standards.
 
-Furthermore, validation of correctness of the optimisation method was performed based on OGW data set.
+In summary, the current implementation of the SEM, in which elastic constants are determined first, is very well suited for model-based structural health monitoring. 
+It is because modelled Lamb wave velocities and wavefront profiles are very close to experimental data obtained by SLDV. 
 
- 
-	impose constraints on optimisation process so that obtain elastic constants of better physical meaning.
-	In summary, the current implementation is very well suited for 
-	 
-	%% The Appendices part is started with the command \appendix;
-	%% appendix sections are then done as normal sections
-	%\appendix
-	 
-	\section*{Acknowledgement}
-   The research was funded by the Polish National Science Center under grant agreement no 2018/29/B/ST8/00045. 
-	
-	
-	
+Analysis of improvement in the wave attenuation modelling and wave crest amplitude distribution through optimisation is a task which is planned in the future.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Acknowledgement}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The research was funded by the Polish National Science Center under grant agreement no 2018/29/B/ST8/00045. 
+		
 	%% If you have bibdatabase file and want bibtex to generate the
 	%% bibitems, please use
 	%%
