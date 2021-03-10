@@ -118,7 +118,7 @@ ObjfunArg.number_of_modes_considered=number_of_modes_considered;
 ObjfunArg.rho=rho;
 % tests loop
 %%
-for test_case = [6:10]
+for test_case = [7:10]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
