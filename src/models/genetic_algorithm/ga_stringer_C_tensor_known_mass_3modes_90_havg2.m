@@ -84,7 +84,7 @@ Q66_lb = (1-variation)*Q66_0;
 Q66_ub = (1+variation)*Q66_0; 
 %% genetic algorithm parameters
 NIND = 100;           % Number of individuals per subpopulations
-MAXGEN = 800;        % maximum Number of generations
+MAXGEN = 300;        % maximum Number of generations
 GGAP = 0.7;           % Generation gap, how many new individuals are created
 NVAR = 9;           %number of variables in objective function
 PRECI = 9;          % Precision of binary representation of variables
@@ -118,7 +118,7 @@ ObjfunArg.number_of_modes_considered=number_of_modes_considered;
 ObjfunArg.rho=rho;
 % tests loop
 %%
-for test_case = [7:10]
+for test_case = [5]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))

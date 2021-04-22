@@ -26,6 +26,8 @@ output_path = prepare_figure_paths(modelfolder,modelname2);
 model_input_path = fullfile( projectroot, 'data','raw','num',modelfolder,[modelname,'_out'], filesep );
 % create path to the experimental processed data folder
 exp_input_data_path=fullfile( projectroot, 'data','processed','exp', filesep );
+% prepare model output path
+model_output_path = prepare_model_paths('processed','num',modelfolder,modelname);
 
 % filename of data to be processed
 % full field measurements after 3D FFT transform (1st quarter)
@@ -66,10 +68,12 @@ output_name = [model_input_path,filesep,num2str(test_case),'output'];
 load(output_name); % 'rhom','rhof','em','ef','nim','nif','vol','C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal'
 %% compute dispersion curves
 [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
+save([model_output_path,filesep,'opt_dispersion_curves'],'wavenumber','CG','FREQ');
 if(~radians)
    wavenumber = wavenumber/(2*pi); % linear scale [1/m]
    wavenumber_max = wavenumber_max/(2*pi); % linear scale [1/m]
 end
+
 for j=1:number_of_angles % beta
     
     figfilename = [modelname,'_','angle_',num2str(beta(j)),'_dispersion_curves_test_case_',num2str(test_case),'_small'];

@@ -133,6 +133,7 @@ target/
 *.jpg
 *.tif
 *.tiff
+*.PNG
 
 # IPython NB Checkpoints
 .ipynb_checkpoints/
