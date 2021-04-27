@@ -1,7 +1,7 @@
-function [stt] = designed_waveform(st,L,f,Wavenumber,D0,Nb)
-% DESIGNED_WAVEFORM   Apply predispersion to original signal 
+function [stt] = designed_waveform2(st,L,f,Wavenumber,D0,D1,Nb)
+% designed_waveform2   Apply predispersion to original signal 
 % 
-% Syntax: [stt] = designed_waveform(st,L,om,wavenumber,D0,Nb) 
+% Syntax: [stt] = designed_waveform2(st,L,om,wavenumber,D0,D1,Nb) 
 % 
 % Inputs: 
 %    st - time domain signal, matrix of doubles, dimensions [NFFT,M]
@@ -11,6 +11,7 @@ function [stt] = designed_waveform(st,L,f,Wavenumber,D0,Nb)
 %    Wavenumber - wavenumber compponents of dispersion curve wavenumber(f),
 %                 repeated M columns, double, dimensions [NFFT,M], Units: rad/m
 %    D0 - cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
+%    D1 - cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
 %    Nb - Butterworth filter order, integer
 % 
 % Outputs: 
@@ -18,9 +19,9 @@ function [stt] = designed_waveform(st,L,f,Wavenumber,D0,Nb)
 %          matrix of doubles, dimensions [NFFT,M]
 % 
 % Example: 
-%    [stt] = designed_waveform(st,L,f,Wavenumber,D0,Nb)
-%    [stt] = designed_waveform(st,0.5,f,Wavenumber,8e3,1)
-%    [stt] = designed_waveform(st,1.0,f,Wavenumber,10000,2) 
+%    [stt] = designed_waveform2(st,L,f,Wavenumber,D0,D1,Nb)
+%    [stt] = designed_waveform2(st,0.5,f,Wavenumber,8e3,100e3,1)
+%    [stt] = designed_waveform2(st,1.0,f,Wavenumber,10000,500000,2) 
 % 
 % Other m-files required:  butterworth_high_pass1D.m 
 % MAT-files required: none 
@@ -43,12 +44,16 @@ Y = Y(1:round(NFFT/2),:); % select part up to Nyquist frequency
 
 % apply high pass filter >10kHz 
 [H] = butterworth_high_pass1D(f,D0,Nb);
+%figure;plot(f,H);
 
 Y=H.*Y;
-% apply low pass filter < 1MHz
+% apply low pass filter 
+[H1] = butterworth_low_pass1D(f,D1,Nb);
+Y=H1.*Y;
 % [I]=find(f>1e6);
 % Y(I,:)=0;
-% figure;plot(f,abs(Y));
+%  figure;plot(f,H1);hold on;plot(f,H,'r');
+%  figure;plot(f,abs(Y));
 % apply precompensation
 G = Y.*exp(-1i.*Wavenumber.*L);
 
@@ -66,4 +71,4 @@ stt=ifft(G,NFFT,'symmetric');
 
 %---------------------- END OF CODE---------------------- 
 
-% ================ [designed_waveform.m] ================  
+% ================ [designed_waveform2.m] ================  

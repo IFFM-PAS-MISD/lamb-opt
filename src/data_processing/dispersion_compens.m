@@ -10,7 +10,8 @@ L=0.4; % distance between actuator and sensor [m]
 
 
 %load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat2/averaged/',num2str(no_of_cycles),'_cycles_',num2str(excit_frequency),'kHz/niscope_avg_waveform.mat']);
-load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat3/averaged/',num2str(no_of_cycles),'_cycles_',num2str(excit_frequency),'kHz/niscope_avg_waveform.mat']);
+%load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat3/averaged/',num2str(no_of_cycles),'_cycles_',num2str(excit_frequency),'kHz/niscope_avg_waveform.mat']);
+load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_A0/averaged/',num2str(no_of_cycles),'_cycles_',num2str(excit_frequency),'kHz/niscope_avg_waveform.mat']);
 
 load('/home/pkudela/work/projects/opus15/lamb-opt/data/processed/num/genetic_algorithm/ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_2lay6_out/opt_dispersion_curves.mat');
 w=round(1.2*sampleRate/(excit_frequency*1e3/no_of_cycles));% window size in points
