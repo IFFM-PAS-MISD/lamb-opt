@@ -56,12 +56,7 @@ for j=1:number_of_angles
     kvec=squeeze(wavenumber(:,j)); % angle j [rd/m]
     s=squeeze(Data_padded(j,:))'; % signal for dispersion compensation
     
-    sp = zeros(nft_padded,1);
-    wavenumber_step = kvec(2) - kvec(1);
-    % mode tracing is unnecessary 
-    %[~,FREQ_new] = mode_tracing_pade(CG(1:number_of_modes_considered,:,j),squeeze(FREQ(1:number_of_modes_considered,:,j)),wavenumber_step);
-    %[~,FREQ_new] = mode_tracing_pade(CG(1:5,:,j),squeeze(FREQ(1:5,:,j)),wavenumber_step);   
-   
+    sp = zeros(nft_padded,1); 
         fvec1=squeeze(FREQ(selected_mode(j),:,j))'; % mode k, angle j [Hz]
         %fvec1=FREQ_new(selected_mode(j),:)'; % mode k, angle j [Hz]
         %figure;plot(squeeze(FREQ_new(2,:)));hold on; plot(squeeze(FREQ_new(3,:)),'r');plot(squeeze(FREQ_new(4,:)),'g');plot(squeeze(FREQ_new(5,:)),'k');
@@ -87,18 +82,18 @@ for j=1:number_of_angles
 %                 freq(I2)=0;
                  Wavenumber1(I2)=0;
                
-                figure;
-                plot(freq,Wavenumber1);
+%                 figure;
+%                 plot(freq,Wavenumber1);
         % post compensation
         sp(:,1) = designed_waveform2(s,-L,freq,Wavenumber1,D0,D1,Nb);
         sp1(:,j) = sp1(:,j) + sp;
         % plotting
-            figure;plot(sp1(:,j),'k');
-            % draw window
-            smax = max(sp1(:,j));
-            smin = min(sp1(:,j));
-            line([(Nexc+1),(Nexc+w),(Nexc+w),(Nexc+1),(Nexc+1)],[smin, smin, smax,smax,smin],'Color','m');
-            title(['Mode ',num2str(selected_mode(j))]);      
+%             figure;plot(sp1(:,j),'k');
+%             % draw window
+%             smax = max(sp1(:,j));
+%             smin = min(sp1(:,j));
+%             line([(Nexc+1),(Nexc+w),(Nexc+w),(Nexc+1),(Nexc+1)],[smin, smin, smax,smax,smin],'Color','m');
+%             title(['Mode ',num2str(selected_mode(j))]);      
     
     %obj_score = obj_score + sum(abs(sp1(Nexc+1:Nexc+w,j)))/w/number_of_angles;
     obj_score = obj_score + 100*sum((sp1(Nexc+1:Nexc+w,j).^2))/w/number_of_angles;
