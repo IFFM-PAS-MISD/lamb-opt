@@ -15,7 +15,7 @@ overwrite = false; % allow overwriting existing results if true
 fig_width = 7; fig_height = 5; 
 % create path to the numerical model data folder
 modelfolder = 'genetic_algorithm';
-modelname = 'ga_pzt_unidirectional_2';
+modelname = 'ga_pzt_unidirectional_A0_S0';
 radians = false;
 test_case=1; % numerical data
 % create output path

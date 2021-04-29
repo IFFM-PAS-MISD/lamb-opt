@@ -1,33 +1,38 @@
 clear all;close all;
 no_of_cycles =3; % best 2 or 2.5 cycles
-excit_frequency=250; % [kHz] % best 40-60 kHz
+excit_frequency=250; % [kHz] % 
 D0 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
 D1 = 300e3;%  cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
 Nb=3; % Butterworth filter order, integer
 
 overwrite = false; % allow overwriting existing results if true
 number_of_modes_considered = 1; % number of modes considered in calculation of objective function score
-number_of_modes=5;
+number_of_modes=7;
 %selected_mode=[2,2,2,3,3,3,3]; % for manual mode tracing
-selected_mode=[3,2,2,3,3,3,3]; % for automatic mode tracing
+%selected_mode=[3,2,2,3,3,3,3]; % for automatic mode tracing (S0 mode) score 0.9326, 2 cycles
+%selected_mode=[1,1,1,1,1,1,1]; % for automatic mode tracing (A0 mode) score 6.5316, 2.5 cycles, 50 kHz
+selected_mode=[4,4,4,4,4,4,4]; % for automatic mode tracing (A1 mode)score 0.0086, 3 cycles
+%selected_mode=[5,5,5,5,5,5,5]; % for automatic mode tracing (A2 mode) score 0.0282, 3 cycles
 L=0.4; % distance between actuator and sensor [m]
 
 
 %load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat2/averaged/',num2str(no_of_cycles),'_cycles_',num2str(excit_frequency),'kHz/niscope_avg_waveform.mat']);
 %load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat3/averaged/',num2str(no_of_cycles),'_cycles_',num2str(excit_frequency),'kHz/niscope_avg_waveform.mat']);
-%load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_A0/averaged/',num2str(no_of_cycles),'_cycles_',num2str(excit_frequency),'kHz/niscope_avg_waveform.mat']);
-load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_S0/averaged/',num2str(no_of_cycles),'_cycles_',num2str(excit_frequency),'kHz/niscope_avg_waveform.mat']);
+load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_A0/averaged/',num2str(no_of_cycles),'_cycles_',num2str(excit_frequency),'kHz/niscope_avg_waveform.mat']);
+%load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_S0/averaged/',num2str(no_of_cycles),'_cycles_',num2str(excit_frequency),'kHz/niscope_avg_waveform.mat']);
 
 
 load('/home/pkudela/work/projects/opus15/lamb-opt/data/processed/num/genetic_algorithm/ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_2lay6_out/opt_dispersion_curves.mat');
 w=round(1.2*sampleRate/(excit_frequency*1e3/no_of_cycles));% window size in points
 dt=1/sampleRate;
-niscope_avg_waveform(1:160,:)=0;
+%niscope_avg_waveform(1:160,:)=0;
+%niscope_avg_waveform(161:end,:)=0;
 niscope_avg_waveform(3000:end,1)=0;
 niscope_avg_waveform(3000:end,2)=0;
 niscope_avg_waveform(3000:end,3)=0;
 niscope_avg_waveform(1200:end,4)=0;
 niscope_avg_waveform(950:end,5)=0;
+%niscope_avg_waveform(3000:end,5)=0;
 niscope_avg_waveform(670:end,6)=0;
 niscope_avg_waveform(850:end,7)=0;
 % for higher frequencies
@@ -126,3 +131,15 @@ plot(sp,'k');
 smax = max(sp);
 smin = min(sp);
 line([(N+1),(N+w),(N+w),(N+1),(N+1)],[smin, smin, smax,smax,smin],'Color','m');
+
+%
+% frequency plot
+fs=sampleRate;
+df=fs/N;                            %frequency resolution
+sampleIndex = -N/2:N/2-1;   %ordered index for FFT plot
+f=sampleIndex*df; 
+a=max(abs(fftshift(fft(niscope_avg_waveform(:,5)))));
+b=max(abs(fftshift(fft(nifgen_avg_waveform_ch1))));
+figure;plot(f,abs(fftshift(fft(niscope_avg_waveform(:,5)))),'r');
+xlim([0,1e6]);hold on;
+plot(f,a/b*abs(fftshift(fft(nifgen_avg_waveform_ch1))),'b');

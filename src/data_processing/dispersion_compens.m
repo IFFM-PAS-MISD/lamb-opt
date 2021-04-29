@@ -36,3 +36,10 @@ plot(sp,'k');
 smax = max(sp);
 smin = min(sp);
 line([(N+1),(N+w),(N+w),(N+1),(N+1)],[smin, smin, smax,smax,smin],'Color','m');
+
+fs=sampleRate;
+df=fs/N;                            %frequency resolution
+sampleIndex = -N/2:N/2-1;   %ordered index for FFT plot
+f=sampleIndex*df; 
+figure;plot(f,abs(fftshift(fft(niscope_avg_waveform(:,3)))),'r');
+xlim([0,1e6]);

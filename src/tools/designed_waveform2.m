@@ -52,6 +52,7 @@ Y=H.*Y;
 Y=H1.*Y;
 % [I]=find(f>1e6);
 % Y(I,:)=0;
+
 %  figure;plot(f,H1);hold on;plot(f,H,'r');
 %  figure;plot(f,abs(Y));
 % apply precompensation

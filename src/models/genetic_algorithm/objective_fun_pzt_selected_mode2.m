@@ -88,12 +88,12 @@ for j=1:number_of_angles
         sp(:,1) = designed_waveform2(s,-L,freq,Wavenumber1,D0,D1,Nb);
         sp1(:,j) = sp1(:,j) + sp;
         % plotting
-%             figure;plot(sp1(:,j),'k');
-%             % draw window
-%             smax = max(sp1(:,j));
-%             smin = min(sp1(:,j));
-%             line([(Nexc+1),(Nexc+w),(Nexc+w),(Nexc+1),(Nexc+1)],[smin, smin, smax,smax,smin],'Color','m');
-%             title(['Mode ',num2str(selected_mode(j))]);      
+            figure;plot(sp1(:,j),'k');
+            % draw window
+            smax = max(sp1(:,j));
+            smin = min(sp1(:,j));
+            line([(Nexc+1),(Nexc+w),(Nexc+w),(Nexc+1),(Nexc+1)],[smin, smin, smax,smax,smin],'Color','m');
+            title(['Mode ',num2str(selected_mode(j))]);      
     
     %obj_score = obj_score + sum(abs(sp1(Nexc+1:Nexc+w,j)))/w/number_of_angles;
     obj_score = obj_score + 100*sum((sp1(Nexc+1:Nexc+w,j).^2))/w/number_of_angles;
