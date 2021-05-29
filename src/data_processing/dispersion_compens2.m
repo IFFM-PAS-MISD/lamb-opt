@@ -1,6 +1,6 @@
 clear all;close all;
-no_of_cycles =3; % best 2 or 2.5 cycles
-excit_frequency=250; % [kHz] % 
+no_of_cycles =1.5; % best 2 or 2.5 cycles
+excit_frequency=140; % [kHz] % 
 D0 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
 D1 = 300e3;%  cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
 Nb=3; % Butterworth filter order, integer
@@ -9,10 +9,12 @@ overwrite = false; % allow overwriting existing results if true
 number_of_modes_considered = 1; % number of modes considered in calculation of objective function score
 number_of_modes=7;
 %selected_mode=[2,2,2,3,3,3,3]; % for manual mode tracing
-%selected_mode=[3,2,2,3,3,3,3]; % for automatic mode tracing (S0 mode) score 0.9326, 2 cycles
-%selected_mode=[1,1,1,1,1,1,1]; % for automatic mode tracing (A0 mode) score 6.5316, 2.5 cycles, 50 kHz
-selected_mode=[4,4,4,4,4,4,4]; % for automatic mode tracing (A1 mode)score 0.0086, 3 cycles
-%selected_mode=[5,5,5,5,5,5,5]; % for automatic mode tracing (A2 mode) score 0.0282, 3 cycles
+%selected_mode=[3,2,3,3,3,3,3]; % for automatic mode tracing (S0 mode) score 0.1094, 2 cycles, 230 kHz
+%selected_mode=[0,0,2,2,2,0,0]; % for automatic mode tracing (SH0 mode) score 0.2915, 2.5 cycles, 220 kHz
+%selected_mode=[1,1,1,1,1,1,1]; % for automatic mode tracing (A0 mode) score 0.65316, 2.5 cycles, 50 kHz
+selected_mode=[1,1,1,1,0,0,0]; % for automatic mode tracing (A0 mode) score 0.0100, 1.5 cycles, 170 kHz
+%selected_mode=[4,4,4,4,4,0,0]; % for automatic mode tracing (A1 mode)score 5.1007e-04, 3 cycles, 240 kHz x200
+%selected_mode=[5,5,5,5,5,5,0]; % for automatic mode tracing (A2 mode) score 0.0014, 3 cycles, 240 kHz x100
 L=0.4; % distance between actuator and sensor [m]
 
 
@@ -25,25 +27,59 @@ load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_A0/averag
 load('/home/pkudela/work/projects/opus15/lamb-opt/data/processed/num/genetic_algorithm/ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_2lay6_out/opt_dispersion_curves.mat');
 w=round(1.2*sampleRate/(excit_frequency*1e3/no_of_cycles));% window size in points
 dt=1/sampleRate;
-%niscope_avg_waveform(1:160,:)=0;
-%niscope_avg_waveform(161:end,:)=0;
-niscope_avg_waveform(3000:end,1)=0;
-niscope_avg_waveform(3000:end,2)=0;
-niscope_avg_waveform(3000:end,3)=0;
-niscope_avg_waveform(1200:end,4)=0;
-niscope_avg_waveform(950:end,5)=0;
-%niscope_avg_waveform(3000:end,5)=0;
-niscope_avg_waveform(670:end,6)=0;
-niscope_avg_waveform(850:end,7)=0;
-% for higher frequencies
+% %niscope_avg_waveform(1:160,:)=0;
+% %niscope_avg_waveform(161:end,:)=0;
+% niscope_avg_waveform(3000:end,1)=0;
+% niscope_avg_waveform(3000:end,2)=0;
+% niscope_avg_waveform(3000:end,3)=0;
+% % niscope_avg_waveform(1200:end,4)=0;
+% niscope_avg_waveform(3000:end,4)=0;
+% % niscope_avg_waveform(950:end,5)=0;
+% niscope_avg_waveform(3000:end,5)=0;
+% % niscope_avg_waveform(670:end,6)=0;
+% niscope_avg_waveform(3000:end,6)=0;
+% % niscope_avg_waveform(850:end,7)=0;
+% niscope_avg_waveform(3000:end,7)=0;
+% % for higher frequencies
+% N=size(niscope_avg_waveform,1);
+% %niscope_avg_waveform(round(N/2)+1:end,:)=0; % for higher frequencies shorter signal is enough
+% niscope_avg_waveform(:,7)=niscope_avg_waveform(:,7)/400; % for higher
+% %frequencies differences in amlitudes at 0 and 90 deg increases
+% niscope_avg_waveform(:,5)=niscope_avg_waveform(:,5)*2;
+
+% S0
+% niscope_avg_waveform(3000:end,1)=0;
+% niscope_avg_waveform(3000:end,2)=0;
+% niscope_avg_waveform(3000:end,3)=0;
+% niscope_avg_waveform(1200:end,4)=0;
+% niscope_avg_waveform(950:end,5)=0;
+% niscope_avg_waveform(670:end,6)=0;
+% niscope_avg_waveform(850:end,7)=0;
+% 
+% N=size(niscope_avg_waveform,1);
+% niscope_avg_waveform(:,7)=niscope_avg_waveform(:,7)/400; % for higher
+% %frequencies differences in amlitudes at 0 and 90 deg increases
+% niscope_avg_waveform(:,5)=niscope_avg_waveform(:,5)*2;
+
+% A0 - whole signal
 N=size(niscope_avg_waveform,1);
-%niscope_avg_waveform(round(N/2)+1:end,:)=0; % for higher frequencies shorter signal is enough
-niscope_avg_waveform(:,7)=niscope_avg_waveform(:,7)/400; % for higher
-%frequencies differences in amlitudes at 0 and 90 deg increases
-niscope_avg_waveform(:,5)=niscope_avg_waveform(:,5)*2;
+%niscope_avg_waveform(3000:end,:)=0;
+% A1
+% niscope_avg_waveform(3000:end,1)=0;
+% niscope_avg_waveform(3000:end,2)=0;
+% niscope_avg_waveform(3000:end,3)=0;
+% niscope_avg_waveform(1200:end,4)=0;
+% niscope_avg_waveform(950:end,5)=0;
+% niscope_avg_waveform(670:end,6)=0;
+% niscope_avg_waveform(850:end,7)=0;
+
+% A0 high frequency
+niscope_avg_waveform(1:2000,:)=0;
+
 n=N;% take whole signal
 time=[1:N]*dt-dt;
 signals=zeros(7,N);
+
 
 signals(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -123,8 +159,9 @@ end
 % FREQ must be in angular frequency [rad/s] and wavenumber in [rad/m]
 %[score,sig_compens] = objective_fun_pzt2(time(1:n),signals(:,1:n),L,CG,FREQ,wavenumber,number_of_modes_considered,w,D0,Nb);
 %[score,sig_compens] = objective_fun_pzt_selected_mode(time(1:n),signals(:,1:n),L,CG,FREQ,wavenumber,selected_mode,w,D0,Nb);
-[score,sig_compens] = objective_fun_pzt_selected_mode2(time(1:n),signals(:,1:n),L,CG,FREQ,wavenumber,selected_mode,w,D0,D1,Nb);
-score=score*10;
+[score,sig_compens] = objective_fun_pzt_selected_mode3(time(1:n),signals(:,1:n),L,FREQ,wavenumber,selected_mode,w,D0,D1,Nb);
+
+%score=score*10;
 figure;
 sp=sum(sig_compens.^2,2);
 plot(sp,'k');
@@ -143,3 +180,9 @@ b=max(abs(fftshift(fft(nifgen_avg_waveform_ch1))));
 figure;plot(f,abs(fftshift(fft(niscope_avg_waveform(:,5)))),'r');
 xlim([0,1e6]);hold on;
 plot(f,a/b*abs(fftshift(fft(nifgen_avg_waveform_ch1))),'b');
+
+% sr=fft(niscope_avg_waveform(:,5));
+% se=fft(nifgen_avg_waveform_ch1);
+% G=sr./se;
+% plot(abs(G));
+% plot(ifft(sr./G));

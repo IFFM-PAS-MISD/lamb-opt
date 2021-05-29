@@ -1,6 +1,6 @@
 clear all;close all;
-no_of_cycles =2.5; % best 2 or 2.5 cycles
-excit_frequency=50; % [kHz] % best 40-60 kHz
+no_of_cycles =3; % best 2 or 2.5 cycles
+excit_frequency=190; % [kHz] % best 40-60 kHz
 D0 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
 Nb=1; % Butterworth filter order, integer
 
@@ -28,6 +28,8 @@ time=[1:N]*dt-dt;
 signals=zeros(7,N);
 
 signals(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
+% signals(6,:)=signals(6,:)/2;
+% signals(7,:)=signals(7,:)/2;
 % FREQ must be in angular frequency [rad/s] and wavenumber in [rad/m]
 [score,sig_compens] = objective_fun_pzt2(time(1:n),signals(:,1:n),L,CG,FREQ,wavenumber,number_of_modes_considered,w,D0,Nb);
 figure;
