@@ -1,4 +1,4 @@
-function [obj_score] = objective_fun_pzt_selected_mode2(time,signals,L,FREQ,wavenumber,selected_mode,w,D0,D1,Nb)
+function [obj_score,sp1] = objective_fun_pzt_selected_mode3(time,signals,L,FREQ,wavenumber,selected_mode,w,D0,D1,Nb)
 % OBJECTIVE_FUN_PZT2   score for dispersion compensated signals
 %    dispersion curve is calculated numerically whearas signals are experimental
 % 
@@ -50,54 +50,54 @@ Fs = 1/dt; % Fs - sampling frequency, Units: [Hz]
 freq = [Fs/2*linspace(0,1,round(nft_padded)/2)]'; % liearly equally spaced vector of frequencies
 obj_score = 0;
 sp1 = zeros(nft_padded,number_of_angles);
-
+beta=0:15:90;
 for j=1:number_of_angles
     if(selected_mode(j))
-        kvec=squeeze(wavenumber(:,j)); % angle j [rd/m]
-        s=squeeze(Data_padded(j,:))'; % signal for dispersion compensation
-
-        sp = zeros(nft_padded,1); 
-            fvec1=squeeze(FREQ(selected_mode(j),:,j))'; % mode k, angle j [Hz]
-            %fvec1=FREQ_new(selected_mode(j),:)'; % mode k, angle j [Hz]
-            % plotting shouldn't be used within parfor due to memory leak
-            %figure;plot(squeeze(FREQ_new(2,:)));hold on; plot(squeeze(FREQ_new(3,:)),'r');plot(squeeze(FREQ_new(4,:)),'g');plot(squeeze(FREQ_new(5,:)),'k');
-    %         figure;
-    %         plot(s);
-    %         y=abs(fft(s));
-    %         y=y(1:nft_padded/2,:);
-    %         figure;
-    %         plot(freq(:,1),y(:,1));
-            %title('Frequncy components of excitation signal');
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            % Mode k
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            % interpolate on liearly equally spaced vector of frequencies
-            Wavenumber1 = interp1(fvec1,kvec,freq,'linear','extrap'); 
-                    % cutting only for laser measurements; for pzt signals is not
-                    % needed
-    %                 [I]=find(freq<20);
-    %                 freq(I)=0;
-    %                 Wavenumber1(I)=0;
-                    % negative wavenumers excluded (as a results of extrapolation)
-                    [I2]=find(Wavenumber1<0);
-    %                 freq(I2)=0;
-                     Wavenumber1(I2)=0;
-
-    %                 figure;
-    %                 plot(freq,Wavenumber1);
-            % post compensation
-            sp(:,1) = designed_waveform2(s,-L,freq,Wavenumber1,D0,D1,Nb);
-            sp1(:,j) = sp1(:,j) + sp;
-            % plotting
-    %             figure;plot(sp1(:,j),'k');
-    %             % draw window
-    %             smax = max(sp1(:,j));
-    %             smin = min(sp1(:,j));
-    %             line([(Nexc+1),(Nexc+w),(Nexc+w),(Nexc+1),(Nexc+1)],[smin, smin, smax,smax,smin],'Color','m');
-    %             title(['Mode ',num2str(selected_mode(j))]);      
-
-        %obj_score = obj_score + sum(abs(sp1(Nexc+1:Nexc+w,j)))/w/number_of_angles;
-        obj_score = obj_score + 100*sum((sp1(Nexc+1:Nexc+w,j).^2))/w/number_of_angles;
+    kvec=squeeze(wavenumber(:,j)); % angle j [rd/m]
+    s=squeeze(Data_padded(j,:))'; % signal for dispersion compensation
+    
+    sp = zeros(nft_padded,1); 
+        fvec1=squeeze(FREQ(selected_mode(j),:,j))'; % mode k, angle j [Hz]
+        %fvec1=FREQ_new(selected_mode(j),:)'; % mode k, angle j [Hz]
+        % plotting shouldn't be used within parfor due to memory leak
+        %figure;plot(squeeze(FREQ_new(2,:)));hold on; plot(squeeze(FREQ_new(3,:)),'r');plot(squeeze(FREQ_new(4,:)),'g');plot(squeeze(FREQ_new(5,:)),'k');
+%         figure;
+%         plot(s);
+%         y=abs(fft(s));
+%         y=y(1:nft_padded/2,:);
+%         figure;
+%         plot(freq(:,1),y(:,1));
+        %title('Frequncy components of excitation signal');
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % Mode k
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % interpolate on liearly equally spaced vector of frequencies
+        Wavenumber1 = interp1(fvec1,kvec,freq,'linear','extrap'); 
+                % cutting only for laser measurements; for pzt signals is not
+                % needed
+%                 [I]=find(freq<20);
+%                 freq(I)=0;
+%                 Wavenumber1(I)=0;
+                % negative wavenumers excluded (as a results of extrapolation)
+                [I2]=find(Wavenumber1<0);
+%                 freq(I2)=0;
+                 Wavenumber1(I2)=0;
+               
+%                 figure;
+%                 plot(freq,Wavenumber1);
+        % post compensation
+        sp(:,1) = designed_waveform2(s,-L,freq,Wavenumber1,D0,D1,Nb);
+        sp1(:,j) = sp1(:,j) + sp;
+        % plotting
+            figure;plot(sp1(:,j),'k');
+            % draw window
+            smax = max(sp1(:,j));
+            smin = min(sp1(:,j));
+            line([(Nexc+1),(Nexc+w),(Nexc+w),(Nexc+1),(Nexc+1)],[smin, smin, smax,smax,smin],'Color','m');
+            title(['Angle ',num2str(beta(j))]);      
+    
+    %obj_score = obj_score + sum(abs(sp1(Nexc+1:Nexc+w,j)))/w/number_of_angles;
+    obj_score = obj_score + 100*sum((sp1(Nexc+1:Nexc+w,j).^2))/w/number_of_angles;
     end
 end
 

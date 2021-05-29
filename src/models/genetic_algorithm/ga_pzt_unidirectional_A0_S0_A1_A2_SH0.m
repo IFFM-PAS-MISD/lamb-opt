@@ -47,13 +47,12 @@ signals_A0(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % S0 mode
 no_of_cycles_S0 =2; % best 2 or 2.5 cycles
-excit_frequency_S0=250; % [kHz] 
+excit_frequency_S0=230; % [kHz] 
 D0_S0 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
 D1_S0 = 300e3;%  cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
 Nb_S0=3; % Butterworth filter order, integer
 
-
-selected_mode_S0=[3,2,2,3,3,3,3]; % selected modes for each angle
+selected_mode_S0=[3,2,3,3,3,3,3]; % selected modes for each angle
 load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_S0/averaged/',num2str(no_of_cycles_S0),'_cycles_',num2str(excit_frequency_S0),'kHz/niscope_avg_waveform.mat']);
 
 w_S0=round(1.2*sampleRate/(excit_frequency_S0*1e3/no_of_cycles_S0));% window size in points
@@ -78,13 +77,13 @@ signals_S0(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A1 mode
 no_of_cycles_A1 =3; % best 2 or 2.5 cycles
-excit_frequency_A1=250; % [kHz] 
+excit_frequency_A1=240; % [kHz] 
 D0_A1 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
 D1_A1 = 300e3;%  cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
 Nb_A1=3; % Butterworth filter order, integer
 
 
-selected_mode_A1=[4,4,4,4,4,4,4]; % selected modes for each angle
+selected_mode_A1=[4,4,4,4,4,0,0]; % selected modes for each angle
 load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_A0/averaged/',num2str(no_of_cycles_A1),'_cycles_',num2str(excit_frequency_A1),'kHz/niscope_avg_waveform.mat']);
 
 w_A1=round(1.2*sampleRate/(excit_frequency_A1*1e3/no_of_cycles_A1));% window size in points
@@ -109,13 +108,13 @@ signals_A1(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A2 mode
 no_of_cycles_A2 =3; % best 2 or 2.5 cycles
-excit_frequency_A2=250; % [kHz] 
+excit_frequency_A2=240; % [kHz] 
 D0_A2 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
 D1_A2 = 300e3;%  cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
 Nb_A2=3; % Butterworth filter order, integer
 
 
-selected_mode_A2=[5,5,5,5,5,5,5]; % selected modes for each angle
+selected_mode_A2=[5,5,5,5,5,5,0]; % selected modes for each angle
 load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_A0/averaged/',num2str(no_of_cycles_A2),'_cycles_',num2str(excit_frequency_A2),'kHz/niscope_avg_waveform.mat']);
 
 w_A2=round(1.2*sampleRate/(excit_frequency_A2*1e3/no_of_cycles_A2));% window size in points
@@ -137,6 +136,37 @@ niscope_avg_waveform(:,5)=niscope_avg_waveform(:,5)*2;
 signals_A2=zeros(7,N);
 
 signals_A2(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SH0 mode
+no_of_cycles_SH0 =2.5; % best 2 or 2.5 cycles
+excit_frequency_SH0=220; % [kHz] 
+D0_SH0 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
+D1_SH0 = 300e3;%  cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
+Nb_SH0=3; % Butterworth filter order, integer
+
+
+selected_mode_SH0=[0,0,2,2,2,0,0]; % selected modes for each angle
+load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_S0/averaged/',num2str(no_of_cycles_SH0),'_cycles_',num2str(excit_frequency_SH0),'kHz/niscope_avg_waveform.mat']);
+
+w_SH0=round(1.2*sampleRate/(excit_frequency_SH0*1e3/no_of_cycles_SH0));% window size in points
+
+
+niscope_avg_waveform(3000:end,1)=0;
+niscope_avg_waveform(3000:end,2)=0;
+niscope_avg_waveform(3000:end,3)=0;
+niscope_avg_waveform(3000:end,4)=0;
+niscope_avg_waveform(3000:end,5)=0;
+niscope_avg_waveform(3000:end,6)=0;
+niscope_avg_waveform(3000:end,7)=0;
+
+N=size(niscope_avg_waveform,1);
+niscope_avg_waveform(:,7)=niscope_avg_waveform(:,7)/400; % for higher
+%frequencies differences in amlitudes at 0 and 90 deg increases
+niscope_avg_waveform(:,5)=niscope_avg_waveform(:,5)*2;
+
+signals_SH0=zeros(7,N);
+
+signals_SH0(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Input for SASE
 beta = 0:15:90; % angles for dispersion curves in polar plot [deg]
@@ -216,7 +246,7 @@ ubin= [1,1,1,1,1,1,1,1,1];%include upper bound of variable range
 % tests loop
 %%
 % 
-for test_case = [1] 
+for test_case = [2] 
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
@@ -235,7 +265,7 @@ for test_case = [1]
        gen = 0;			% generational counter
        
         % Evaluate initial population
-        [ObjV] = obj_ga_pzt_unidirectional_A0_S0_A1_A2(Phen,time,signals_A0,signals_S0,signals_A1,signals_A2,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes,selected_mode_A0,selected_mode_S0,selected_mode_A1,selected_mode_A2,rho,w_A0,w_S0,w_A1,w_A2,D0_A0,D0_S0,D0_A1,D0_A2,D1_A0,D1_S0,D1_A1,D1_A2,Nb_A0,Nb_S0,Nb_A1,Nb_A2,L);
+        [ObjV] = obj_ga_pzt_unidirectional_A0_S0_A1_A2_SH0(Phen,time,signals_A0,signals_S0,signals_A1,signals_A2,signals_SH0,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes,selected_mode_A0,selected_mode_S0,selected_mode_A1,selected_mode_A2,selected_mode_SH0,rho,w_A0,w_S0,w_A1,w_A2,w_SH0,D0_A0,D0_S0,D0_A1,D0_A2,D0_SH0,D1_A0,D1_S0,D1_A1,D1_A2,D1_SH0,Nb_A0,Nb_S0,Nb_A1,Nb_A2,Nb_SH0,L);
         % Generational loop
        while gen < MAXGEN
             tic;
@@ -244,7 +274,7 @@ for test_case = [1]
                 NRANDIND = ceil(ROGR*NIND);
                 RandChrom = crtbp(NRANDIND, NVAR*PRECI); % NRANDIND random individuals
                 % evaluate random individual
-                [ObjVRand] = obj_ga_pzt_unidirectional_A0_S0_A1_A2(bs2rv(RandChrom,FieldD),time,signals_A0,signals_S0,signals_A1,signals_A2,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes,selected_mode_A0,selected_mode_S0,selected_mode_A1,selected_mode_A2,rho,w_A0,w_S0,w_A1,w_A2,D0_A0,D0_S0,D0_A1,D0_A2,D1_A0,D1_S0,D1_A1,D1_A2,Nb_A0,Nb_S0,Nb_A1,Nb_A2,L);
+                [ObjVRand] = obj_ga_pzt_unidirectional_A0_S0_A1_A2_SH0(bs2rv(RandChrom,FieldD),time,signals_A0,signals_S0,signals_A1,signals_A2,signals_SH0,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes,selected_mode_A0,selected_mode_S0,selected_mode_A1,selected_mode_A2,selected_mode_SH0,rho,w_A0,w_S0,w_A1,w_A2,w_SH0,D0_A0,D0_S0,D0_A1,D0_A2,D0_SH0,D1_A0,D1_S0,D1_A1,D1_A2,D1_SH0,Nb_A0,Nb_S0,Nb_A1,Nb_A2,Nb_SH0,L);
                 [A,I]=sort(ObjV,'descend');
                 % replace weakest individuals
                 for k=1:NRANDIND
@@ -269,8 +299,7 @@ for test_case = [1]
 
         % Evaluate offspring, call objective function
             %tic;
-           [ObjVSel] = obj_ga_pzt_unidirectional_A0_S0_A1_A2(bs2rv(SelCh,FieldD),time,signals_A0,signals_S0,signals_A1,signals_A2,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes,selected_mode_A0,selected_mode_S0,selected_mode_A1,selected_mode_A2,rho,w_A0,w_S0,w_A1,w_A2,D0_A0,D0_S0,D0_A1,D0_A2,D1_A0,D1_S0,D1_A1,D1_A2,Nb_A0,Nb_S0,Nb_A1,Nb_A2,L);
-               
+            [ObjVSel] = obj_ga_pzt_unidirectional_A0_S0_A1_A2_SH0(bs2rv(SelCh,FieldD),time,signals_A0,signals_S0,signals_A1,signals_A2,signals_SH0,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes,selected_mode_A0,selected_mode_S0,selected_mode_A1,selected_mode_A2,selected_mode_SH0,rho,w_A0,w_S0,w_A1,w_A2,w_SH0,D0_A0,D0_S0,D0_A1,D0_A2,D0_SH0,D1_A0,D1_S0,D1_A1,D1_A2,D1_SH0,Nb_A0,Nb_S0,Nb_A1,Nb_A2,Nb_SH0,L);    
            %toc
            % Reinsert offspring into current population
            [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);

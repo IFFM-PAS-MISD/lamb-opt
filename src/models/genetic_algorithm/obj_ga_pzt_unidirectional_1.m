@@ -41,6 +41,7 @@ ObjV = zeros(size(Phen,1),1);
 % fittnes function scaling factors
 a=100;
 b=250;
+D1 = 500e3;%
 %for k=1:size(Phen,1)
 parfor k=1:size(Phen,1)
     %[k,size(Phen,1)]
@@ -57,8 +58,8 @@ parfor k=1:size(Phen,1)
     %% SASE
     [wavenumber,CG,FREQ] = main_SASE(rho,Q11,Q12,Q13,Q22,Q23,Q33,Q44,Q55,Q66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
 
- 
     [score,~] = objective_fun_pzt2(time,signals,L,CG,FREQ,wavenumber,number_of_modes_considered,w,D0,Nb);
+    %[score] = objective_fun_pzt_selected_mode2(time,signals,L,CG,FREQ,wavenumber,[1,1,1,1,1,1,1],w,D0,D1,Nb)
     
     ObjV(k)=a*(-1)*score+b;
 end

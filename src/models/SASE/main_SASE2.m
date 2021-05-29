@@ -4,7 +4,7 @@ function [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C
 %    sweep over frequencies 
 %    only real values of elastic constant matrix (no attenuation) 
 % 
-% Syntax: [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer) 
+% Syntax: [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,fmin,fmax,number_of_frequency_points,beta,stack_dir,np,nele_layer)
 % 
 % Inputs:
 %    rho - mass density of composite layers, double, Units: kg/m^3
@@ -27,8 +27,7 @@ function [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C
 %    FREQ - matrix of frequencies, double, dimensions [number_of_modes,number_of_wavenumber_points,number_of_angles], Units: Hz 
 % 
 % Example: 
-%    [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer) 
-%    [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,[0,90,0,90],h,wavenumber_max,512,[0,30,60,90],1,3,1) 
+% [wavenumber,CG,FREQ] = main_SASE2(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,fmin,fmax,number_of_frequency_points,beta,stack_dir,np,nele_layer)
 % 
 % Other m-files required: get_om 
 % Subfunctions: none 

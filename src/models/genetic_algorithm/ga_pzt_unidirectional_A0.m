@@ -9,7 +9,7 @@ load project_paths projectroot src_path;
 data_path=fullfile( projectroot, 'data','processed','exp', filesep );
 %% Prepare output directories
 % allow overwriting existing results if true
-overwrite=true;
+overwrite=false;
 % retrieve model name based on running file and folder
 currentFile = mfilename('fullpath');
 [pathstr,name,ext] = fileparts( currentFile );
@@ -20,124 +20,36 @@ modelname = name;
 model_output_path = prepare_model_paths('raw','num',modelfolder,modelname);
 number_of_modes_considered = 1; % number of modes considered in calculation of objective function score
 %% Load parameters which are used in experiment
-number_of_modes=7; % number of modes for mode tracing (sorting)
+
+no_of_cycles =[2.5,2]; % best 2 or 2.5 cycles
+excit_frequency=[50,140]; % [kHz] % best 40-60 kHz
+D0 = [10e3,10e3];%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
+Nb=[1,1]; % Butterworth filter order, integer
 L=0.4; % distance between actuator and sensor [m]
-% A0 mode
-no_of_cycles_A0 =2.5; % best 2 or 2.5 cycles
-excit_frequency_A0=50; % [kHz] % best 40-60 kHz
-D0_A0 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
-D1_A0 = 1e6;%  cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
-Nb_A0=1; % Butterworth filter order, integer
+%N=size(niscope_avg_waveform,1);
+N=8192;
 
-selected_mode_A0=[1,1,1,1,1,1,1]; % selected modes for each angle
-
-load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_A0/averaged/',num2str(no_of_cycles_A0),'_cycles_',num2str(excit_frequency_A0),'kHz/niscope_avg_waveform.mat']);
-
-load('/home/pkudela/work/projects/opus15/lamb-opt/data/processed/num/genetic_algorithm/ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_2lay6_out/opt_dispersion_curves.mat');
-w_A0=round(1.2*sampleRate/(excit_frequency_A0*1e3/no_of_cycles_A0));% window size in points
+m=length(excit_frequency);
+signals=zeros(7,N,m);
+for k=1:m
+    load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_A0/averaged/',num2str(no_of_cycles(k)),'_cycles_',num2str(excit_frequency(k)),'kHz/niscope_avg_waveform.mat']);
+    signals(:,1:N,k)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
+end
+signals(6,:,2)=signals(6,:,2)/2;
+signals(7,:,2)=signals(7,:,2)/2;
+w=[round(1.2.*sampleRate./(excit_frequency.*1e3./no_of_cycles))];% window size in points
 dt=1/sampleRate;
 % for higher frequencies
-N=size(niscope_avg_waveform,1);
+
+%niscope_avg_waveform(round(N/2)+1:end,:)=0; % for higher frequencies shorter signal is enough
+%niscope_avg_waveform(:,7)=niscope_avg_waveform(:,7)/10; % for higher
+%frequencies differences in amlitudes at 0 and 90 deg increases
 n=N;% take whole signal
 
 time=[1:N]*dt-dt;
-signals_A0=zeros(7,N);
 
-signals_A0(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% S0 mode
-no_of_cycles_S0 =2; % best 2 or 2.5 cycles
-excit_frequency_S0=250; % [kHz] 
-D0_S0 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
-D1_S0 = 300e3;%  cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
-Nb_S0=3; % Butterworth filter order, integer
-
-
-selected_mode_S0=[3,2,2,3,3,3,3]; % selected modes for each angle
-load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_S0/averaged/',num2str(no_of_cycles_S0),'_cycles_',num2str(excit_frequency_S0),'kHz/niscope_avg_waveform.mat']);
-
-w_S0=round(1.2*sampleRate/(excit_frequency_S0*1e3/no_of_cycles_S0));% window size in points
-
-
-niscope_avg_waveform(3000:end,1)=0;
-niscope_avg_waveform(3000:end,2)=0;
-niscope_avg_waveform(3000:end,3)=0;
-niscope_avg_waveform(1200:end,4)=0;
-niscope_avg_waveform(950:end,5)=0;
-niscope_avg_waveform(670:end,6)=0;
-niscope_avg_waveform(850:end,7)=0;
-
-N=size(niscope_avg_waveform,1);
-niscope_avg_waveform(:,7)=niscope_avg_waveform(:,7)/400; % for higher
-%frequencies differences in amlitudes at 0 and 90 deg increases
-niscope_avg_waveform(:,5)=niscope_avg_waveform(:,5)*2;
-
-signals_S0=zeros(7,N);
-
-signals_S0(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% A1 mode
-no_of_cycles_A1 =3; % best 2 or 2.5 cycles
-excit_frequency_A1=250; % [kHz] 
-D0_A1 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
-D1_A1 = 300e3;%  cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
-Nb_A1=3; % Butterworth filter order, integer
-
-
-selected_mode_A1=[4,4,4,4,4,4,4]; % selected modes for each angle
-load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_A0/averaged/',num2str(no_of_cycles_A1),'_cycles_',num2str(excit_frequency_A1),'kHz/niscope_avg_waveform.mat']);
-
-w_A1=round(1.2*sampleRate/(excit_frequency_A1*1e3/no_of_cycles_A1));% window size in points
-
-
-niscope_avg_waveform(3000:end,1)=0;
-niscope_avg_waveform(3000:end,2)=0;
-niscope_avg_waveform(3000:end,3)=0;
-niscope_avg_waveform(1200:end,4)=0;
-niscope_avg_waveform(950:end,5)=0;
-niscope_avg_waveform(670:end,6)=0;
-niscope_avg_waveform(850:end,7)=0;
-
-N=size(niscope_avg_waveform,1);
-niscope_avg_waveform(:,7)=niscope_avg_waveform(:,7)/400; % for higher
-%frequencies differences in amlitudes at 0 and 90 deg increases
-niscope_avg_waveform(:,5)=niscope_avg_waveform(:,5)*2;
-
-signals_A1=zeros(7,N);
-
-signals_A1(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% A2 mode
-no_of_cycles_A2 =3; % best 2 or 2.5 cycles
-excit_frequency_A2=250; % [kHz] 
-D0_A2 = 10e3;%  cut off frequency for high-pass Butterworth filter, double , Units: [Hz]
-D1_A2 = 300e3;%  cut off frequency for low-pass Butterworth filter, double , Units: [Hz]
-Nb_A2=3; % Butterworth filter order, integer
-
-
-selected_mode_A2=[5,5,5,5,5,5,5]; % selected modes for each angle
-load(['/pkudela_odroid_sensors/lamb_opt/pzt_circ_array_CFRP_uni_Cedrat_A0/averaged/',num2str(no_of_cycles_A2),'_cycles_',num2str(excit_frequency_A2),'kHz/niscope_avg_waveform.mat']);
-
-w_A2=round(1.2*sampleRate/(excit_frequency_A2*1e3/no_of_cycles_A2));% window size in points
-
-
-niscope_avg_waveform(3000:end,1)=0;
-niscope_avg_waveform(3000:end,2)=0;
-niscope_avg_waveform(3000:end,3)=0;
-niscope_avg_waveform(1200:end,4)=0;
-niscope_avg_waveform(950:end,5)=0;
-niscope_avg_waveform(670:end,6)=0;
-niscope_avg_waveform(850:end,7)=0;
-
-N=size(niscope_avg_waveform,1);
-niscope_avg_waveform(:,7)=niscope_avg_waveform(:,7)/400; % for higher
-%frequencies differences in amlitudes at 0 and 90 deg increases
-niscope_avg_waveform(:,5)=niscope_avg_waveform(:,5)*2;
-
-signals_A2=zeros(7,N);
-
-signals_A2(:,1:N)=niscope_avg_waveform(:,[1,2,3,4,5,6,7])';
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+load('/home/pkudela/work/projects/opus15/lamb-opt/data/processed/num/genetic_algorithm/ga_unidirectional_C_tensor_known_mass_mut_rnd_offspring_2lay6_out/opt_dispersion_curves.mat');
+%return;
 %% Input for SASE
 beta = 0:15:90; % angles for dispersion curves in polar plot [deg]
 no_of_angles = length(beta);
@@ -215,8 +127,8 @@ ubin= [1,1,1,1,1,1,1,1,1];%include upper bound of variable range
 
 % tests loop
 %%
-% 
-for test_case = [1] 
+% objective_fun_mod
+for test_case = [1]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
@@ -235,7 +147,8 @@ for test_case = [1]
        gen = 0;			% generational counter
        
         % Evaluate initial population
-        [ObjV] = obj_ga_pzt_unidirectional_A0_S0_A1_A2(Phen,time,signals_A0,signals_S0,signals_A1,signals_A2,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes,selected_mode_A0,selected_mode_S0,selected_mode_A1,selected_mode_A2,rho,w_A0,w_S0,w_A1,w_A2,D0_A0,D0_S0,D0_A1,D0_A2,D1_A0,D1_S0,D1_A1,D1_A2,Nb_A0,Nb_S0,Nb_A1,Nb_A2,L);
+        [ObjV] = obj_ga_pzt_unidirectional_A0(Phen,time,signals,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes_considered,rho,w,D0,Nb,L);
+
         % Generational loop
        while gen < MAXGEN
             tic;
@@ -244,7 +157,8 @@ for test_case = [1]
                 NRANDIND = ceil(ROGR*NIND);
                 RandChrom = crtbp(NRANDIND, NVAR*PRECI); % NRANDIND random individuals
                 % evaluate random individual
-                [ObjVRand] = obj_ga_pzt_unidirectional_A0_S0_A1_A2(bs2rv(RandChrom,FieldD),time,signals_A0,signals_S0,signals_A1,signals_A2,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes,selected_mode_A0,selected_mode_S0,selected_mode_A1,selected_mode_A2,rho,w_A0,w_S0,w_A1,w_A2,D0_A0,D0_S0,D0_A1,D0_A2,D1_A0,D1_S0,D1_A1,D1_A2,Nb_A0,Nb_S0,Nb_A1,Nb_A2,L);
+                [ObjVRand] = obj_ga_pzt_unidirectional_A0(bs2rv(RandChrom,FieldD),time,signals,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes_considered,rho,w,D0,Nb,L);
+
                 [A,I]=sort(ObjV,'descend');
                 % replace weakest individuals
                 for k=1:NRANDIND
@@ -269,8 +183,8 @@ for test_case = [1]
 
         % Evaluate offspring, call objective function
             %tic;
-           [ObjVSel] = obj_ga_pzt_unidirectional_A0_S0_A1_A2(bs2rv(SelCh,FieldD),time,signals_A0,signals_S0,signals_A1,signals_A2,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes,selected_mode_A0,selected_mode_S0,selected_mode_A1,selected_mode_A2,rho,w_A0,w_S0,w_A1,w_A2,D0_A0,D0_S0,D0_A1,D0_A2,D1_A0,D1_S0,D1_A1,D1_A2,Nb_A0,Nb_S0,Nb_A1,Nb_A2,L);
-               
+           [ObjVSel] = obj_ga_pzt_unidirectional_A0(bs2rv(SelCh,FieldD),time,signals,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer,number_of_modes_considered,rho,w,D0,Nb,L);
+
            %toc
            % Reinsert offspring into current population
            [Chrom, ObjV]=reins(Chrom,SelCh,1,1,ObjV,ObjVSel);

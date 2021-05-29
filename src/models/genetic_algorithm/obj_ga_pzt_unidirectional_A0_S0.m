@@ -64,7 +64,7 @@ parfor k=1:size(Phen,1)
     % A0 mode score
     [score1,~] = objective_fun_pzt2(time,signals_A0,L,CG,FREQ,wavenumber,number_of_modes_considered,w_A0,D0_A0,Nb_A0);
     % S0 mode score
-    [score2,sp1] = objective_fun_pzt_selected_mode2(time,signals_S0,L,CG,FREQ,wavenumber,selected_mode,w_S0,D0_S0,D1_S0,Nb_S0);
+    [score2] = objective_fun_pzt_selected_mode2(time,signals_S0,L,CG,FREQ,wavenumber,selected_mode,w_S0,D0_S0,D1_S0,Nb_S0);
     score=score1+10*score2;
     ObjV(k)=a*(-1)*score+b;
 end
