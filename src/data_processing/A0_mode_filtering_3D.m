@@ -176,32 +176,56 @@ end
 mask_width = linspace(20,80,length(f_vec)); % [rad/m] mask width lineary varies with frequencies (actually this is half width)
 mask_width(1:10)=linspace(0,10,10); % mask width at lower frequencies is narrower
 
-% mask A0 (Cartesian coordinates) - needs to be done in vectorized form
-mask_A0=zeros(length(kx_vec),length(ky_vec),length(f_vec));
-for fn=1:length(f_vec) % loop over frequencies (mask for each frequency bin)
-    [fn,length(f_vec)]
-    w_l = squeeze(wavenumber1q_A0(fn, :)-mask_width(fn));
-    w_u = squeeze(wavenumber1q_A0(fn, :)+mask_width(fn));
-    for j=1:length(ky_vec)
-        for i=1:length(kx_vec)
-            k=sqrt(kx_vec(i)^2+ky_vec(j)^2);
-            if(k==0) 
-                b=0;
-            else
-                if(kx_vec(i)>ky_vec(j))
-                    b=acos(kx_vec(i)/k)*180/pi;
-                else
-                    b=asin(ky_vec(j)/k)*180/pi;
-                end
-            end
-            [A,I]=min(abs(beta-b));
-            if(k>w_l(I) && k<w_u(I))
-                mask_A0(j,i,fn)=1;
-            end
-        end
+% mask A0 (Cartesian coordinates) - loop form (slow)
+% mask_A0=zeros(length(kx_vec),length(ky_vec),length(f_vec));
+% for fn=1:length(f_vec) % loop over frequencies (mask for each frequency bin)
+%     [fn,length(f_vec)]
+%     w_l = squeeze(wavenumber1q_A0(fn, :)-mask_width(fn));
+%     w_u = squeeze(wavenumber1q_A0(fn, :)+mask_width(fn));
+%     for j=1:length(ky_vec)
+%         for i=1:length(kx_vec)
+%             k=sqrt(kx_vec(i)^2+ky_vec(j)^2);
+%             if(k==0) 
+%                 b=0;
+%             else
+%                 if(kx_vec(i)>ky_vec(j))
+%                     b=acos(kx_vec(i)/k)*180/pi;
+%                 else
+%                     b=asin(ky_vec(j)/k)*180/pi;
+%                 end
+%             end
+%             [A,I]=min(abs(beta-b));
+%             if(k>w_l(I) && k<w_u(I))
+%                 mask_A0(j,i,fn)=1;
+%             end
+%         end
+%     end
+% end
+% vectorized form of mask calculation (fast)
+wavenumber_lower_bound = (wavenumber1q_A0 - repmat(mask_width',1,length(beta)))'; %[length(beta),length(f_vec)]
+wavenumber_upper_bound = (wavenumber1q_A0 + repmat(mask_width',1,length(beta)))';
+[kx_grid,ky_grid]=meshgrid(kx_vec,ky_vec);
+k_grid=sqrt(kx_grid.^2+ky_grid.^2);% wavenumber values on interpolated grid
+b_grid= zeros(length(kx_vec),length(ky_vec));% angle values on interpolated grid
+I1=(kx_grid>ky_grid);
+b_grid(I1)=acos(kx_grid(I1)./k_grid(I1))*180/pi;
+I2=(kx_grid<=ky_grid);I2(1,1)=0;
+b_grid(I2)=asin(ky_grid(I2)./k_grid(I2))*180/pi;
+ind=zeros(length(kx_vec),length(ky_vec));
+for j=1:length(ky_vec)
+    for i=1:length(kx_vec)
+        [A,I]=min(abs(beta-b_grid(i,j)));
+        ind(i,j)=I;
     end
 end
+fn=85;
+k_gridp=repmat(k_grid,1,1,length(f_vec));
+J1=(k_gridp > reshape(wavenumber_lower_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
+J2=(k_gridp < reshape(wavenumber_upper_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
+mask_A0 = J1.*J2;
+%figure;surf(mask_A0(:,:,fn));shading interp; view(2);axis equal;
 
+%%
 % mask for all quadrants (mirroring)
 mask_A0_4quadrants=zeros(2*length(kx_vec),2*length(ky_vec),length(f_vec));
 mask_A0_4quadrants(length(kx_vec)+1:2*length(kx_vec),length(ky_vec)+1:2*length(ky_vec),:)=mask_A0;
@@ -224,18 +248,40 @@ fn=80; % f_vec(80)=9.8943e+04; %[Hz]
 %figure;surf(squeeze(abs(KXKYF(2:end,2:end,512-fn))));shading interp;view(2);axis equal;
 %figure;surf(squeeze(mask_A0_4quadrants_sym(2:end,2:end,512+fn)));shading interp;view(2);axis equal;
 %figure;surf(squeeze(abs(KXKYF_A0(2:end,2:end,512+fn))));shading interp;view(2);axis equal;
-W = ifftn(ifftshift(KXKYF_A0),'symmetric'); % wavefield is on the first quarter of the marix (always real)
-%figure;surf(squeeze((real(W(1:end/2,1:end/2,100)))));shading interp;view(2);axis equal;colormap jet;
-figure;surf(squeeze((real(W(1:m,1:n,100)))));shading interp;view(2);axis equal;colormap jet;
+% inverse Fourier transform for pure A0 wavefield
+W_A0 = ifftn(ifftshift(KXKYF_A0),'symmetric'); % wavefield is on the first quarter of the marix (always real)
+%% plot figures - checking results
+%figure;surf(squeeze((real(W_A0(1:end/2,1:end/2,100)))));shading interp;view(2);axis equal;colormap jet;
+figure;surf(squeeze((real(W_A0(1:m,1:n,100)))));shading interp;view(2);axis equal;colormap jet;
 figure;surf(squeeze(((Data(:,:,100)))));shading interp;view(2);axis equal;colormap jet;
 
-figure;surf(squeeze((real(W(1:m,1:n,150)))));shading interp;view(2);axis equal;colormap jet;
+figure;surf(squeeze((real(W_A0(1:m,1:n,150)))));shading interp;view(2);axis equal;colormap jet;
 figure;surf(squeeze(((Data(:,:,150)))));shading interp;view(2);axis equal;colormap jet;
 
-figure;surf(squeeze((real(W(1:m,1:n,250)))));shading interp;view(2);axis equal;colormap jet;
+figure;surf(squeeze((real(W_A0(1:m,1:n,250)))));shading interp;view(2);axis equal;colormap jet;
 figure;surf(squeeze(((Data(:,:,250)))));shading interp;view(2);axis equal;colormap jet;
 
-figure;surf(squeeze((real(W(1:m,1:n,350)))));shading interp;view(2);axis equal;colormap jet;
+figure;surf(squeeze((real(W_A0(1:m,1:n,350)))));shading interp;view(2);axis equal;colormap jet;
+figure;surf(squeeze(((Data(:,:,350)))));shading interp;view(2);axis equal;colormap jet;
+
+% inverse mask
+mask_remaining_modes = ((-1)*mask_A0_4quadrants_sym)+1;
+% apply mask
+KXKYF_remaining_modes = KXKYF.*mask_remaining_modes;
+% inverse Fourier transform for wavefield containing remaining nodes
+W_remaining_modes = ifftn(ifftshift(KXKYF_remaining_modes),'symmetric'); % wavefield is on the first quarter of the marix (always real)
+%% plot figures - checking results
+
+figure;surf(squeeze((real(W_remaining_modes(1:m,1:n,100)))));shading interp;view(2);axis equal;colormap jet;
+figure;surf(squeeze(((Data(:,:,100)))));shading interp;view(2);axis equal;colormap jet;
+
+figure;surf(squeeze((real(W_remaining_modes(1:m,1:n,150)))));shading interp;view(2);axis equal;colormap jet;
+figure;surf(squeeze(((Data(:,:,150)))));shading interp;view(2);axis equal;colormap jet;
+
+figure;surf(squeeze((real(W_remaining_modes(1:m,1:n,250)))));shading interp;view(2);axis equal;colormap jet;
+figure;surf(squeeze(((Data(:,:,250)))));shading interp;view(2);axis equal;colormap jet;
+
+figure;surf(squeeze((real(W_remaining_modes(1:m,1:n,350)))));shading interp;view(2);axis equal;colormap jet;
 figure;surf(squeeze(((Data(:,:,350)))));shading interp;view(2);axis equal;colormap jet;
 return
 %%
