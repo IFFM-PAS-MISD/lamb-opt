@@ -41,11 +41,11 @@ exp_wavefield_data_path=fullfile( projectroot, 'data','raw','exp', filesep );
 % filename of data to be processed
 % full field measurements after 3D FFT transform (1st quarter)
 input_file = 1; % experimental data
-disp('loading experimental data');
-% load experimental data file
-exp_filename = {'interim_499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni_KXKYF',... % 1 small area unidirectional
-                            'interim_499x499p_chp200_x40_6Vpp_250Hz_uni_KXKYF'};         % 2 large area unidirectional
-load([exp_input_data_path,exp_filename{input_file}]); % 'KXKYF_','f_vec','kx_vec', 'ky_vec' 
+% disp('loading experimental data');
+% % load experimental data file
+% exp_filename = {'interim_499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni_KXKYF',... % 1 small area unidirectional
+%                             'interim_499x499p_chp200_x40_6Vpp_250Hz_uni_KXKYF'};         % 2 large area unidirectional
+% load([exp_input_data_path,exp_filename{input_file}]); % 'KXKYF_','f_vec','kx_vec', 'ky_vec' 
 
 %% Input for SASE
 ht = 2.85/1000; % [m] laminate total thickness; unidirectional
@@ -66,14 +66,11 @@ m=6.46; % total mass of the specimen [kg]
 V=1.2*1.2*ht; % specimen volume [m^3]
 rho = m/V;
 %% input for mask
-% mask_width_1=40;
-% mask_width_2=80;
 mask_width_1=60;
 mask_width_2=100;
-
-% if(~radians)
-%    wavenumber_max = wavenumber_max/(2*pi); % linear scale [1/m]
-% end
+% Gauss window paramiters for blurring mask
+Gauss_win_size = 10;
+Gauss_sigma = 2; 
 fprintf('Computing 3D dispersion relation: %s\n', modelname);
 %% load optimized constants
 output_name = [model_input_path,filesep,num2str(test_case),'output'];
@@ -83,6 +80,7 @@ load(output_name); % 'C11','C12','C13','C22','C23','C33','C44','C55','C66','rho'
 % save([dispersion_output_path,'dispersion3D_uni1'],'wavenumber1','CG1','FREQ1');
 disp('loading dispersion curves');
 load([dispersion_output_path,'dispersion3D_uni1']);% 'wavenumber1','CG1','FREQ1' - dispersion curves for optimized constants
+clear CG1;
 % sanity check - plot A0 mode
 % figure;
 % for k=1:length(beta)   
@@ -106,9 +104,26 @@ disp('Transform to wavenumber-wavenumber-frequency domain');
 % interpolate data at selected frequencies f_vec
 disp('wavenumber interpolation');
 wavenumber1q_A0=zeros(length(f_vec),length(beta));
+wavenumber1q_S0=zeros(length(f_vec),length(beta));
+wavenumber1q_SH0=zeros(length(f_vec),length(beta));
+number_of_modes = 7;
 for k=1:length(beta)   
-    wavenumber1q_A0(:,k) = interp1(FREQ1(1,:,k),wavenumber1(:,k),f_vec,'spline'); % for A0 mode only
+    [k,length(beta)]
+    [FREQ_new] = mode_tracing_new(squeeze(FREQ1(:,:,k)),wavenumber1(:,k),number_of_modes);
+    wavenumber1q_A0(:,k) = interp1(FREQ_new(:,1)',wavenumber1(:,k),f_vec,'spline'); % A0
+    wavenumber1q_S0(:,k) = interp1(FREQ_new(:,3)',wavenumber1(:,k),f_vec,'spline'); % S0
+    wavenumber1q_SH0(:,k) = interp1(FREQ_new(:,2)',wavenumber1(:,k),f_vec,'spline'); % SH0
 end
+% correction of numerical errors
+wavenumber1q_A0(1,:)=abs(wavenumber1q_A0(1,:));
+wavenumber1q_S0(1,:)=abs(wavenumber1q_S0(1,:));
+wavenumber1q_SH0(1,:)=abs(wavenumber1q_SH0(1,:));
+temp = wavenumber1q_SH0(296:512,1:2);
+wavenumber1q_SH0(296:512,1:2)=wavenumber1q_S0(296:512,1:2);
+wavenumber1q_S0(296:512,1:2) = temp;
+
+%for k=1:512 polarplot(beta*pi/180,wavenumber1q_SH0(k,:),'g');hold on;polarplot(beta*pi/180,wavenumber1q_S0(k,:),'b');polarplot(beta*pi/180,wavenumber1q_A0(k,:),'r');pause;clf;end;
+
 %% create mask
 disp('compute mask');
 
@@ -141,9 +156,7 @@ mask_width = [linspace(0,mask_width_1,5),linspace(mask_width_1,mask_width_2,leng
 %         end
 %     end
 % end
-% vectorized form of mask calculation (fast)
-wavenumber_lower_bound = (wavenumber1q_A0 - repmat(mask_width',1,length(beta)))'; %[length(beta),length(f_vec)]
-wavenumber_upper_bound = (wavenumber1q_A0 + repmat(mask_width',1,length(beta)))';
+%% vectorized form of mask calculation (fast)
 [kx_grid,ky_grid]=meshgrid(kx_vec,ky_vec);
 k_grid=sqrt(kx_grid.^2+ky_grid.^2);% wavenumber values on interpolated grid
 b_grid= zeros(length(kx_vec),length(ky_vec));% angle values on interpolated grid
@@ -151,6 +164,7 @@ I1=(kx_grid>ky_grid);
 b_grid(I1)=acos(kx_grid(I1)./k_grid(I1))*180/pi;
 I2=(kx_grid<=ky_grid);I2(1,1)=0;
 b_grid(I2)=asin(ky_grid(I2)./k_grid(I2))*180/pi;
+k_gridp=repmat(k_grid,1,1,length(f_vec));
 ind=zeros(length(kx_vec),length(ky_vec));
 for j=1:length(ky_vec)
     for i=1:length(kx_vec)
@@ -158,49 +172,104 @@ for j=1:length(ky_vec)
         ind(i,j)=I;
     end
 end
-k_gridp=repmat(k_grid,1,1,length(f_vec));
-J1=(k_gridp > reshape(wavenumber_lower_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
-J2=(k_gridp < reshape(wavenumber_upper_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
-mask_A0 = J1.*J2;
-%figure;surf(mask_A0(:,:,fn));shading interp; view(2);axis equal;
-
-%%
-% mask for all quadrants (mirroring)
-mask_A0_4quadrants=zeros(2*length(kx_vec),2*length(ky_vec),length(f_vec));
-mask_A0_4quadrants(length(kx_vec)+1:2*length(kx_vec),length(ky_vec)+1:2*length(ky_vec),:)=mask_A0;
-mask_A0_4quadrants(1:length(kx_vec),length(ky_vec)+1:2*length(ky_vec),:)=flipud(mask_A0);
-mask_A0_4quadrants(length(kx_vec)+1:2*length(kx_vec),1:length(ky_vec),:)=fliplr(mask_A0);
-mask_A0_4quadrants(1:length(kx_vec),1:length(ky_vec),:)=rot90(mask_A0,2);
-%% blur mask
-[H] = Gauss(10,2);   
-FilterMaskBlur=zeros(2*length(kx_vec),2*length(ky_vec),length(f_vec));
-for k=1:length(f_vec)
-    FilterMaskBlur(:,:,k) = filter2(H,mask_A0_4quadrants(:,:,k));
-end
-% mask for all quadrants symmetric in frequencies
-mask_A0_4quadrants_sym=zeros(2*length(kx_vec),2*length(ky_vec),2*length(f_vec));
-mask_A0_4quadrants_sym(:,:,1:length(f_vec))=flip(FilterMaskBlur,3);
-mask_A0_4quadrants_sym(:,:,length(f_vec)+1:2*length(f_vec))=FilterMaskBlur;
-clear mask_A0_4quadrants mask_A0; 
+%% mask A0 
+    wavenumber_lower_bound = (wavenumber1q_A0 - repmat(mask_width',1,length(beta)))'; %[length(beta),length(f_vec)]
+    wavenumber_upper_bound = (wavenumber1q_A0 + repmat(mask_width',1,length(beta)))';
+   
+    J1=(k_gridp > reshape(wavenumber_lower_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
+    J2=(k_gridp < reshape(wavenumber_upper_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
+    mask_A0 = J1.*J2;
+    %fn=85;figure;surf(mask_A0(:,:,fn));shading interp; view(2);axis equal;
+    
+    % mask for all quadrants (mirroring)
+    mask_A0_4quadrants=zeros(2*length(kx_vec),2*length(ky_vec),length(f_vec));
+    mask_A0_4quadrants(length(kx_vec)+1:2*length(kx_vec),length(ky_vec)+1:2*length(ky_vec),:)=mask_A0;
+    mask_A0_4quadrants(1:length(kx_vec),length(ky_vec)+1:2*length(ky_vec),:)=flipud(mask_A0);
+    mask_A0_4quadrants(length(kx_vec)+1:2*length(kx_vec),1:length(ky_vec),:)=fliplr(mask_A0);
+    mask_A0_4quadrants(1:length(kx_vec),1:length(ky_vec),:)=rot90(mask_A0,2);
+    % blur mask
+    [H] = Gauss(Gauss_win_size,Gauss_sigma);  
+    FilterMaskBlur=zeros(2*length(kx_vec),2*length(ky_vec),length(f_vec));
+    for k=1:length(f_vec)
+        FilterMaskBlur(:,:,k) = filter2(H,mask_A0_4quadrants(:,:,k));
+    end
+    % mask for all quadrants symmetric in frequencies
+    mask_A0_4quadrants_sym=zeros(2*length(kx_vec),2*length(ky_vec),2*length(f_vec));
+    mask_A0_4quadrants_sym(:,:,1:length(f_vec))=flip(FilterMaskBlur,3);
+    mask_A0_4quadrants_sym(:,:,length(f_vec)+1:2*length(f_vec))=FilterMaskBlur;
+    clear mask_A0_4quadrants mask_A0; 
+%% mask S0
+    wavenumber_lower_bound = (wavenumber1q_S0 - repmat(mask_width',1,length(beta)))'; %[length(beta),length(f_vec)]
+    wavenumber_upper_bound = (wavenumber1q_S0 + repmat(mask_width',1,length(beta)))';
+    J1=(k_gridp > reshape(wavenumber_lower_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
+    J2=(k_gridp < reshape(wavenumber_upper_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
+    mask_S0 = J1.*J2;
+    %figure;surf(mask_A0(:,:,fn));shading interp; view(2);axis equal;
+    
+    % mask for all quadrants (mirroring)
+    mask_S0_4quadrants=zeros(2*length(kx_vec),2*length(ky_vec),length(f_vec));
+    mask_S0_4quadrants(length(kx_vec)+1:2*length(kx_vec),length(ky_vec)+1:2*length(ky_vec),:)=mask_S0;
+    mask_S0_4quadrants(1:length(kx_vec),length(ky_vec)+1:2*length(ky_vec),:)=flipud(mask_S0);
+    mask_S0_4quadrants(length(kx_vec)+1:2*length(kx_vec),1:length(ky_vec),:)=fliplr(mask_S0);
+    mask_S0_4quadrants(1:length(kx_vec),1:length(ky_vec),:)=rot90(mask_S0,2);
+    % blur mask
+    [H] = Gauss(Gauss_win_size,Gauss_sigma);  
+    FilterMaskBlur=zeros(2*length(kx_vec),2*length(ky_vec),length(f_vec));
+    for k=1:length(f_vec)
+        FilterMaskBlur(:,:,k) = filter2(H,mask_S0_4quadrants(:,:,k));
+    end
+    % mask for all quadrants symmetric in frequencies
+    mask_S0_4quadrants_sym=zeros(2*length(kx_vec),2*length(ky_vec),2*length(f_vec));
+    mask_S0_4quadrants_sym(:,:,1:length(f_vec))=flip(FilterMaskBlur,3);
+    mask_S0_4quadrants_sym(:,:,length(f_vec)+1:2*length(f_vec))=FilterMaskBlur;
+    clear mask_S0_4quadrants mask_S0; 
+%% mask SH0
+    wavenumber_lower_bound = (wavenumber1q_SH0 - repmat(mask_width',1,length(beta)))'; %[length(beta),length(f_vec)]
+    wavenumber_upper_bound = (wavenumber1q_SH0 + repmat(mask_width',1,length(beta)))';
+    J1=(k_gridp > reshape(wavenumber_lower_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
+    J2=(k_gridp < reshape(wavenumber_upper_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
+    mask_SH0 = J1.*J2;
+    %figure;surf(mask_SH0(:,:,fn));shading interp; view(2);axis equal;
+    
+    % mask for all quadrants (mirroring)
+    mask_SH0_4quadrants=zeros(2*length(kx_vec),2*length(ky_vec),length(f_vec));
+    mask_SH0_4quadrants(length(kx_vec)+1:2*length(kx_vec),length(ky_vec)+1:2*length(ky_vec),:)=mask_SH0;
+    mask_SH0_4quadrants(1:length(kx_vec),length(ky_vec)+1:2*length(ky_vec),:)=flipud(mask_SH0);
+    mask_SH0_4quadrants(length(kx_vec)+1:2*length(kx_vec),1:length(ky_vec),:)=fliplr(mask_SH0);
+    mask_SH0_4quadrants(1:length(kx_vec),1:length(ky_vec),:)=rot90(mask_SH0,2);
+    % blur mask
+    [H] = Gauss(Gauss_win_size,Gauss_sigma);  
+    FilterMaskBlur=zeros(2*length(kx_vec),2*length(ky_vec),length(f_vec));
+    for k=1:length(f_vec)
+        FilterMaskBlur(:,:,k) = filter2(H,mask_SH0_4quadrants(:,:,k));
+    end
+    % mask for all quadrants symmetric in frequencies
+    mask_SH0_4quadrants_sym=zeros(2*length(kx_vec),2*length(ky_vec),2*length(f_vec));
+    mask_SH0_4quadrants_sym(:,:,1:length(f_vec))=flip(FilterMaskBlur,3);
+    mask_SH0_4quadrants_sym(:,:,length(f_vec)+1:2*length(f_vec))=FilterMaskBlur;
+    clear mask_SH0_4quadrants mask_SH0; 
+% clear unnecessary matrices
+clear k_grid k_gridp kx_grid ky_grid;
 %% apply mask
 disp('processing and inverse Fourier transform');
 KXKYF_A0 = KXKYF.*mask_A0_4quadrants_sym;
-
-%% inverse Fourier transform for pure A0 wavefield
-W_A0 = ifftn(ifftshift(KXKYF_A0),'symmetric'); % wavefield is on the first quarter of the marix (always real)
-%% inverse mask
-mask_remaining_modes = ((-1)*mask_A0_4quadrants_sym)+1;
-% apply mask
-KXKYF_remaining_modes = KXKYF.*mask_remaining_modes;
-% inverse Fourier transform for wavefield containing remaining nodes
-W_remaining_modes = ifftn(ifftshift(KXKYF_remaining_modes),'symmetric'); % wavefield is on the first quarter of the marix (always real)
+KXKYF_S0 = KXKYF.*mask_S0_4quadrants_sym;
+KXKYF_SH0 = KXKYF.*mask_SH0_4quadrants_sym;
+%% inverse Fourier transform for pure A0, S0, SH0 wavefield
+W_A0 = ifftn(ifftshift(KXKYF_A0),'symmetric'); % wavefield A0
+W_S0 = ifftn(ifftshift(KXKYF_S0),'symmetric'); % wavefield S0 
+W_SH0 = ifftn(ifftshift(KXKYF_SH0),'symmetric'); % wavefield SH0
 %% plotting
 disp('plotting');
 fn=80; % f_vec(80)=9.8943e+04; %[Hz]
 figure;surf(mask_A0_4quadrants_sym(:,:,length(f_vec)+fn));shading interp;view(2);axis square;xlim([1 2*length(kx_vec)]);ylim([1 2*length(ky_vec)]);
 figure;surf((squeeze(mask_A0_4quadrants_sym(end/2+1:end,end/2,length(f_vec)+1:end))));shading interp;view(2);xlim([1 length(kx_vec)]);ylim([1 length(f_vec)]);
-figure;surf(mask_remaining_modes(:,:,length(f_vec)+fn));shading interp;view(2);axis square;xlim([1 2*length(kx_vec)]);ylim([1 2*length(ky_vec)]);
-figure;surf((squeeze(mask_remaining_modes(end/2+1:end,end/2,length(f_vec)+1:end))));shading interp;view(2);xlim([1 length(kx_vec)]);ylim([1 length(f_vec)]);
+
+figure;surf(mask_S0_4quadrants_sym(:,:,length(f_vec)+fn));shading interp;view(2);axis square;xlim([1 2*length(kx_vec)]);ylim([1 2*length(ky_vec)]);
+figure;surf((squeeze(mask_S0_4quadrants_sym(end/2+1:end,end/2,length(f_vec)+1:end))));shading interp;view(2);xlim([1 length(kx_vec)]);ylim([1 length(f_vec)]);
+
+figure;surf(mask_SH0_4quadrants_sym(:,:,length(f_vec)+fn));shading interp;view(2);axis square;xlim([1 2*length(kx_vec)]);ylim([1 2*length(ky_vec)]);
+figure;surf((squeeze(mask_SH0_4quadrants_sym(end/2+1:end,end/2,length(f_vec)+1:end))));shading interp;view(2);xlim([1 length(kx_vec)]);ylim([1 length(f_vec)]);
 
 %figure;surf(squeeze(abs(KXKYF(2:end,2:end,512+fn))));shading interp;view(2);axis equal;xlim([1 2*length(kx_vec)]); ylim([1 2*length(ky_vec)]);axis off;
 %figure;surf(squeeze(abs(KXKYF(2:end,2:end,512-fn))));shading interp;view(2);axis equal;axis equal;xlim([1 2*length(kx_vec)]); ylim([1 2*length(ky_vec)]);axis off;
@@ -208,7 +277,8 @@ figure;surf((squeeze(mask_remaining_modes(end/2+1:end,end/2,length(f_vec)+1:end)
 %figure;surf(squeeze(abs(KXKYF_A0(2:end,2:end,512+fn))));shading interp;view(2);axis equal;axis equal;xlim([1 2*length(kx_vec)]); ylim([1 2*length(ky_vec)]);axis off;
 %% plot figures - checking results
 filename_A0 = [wavefield_name,'_A0'];
-filename_remaining_modes = [wavefield_name,'_remaining_modes'];
+filename_S0 = [wavefield_name,'_S0'];
+filename_SH0 = [wavefield_name,'_SH0'];
 for fn=[100,150,200,250,300,350]
     fh=figure('Menu','none','ToolBar','none');
         surf(squeeze((real(W_A0(1:m,1:n,fn))))); shading interp;view(2);colormap jet;xlim([1 m]); ylim([1 n]);axis off;
@@ -219,8 +289,16 @@ for fn=[100,150,200,250,300,350]
         set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
         set(gcf,'PaperPositionMode','auto');
         print([figure_output_path,figfilename],'-dpng', '-r600'); 
-    figure('Menu','none','ToolBar','none');surf(squeeze((real(W_remaining_modes(1:m,1:n,fn)))));shading interp;view(2);colormap jet;xlim([1 m]); ylim([1 n]);axis off;
-        figfilename = [filename_remaining_modes,'_frame_',num2str(fn)];
+    figure('Menu','none','ToolBar','none');surf(squeeze((real(W_S0(1:m,1:n,fn)))));shading interp;view(2);colormap jet;xlim([1 m]); ylim([1 n]);axis off;
+        figfilename = [filename_S0,'_frame_',num2str(fn)];
+        set(gcf,'Color','w');set(gca,'FontName','Times');set(gca,'Fontsize',10,'linewidth',1); set(gcf,'Renderer','zbuffer');
+        fig = gcf;set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+        % remove unnecessary white space
+        set(gca, 'Position',[0 0 1. 1.]); % figure without axis and white border
+        set(gcf,'PaperPositionMode','auto');
+        print([figure_output_path,figfilename],'-dpng', '-r600'); 
+    figure('Menu','none','ToolBar','none');surf(squeeze((real(W_SH0(1:m,1:n,fn)))));shading interp;view(2);colormap jet;xlim([1 m]); ylim([1 n]);axis off;
+        figfilename = [filename_SH0,'_frame_',num2str(fn)];
         set(gcf,'Color','w');set(gca,'FontName','Times');set(gca,'Fontsize',10,'linewidth',1); set(gcf,'Renderer','zbuffer');
         fig = gcf;set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
         % remove unnecessary white space
@@ -239,82 +317,8 @@ end
 
 %% saving data
 Data_A0 = real(W_A0(1:m,1:n,:));
-Data_remaining_modes = real(W_remaining_modes(1:m,1:n,:));
+Data_S0 = real(W_S0(1:m,1:n,:));
+Data_SH0 = real(W_SH0(1:m,1:n,:));
+% save([output_path,filename_A0],'Data_A0','WL','time');
 
-save([output_path,filename_A0],'Data_A0','WL','time');
-save([output_path,filename_remaining_modes],'Data_remaining_modes','WL','time');
-
-%% estimate damping coefficient
-[alpha_1] = estimate_damping_coefficient(Data_A0,time); % 22509
-[alpha_2] = estimate_damping_coefficient(Data_remaining_modes,time);% 23922
-[alpha_3] = estimate_damping_coefficient(Data,time); % 19132
-%% RMS
-RMS_A0= squeeze(sum(Data_A0.^2,3));
-figure;imagesc(RMS_A0);set(gca,'YDir','normal');axis square;
-figure;plot(RMS_A0(167:end,167));hold on;plot(RMS_A0(167,167:end),'r');
-
-Magnitude_A0=squeeze(max(abs(Data_A0),[],3));
-figure;imagesc(Magnitude_A0);set(gca,'YDir','normal');axis square;
-figure;plot(Magnitude_A0(167:end,167));hold on;plot(Magnitude_A0(167,167:end),'r');
-
-Magnitude_All=squeeze(max(abs(Data),[],3));
-d=linspace(0,WL(1),167);
-figure;imagesc(Magnitude_All);set(gca,'YDir','normal');axis square;
-figure;plot(d',Magnitude_All(167:end,167));hold on;plot(d,Magnitude_All(167,167:end)','r');
-A1=0.003;
-c01=2000;
-eta1=alpha_3/(2*c01);
-s1=A1*(1./sqrt(d)).*exp(-eta1.*d);
-plot(d,s1,'g');
-
-A2=0.004;
-c02=3000;
-eta2=alpha_3/(2*c02);
-s2=A2*(1./sqrt(d)).*exp(-eta2.*d);
-plot(d,s2,'m');
-%%
-E1= squeeze(sum(sum(Data_A0.^2,1),2));
-E2= squeeze(sum(sum(Data_remaining_modes.^2,1),2));
-E12=squeeze(sum(sum((Data_A0+Data_remaining_modes).^2,1),2));
-figure;plot(time,E1);hold on;
-plot(time,E2,'r');
-plot(time,E12,'g');
-
-figure;plot(time,E1/max(E12));hold on;
-plot(time,E2/max(E12),'r');
-plot(time,E12/max(E12),'g');
-
-%% estimate damping
-alpha=[1e3:1:1e5]'; % alpha range
-En=E1/max(E12);
-[A,I] = max(En);
-Ens= En(I:end);
-t=linspace(0,time(length(Ens)),length(Ens));
- 
-% grid search optimization
-f=exp(-alpha*t);
-Ens_p = repmat(Ens',[length(alpha),1]);
-f2=sum((f-Ens_p).^2,2); 
-[~,J] = min(f2);
-alpha1=alpha(J)
-
-%
-En=E12/max(E12);
-[A,I] = max(En);
-Ens= En(I:end);
-t=linspace(0,time(length(Ens)),length(Ens));
- 
-% grid search optimization
-f=max(En)*exp(-alpha*t);
-Ens_p = repmat(Ens',[length(alpha),1]);
-f2=sum((f-Ens_p).^2,2); 
-[~,J] = min(f2);
-alpha2=alpha(J)
-
-figure;
-plot(t,f(J,:),'r');
-hold on; plot(t,Ens,'k','LineWidth',2);
-set(gcf,'color','white');
-xlabel('Time [s]');
-ylabel('Normalized energy');
 
