@@ -97,12 +97,19 @@ clear CG1;
 
 %%
 disp('loading wavefield data');
-wavefield_name='333x333p_100kHz_5HC_10Vpp_x10_pzt';
+% wavefield_name='499x499p_chp200_x30_6Vpp_250Hz_100mmsv_small_uni'; 
+% exp_raw_input_data_path=fullfile( projectroot, 'data','raw','exp', filesep );% 
+% load([exp_raw_input_data_path,wavefield_name]); WL=[0.455,0.455]; % Data, time % do not rotate data
+
+wavefield_name='333x333p_chp160_10Vpp_x20_pzt';
 load(['/pkudela_odroid_laser/aidd/data/raw/exp/L1_S2_B/',wavefield_name]);% Data, WL, time
 Data=rot90(Data);
+
+
 [m,n,nft]=size(Data);
 Width=WL(1);
 Length=WL(2);
+
 disp('Transform to wavenumber-wavenumber-frequency domain');
 [KXKYF,kx_vec,ky_vec,f_vec] = spatial_to_wavenumber_wavefield_full(Data,Length,Width,time);
 % interpolate data at selected frequencies f_vec
@@ -111,20 +118,28 @@ wavenumber1q_A0=zeros(length(f_vec),length(beta));
 wavenumber1q_S0=zeros(length(f_vec),length(beta));
 wavenumber1q_SH0=zeros(length(f_vec),length(beta));
 number_of_modes = 7;
-for k=1:length(beta)   
-    [k,length(beta)]
-    [FREQ_new] = mode_tracing_new(squeeze(FREQ1(:,:,k)),wavenumber1(:,k),number_of_modes);
-    wavenumber1q_A0(:,k) = interp1(FREQ_new(:,1)',wavenumber1(:,k),f_vec,'spline'); % A0
-    wavenumber1q_S0(:,k) = interp1(FREQ_new(:,3)',wavenumber1(:,k),f_vec,'spline'); % S0
-    wavenumber1q_SH0(:,k) = interp1(FREQ_new(:,2)',wavenumber1(:,k),f_vec,'spline'); % SH0
-end
-% correction of numerical errors
-wavenumber1q_A0(1,:)=abs(wavenumber1q_A0(1,:));
-wavenumber1q_S0(1,:)=abs(wavenumber1q_S0(1,:));
-wavenumber1q_SH0(1,:)=abs(wavenumber1q_SH0(1,:));
-temp = wavenumber1q_SH0(296:512,1:2);
-wavenumber1q_SH0(296:512,1:2)=wavenumber1q_S0(296:512,1:2);
-wavenumber1q_S0(296:512,1:2) = temp;
+% for k=1:length(beta)   
+%     [k,length(beta)]
+%     [FREQ_new] = mode_tracing_new(squeeze(FREQ1(:,:,k)),wavenumber1(:,k),number_of_modes);
+%     wavenumber1q_A0(:,k) = interp1(FREQ_new(:,1)',wavenumber1(:,k),f_vec,'spline'); % A0
+%     wavenumber1q_S0(:,k) = interp1(FREQ_new(:,3)',wavenumber1(:,k),f_vec,'spline'); % S0
+%     wavenumber1q_SH0(:,k) = interp1(FREQ_new(:,2)',wavenumber1(:,k),f_vec,'spline'); % SH0
+% end
+% % correction of numerical errors
+% wavenumber1q_A0(1,:)=abs(wavenumber1q_A0(1,:));
+% wavenumber1q_S0(1,:)=abs(wavenumber1q_S0(1,:));
+% wavenumber1q_SH0(1,:)=abs(wavenumber1q_SH0(1,:));
+% temp = wavenumber1q_SH0(296:512,1:2);
+% wavenumber1q_SH0(296:512,1:2)=wavenumber1q_S0(296:512,1:2);
+% wavenumber1q_S0(296:512,1:2) = temp;
+% 
+% save([output_path,'wavenumber1q_A0'],'wavenumber1q_A0');
+% save([output_path,'wavenumber1q_S0'],'wavenumber1q_S0');
+% save([output_path,'wavenumber1q_SH0'],'wavenumber1q_SH0');
+
+load([output_path,'wavenumber1q_A0']);
+load([output_path,'wavenumber1q_S0']);
+load([output_path,'wavenumber1q_SH0']);
 
 %for k=1:512 polarplot(beta*pi/180,wavenumber1q_SH0(k,:),'g');hold on;polarplot(beta*pi/180,wavenumber1q_S0(k,:),'b');polarplot(beta*pi/180,wavenumber1q_A0(k,:),'r');pause;clf;end;
 
@@ -176,15 +191,28 @@ for j=1:length(ky_vec)
         ind(i,j)=I;
     end
 end
+%% frequency domain mask
+    [G] = Gauss(21,4); 
+    G=G-(min(G(:,11)));
+    G=G/max(max(G));
+    center_fn=81;
+    T=zeros(length(f_vec),1);
+    T(center_fn-10:center_fn+10)=G(:,11);
+    T=repmat(T,[1,length(kx_vec),length(ky_vec)]);
+    T = permute(T,[3 2 1]);
 %% mask A0 
     mask_width = [linspace(0,mask_width_A0_1,5),linspace(mask_width_A0_1,mask_width_A0_2,length(f_vec)-5)];
+    %mask_width = [linspace(0,0,80),linspace(mask_width_A0_1,mask_width_A0_2,10),linspace(0,0,length(f_vec)-90)];
+    %mask_width = [linspace(0,0,80),linspace(mask_width_A0_1,mask_width_A0_2,1),linspace(0,0,length(f_vec)-81)];
+    
     wavenumber_lower_bound = (wavenumber1q_A0 - repmat(mask_width',1,length(beta)))'; %[length(beta),length(f_vec)]
     wavenumber_upper_bound = (wavenumber1q_A0 + repmat(mask_width',1,length(beta)))';
    
     J1=(k_gridp > reshape(wavenumber_lower_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
     J2=(k_gridp < reshape(wavenumber_upper_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
     mask_A0 = J1.*J2;
-    %fn=85;figure;surf(mask_A0(:,:,fn));shading interp; view(2);axis equal;
+    mask_A0 = mask_A0 .* T;
+    %fn=81;figure;surf(mask_A0(:,:,fn));shading interp; view(2);axis equal;
     
     % mask for all quadrants (mirroring)
     mask_A0_4quadrants=zeros(2*length(kx_vec),2*length(ky_vec),length(f_vec));
@@ -203,13 +231,17 @@ end
     mask_A0_4quadrants_sym(:,:,1:length(f_vec))=flip(FilterMaskBlur,3);
     mask_A0_4quadrants_sym(:,:,length(f_vec)+1:2*length(f_vec))=FilterMaskBlur;
     clear mask_A0_4quadrants mask_A0; 
-%% mask S0
-    mask_width = [linspace(0,mask_width_S0_1,5),linspace(mask_width_S0_1,mask_width_S0_2,length(f_vec)-5)];
+%% mask S0 
+    mask_width = [linspace(0,mask_width_A0_1,5),linspace(mask_width_S0_1,mask_width_S0_2,length(f_vec)-5)];
+    %mask_width = [linspace(0,0,80),linspace(mask_width_S0_1,mask_width_S0_2,10),linspace(0,0,length(f_vec)-90)];
+    %mask_width = [linspace(0,0,80),linspace(mask_width_S0_1,mask_width_S0_2,1),linspace(0,0,length(f_vec)-81)];
     wavenumber_lower_bound = (wavenumber1q_S0 - repmat(mask_width',1,length(beta)))'; %[length(beta),length(f_vec)]
     wavenumber_upper_bound = (wavenumber1q_S0 + repmat(mask_width',1,length(beta)))';
     J1=(k_gridp > reshape(wavenumber_lower_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
     J2=(k_gridp < reshape(wavenumber_upper_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
     mask_S0 = J1.*J2;
+    mask_S0 = mask_S0 .* T;
+    
     %figure;surf(mask_A0(:,:,fn));shading interp; view(2);axis equal;
     
     % mask for all quadrants (mirroring)
@@ -231,12 +263,14 @@ end
     clear mask_S0_4quadrants; 
 %% mask SH0
     mask_width = [linspace(0,mask_width_SH0_1,5),linspace(mask_width_SH0_1,mask_width_SH0_2,length(f_vec)-5)];
+    %mask_width = [linspace(0,0,80),linspace(mask_width_SH0_1,mask_width_SH0_2,10),linspace(0,0,length(f_vec)-90)];
+    %mask_width = [linspace(0,0,80),linspace(mask_width_SH0_1,mask_width_SH0_2,1),linspace(0,0,length(f_vec)-81)];
     wavenumber_lower_bound = (wavenumber1q_SH0 - repmat(mask_width',1,length(beta)))'; %[length(beta),length(f_vec)]
     wavenumber_upper_bound = (wavenumber1q_SH0 + repmat(mask_width',1,length(beta)))';
     J1=(k_gridp > reshape(wavenumber_lower_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
     J2=(k_gridp < reshape(wavenumber_upper_bound(reshape(ind,[],1),:),length(kx_vec),length(ky_vec),length(f_vec)));
     mask_SH0 = J1.*J2;
-    
+    mask_SH0 = mask_SH0 .* T;
     % exclude common mask elements with S0
     mask_S0_SH0_intersect = mask_S0 .* mask_SH0;
     mask_SH0 = mask_SH0 - mask_S0_SH0_intersect;
@@ -273,7 +307,7 @@ W_S0 = ifftn(ifftshift(KXKYF_S0),'symmetric'); % wavefield S0
 W_SH0 = ifftn(ifftshift(KXKYF_SH0),'symmetric'); % wavefield SH0
 %% plotting
 disp('plotting');
-fn=50; % f_vec(80)=9.8943e+04; %[Hz]
+fn=81; % f_vec(80)=9.8943e+04; %[Hz]
 figure;surf(mask_A0_4quadrants_sym(:,:,length(f_vec)+fn));shading interp;view(2);axis square;xlim([1 2*length(kx_vec)]);ylim([1 2*length(ky_vec)]);
 figure;surf((squeeze(mask_A0_4quadrants_sym(end/2+1:end,end/2,length(f_vec)+1:end))));shading interp;view(2);xlim([1 length(kx_vec)]);ylim([1 length(f_vec)]);
 
@@ -332,9 +366,11 @@ for fn=[50,100,150,200,250,300]
 end
 
 %% saving data
+disp('saving data');
 Data_A0 = real(W_A0(1:m,1:n,:));
 Data_S0 = real(W_S0(1:m,1:n,:));
 Data_SH0 = real(W_SH0(1:m,1:n,:));
+
 save([output_path,filename_A0],'Data_A0','WL','time');
 save([output_path,filename_S0],'Data_S0','WL','time');
 save([output_path,filename_SH0],'Data_SH0','WL','time');
