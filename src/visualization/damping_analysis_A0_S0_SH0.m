@@ -1,6 +1,25 @@
 
 disp('loading wavefield data');
+% load projectroot path
+load project_paths projectroot src_path;
 
+%% Prepare output directories
+% allow overwriting existing results if true
+overwrite=false;
+% retrieve model name based on running file and folder
+currentFile = mfilename('fullpath');
+[pathstr,name,ext] = fileparts( currentFile );
+idx = strfind( pathstr,filesep );
+modelname = name; 
+modelfolder='damping';
+% create output path
+output_path = prepare_figure_paths(modelfolder,modelname);
+
+% figure parameters
+% size 12cm by 8cm (1-column text)
+fig_width = 12; fig_height = 8; 
+% size 7cm by 5cm (2-column text)
+%fig_width = 7; fig_height = 5; 
 
 wavefield_name='333x333p_100kHz_5HC_10Vpp_x10_pzt';
 load(['/home/pkudela/work/projects/opus15/lamb-opt/data/processed/exp/A0_S0_SH0_mode_filtering_3D/',wavefield_name,'_A0']);% Data_A0, WL, time
@@ -106,16 +125,24 @@ end
 %% plotting
 % phase velocities polar plots
 figure;
-polarplot(beta*pi/180,cp_A0,'ro');hold on;
-polarplot(beta*pi/180,cp_S0,'bd');
-polarplot(beta*pi/180,cp_SH0,'gv');
-legend('A0','S0','SH0');
-thetalim([0 90]);
-set(gcf,'Color','w');
-set(gca,'FontName','Times');
-title({'c_p [m/s]'});
+figfilename='CFRP_uni_phase_velocity_polar_100kHz';
+    polarplot(beta*pi/180,cp_A0,'ro');hold on;
+    polarplot(beta*pi/180,cp_S0,'bd');
+    polarplot(beta*pi/180,cp_SH0,'gv');
+    legend('A0','S0','SH0');
+    thetalim([0 90]);
+    set(gcf,'Color','w');
+    set(gca,'FontName','Times');
+    title({'c_p [m/s]'});
+    fig=gcf;
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+    % remove unnecessary white space
+    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+    fig.PaperPositionMode   = 'auto';
+    print([output_path,figfilename],'-dpng', '-r600'); 
 % eta (attenuation) polar plots
 figure;
+    figfilename='CFRP_uni_attenuation_polar_100kHz';
     polarplot(beta*pi/180,alpha./(2*cp_A0),'ro');hold on;
     polarplot(beta*pi/180,alpha./(2*cp_S0),'bd');
     polarplot(beta*pi/180,alpha./(2*cp_SH0),'gv');
@@ -124,8 +151,15 @@ figure;
     set(gcf,'Color','w');
     set(gca,'FontName','Times');
     title({'\eta [Np/m]'});
+    fig=gcf;
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+    % remove unnecessary white space
+    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+    fig.PaperPositionMode   = 'auto';
+    print([output_path,figfilename],'-dpng', '-r600'); 
 % A0 mode
 figure;
+    figfilename='CFRP_uni_A0_attenuation_100kHz';
     plot(R,Data_polar_A0_magnitude(1,:),'g'); % 0 deg
     hold on;
     plot(R,Data_polar_A0_magnitude(7,:),'k'); % 30 deg
@@ -150,10 +184,18 @@ figure;
            ['A= ',num2str(A_A0(14)),' \eta = ',num2str(alpha/(2*cp_A0(14)))],...
            ['A= ',num2str(A_A0(19)),' \eta = ',num2str(alpha/(2*cp_A0(19)))]);
     xlim([0 0.2]);ylim([0 0.03]);
-
+    set(gcf,'Color','w');
+    set(gca,'FontName','Times');
+    fig=gcf;
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+    % remove unnecessary white space
+    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+    fig.PaperPositionMode   = 'auto';
+    print([output_path,figfilename],'-dpng', '-r600'); 
 
 % S0 mode
 figure;
+    figfilename='CFRP_uni_S0_attenuation_100kHz';
     plot(R,Data_polar_S0_magnitude(1,:),'g');
     hold on;
     plot(R,Data_polar_S0_magnitude(7,:),'k');
@@ -179,9 +221,17 @@ figure;
            ['A= ',num2str(A_S0(19)),' \eta = ',num2str(alpha/(2*cp_S0(19)))]);
     title('S0 mode');
     xlim([0 0.2]);ylim([0 0.005]);
-
+    set(gcf,'Color','w');
+    set(gca,'FontName','Times');
+    fig=gcf;
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+    % remove unnecessary white space
+    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+    fig.PaperPositionMode   = 'auto';
+    print([output_path,figfilename],'-dpng', '-r600'); 
 % SH0 mode
 figure;
+    figfilename='CFRP_uni_SH0_attenuation_100kHz';
     plot(R,Data_polar_SH0_magnitude(1,:),'g');
     hold on;
     plot(R,Data_polar_SH0_magnitude(7,:),'k');
@@ -206,9 +256,17 @@ figure;
            ['A= ',num2str(A_SH0(19)),' \eta = ',num2str(alpha/(2*cp_SH0(19)))]);
     title('SH0 mode');
     xlim([0 0.2]);ylim([0 0.008]);
-
+    set(gcf,'Color','w');
+    set(gca,'FontName','Times');
+    fig=gcf;
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+    % remove unnecessary white space
+    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+    fig.PaperPositionMode   = 'auto';
+    print([output_path,figfilename],'-dpng', '-r600'); 
 % Comparison of amplitudes per mode at 0 deg
 figure;
+    figfilename='CFRP_uni_A0_S0_SH0_attenuation_0deg_100kHz';
     plot(R,Data_polar_A0_magnitude(1,:),'r');
     hold on;
     plot(R,Data_polar_S0_magnitude(1,:),'b');
@@ -217,14 +275,49 @@ figure;
     title('Amplitude comparison at 0 deg');
     xlabel('d [m]');
     ylabel('A [m/s]');
-
+    set(gcf,'Color','w');
+    set(gca,'FontName','Times');
+    fig=gcf;
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+    % remove unnecessary white space
+    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+    fig.PaperPositionMode   = 'auto';
+    print([output_path,figfilename],'-dpng', '-r600'); 
 % Comparison of attenuation per mode at 0 deg
+k=1; % 0 deg
 figure;
-    plot(R,exp(-eta0.*R)*100,'r--');
+    figfilename='CFRP_uni_A0_S0_SH0_attenuation_damping_only_0deg_100kHz';
+    plot(R,exp(-alpha/(2*cp_A0(k)).*R)*100,'r--');
     hold on;
-    plot(R,exp(-eta0_S0.*R)*100,'b--');
-    plot(R,exp(-eta0_SH0.*R)*100,'g--');
+    plot(R,exp(-alpha/(2*cp_S0(k)).*R)*100,'b--');
+    plot(R,exp(-alpha/(2*cp_SH0(k)).*R)*100,'g--');
     legend('A0','S0','SH0');
-    title('Attenuation comparison at 0 deg');
+    title('Attenuation due to damping (0 deg)');
     xlabel('d [m]');
     ylabel('Attenuation [%]');
+    set(gcf,'Color','w');
+    set(gca,'FontName','Times');
+    fig=gcf;
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+    % remove unnecessary white space
+    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+    fig.PaperPositionMode   = 'auto';
+    print([output_path,figfilename],'-dpng', '-r600'); 
+figure;
+    figfilename='CFRP_uni_A0_S0_SH0_attenuation_geometric_spread_0deg_100kHz';
+    plot(R,exp(-alpha/(2*cp_A0(k)).*R)*100,'r--');
+    hold on;
+    plot(R,exp(-alpha/(2*cp_S0(k)).*R)*100,'b--');
+    plot(R,exp(-alpha/(2*cp_SH0(k)).*R)*100,'g--');
+    legend('A0','S0','SH0');
+    title('Attenuation due to damping (0 deg)');
+    xlabel('d [m]');
+    ylabel('Attenuation [%]');
+    set(gcf,'Color','w');
+    set(gca,'FontName','Times');
+    fig=gcf;
+    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+    % remove unnecessary white space
+    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+    fig.PaperPositionMode   = 'auto';
+    print([output_path,figfilename],'-dpng', '-r600'); 
