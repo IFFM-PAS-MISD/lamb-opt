@@ -321,3 +321,27 @@ figure;
     set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
     fig.PaperPositionMode   = 'auto';
     print([output_path,figfilename],'-dpng', '-r600'); 
+    
+%
+% phase velocity for Tomasz
+% index for 100 kHz
+[a,I]=min(abs(f_vec-40000));
+cp_A0=f_vec(I)./wavenumber1q_A0_new(:,I); 
+cp_S0=f_vec(I)./wavenumber1q_S0_new(:,I); 
+cp_SH0=f_vec(I)./wavenumber1q_SH0_new(:,I); 
+figure;
+figfilename='CFRP_uni_phase_velocity_polar_40kHz';
+polarplot(beta*pi/180,cp_A0,'ro');hold on;
+polarplot(beta*pi/180,cp_S0,'bd');
+polarplot(beta*pi/180,cp_SH0,'gv');
+legend('A0','S0','SH0');
+thetalim([0 90]);
+set(gcf,'Color','w');
+set(gca,'FontName','Times');
+title({'c_p [m/s]'});
+fig=gcf;
+set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); %
+% remove unnecessary white space
+set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+fig.PaperPositionMode   = 'auto';
+%print([output_path,figfilename],'-dpng', '-r600');

@@ -1,0 +1,62 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{latexsym}
+\usepackage[pdftex]{graphicx,color}
+\usepackage[T1,plmath]{polski}
+\usepackage[cp1250]{inputenc}
+\usepackage{indentfirst}
+\usepackage{multirow}
+\usepackage{geometry}
+\newgeometry{tmargin=2cm, bmargin=2cm, lmargin=2.25cm, rmargin=2.25cm} 
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{helvet}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+\begin{document}
+	
+\indent
+Kontynuowano prace nad zagadnieniem identyfikacji sta³ych sprê¿ystych laminatów kompozytowych wzmacnianych w³óknami i tkaninami wêglowymi, w~którym wykorzystywane s¹ krzywe dyspersji fal Lamba.
+Badano zarówno próbki quasi-izotropowe oraz próbki o~du¿ym stopniu anizotropowoœci.
+Rozwa¿ano dwa podejœcia, w których dane eksperymentalne przecinano p³aszczyznami dla wybranych k¹tów propagacji lub wybranych czêstotliwoœci, co obrazuje Rys.~\ref{fig_pk_01}. 
+Pierwsze podejœcie jest bardziej wydajne obliczeniowo.
+Zastosowany algorytm genetyczny jest zbie¿ny w obu przypadkach i prowadzi do zbli¿onych wyników
+z wyj¹tkiem sta³ych sprê¿ystych $C_{23}$ i $C_{33}$, które ró¿ni¹ siê o ponad 30\%.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1]{fig_pk_01a.png}
+	\includegraphics[scale=1]{fig_pk_01b.png}
+	\caption{Eksperymentalne dane w dziedzinie liczb falowych i~czêstotliwoœci ($k_x-k_y-f$) przeciête dla wybranych k¹tów oraz wybranych czêstotliwoœci.}
+	\label{fig_pk_01}
+\end{figure}
+
+\indent % rozpoczyna nowym akapitem
+Rozwijano prace nad zagadnieniem zastosowania metod uczenia maszynowego w~wizualizacji delaminacji wystêpuj¹cej w~laminatach kompozytowych wzmacnianych tkaninami i~w³óknami wêglowymi. 
+W~roku sprawozdawczym zaimplementowano i~testowano splotowe sieci neuronowe oraz sieci rekurencyjne w szczególnoœci typu ConvLSTM. 
+Tego typu sieci neuronowe trenowane s¹ na zbiorach danych w~postaci animacji propaguj¹cych siê fal sprê¿ystych. 
+Sieæ neuronowa jest w~stanie zidentyfikowaæ anomalie propaguj¹cych siê fal sprê¿ystych spowodowane uszkodzeniem.  
+Mapy uszkodzeñ otrzymane za pomoc¹ opracowanych architektur sieci neuronowych obrazuj¹ uszkodzenia z~wiêksz¹ dok³adnoœci¹ ni¿ konwencjonalne metody przetwarzania sygna³ów takie jak adaptacyjna metoda filtrowania w~dziedzinie liczb falowych. 
+Przyk³adowe mapy uszkodzeñ przedstawiono na Rys.~\ref{fig_pk_02}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.82]{fig_pk_02a.png}
+	\includegraphics[scale=0.4]{fig_pk_02b.png}
+	\includegraphics[scale=0.4]{fig_pk_02c.png}
+	\caption{Obrazowanie delaminacji w~postaci przek³adki teflonowej; kolejno: faktyczny obszar delaminacji, ConvLSTM, ConvLSTM typu koder-dekoder.}
+	\label{fig_pk_02}
+\end{figure}
+
+Rozpoczêto prace nad metamateria³ami fononicznymi o~unikalnych w³aœciwoœciach filtruj¹cych.
+Wykonano szereg obliczeñ w~œrodowisku Comsol Multiphysics, które pozwoli³y wybraæ optymalne parametry komórki jednostkowej kryszta³u fononicznego pod wzglêdem pasma wzbronionego (z ang. \emph{band gap}).
+Szerokoœæ pasma czêstotliwoœci dla których fale sprê¿yste nie propaguj¹ zweryfikowano za pomoc¹ pe³nego modelu numerycznego oraz eksperymentalnie.
+Wyniki weryfikacji dla wybranych klatek propaguj¹cych siê fal sprê¿ystych przedstawiono na Rys.~\ref{fig_pk_03}.
+Mo¿na zaobserwowaæ, ¿e fale sprê¿yste nie propaguj¹ przez materia³ fononiczny, jeœli zakres czêstotliwoœci wzbudzenia (wzbudzenie w¹skopasmowe) znajduje siê w~paœmie wzbronionym.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1]{fig_pk_03.png}
+	\caption{Propagacja fal sprê¿ystych w~p³ycie z~materia³em fononicznym; kolejno: wzbudzenie szerokopasmowe - wyniki numeryczne i~eksperymentalne, wzbudzenie w¹skopasmowe w~paœmie wzbronionym - wyniki numeryczne i~eksperymentalne.}
+	\label{fig_pk_03}
+\end{figure}
+
+\end{document}

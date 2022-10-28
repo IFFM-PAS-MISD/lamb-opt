@@ -1,0 +1,53 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{latexsym}
+\usepackage[pdftex]{graphicx,color}
+\usepackage[T1,plmath]{polski}
+\usepackage[cp1250]{inputenc}
+\usepackage{indentfirst}
+\usepackage{multirow}
+\usepackage{geometry}
+\newgeometry{tmargin=2cm, bmargin=2cm, lmargin=2.25cm, rmargin=2.25cm} 
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{helvet}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+\begin{document}
+	
+\indent
+Kontynuowano prace nad zagadnieniem identyfikacji sta³ych sprê¿ystych laminatów kompozytowych wzmacnianych w³óknami i tkaninami wêglowymi.
+Do identyfikacji sta³ych sprê¿ystych wykorzystano krzywe dyspersji fal Lamba.
+Krzywe dyspersji obliczano za pomoc¹ pó³-analitycznej metody elementów spektralnych dla zadanej macierzy sta³ych sprê¿ystych.
+Macierz ta zosta³a zakodowana jako chromosom w algorytmie genetycznym s³u¿¹cym do optymalizacji.
+Zbudowano funkcjê celu, która ma na celu minimalizacjê ró¿nicy pomiêdzy numerycznymi i eksperymentalnymi krzywymi dyspersji.
+Algorytm okaza³ siê zbie¿ny.
+Przyk³adowe wyniki krzywych dyspersji przed i po optymalizacji przedstawiono na Rys.~\ref{fig_pk_01}.
+Analizowano ró¿ne strategie rozwi¹zywania postawionego problemu z uwzglêdnieniem czasu obliczeñ, doboru k¹tów propagacji, itp. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1]{fig_pk_01a.png}
+	\includegraphics[scale=1]{fig_pk_01b.png}
+	\caption{Krzywe dyspersji dla k¹ta propagacji 60\(^{\circ}\) obliczone metod¹ pó³-analityczn¹ na tle eksperymentu przed i po optymalizacji sta³ych sprê¿ystych; $f$ - czêstotliwoœæ, $k$ - liczba falowa.}
+	\label{fig_pk_01}
+\end{figure}
+
+\indent % rozpoczyna nowym akapitem
+Rozpoczêto prace nad zagadnieniem zastosowania metod sztucznej inteligencji w  tomografii delaminacji wystêpuj¹cej w laminatach kompozytowych wzmacnianych tkaninami i w³óknami wêglowymi. 
+Metoda wykorzystuje pe³ne pole fal Lamba symulowane numerycznie oraz rejestrowane za pomoc¹ wibrometru laserowego. 
+Stanowi ono wejœcie do sztucznej sieci neuronowej, której zadaniem jest segmentacja obrazu ze wskazaniem obszaru uszkodzonego i nieuszkodzonego. 
+W roku sprawozdawczym zaimplementowano i testowano splotowe sieci neuronowe.  Otrzymano pierwsze obiecuj¹ce wyniki, które przedstawiono na Rys.~\ref{fig_pk_02}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.8]{fig_pk_02a.png}
+	\includegraphics[scale=0.8]{fig_pk_02b.png}
+	\includegraphics[scale=0.8]{fig_pk_02c.png}
+	\includegraphics[scale=0.8]{fig_pk_02d.png}
+	\caption{Tomografia delaminacji; kolejno: RMS pe³nego pola fal, faktyczny obszar delaminacji, tomografia za pomoc¹ adaptacyjnej metody filtrowania w dziedzinie liczb falowych, tomografia uzyskana za pomoc¹ splotowej sieci neuronowej.}
+	\label{fig_pk_02}
+\end{figure}
+
+
+
+
+\end{document}
