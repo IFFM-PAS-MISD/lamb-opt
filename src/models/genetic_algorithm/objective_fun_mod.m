@@ -52,20 +52,29 @@ for j=1:number_of_angles % beta
                     case 1 % 0 deg
                         H(i,I)=0.1;
                     case 2 % 15 deg
-                        H(i,I)=2;
-                    case 3 % 30 deg
-                        H(i,I)=1.5;
-                    case 4 % 45 deg
+                        %H(i,I)=2;
                         H(i,I)=1;
+                    case 3 % 30 deg
+                        %H(i,I)=1.5;
+                        H(i,I)=3;
+                    case 4 % 45 deg
+                        %H(i,I)=1;
+                        H(i,I)=0.5;
                     case 5 % 60 deg
-                        H(i,I)=1.5;
+                        %H(i,I)=1.5;
+                        H(i,I)=3;
                     case 6 % 75 deg
-                        H(i,I)=2;
+                        %H(i,I)=2;
+                        H(i,I)=1;
                     case 7 % 90 deg
                         H(i,I)=0.1;
                 end
             else
-                H(i,I) = 1;
+                if(k>3)
+                    H(i,I) = 0.1; % for Higher modes
+                else
+                    H(i,I) = 1; % For A0 and S0 mode
+                end
             end
         end
     end

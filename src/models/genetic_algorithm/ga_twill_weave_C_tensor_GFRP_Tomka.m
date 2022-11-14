@@ -22,7 +22,9 @@ modelname = name;
 model_output_path = prepare_model_paths('raw','num',modelfolder,modelname);
 figure_output_path = prepare_figure_paths(modelname);
 % test_case 1 and 2: 4 modes considered
-% other cases: 6 modes considered
+% test case 3 and 4: 6 modes considered
+% test case 5: 4 modes considered
+% test case 6: 6 modes considered; polar Data modified along frequencies
 number_of_modes_considered = 6; % number of modes considered in calculation of objective function score
 
 %% Load parameters which are used in experiment
@@ -64,31 +66,50 @@ Q44_0 = 3e9;
 Q55_0 = 3e9;
 Q66_0 = 3e9;
 
-variation = 0.7;
-Q11_lb = (1-variation)*Q11_0; 
-Q11_ub = (1+variation)*Q11_0; 
-Q12_lb = (1-variation)*Q12_0; 
-Q12_ub = (1+variation)*Q12_0; 
-Q13_lb = (1-variation)*Q13_0; 
-Q13_ub = (1+variation)*Q13_0; 
-Q22_lb = (1-variation)*Q22_0; 
-Q22_ub = (1+variation)*Q22_0; 
-Q23_lb = (1-variation)*Q23_0; 
-Q23_ub = (1+variation)*Q23_0; 
-Q33_lb = (1-variation)*Q33_0; 
-Q33_ub = (1+variation)*Q33_0; 
-Q44_lb = (1-variation)*Q44_0; 
-Q44_ub = (1+variation)*Q44_0; 
-Q55_lb = (1-variation)*Q55_0; 
-Q55_ub = (1+variation)*Q55_0; 
-Q66_lb = (1-variation)*Q66_0; 
-Q66_ub = (1+variation)*Q66_0; 
+%variation = 0.7;% for runs 1:3
+variation = 0.8;% for runs >=4
+% Q11_lb = (1-variation)*Q11_0; 
+% Q11_ub = (1+variation)*Q11_0; 
+% Q12_lb = (1-variation)*Q12_0; 
+% Q12_ub = (1+variation)*Q12_0; 
+% Q13_lb = (1-variation)*Q13_0; 
+% Q13_ub = (1+variation)*Q13_0; 
+% Q22_lb = (1-variation)*Q22_0; 
+% Q22_ub = (1+variation)*Q22_0; 
+% Q23_lb = (1-variation)*Q23_0; 
+% Q23_ub = (1+variation)*Q23_0; 
+% Q33_lb = (1-variation)*Q33_0; 
+% Q33_ub = (1+variation)*Q33_0; 
+% Q44_lb = (1-variation)*Q44_0; 
+% Q44_ub = (1+variation)*Q44_0; 
+% Q55_lb = (1-variation)*Q55_0; 
+% Q55_ub = (1+variation)*Q55_0; 
+% Q66_lb = (1-variation)*Q66_0; 
+% Q66_ub = (1+variation)*Q66_0; 
+Q11_lb = 5e9; 
+Q11_ub = 50e9; 
+Q12_lb = 0.7e9; 
+Q12_ub = 10e9; 
+Q13_lb = 0.7e9; 
+Q13_ub = 10e9; 
+Q22_lb = 5e9; 
+Q22_ub = 50e9; 
+Q23_lb = 0.7e9; 
+Q23_ub = 10e9; 
+Q33_lb = 1e9; 
+Q33_ub = 17e9; 
+Q44_lb = 0.3e9; 
+Q44_ub = 6e9; 
+Q55_lb = 0.3e9; 
+Q55_ub = 6e9; 
+Q66_lb = 0.3; 
+Q66_ub = 6e9; 
 %% genetic algorithm parameters
 % fittnes function scaling factors
 a=100;
 b=310;
 NIND = 100;           % Number of individuals per subpopulations
-MAXGEN = 500;        % maximum Number of generations
+MAXGEN = 250;        % maximum Number of generations
 GGAP = 0.9;           % Generation gap, how many new individuals are created
 NVAR = 9;           %number of variables in objective function
 PRECI = 12;          % Precision of binary representation of variables
@@ -101,9 +122,24 @@ scale=[0,0,0,0,0,0,0,0,0]; %arithmetic scale
 lbin=  [1,1,1,1,1,1,1,1,1];%include lower bound of variable range
 ubin= [1,1,1,1,1,1,1,1,1];%include upper bound of variable range
 %%
-%% tests loop
+[number_of_angles,number_of_wavenumber_points,number_of_frequency_points] = size(Data_polar);
+fvec = linspace(0,fmax,number_of_frequency_points);
+%fl=320e3; % transition frequency
+fl=300e3; % transition frequency
+fu=520e3; % cut off frequency
+[~,J1] = min(abs(fl-fvec));
+[~,J2] = min(abs(fu-fvec));
+fmod=ones(1,1,number_of_frequency_points);
+fmod(1,J1+1:J2) = linspace(1,0,J2-J1);
+fmod(1,J2+1:end) = 0;
+for i=1:number_of_angles
+    for j=1:number_of_wavenumber_points
+        Data_polar(i,j,:)=Data_polar(i,j,:).*fmod;
+    end
+end
+% tests loop
 %%
-for test_case = [3:10]
+for test_case = [7:8]
     
     output_name = [model_output_path,filesep,num2str(test_case),'output'];
      if(overwrite||(~overwrite && ~exist([output_name,'.mat'], 'file')))
@@ -192,419 +228,704 @@ for test_case = [3:10]
             plot(PBest(:,9),'o-');
             ylim([Q66_lb Q66_ub]);
             title('C66');
+            drawnow;
             figure(2);
             plot(Best,'bo-','MarkerSize',2);hold on;
             plot(Mean,'rd-','MarkerSize',2);
             legend('Best','Mean');
             title(['Objective fun value, generation: ',num2str(gen)])
             drawnow;
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            C11 = PBest(gen,1);
+            C12 = PBest(gen,2);
+            C13 = PBest(gen,3);
+            C22 = PBest(gen,4);
+            C23 = PBest(gen,5);
+            C33 = PBest(gen,6);
+            C44 = PBest(gen,7);
+            C55 = PBest(gen,8);
+            C66 = PBest(gen,9);
+            ObjVal=min(ObjV);
+
+            [C11,C12,C13,C22,C23,C33,C44,C55,C66]
+            %% Plot best case
+             radians = false;
+             % size 12cm by 8cm (1-column text)
+             %fig_width = 12; fig_height = 8; 
+              % size 7cm by 5cm (2-column text)
+             fig_width = 7; fig_height = 5; 
+             
+             [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
+             if(~radians)
+                wavenumber = wavenumber/(2*pi); % linear scale [1/m]
+             end
+             fig=figure(3); % angle 1 0deg
+             set(gcf,'Color','w');
+             imagesc(fvec(2:end)/1e3, wavenumber(2:end,1), squeeze(abs(Data_polar(1,2:end,2:end)))); 
+             set(gca,'YDir','normal'); 
+             axis([0 500 0 400]);
+             set(gca,'Fontsize',10,'linewidth',1);
+             xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+             if(radians)
+                 ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
+             else
+                 ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
+             end
+             %colormap jet; 
+             colormap turbo; 
+             %axis tight; 
+             caxis([0 max(caxis)/3]); 
+
+             hold on;
+             fvec1=squeeze(FREQ(1,:,1)); % mode 1, angle j
+             fvec2=squeeze(FREQ(2,:,1)); % mode 2, angle j
+             fvec3=squeeze(FREQ(3,:,1)); % mode 3, angle j
+             fvec4=squeeze(FREQ(4,:,1)); % mode 4, angle j
+             fvec5=squeeze(FREQ(5,:,1)); % mode 5, angle j
+             fvec6=squeeze(FREQ(6,:,1)); % mode 6, angle j
+             kvec=squeeze(wavenumber(:,1)); % angle j
+             LW=0.5; % small figures
+             %LW=1; % large figures
+             if(number_of_modes_considered==3)
+                 plot(fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+             end
+             if(number_of_modes_considered==4)
+                 plot(fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==5)
+                 plot(fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==6)
+                 plot(fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             
+             
+             %set(gca,'FontName','Helvetica');% default 'Helvetica'
+             set(gca,'FontName','Times');
+             drawnow;
+       
+             title({['$Gen=$ ',num2str(gen),', ',num2str(beta(1)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+             %set(gca, 'Position',[0 0 1.2 1.2]); % figure without axis and white border
+             set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+             % remove unnecessary white space
+             set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+             fig.PaperPositionMode   = 'auto';
+             figfilename = ['Run_',num2str(test_case),'_Gen_',num2str(gen),'_angle_',num2str(beta(1))];
+             print([figure_output_path,figfilename],'-dpng', '-r600'); 
+             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+             figure(4);
+             set(gcf,'Color','w');
+            t=tiledlayout(1,2);
+            %t.TileSpacing = 'tight';
+            t.TileSpacing = 'none';
+            t.Padding = 'tight';
+
+            % Left plot
+            ax1 = nexttile;
+            imagesc(ax1,fvec(2:end)/1e3, wavenumber(2:end,1), squeeze(abs(Data_polar(1,2:end,2:end)))); 
+             set(gca,'YDir','normal'); 
+             axis([0 500 0 400]);
+             set(gca,'Fontsize',10,'linewidth',1);
+             xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+             if(radians)
+                 ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
+             else
+                 ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
+             end
+             %colormap jet; 
+             colormap turbo;
+             %axis tight; 
+             caxis([0 max(caxis)/3]); 
+
+             hold on;
+             fvec1=squeeze(FREQ(1,:,1)); % mode 1, angle j
+             fvec2=squeeze(FREQ(2,:,1)); % mode 2, angle j
+             fvec3=squeeze(FREQ(3,:,1)); % mode 3, angle j
+             fvec4=squeeze(FREQ(4,:,1)); % mode 4, angle j
+             fvec5=squeeze(FREQ(5,:,1)); % mode 5, angle j
+             fvec6=squeeze(FREQ(6,:,1)); % mode 6, angle j
+             kvec=squeeze(wavenumber(:,1)); % angle j
+             LW=0.5; % small figures
+             %LW=1; % large figures
+             if(number_of_modes_considered==3)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+             end
+             if(number_of_modes_considered==4)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==5)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax1,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==6)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax1,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax1,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             %set(gca,'FontName','Helvetica');% default 'Helvetica'
+             set(ax1,'FontName','Times');
+             title({[num2str(beta(1)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+             text(ax1,0,440,['Gen= ',num2str(gen)],'HorizontalAlignment','left','Fontsize',10,'FontName','Times','fontweight','bold');
+
+             % Right plot
+             ax2 = nexttile;
+             imagesc(ax2,fvec(2:end)/1e3, wavenumber(2:end,4), squeeze(abs(Data_polar(4,2:end,2:end)))); 
+             set(ax2,'YDir','normal'); 
+             axis([0 500 0 400]);
+             set(ax2,'Fontsize',10,'linewidth',1);
+             xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+    %          if(radians)
+    %              ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
+    %          else
+    %              ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
+    %          end
+             %colormap jet; 
+             colormap turbo;
+             %axis tight; 
+             caxis([0 max(caxis)/3]); 
+
+             hold on;
+             fvec1=squeeze(FREQ(1,:,4)); % mode 1, angle 4
+             fvec2=squeeze(FREQ(2,:,4)); % mode 2, angle 4
+             fvec3=squeeze(FREQ(3,:,4)); % mode 3, angle 4
+             fvec4=squeeze(FREQ(4,:,4)); % mode 4, angle 4
+             fvec5=squeeze(FREQ(5,:,4)); % mode 5, angle 4
+             fvec6=squeeze(FREQ(6,:,4)); % mode 6, angle 4
+             kvec=squeeze(wavenumber(:,4)); % angle 4
+             LW=0.5; % small figures
+             %LW=1; % large figures
+             if(number_of_modes_considered==3)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+             end
+             if(number_of_modes_considered==4)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==5)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax2,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==6)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax2,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax2,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             %set(gca,'FontName','Helvetica');% default 'Helvetica'
+             set(ax2,'FontName','Times');
+             title({[num2str(beta(4)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+             fig = gcf;
+             drawnow;
+             set(fig, 'Units','centimeters', 'Position',[10 10 2*fig_width fig_height]); % 
+             % remove unnecessary white space
+             set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+             fig.PaperPositionMode   = 'auto';
+             figfilename = ['Run_',num2str(test_case),'_Gen_',num2str(gen),'_2angles'];
+             print([figure_output_path,figfilename],'-dpng', '-r600'); 
+             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+             figure(5);
+             set(gcf,'Color','w');
+            t=tiledlayout(1,2);
+            %t.TileSpacing = 'tight';
+            t.TileSpacing = 'none';
+            t.Padding = 'tight';
+
+            % Left plot
+            ax1 = nexttile;
+            imagesc(ax1,fvec(2:end)/1e3, wavenumber(2:end,1), squeeze(abs(Data_polar(1,2:end,2:end)))); 
+             set(gca,'YDir','normal'); 
+             axis([0 500 0 400]);
+             set(gca,'Fontsize',10,'linewidth',1);
+             xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+             if(radians)
+                 ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
+             else
+                 ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
+             end
+             %colormap jet; 
+             colormap turbo;
+             %axis tight; 
+             caxis([0 max(caxis)/3]); 
+
+             hold on;
+             fvec1=squeeze(FREQ(1,:,2)); % mode 1, angle j
+             fvec2=squeeze(FREQ(2,:,2)); % mode 2, angle j
+             fvec3=squeeze(FREQ(3,:,2)); % mode 3, angle j
+             fvec4=squeeze(FREQ(4,:,2)); % mode 4, angle j
+             fvec5=squeeze(FREQ(5,:,2)); % mode 5, angle j
+             fvec6=squeeze(FREQ(6,:,2)); % mode 6, angle j
+             kvec=squeeze(wavenumber(:,2)); % angle j
+             LW=0.5; % small figures
+             %LW=1; % large figures
+             if(number_of_modes_considered==3)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+             end
+             if(number_of_modes_considered==4)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==5)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax1,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==6)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax1,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax1,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             %set(gca,'FontName','Helvetica');% default 'Helvetica'
+             set(ax1,'FontName','Times');
+             title({[num2str(beta(2)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+             text(ax1,0,440,['Gen= ',num2str(gen)],'HorizontalAlignment','left','Fontsize',10,'FontName','Times','fontweight','bold');
+
+             % Right plot
+             ax2 = nexttile;
+             imagesc(ax2,fvec(2:end)/1e3, wavenumber(2:end,4), squeeze(abs(Data_polar(4,2:end,2:end)))); 
+             set(ax2,'YDir','normal'); 
+             axis([0 500 0 400]);
+             set(ax2,'Fontsize',10,'linewidth',1);
+             xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+    %          if(radians)
+    %              ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
+    %          else
+    %              ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
+    %          end
+             %colormap jet; 
+             colormap turbo;
+             %axis tight; 
+             caxis([0 max(caxis)/3]); 
+
+             hold on;
+             fvec1=squeeze(FREQ(1,:,6)); % mode 1, angle 6
+             fvec2=squeeze(FREQ(2,:,6)); % mode 2, angle 6
+             fvec3=squeeze(FREQ(3,:,6)); % mode 3, angle 6
+             fvec4=squeeze(FREQ(4,:,6)); % mode 4, angle 6
+             fvec5=squeeze(FREQ(5,:,6)); % mode 5, angle 6
+             fvec6=squeeze(FREQ(6,:,6)); % mode 6, angle 6
+             kvec=squeeze(wavenumber(:,6)); % angle 6
+             LW=0.5; % small figures
+             %LW=1; % large figures
+             if(number_of_modes_considered==3)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+             end
+             if(number_of_modes_considered==4)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==5)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax2,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==6)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax2,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax2,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             %set(gca,'FontName','Helvetica');% default 'Helvetica'
+             set(ax2,'FontName','Times');
+             title({[num2str(beta(6)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+             fig = gcf;
+             drawnow;
+             set(fig, 'Units','centimeters', 'Position',[10 10 2*fig_width fig_height]); % 
+             % remove unnecessary white space
+             set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+             fig.PaperPositionMode   = 'auto';
+             figfilename = ['Run_',num2str(test_case),'_Gen_',num2str(gen),'_15_75_angles'];
+             print([figure_output_path,figfilename],'-dpng', '-r600'); 
+             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+             figure(6);
+             set(gcf,'Color','w');
+            t=tiledlayout(2,2);
+            %t.TileSpacing = 'tight';
+            t.TileSpacing = 'none';
+            t.Padding = 'tight';
+
+            % plot (1,1) 0deg
+            ax1 = nexttile;
+            imagesc(ax1,fvec(2:end)/1e3, wavenumber(2:end,1), squeeze(abs(Data_polar(1,2:end,2:end)))); 
+             set(gca,'YDir','normal'); 
+             axis([0 500 0 400]);
+             set(gca,'Fontsize',10,'linewidth',1);
+             %xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+             if(radians)
+                 ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
+             else
+                 ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
+             end
+             %colormap jet; 
+             colormap turbo;
+             %axis tight; 
+             caxis([0 max(caxis)/3]); 
+
+             hold on;
+             fvec1=squeeze(FREQ(1,:,1)); % mode 1, angle j
+             fvec2=squeeze(FREQ(2,:,1)); % mode 2, angle j
+             fvec3=squeeze(FREQ(3,:,1)); % mode 3, angle j
+             fvec4=squeeze(FREQ(4,:,1)); % mode 4, angle j
+             fvec5=squeeze(FREQ(5,:,1)); % mode 5, angle j
+             fvec6=squeeze(FREQ(6,:,1)); % mode 6, angle j
+             kvec=squeeze(wavenumber(:,1)); % angle j
+             LW=0.5; % small figures
+             %LW=1; % large figures
+             if(number_of_modes_considered==3)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+             end
+             if(number_of_modes_considered==4)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==5)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax1,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==6)
+                 plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax1,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax1,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             %set(gca,'FontName','Helvetica');% default 'Helvetica'
+             set(ax1,'FontName','Times');
+             title({[num2str(beta(1)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+             text(ax1,0,440,['Gen= ',num2str(gen)],'HorizontalAlignment','left','Fontsize',10,'FontName','Times','fontweight','bold');
+
+             % plot (1,2) 30 deg
+             ax2 = nexttile;
+             imagesc(ax2,fvec(2:end)/1e3, wavenumber(2:end,3), squeeze(abs(Data_polar(3,2:end,2:end)))); 
+             set(ax2,'YDir','normal'); 
+             axis([0 500 0 400]);
+             set(ax2,'Fontsize',10,'linewidth',1);
+             %xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+    %          if(radians)
+    %              ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
+    %          else
+    %              ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
+    %          end
+             %colormap jet; 
+             colormap turbo;
+             %axis tight; 
+             caxis([0 max(caxis)/3]); 
+
+             hold on;
+             fvec1=squeeze(FREQ(1,:,3)); % mode 1, angle 3
+             fvec2=squeeze(FREQ(2,:,3)); % mode 2, angle 3
+             fvec3=squeeze(FREQ(3,:,3)); % mode 3, angle 3
+             fvec4=squeeze(FREQ(4,:,3)); % mode 4, angle 3
+             fvec5=squeeze(FREQ(5,:,3)); % mode 5, angle 3
+             fvec6=squeeze(FREQ(6,:,3)); % mode 6, angle 3
+             kvec=squeeze(wavenumber(:,3)); % angle 3
+             LW=0.5; % small figures
+             %LW=1; % large figures
+             if(number_of_modes_considered==3)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+             end
+             if(number_of_modes_considered==4)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==5)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax2,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==6)
+                 plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax2,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax2,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             %set(gca,'FontName','Helvetica');% default 'Helvetica'
+             set(ax2,'FontName','Times');
+             title({[num2str(beta(3)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+
+             % plot (2,1) 60deg
+            ax3 = nexttile;
+            imagesc(ax3,fvec(2:end)/1e3, wavenumber(2:end,5), squeeze(abs(Data_polar(5,2:end,2:end)))); 
+             set(gca,'YDir','normal'); 
+             axis([0 500 0 400]);
+             set(gca,'Fontsize',10,'linewidth',1);
+             xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+             if(radians)
+                 ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
+             else
+                 ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
+             end
+             %colormap jet; 
+             colormap turbo;
+             %axis tight; 
+             caxis([0 max(caxis)/3]); 
+
+             hold on;
+             fvec1=squeeze(FREQ(1,:,5)); % mode 1, angle 5
+             fvec2=squeeze(FREQ(2,:,5)); % mode 2, angle 5
+             fvec3=squeeze(FREQ(3,:,5)); % mode 3, angle 5
+             fvec4=squeeze(FREQ(4,:,5)); % mode 4, angle 5
+             fvec5=squeeze(FREQ(5,:,5)); % mode 5, angle 5
+             fvec6=squeeze(FREQ(6,:,5)); % mode 6, angle 5
+             kvec=squeeze(wavenumber(:,5)); % angle j
+             LW=0.5; % small figures
+             %LW=1; % large figures
+             if(number_of_modes_considered==3)
+                 plot(ax3,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax3,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax3,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+             end
+             if(number_of_modes_considered==4)
+                 plot(ax3,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax3,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax3,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax3,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==5)
+                 plot(ax3,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax3,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax3,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax3,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax3,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==6)
+                 plot(ax3,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax3,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax3,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax3,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax3,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax3,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             %set(gca,'FontName','Helvetica');% default 'Helvetica'
+             set(ax3,'FontName','Times');
+             title({[num2str(beta(5)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+
+             % plot (2,2) 90 deg
+             ax4 = nexttile;
+             imagesc(ax4,fvec(2:end)/1e3, wavenumber(2:end,7), squeeze(abs(Data_polar(7,2:end,2:end)))); 
+             set(ax4,'YDir','normal'); 
+             axis([0 500 0 400]);
+             set(ax4,'Fontsize',10,'linewidth',1);
+             xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
+    %          if(radians)
+    %              ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
+    %          else
+    %              ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
+    %          end
+             %colormap jet; 
+             colormap turbo;
+             %axis tight; 
+             caxis([0 max(caxis)/3]); 
+
+             hold on;
+             fvec1=squeeze(FREQ(1,:,7)); % mode 1, angle 7
+             fvec2=squeeze(FREQ(2,:,7)); % mode 2, angle 7
+             fvec3=squeeze(FREQ(3,:,7)); % mode 3, angle 7
+             fvec4=squeeze(FREQ(4,:,7)); % mode 4, angle 7
+             fvec5=squeeze(FREQ(5,:,7)); % mode 5, angle 7
+             fvec6=squeeze(FREQ(6,:,7)); % mode 6, angle 7
+             kvec=squeeze(wavenumber(:,7)); % angle 7
+             LW=0.5; % small figures
+             %LW=1; % large figures
+             if(number_of_modes_considered==3)
+                 plot(ax4,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax4,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax4,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+             end
+             if(number_of_modes_considered==4)
+                 plot(ax4,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax4,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax4,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax4,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==5)
+                 plot(ax4,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax4,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax4,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax4,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax4,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             if(number_of_modes_considered==6)
+                 plot(ax4,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
+                 plot(ax4,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
+                 plot(ax4,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
+                 plot(ax4,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax4,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+                 plot(ax4,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
+             end
+             %set(gca,'FontName','Helvetica');% default 'Helvetica'
+             set(ax4,'FontName','Times');
+             title({[num2str(beta(7)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+             drawnow;
+             fig = gcf;
+             set(fig, 'Units','centimeters', 'Position',[10 10 2*fig_width 2*fig_height]); % 
+             % remove unnecessary white space
+             set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+             fig.PaperPositionMode   = 'auto';
+             figfilename = ['Run_',num2str(test_case),'_Gen_',num2str(gen),'_4angles'];
+             print([figure_output_path,figfilename],'-dpng', '-r600'); 
             toc
             if(Best(gen) < ObjV_limit && gen >= 50) 
                 break; 
             end
        end 
 
-         
-        
-        C11 = PBest(gen,1);
-        C12 = PBest(gen,2);
-        C13 = PBest(gen,3);
-        C22 = PBest(gen,4);
-        C23 = PBest(gen,5);
-        C33 = PBest(gen,6);
-        C44 = PBest(gen,7);
-        C55 = PBest(gen,8);
-        C66 = PBest(gen,9);
-        ObjVal=min(ObjV);
-
-        [C11,C12,C13,C22,C23,C33,C44,C55,C66]
-
          save(output_name,'C11','C12','C13','C22','C23','C33','C44','C55','C66','rho','ObjVal');
-         %% Plot best case
-         radians = false;
-         % size 12cm by 8cm (1-column text)
-         %fig_width = 12; fig_height = 8; 
-          % size 7cm by 5cm (2-column text)
-         fig_width = 7; fig_height = 5; 
-         [number_of_angles,number_of_wavenumber_points,number_of_frequency_points] = size(Data_polar);
-         fvec = linspace(0,fmax,number_of_frequency_points);
-         [wavenumber,CG,FREQ] = main_SASE(rho,C11,C12,C13,C22,C23,C33,C44,C55,C66,layup,h,wavenumber_min,wavenumber_max,number_of_wavenumber_points,beta,stack_dir,np,nele_layer);
-         if(~radians)
-            wavenumber = wavenumber/(2*pi); % linear scale [1/m]
-            wavenumber_max = wavenumber_max/(2*pi); % linear scale [1/m]
-         end
-         figure(3); % angle 1 0deg
-         set(gcf,'Color','w');
-         imagesc(fvec(2:end)/1e3, wavenumber(2:end,1), squeeze(abs(Data_polar(1,2:end,2:end)))); 
-         set(gca,'YDir','normal'); 
-         axis([0 500 0 400]);
-         set(gca,'Fontsize',10,'linewidth',1);
-         xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
-         if(radians)
-             ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
-         else
-             ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
-         end
-         %colormap jet; 
-         colormap turbo; 
-         %axis tight; 
-         caxis([0 max(caxis)/3]); 
+         %plot GA convergence  
+        figure(7);
+        plot(Best,'bo-','MarkerFaceColor','b','MarkerSize',2);hold on;
+        plot(Mean,'rd-','MarkerFaceColor','r','MarkerSize',2);
+        legend('Best','Mean');
 
-         hold on;
-         fvec1=squeeze(FREQ(1,:,1)); % mode 1, angle j
-         fvec2=squeeze(FREQ(2,:,1)); % mode 2, angle j
-         fvec3=squeeze(FREQ(3,:,1)); % mode 3, angle j
-         fvec4=squeeze(FREQ(4,:,1)); % mode 4, angle j
-         fvec5=squeeze(FREQ(5,:,1)); % mode 5, angle j
-         fvec6=squeeze(FREQ(6,:,1)); % mode 5, angle j
-         kvec=squeeze(wavenumber(:,1)); % angle j
-         LW=0.5; % small figures
-         %LW=1; % large figures
-         plot(fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
-         plot(fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
-         plot(fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
-         plot(fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         %set(gca,'FontName','Helvetica');% default 'Helvetica'
-         set(gca,'FontName','Times');
-         fig = gcf;
-         title({['$Gen=$ ',num2str(gen),', ',num2str(beta(1)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
-         %set(gca, 'Position',[0 0 1.2 1.2]); % figure without axis and white border
-         set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
-         % remove unnecessary white space
-         set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-         fig.PaperPositionMode   = 'auto';
-         figfilename = ['Run_',num2str(test_case),'_Gen_',num2str(gen),'_angle_',num2str(beta(1))];
-         print([figure_output_path,figfilename],'-dpng', '-r600'); 
-         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-         figure(4);
-         set(gcf,'Color','w');
-        t=tiledlayout(1,2);
+        set(gcf,'Color','w');
+        set(gca,'Fontsize',10,'linewidth',1);
+        title('');
+        xlabel('Gen','Fontsize',12);
+        ylabel('F','Fontsize',12);
+        xlim([1 ,MAXGEN]);
+        ylim([min(Best)-0.1*min(Best) 1.1*max(Mean)]);
+        %axis([0 50 -10 100]);
+        set(gca,'FontName','Times');
+        drawnow;
+        fig = gcf;
+        set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
+        % remove unnecessary white space
+        set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+        fig.PaperPositionMode   = 'auto';
+        figfilename = ['Run_',num2str(test_case),'_GA_convergence'];
+        print([figure_output_path,figfilename],'-dpng', '-r600');  
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        figure(8);
+        set(gcf,'Color','w');
+        t=tiledlayout(3,3);
         %t.TileSpacing = 'tight';
         t.TileSpacing = 'none';
         t.Padding = 'tight';
-        
-        % Left plot
+
         ax1 = nexttile;
-        imagesc(ax1,fvec(2:end)/1e3, wavenumber(2:end,1), squeeze(abs(Data_polar(1,2:end,2:end)))); 
-         set(gca,'YDir','normal'); 
-         axis([0 500 0 400]);
-         set(gca,'Fontsize',10,'linewidth',1);
-         xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
-         if(radians)
-             ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
-         else
-             ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
-         end
-         %colormap jet; 
-         colormap turbo;
-         %axis tight; 
-         caxis([0 max(caxis)/3]); 
-
-         hold on;
-         fvec1=squeeze(FREQ(1,:,1)); % mode 1, angle j
-         fvec2=squeeze(FREQ(2,:,1)); % mode 2, angle j
-         fvec3=squeeze(FREQ(3,:,1)); % mode 3, angle j
-         fvec4=squeeze(FREQ(4,:,1)); % mode 4, angle j
-         fvec5=squeeze(FREQ(5,:,1)); % mode 5, angle j
-         fvec6=squeeze(FREQ(6,:,1)); % mode 5, angle j
-         kvec=squeeze(wavenumber(:,1)); % angle j
-         LW=0.5; % small figures
-         %LW=1; % large figures
-         plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
-         plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
-         plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
-         plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax1,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax1,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         %set(gca,'FontName','Helvetica');% default 'Helvetica'
-         set(ax1,'FontName','Times');
-         title({[num2str(beta(1)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
-         text(ax1,0,440,['Gen= ',num2str(gen)],'HorizontalAlignment','left','Fontsize',10,'FontName','Times','fontweight','bold');
-            
-         % Right plot
-         ax2 = nexttile;
-         imagesc(ax2,fvec(2:end)/1e3, wavenumber(2:end,4), squeeze(abs(Data_polar(4,2:end,2:end)))); 
-         set(ax2,'YDir','normal'); 
-         axis([0 500 0 400]);
-         set(ax2,'Fontsize',10,'linewidth',1);
-         xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
-%          if(radians)
-%              ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
-%          else
-%              ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
-%          end
-         %colormap jet; 
-         colormap turbo;
-         %axis tight; 
-         caxis([0 max(caxis)/3]); 
-
-         hold on;
-         fvec1=squeeze(FREQ(1,:,4)); % mode 1, angle 4
-         fvec2=squeeze(FREQ(2,:,4)); % mode 2, angle 4
-         fvec3=squeeze(FREQ(3,:,4)); % mode 3, angle 4
-         fvec4=squeeze(FREQ(4,:,4)); % mode 4, angle 4
-         fvec5=squeeze(FREQ(5,:,4)); % mode 5, angle 4
-         fvec6=squeeze(FREQ(6,:,4)); % mode 5, angle 4
-         kvec=squeeze(wavenumber(:,4)); % angle 4
-         LW=0.5; % small figures
-         %LW=1; % large figures
-         plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
-         plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
-         plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
-         plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax2,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax2,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         %set(gca,'FontName','Helvetica');% default 'Helvetica'
-         set(ax2,'FontName','Times');
-         title({[num2str(beta(4)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
-         fig = gcf;
-         
-         set(fig, 'Units','centimeters', 'Position',[10 10 2*fig_width fig_height]); % 
-         % remove unnecessary white space
-         set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-         fig.PaperPositionMode   = 'auto';
-         figfilename = ['Run_',num2str(test_case),'_Gen_',num2str(gen),'_2angles'];
-         print([figure_output_path,figfilename],'-dpng', '-r600'); 
-         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-         figure(5);
-         set(gcf,'Color','w');
-        t=tiledlayout(2,2);
-        %t.TileSpacing = 'tight';
-        t.TileSpacing = 'none';
-        t.Padding = 'tight';
-        
-        % plot (1,1) 0deg
-        ax1 = nexttile;
-        imagesc(ax1,fvec(2:end)/1e3, wavenumber(2:end,1), squeeze(abs(Data_polar(1,2:end,2:end)))); 
-         set(gca,'YDir','normal'); 
-         axis([0 500 0 400]);
-         set(gca,'Fontsize',10,'linewidth',1);
-         %xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
-         if(radians)
-             ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
-         else
-             ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
-         end
-         %colormap jet; 
-         colormap turbo;
-         %axis tight; 
-         caxis([0 max(caxis)/3]); 
-
-         hold on;
-         fvec1=squeeze(FREQ(1,:,1)); % mode 1, angle j
-         fvec2=squeeze(FREQ(2,:,1)); % mode 2, angle j
-         fvec3=squeeze(FREQ(3,:,1)); % mode 3, angle j
-         fvec4=squeeze(FREQ(4,:,1)); % mode 4, angle j
-         fvec5=squeeze(FREQ(5,:,1)); % mode 5, angle j
-         fvec6=squeeze(FREQ(6,:,1)); % mode 5, angle j
-         kvec=squeeze(wavenumber(:,1)); % angle j
-         LW=0.5; % small figures
-         %LW=1; % large figures
-         plot(ax1,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
-         plot(ax1,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
-         plot(ax1,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
-         plot(ax1,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax1,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax1,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         %set(gca,'FontName','Helvetica');% default 'Helvetica'
-         set(ax1,'FontName','Times');
-         title({[num2str(beta(1)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
-         text(ax1,0,440,['Gen= ',num2str(gen)],'HorizontalAlignment','left','Fontsize',10,'FontName','Times','fontweight','bold');
-            
-         % plot (1,2) 30 deg
-         ax2 = nexttile;
-         imagesc(ax2,fvec(2:end)/1e3, wavenumber(2:end,3), squeeze(abs(Data_polar(3,2:end,2:end)))); 
-         set(ax2,'YDir','normal'); 
-         axis([0 500 0 400]);
-         set(ax2,'Fontsize',10,'linewidth',1);
-         %xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
-%          if(radians)
-%              ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
-%          else
-%              ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
-%          end
-         %colormap jet; 
-         colormap turbo;
-         %axis tight; 
-         caxis([0 max(caxis)/3]); 
-
-         hold on;
-         fvec1=squeeze(FREQ(1,:,3)); % mode 1, angle 3
-         fvec2=squeeze(FREQ(2,:,3)); % mode 2, angle 3
-         fvec3=squeeze(FREQ(3,:,3)); % mode 3, angle 3
-         fvec4=squeeze(FREQ(4,:,3)); % mode 4, angle 3
-         fvec5=squeeze(FREQ(5,:,3)); % mode 5, angle 3
-         fvec6=squeeze(FREQ(6,:,3)); % mode 5, angle 3
-         kvec=squeeze(wavenumber(:,3)); % angle 3
-         LW=0.5; % small figures
-         %LW=1; % large figures
-         plot(ax2,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
-         plot(ax2,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
-         plot(ax2,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
-         plot(ax2,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax2,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax2,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         %set(gca,'FontName','Helvetica');% default 'Helvetica'
-         set(ax2,'FontName','Times');
-         title({[num2str(beta(3)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
-         
-         % plot (2,1) 60deg
+        plot(ax1,PBest(:,1)/1e9,'ko-','MarkerFaceColor','k','MarkerSize',2);
+        ylim([Q11_lb/1e9 Q11_ub/1e9]);
+        title({'$C_{11}$'},'Fontsize',12,'interpreter','latex');
+        xlim([1 ,MAXGEN]);
+        ax2 = nexttile;
+        plot(ax2,PBest(:,2)/1e9,'ko-','MarkerFaceColor','k','MarkerSize',2);
+        ylim([Q12_lb/1e9 Q12_ub/1e9]);
+        title({'$C_{12}$'},'Fontsize',12,'interpreter','latex');
+        xlim([1 ,MAXGEN]);
         ax3 = nexttile;
-        imagesc(ax3,fvec(2:end)/1e3, wavenumber(2:end,5), squeeze(abs(Data_polar(5,2:end,2:end)))); 
-         set(gca,'YDir','normal'); 
-         axis([0 500 0 400]);
-         set(gca,'Fontsize',10,'linewidth',1);
-         xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
-         if(radians)
-             ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
-         else
-             ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
-         end
-         %colormap jet; 
-         colormap turbo;
-         %axis tight; 
-         caxis([0 max(caxis)/3]); 
-
-         hold on;
-         fvec1=squeeze(FREQ(1,:,5)); % mode 1, angle 5
-         fvec2=squeeze(FREQ(2,:,5)); % mode 2, angle 5
-         fvec3=squeeze(FREQ(3,:,5)); % mode 3, angle 5
-         fvec4=squeeze(FREQ(4,:,5)); % mode 4, angle 5
-         fvec5=squeeze(FREQ(5,:,5)); % mode 5, angle 5
-         fvec6=squeeze(FREQ(6,:,5)); % mode 5, angle 5
-         kvec=squeeze(wavenumber(:,5)); % angle j
-         LW=0.5; % small figures
-         %LW=1; % large figures
-         plot(ax3,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
-         plot(ax3,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
-         plot(ax3,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
-         plot(ax3,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax3,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax3,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         %set(gca,'FontName','Helvetica');% default 'Helvetica'
-         set(ax3,'FontName','Times');
-         title({[num2str(beta(5)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
-            
-         % plot (2,2) 90 deg
-         ax4 = nexttile;
-         imagesc(ax4,fvec(2:end)/1e3, wavenumber(2:end,7), squeeze(abs(Data_polar(7,2:end,2:end)))); 
-         set(ax4,'YDir','normal'); 
-         axis([0 500 0 400]);
-         set(ax4,'Fontsize',10,'linewidth',1);
-         xlabel({'$f$ [kHz]'},'Fontsize',12,'interpreter','latex');
-%          if(radians)
-%              ylabel({'$k$ [rad/m]'},'Fontsize',12,'interpreter','latex'); % radian scale [rad/m]
-%          else
-%              ylabel({'$k$ [1/m]'},'Fontsize',12,'interpreter','latex'); % linear scale [1/m]
-%          end
-         %colormap jet; 
-         colormap turbo;
-         %axis tight; 
-         caxis([0 max(caxis)/3]); 
-
-         hold on;
-         fvec1=squeeze(FREQ(1,:,7)); % mode 1, angle 7
-         fvec2=squeeze(FREQ(2,:,7)); % mode 2, angle 7
-         fvec3=squeeze(FREQ(3,:,7)); % mode 3, angle 7
-         fvec4=squeeze(FREQ(4,:,7)); % mode 4, angle 7
-         fvec5=squeeze(FREQ(5,:,7)); % mode 5, angle 7
-         fvec6=squeeze(FREQ(6,:,7)); % mode 5, angle 7
-         kvec=squeeze(wavenumber(:,7)); % angle 7
-         LW=0.5; % small figures
-         %LW=1; % large figures
-         plot(ax4,fvec1(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % A0
-         plot(ax4,fvec2(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % SH0
-         plot(ax4,fvec3(2:end)/1e3,kvec(2:end),'w','linewidth',LW); % S0
-         plot(ax4,fvec4(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax4,fvec5(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         plot(ax4,fvec6(2:end)/1e3,kvec(2:end),'w','linewidth',LW);
-         %set(gca,'FontName','Helvetica');% default 'Helvetica'
-         set(ax4,'FontName','Times');
-         title({[num2str(beta(7)),'$^{\circ}$']},'Fontsize',12,'interpreter','latex');
+        plot(ax3,PBest(:,3)/1e9,'ko-','MarkerFaceColor','k','MarkerSize',2);
+        ylim([Q13_lb/1e9 Q13_ub/1e9]);
+        title({'$C_{13}$'},'Fontsize',12,'interpreter','latex');
+        xlim([1 ,MAXGEN]);
+        ax4 = nexttile;
+        plot(ax4,PBest(:,4)/1e9,'ko-','MarkerFaceColor','k','MarkerSize',2);
+        ylim([Q22_lb/1e9 Q22_ub/1e9]);
+        title({'$C_{22}$'},'Fontsize',12,'interpreter','latex');
+        xlim([1 ,MAXGEN]);
+        ax5 = nexttile;
+        plot(ax5,PBest(:,5)/1e9,'ko-','MarkerFaceColor','k','MarkerSize',2);
+        ylim([Q23_lb/1e9 Q23_ub/1e9]);
+        title({'$C_{23}$'},'Fontsize',12,'interpreter','latex');
+        xlim([1 ,MAXGEN]);
+        ax6 = nexttile;
+        plot(ax6,PBest(:,6)/1e9,'ko-','MarkerFaceColor','k','MarkerSize',2);
+        ylim([Q33_lb/1e9 Q33_ub/1e9]);
+        title({'$C_{33}$'},'Fontsize',12,'interpreter','latex');
+        xlim([1 ,MAXGEN]);
+        ax7 = nexttile;
+        plot(ax7,PBest(:,7)/1e9,'ko-','MarkerFaceColor','k','MarkerSize',2);
+        ylim([Q44_lb/1e9 Q44_ub/1e9]);
+        title({'$C_{44}$'},'Fontsize',12,'interpreter','latex');
+        xlim([1 ,MAXGEN]);
+        ax8 = nexttile;
+        plot(ax8,PBest(:,8)/1e9,'ko-','MarkerFaceColor','k','MarkerSize',2);
+        ylim([Q55_lb/1e9 Q55_ub/1e9]);
+        title({'$C_{55}$'},'Fontsize',12,'interpreter','latex');
+        xlim([1 ,MAXGEN]);
+        ax9 = nexttile;
+        plot(ax9,PBest(:,9)/1e9,'ko-','MarkerFaceColor','k','MarkerSize',2);
+        ylim([Q66_lb/1e9 Q66_ub/1e9]);
+        title({'$C_{66}$'},'Fontsize',12,'interpreter','latex');
+        set(gca,'FontName','Times');
+        xlim([1 ,MAXGEN]);
+        drawnow;
+        fig = gcf;
+        set(fig, 'Units','centimeters', 'Position',[10 10 2*fig_width 2*fig_height]); % 
+        % remove unnecessary white space
+        set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
+        fig.PaperPositionMode   = 'auto';
+        figfilename = ['Run_',num2str(test_case),'_C_convergence'];
+        print([figure_output_path,figfilename],'-dpng', '-r600');  
          
-         fig = gcf;
-         set(fig, 'Units','centimeters', 'Position',[10 10 2*fig_width 2*fig_height]); % 
-         % remove unnecessary white space
-         set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-         fig.PaperPositionMode   = 'auto';
-         figfilename = ['Run_',num2str(test_case),'_Gen_',num2str(gen),'_4angles'];
-         print([figure_output_path,figfilename],'-dpng', '-r600'); 
      else
          fprintf([modelname,' test case: %d already exist\n'], test_case);
      end
-     %plot GA convergence  
-    figure(6);
-    plot(Best,'bo-','MarkerFaceColor','b','MarkerSize',2);hold on;
-    plot(Mean,'rd-','MarkerFaceColor','r','MarkerSize',2);
-    legend('Best','Mean');
-    
-    set(gcf,'Color','w');
-    set(gca,'Fontsize',10,'linewidth',1);
-    title('');
-    xlabel('Gen','Fontsize',12);
-    ylabel('F','Fontsize',12);
-    %axis([0 50 -10 100]);
-    set(gca,'FontName','Times');
-    fig = gcf;
-    set(fig, 'Units','centimeters', 'Position',[10 10 fig_width fig_height]); % 
-    % remove unnecessary white space
-    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-    fig.PaperPositionMode   = 'auto';
-    figfilename = ['Run_',num2str(test_case),'_GA_convergence'];
-    print([paper_path,figfilename],'-dpng', '-r600');  
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    figure(7);
-    set(gcf,'Color','w');
-    t=tiledlayout(3,3);
-    %t.TileSpacing = 'tight';
-    t.TileSpacing = 'none';
-    t.Padding = 'tight';
-    
-    ax1 = nexttile;
-    plot(ax1,PBest(:,1)/1e9,'o-','MarkerFaceColor','k','MarkerSize',2);
-    ylim([Q11_lb/1e9 Q11_ub/1e9]);
-    title({'$C_{11}$'},'Fontsize',12,'interpreter','latex');
-    ax2 = nexttile;
-    plot(ax2,PBest(:,2)/1e9,'o-','MarkerFaceColor','k','MarkerSize',2);
-    ylim([Q12_lb/1e9 Q12_ub/1e9]);
-    title({'$C_{12}$'},'Fontsize',12,'interpreter','latex');
-    ax3 = nexttile;
-    plot(ax3,PBest(:,3)/1e9,'o-','MarkerFaceColor','k','MarkerSize',2);
-    ylim([Q13_lb/1e9 Q13_ub/1e9]);
-    title({'$C_{13}$'},'Fontsize',12,'interpreter','latex');
-    ax4 = nexttile;
-    plot(ax4,PBest(:,4)/1e9,'o-','MarkerFaceColor','k','MarkerSize',2);
-    ylim([Q22_lb/1e9 Q22_ub/1e9]);
-    title({'$C_{22}$'},'Fontsize',12,'interpreter','latex');
-    ax5 = nexttile;
-    plot(ax5,PBest(:,5)/1e9,'o-','MarkerFaceColor','k','MarkerSize',2);
-    ylim([Q23_lb/1e9 Q23_ub/1e9]);
-    title({'$C_{23}$'},'Fontsize',12,'interpreter','latex');
-    ax6 = nexttile;
-    plot(ax6,PBest(:,6)/1e9,'o-','MarkerFaceColor','k','MarkerSize',2);
-    ylim([Q33_lb/1e9 Q33_ub/1e9]);
-    title({'$C_{33}$'},'Fontsize',12,'interpreter','latex');
-    ax7 = nexttile;
-    plot(ax7,PBest(:,7)/1e9,'o-','MarkerFaceColor','k','MarkerSize',2);
-    ylim([Q44_lb/1e9 Q44_ub/1e9]);
-    title({'$C_{44}$'},'Fontsize',12,'interpreter','latex');
-    ax8 = nexttile;
-    plot(ax8,PBest(:,8)/1e9,'o-','MarkerFaceColor','k','MarkerSize',2);
-    ylim([Q55_lb/1e9 Q55_ub/1e9]);
-    title({'$C_{55}$'},'Fontsize',12,'interpreter','latex');
-    ax9 = nexttile;
-    plot(ax9,PBest(:,9)/1e9,'o-','MarkerFaceColor','k','MarkerSize',2);
-    ylim([Q66_lb/1e9 Q66_ub/1e9]);
-    title({'$C_{66}$'},'Fontsize',12,'interpreter','latex');
-    set(gca,'FontName','Times');
-    fig = gcf;
-    set(fig, 'Units','centimeters', 'Position',[10 10 2*fig_width 2*fig_height]); % 
-    % remove unnecessary white space
-    set(gca,'LooseInset', max(get(gca,'TightInset'), 0.02));
-    fig.PaperPositionMode   = 'auto';
-    figfilename = ['Run_',num2str(test_case),'_C_convergence'];
-    print([paper_path,figfilename],'-dpng', '-r600');  
+     
             
 end
